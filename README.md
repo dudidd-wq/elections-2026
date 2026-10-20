@@ -1,6 +1,6 @@
 # השוואת מצעים – בחירות לכנסת 2026
 
-An interactive, neutral, Hebrew (RTL) comparison of the 2026 Knesset election platforms: 12 lists × 10 issues, a cross-cutting analysis, and a poll tracker.
+An interactive, neutral, Hebrew (RTL) comparison of the 2026 Knesset election platforms: 13 lists × 10 issues (12 from the source document + Ra'am, added by the site and marked ‡), a cross-cutting analysis, and a poll tracker.
 Election day: **27.10.2026**. Live site: https://dudidd-wq.github.io/elections-2026/
 
 Static HTML/CSS/JS. No build step and no dependencies. Every piece of content lives in `data/*.json`.
@@ -9,11 +9,12 @@ Static HTML/CSS/JS. No build step and no dependencies. Every piece of content li
 | Path | What |
 |---|---|
 | `index.html`, `css/style.css`, `js/app.js` | The app: a hash-routed single page (`#/matrix`, `#/issue/<id>`, `#/list/<id>`, `#/compare/<a>,<b>[,<c>]`, `#/analysis/<tab>`, `#/polls`, `#/about`) |
-| `data/platforms.json` | Lists, issues, the 120 positions (summary, full text, source type, source URL, `star`), profiles, gaps, sources |
+| `data/platforms.json` | Lists, issues, the 130 positions (summary, full text, source type, source URL, `star`), profiles, gaps, sources |
 | `data/analysis.json` | The cross-cutting analysis: splits ranking, camps per issue, cross-axis splits, consensus, overlaps, principle vs degree |
 | `data/polls.json` | Polls (date, outlet, pollster, sample, seats, source URLs, verification), method, blocs, computed average, trend |
 | `source/platforms.md` | Copy of the canonical research document the platform data is generated from |
-| `tools/build_data.py` | Regenerates `platforms.json` and `analysis.json` from `source/platforms.md` |
+| `tools/build_data.py` | Regenerates `platforms.json` and `analysis.json` from `source/platforms.md`, then merges `source/additions.json` |
+| `source/additions.json` | Site additions (‡): the Ra'am list (profile, 10 positions, sources), its analysis additions, and the Joint List verification note. Never edit the md for these. |
 | `tools/update_polls.py` | Adds or imports polls and recomputes the average, ranges, bloc sums and trend |
 | `sw.js` | Service worker (network-first, offline fallback). **Bump `VERSION` on every deploy.** |
 
@@ -21,7 +22,7 @@ Static HTML/CSS/JS. No build step and no dependencies. Every piece of content li
 
 ### Platform content
 1. Edit the research document and copy it to `source/platforms.md`. Keep the same headings and table layout.
-2. Run `python3 tools/build_data.py`. It prints `ok: lists 12 issues 10 cells 120 ...` and fails loudly if the structure changes.
+2. Run `python3 tools/build_data.py`. It prints `ok: lists 13 issues 10 cells 130 ...` and fails loudly if the structure changes.
 3. Bump `VERSION` in `sw.js`, then commit and push. GitHub Pages redeploys automatically.
 
 `*` comes from the short-code matrix in the analysis section ("ניתוח רוחבי", section 4). A cell with `*` there gets `"star": true`.
@@ -49,7 +50,8 @@ After an import, spot-check new rows against their original links. You can set `
 - Every list gets the same layout. The ordering is explicit: alphabetical by default, or by poll average, and the user can switch.
 - Bloc definitions follow the lists' own declarations as recorded in the source document. Colors are neutral, not party colors.
 - `*` marks positions based on statements or votes rather than a written platform. `†` marks the two lists added on 20.10.2026.
-- Known gap: Ra'am appears in the polls but is not covered by the source document, so its positions are not shown. The site says so.
+- `‡` marks site additions that are not in the source document (Ra'am and its analysis additions). The original text is unchanged.
+- The Joint List (Hadash + Ta'al + Balad) appears as one list in every poll; there is no separate Balad column.
 
 ## Local preview
 ```bash

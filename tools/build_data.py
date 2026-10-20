@@ -246,7 +246,35 @@ aliases = {
  'yb': ['ישראל ביתנו'], 'utj': ['יהדות התורה', 'פינדרוס', 'פרוש'], 'rzz': ['הציונות הדתית–זהות', 'צ"ד', 'זהות', 'פייגלין', 'סמוטריץ\''],
  'miluim': ['המילואימניקים והכלכלית'], 'amcha': ['עמך ישראל', 'וינטר']}
 platforms['aliases'] = aliases
+
+# ---- site additions (not part of platforms.md): source/additions.json, every item flagged added=True
+ADD = json.load(open(os.path.join(ROOT, 'source', 'additions.json'), encoding='utf-8'))
+for d in ADD['lists']:
+    d = dict(d, added=True, added20Oct=False)
+    platforms['lists'].append(d)
+    platforms['positions'][d['id']] = {}
+    for I in ISSUE_IDS:
+        q = dict(ADD['positions'][d['id']][I])
+        q.update(star=True, added=True, notFound=q['summary'].startswith('לא נמצאה'))
+        platforms['positions'][d['id']][I] = q
+for L, v in ADD.get('verify', {}).items():
+    for d in platforms['lists']:
+        if d['id'] == L:
+            d['verify'] = v
+platforms['aliases'].update(ADD['aliases'])
+platforms['addedLegend'] = ADD['addedLegend']
+platforms['gapsAdded'] = ADD['gaps']
+platforms['mainSplitsAdded'] = ADD['mainSplits']
+AA = ADD['analysis']
+for c in analysis['camps']:
+    c['added'] = AA['camps'][c['issue']]
+analysis['addedNote'] = AA['note']
+analysis['rankAdded'] = AA['rank']
+analysis['crossAxisAdded'] = AA['crossAxis']
+analysis['consensusBroadAdded'] = AA['consensusBroad']
+analysis['consensusPartialAdded'] = AA['consensusPartial']
+analysis['overlapsAdded'] = AA['overlaps']
 os.makedirs(os.path.join(ROOT, 'data'), exist_ok=True)
 json.dump(platforms, open(os.path.join(ROOT, 'data', 'platforms.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 json.dump(analysis, open(os.path.join(ROOT, 'data', 'analysis.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-print('ok: lists', len(lists), 'issues', len(issues), 'cells', sum(len(v) for v in positions.values()), 'camps', len(camps), 'rank', len(rank))
+print('ok: lists', len(platforms['lists']), 'issues', len(issues), 'cells', sum(len(v) for v in positions.values()), 'camps', len(camps), 'rank', len(rank))

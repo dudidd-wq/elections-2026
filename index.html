@@ -4,35 +4,44 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>השוואת מצעים – בחירות לכנסת 2026</title>
-<meta name="description" content="השוואה ניטרלית ואינטראקטיבית של עמדות 12 רשימות ב-10 סוגיות לקראת הבחירות לכנסת ה-26 (27.10.2026), עם מקורות, ניתוח רוחבי וסקרי מנדטים.">
-<meta name="theme-color" content="#1d3557">
+<meta name="description" content="השוואה ניטרלית ואינטראקטיבית של עמדות 13 רשימות ב-10 סוגיות לקראת הבחירות לכנסת ה-26 (27.10.2026), עם מקורות, ניתוח רוחבי וסקרי מנדטים.">
+<meta name="theme-color" content="#f5f3ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101217" media="(prefers-color-scheme: dark)">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/heebo-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+<script>(function(){try{var t=localStorage.getItem('el26.theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="preload" href="data/platforms.json" as="fetch" crossorigin>
 <link rel="preload" href="data/polls.json" as="fetch" crossorigin>
+<link rel="preload" href="data/analysis.json" as="fetch" crossorigin>
 </head>
 <body>
 <a class="skip" href="#main">דילוג לתוכן</a>
 <header class="top">
   <div class="wrap top-row">
-    <a class="brand" href="#/"><span class="brand-t">השוואת מצעים</span> <span class="brand-s">בחירות לכנסת ה-26 · 27.10.2026</span></a>
+    <a class="brand" href="#/" aria-label="השוואת מצעים – בחירות לכנסת ה-26, לעמוד הראשי">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M7 22a9 9 0 0 1 18 0" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round"/><circle cx="16" cy="22" r="2.4" fill="var(--bg)"/></svg>
+      <span><span class="brand-t">השוואת מצעים</span><span class="brand-s">בחירות לכנסת ה-26 · 27.10.2026</span></span>
+    </a>
+    <nav class="nav" aria-label="ניווט ראשי">
+      <ul>
+        <li><a href="#/" data-nav="home">ראשי</a></li>
+        <li><a href="#/matrix" data-nav="matrix">מטריצה</a></li>
+        <li><a href="#/issue" data-nav="issue">לפי סוגיה</a></li>
+        <li><a href="#/list" data-nav="list">לפי רשימה</a></li>
+        <li><a href="#/compare" data-nav="compare">השוואה</a></li>
+        <li><a href="#/analysis" data-nav="analysis">ניתוח רוחבי</a></li>
+        <li><a href="#/polls" data-nav="polls">סקרים</a></li>
+        <li><a href="#/about" data-nav="about">שיטה ומקורות</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="theme-btn" id="theme" aria-label="מצב כהה" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 14.5A8.5 8.5 0 0 1 9.5 3a.6.6 0 0 0-.8-.7A9.5 9.5 0 1 0 21.7 15.3a.6.6 0 0 0-.7-.8z"/></svg></button>
   </div>
-  <nav class="nav" aria-label="ניווט ראשי">
-    <ul class="wrap">
-      <li><a href="#/" data-nav="home">ראשי</a></li>
-      <li><a href="#/matrix" data-nav="matrix">מטריצה</a></li>
-      <li><a href="#/issue" data-nav="issue">לפי סוגיה</a></li>
-      <li><a href="#/list" data-nav="list">לפי רשימה</a></li>
-      <li><a href="#/compare" data-nav="compare">השוואה</a></li>
-      <li><a href="#/analysis" data-nav="analysis">ניתוח רוחבי</a></li>
-      <li><a href="#/polls" data-nav="polls">סקרים</a></li>
-      <li><a href="#/about" data-nav="about">שיטה ומקורות</a></li>
-    </ul>
-  </nav>
 </header>
 <main id="main" class="wrap" tabindex="-1">
-  <p class="loading">טוען נתונים…</p>
+  <div class="skel" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <p class="sr" role="status">טוען נתונים…</p>
   <noscript><p>האתר דורש JavaScript כדי להציג את הנתונים. את הנתונים הגולמיים אפשר לקרוא ישירות בקבצים <a href="data/platforms.json">platforms.json</a>, <a href="data/analysis.json">analysis.json</a> ו-<a href="data/polls.json">polls.json</a>.</p></noscript>
 </main>
 <footer class="foot">
@@ -44,6 +53,7 @@
     <div id="dlg-body"></div>
   </div>
 </dialog>
+<div class="tip" id="tip" role="tooltip" aria-hidden="true"></div>
 <script src="js/app.js" defer></script>
 </body>
 </html>

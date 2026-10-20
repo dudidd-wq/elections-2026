@@ -1,7 +1,7 @@
 {
  "meta": {
   "title": "סקרי מנדטים – בחירות לכנסת ה-26",
-  "updatedAt": "2026-10-20T23:02+03:00",
+  "updatedAt": "2026-10-20T23:36+03:00",
   "primarySource": {
    "label": "israelielections.com – טבלת סקרי המנדטים לכנסת ה-26 (כל סקר מקושר לפרסום המקורי)",
    "url": "https://israelielections.com/2026/polls/"
@@ -85,8 +85,8 @@
   {
    "id": "raam",
    "name": "רע\"ם",
-   "platform": false,
-   "note": "רע\"ם לא נכללה במסמך השוואת המצעים, ולכן עמדותיה אינן מוצגות באתר. היא מופיעה כאן כי היא נכללת בסקרים."
+   "platform": true,
+   "addedBySite": true
   },
   {
    "id": "miluim",
@@ -2249,7 +2249,7 @@
   }
  ],
  "computed": {
-  "computedAt": "2026-10-20T23:02+03:00",
+  "computedAt": "2026-10-20T23:36+03:00",
   "asOf": "2026-10-20",
   "window": [
    "2026-10-14",
