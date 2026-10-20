@@ -10,6 +10,9 @@ Source: /workspace/elections-2026/platforms.md (canonical). Repo: dudidd-wq/elec
 - [x] audit (/workspace/elections-2026-audit/AUDIT.md): all >=9 (10,10,10,10,10,10,9,9,9,10). SW VERSION v4.
 - [x] 20.10 late: Ra'am added (source/additions.json), Joint List verified, full visual redesign (Heebo, dark mode, hemicycle, heatmap, SVG charts). SW VERSION v6-2026-10-21b. Screenshots: /workspace/elections-2026-audit/shots/.
 
+- [x] 21.10 00:13 perf fixes (collator cache, no forced layout, content-visibility) v7; 00:21 mobile nav 4x2 grid v8 (8b59d75). Live tests: smoke/axe 0, content 120/120, raam 10/10, extra OK (offline 130), LH ≥95 (polls mobile noisy under box load).
+- [x] AUDIT.md updated (Ra'am/Joint, design critique 3 rounds → 9/9/9/9).
+
 ## Findings
 - md poll baseline (7 outlets 13–19.10) matches IIE 77/77 + added lists 14/14; Wikipedia matches 5 of 7 (IH 15.10 & i24 13.10 not on WP).
 - md omitted Maariv 15.10, Ch16 13.10, Walla 19.10 from the 7-outlet window. Site uses all outlets, 7-day window.
