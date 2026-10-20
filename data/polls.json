@@ -1,0 +1,2910 @@
+{
+ "meta": {
+  "title": "סקרי מנדטים – בחירות לכנסת ה-26",
+  "updatedAt": "2026-10-20T22:46+03:00",
+  "primarySource": {
+   "label": "israelielections.com – טבלת סקרי המנדטים לכנסת ה-26 (כל סקר מקושר לפרסום המקורי)",
+   "url": "https://israelielections.com/2026/polls/"
+  },
+  "crossCheck": [
+   {
+    "label": "ויקיפדיה – Opinion polling for the 2026 Israeli legislative election",
+    "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_Israeli_legislative_election"
+   },
+   {
+    "label": "הפתק – מעקב סקרים",
+    "url": "https://www.thepetek.com/he/polls"
+   },
+   {
+    "label": "Middle East Forum – Poll of Polls",
+    "url": "https://israelvote.meforum.org/"
+   }
+  ],
+  "scope": "כל סקרי המנדטים שפורסמו מ-9.9.2026 (אחרי הגשת הרשימות) ועד היום, כפי שהם מופיעים בטבלת israelielections.com, עם קישור לפרסום המקורי של כל סקר.",
+  "threshold": "אחוז החסימה הוא 3.25%. רשימה שעוברת אותו מקבלת לפחות 4 מנדטים; רשימה מתחת לחסימה, או שלא דווחה בסקר, נספרת כ-0.",
+  "silence": "לפי חוק הבחירות אסור לפרסם סקרים מסוף יום שישי שלפני הבחירות (23.10.2026) ועד סגירת הקלפיות ב-27.10.2026 בשעה 22:00.",
+  "latestPollDate": "2026-10-20",
+  "pollCount": 65
+ },
+ "method": {
+  "windowDays": 7,
+  "trendFrom": "2026-09-15",
+  "text": "ממוצע פשוט של הסקר האחרון של כל כלי תקשורת שפרסם סקר ב-7 הימים שמסתיימים בתאריך הסקר האחרון. כל כלי תקשורת נספר פעם אחת, בלי שקלול לפי גודל מדגם או לפי דיוק היסטורי. רשימה מתחת לאחוז החסימה נספרת כ-0, ולכן הממוצע של רשימות קטנות אינו משקף את נתח הקולות שלהן. המגמה מחושבת באותה שיטה לכל תאריך שבו פורסם סקר."
+ },
+ "parties": [
+  {
+   "id": "likud",
+   "name": "הליכוד",
+   "platform": true
+  },
+  {
+   "id": "yashar",
+   "name": "ישר! (איזנקוט)",
+   "platform": true
+  },
+  {
+   "id": "beyachad",
+   "name": "ביחד (בנט–לפיד)",
+   "platform": true
+  },
+  {
+   "id": "dems",
+   "name": "הדמוקרטים",
+   "platform": true
+  },
+  {
+   "id": "joint",
+   "name": "הרשימה המשותפת",
+   "platform": true
+  },
+  {
+   "id": "otzma",
+   "name": "עוצמה יהודית",
+   "platform": true
+  },
+  {
+   "id": "shas",
+   "name": "ש\"ס",
+   "platform": true
+  },
+  {
+   "id": "yb",
+   "name": "ישראל ביתנו",
+   "platform": true
+  },
+  {
+   "id": "utj",
+   "name": "יהדות התורה",
+   "platform": true
+  },
+  {
+   "id": "rzz",
+   "name": "הציונות הדתית–זהות",
+   "platform": true
+  },
+  {
+   "id": "raam",
+   "name": "רע\"ם",
+   "platform": false,
+   "note": "רע\"ם לא נכללה במסמך השוואת המצעים, ולכן עמדותיה אינן מוצגות באתר. היא מופיעה כאן כי היא נכללת בסקרים."
+  },
+  {
+   "id": "miluim",
+   "name": "המילואימניקים והכלכלית",
+   "platform": true
+  },
+  {
+   "id": "amcha",
+   "name": "עמך ישראל",
+   "platform": true
+  },
+  {
+   "id": "bw",
+   "name": "כחול לבן",
+   "platform": false,
+   "withdrawn": "2026-10-19",
+   "note": "כחול לבן פרשה מהמרוץ ב-19.10.2026."
+  }
+ ],
+ "blocs": [
+  {
+   "id": "coalition",
+   "name": "גוש נתניהו (מפלגות הממשלה ה-37)",
+   "members": [
+    "likud",
+    "otzma",
+    "shas",
+    "utj",
+    "rzz"
+   ]
+  },
+  {
+   "id": "opposition",
+   "name": "גוש האופוזיציה (ישר!, ביחד, הדמוקרטים, ישראל ביתנו)",
+   "members": [
+    "yashar",
+    "beyachad",
+    "dems",
+    "yb"
+   ]
+  },
+  {
+   "id": "arab",
+   "name": "הרשימות הערביות (הרשימה המשותפת, רע\"ם) – מחוץ לשני הגושים",
+   "members": [
+    "joint",
+    "raam"
+   ]
+  },
+  {
+   "id": "other",
+   "name": "רשימות אחרות (המילואימניקים והכלכלית, עמך ישראל, כחול לבן)",
+   "members": [
+    "miluim",
+    "amcha",
+    "bw"
+   ]
+  }
+ ],
+ "blocNote": "החלוקה לגושים לקוחה מההצהרות של הרשימות כפי שהן מופיעות במסמך המקור, ולא מהערכה שלנו. המילואימניקים והכלכלית מגדירה את עצמה מחוץ לגושים; עמך ישראל הודיעה שתמליץ רק על נתניהו; הרשימה המשותפת ורע\"ם אינן חלק משני הגושים. סכום גוש הוא חיבור פשוט של המנדטים ואינו תחזית להרכב קואליציה.",
+ "documentBaseline": {
+  "label": "בסיס הסקרים במסמך המקור (platforms.md, 20.10.2026)",
+  "text": "מסמך השוואת המצעים חישב ממוצע של הסקר האחרון של 7 כלי תקשורת (13–19.10.2026): ערוץ 14, חדשות 13, חדשות 12, כאן 11, זמן ישראל, ישראל היום ו-i24NEWS.",
+  "average": {
+   "likud": 22.6,
+   "yashar": 22.4,
+   "beyachad": 12.3,
+   "dems": 8.9,
+   "joint": 8.3,
+   "otzma": 7.9,
+   "shas": 7.9,
+   "yb": 7.7,
+   "utj": 7.4,
+   "rzz": 6.6,
+   "raam": 5.3,
+   "miluim": 2.3,
+   "amcha": 0.6
+  },
+  "verification": "נבדק ב-20.10.2026: כל 77 הנתונים של 7 הסקרים במסמך (11 רשימות × 7) ושורות הרשימות שנוספו תואמים את טבלת israelielections.com, ו-5 מהסקרים תואמים גם את ויקיפדיה (סקרי ישראל היום ו-i24NEWS מאותו שבוע עוד לא הופיעו בוויקיפדיה). המסמך לא כלל שלושה סקרים שפורסמו באותו שבוע: מעריב (15.10), ערוץ 16 (13.10) ו-וואלה (19.10). האתר מחשב ממוצע מעודכן בשיטה שמפורטת למעלה וכולל את כל כלי התקשורת."
+ },
+ "polls": [
+  {
+   "date": "2026-10-20",
+   "outletEn": "i24NEWS",
+   "outlet": "i24NEWS",
+   "pollsterEn": "Direct Polls (Shlomo Filber)",
+   "pollster": "דיירקט פולס (שלמה פילבר)",
+   "sample": 521,
+   "seats": {
+    "likud": 26,
+    "yashar": 20,
+    "beyachad": 12,
+    "dems": 9,
+    "otzma": 9,
+    "joint": 8,
+    "shas": 8,
+    "utj": 8,
+    "yb": 7,
+    "rzz": 7,
+    "raam": 6,
+    "miluim": 0,
+    "amcha": 0,
+    "bw": null
+   },
+   "url": "https://www.i24news.tv/he/news/israel-elections-2026/polls/artc-91da6024",
+   "urls": [
+    "https://www.i24news.tv/he/news/israel-elections-2026/polls/artc-91da6024"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-20_i24news",
+   "verified": true,
+   "verifiedNote": "נבדק מול כתבת i24NEWS המקורית"
+  },
+  {
+   "date": "2026-10-20",
+   "outletEn": "Channel 14",
+   "outlet": "ערוץ 14",
+   "pollsterEn": "Shlomo Filber",
+   "pollster": "שלמה פילבר",
+   "sample": null,
+   "seats": {
+    "likud": 30,
+    "yashar": 20,
+    "beyachad": 9,
+    "dems": 9,
+    "otzma": 8,
+    "joint": 8,
+    "shas": 9,
+    "utj": 8,
+    "yb": 6,
+    "rzz": 7,
+    "raam": 6,
+    "miluim": 0,
+    "amcha": 0,
+    "bw": null
+   },
+   "url": "https://www.kipa.co.il/%D7%97%D7%93%D7%A9%D7%95%D7%AA/1234238-0/",
+   "urls": [
+    "https://www.kipa.co.il/%D7%97%D7%93%D7%A9%D7%95%D7%AA/1234238-0/",
+    "https://www.ice.co.il/research/news/article/1134443"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-20_channel14",
+   "verified": true,
+   "verifiedNote": "נבדק מול כתבת ice (20.10.2026)"
+  },
+  {
+   "date": "2026-10-20",
+   "outletEn": "Channel 16 / 103FM",
+   "outlet": "ערוץ 16 / 103FM",
+   "pollsterEn": "Maagar Mochot",
+   "pollster": "מאגר מוחות",
+   "sample": null,
+   "seats": {
+    "likud": 18,
+    "yashar": 21,
+    "beyachad": 15,
+    "dems": 9,
+    "otzma": 9,
+    "joint": 9,
+    "shas": 6,
+    "utj": 7,
+    "yb": 7,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.kipa.co.il/%D7%97%D7%93%D7%A9%D7%95%D7%AA/1234239-0/",
+   "urls": [
+    "https://www.kipa.co.il/%D7%97%D7%93%D7%A9%D7%95%D7%AA/1234239-0/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-20_channel16103fm",
+   "verified": true,
+   "verifiedNote": "נבדק מול כתבת כיפה"
+  },
+  {
+   "date": "2026-10-19",
+   "outletEn": "Channel 14",
+   "outlet": "ערוץ 14",
+   "pollsterEn": "Shlomo Filber",
+   "pollster": "שלמה פילבר",
+   "sample": null,
+   "seats": {
+    "likud": 30,
+    "yashar": 19,
+    "beyachad": 10,
+    "dems": 10,
+    "otzma": 7,
+    "joint": 8,
+    "shas": 10,
+    "utj": 8,
+    "yb": 6,
+    "rzz": 7,
+    "raam": 5,
+    "miluim": null,
+    "amcha": null,
+    "bw": null
+   },
+   "url": "https://www.kipa.co.il/%D7%97%D7%93%D7%A9%D7%95%D7%AA/1234129-0/",
+   "urls": [
+    "https://www.kipa.co.il/%D7%97%D7%93%D7%A9%D7%95%D7%AA/1234129-0/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-19_channel14",
+   "verified": true,
+   "verifiedNote": "תואם את טבלת מסמך המקור ואת israelielections.com"
+  },
+  {
+   "date": "2026-10-19",
+   "outletEn": "Walla",
+   "outlet": "וואלה",
+   "pollsterEn": "Lazar Research",
+   "pollster": "מכון לזר (Panel4All)",
+   "sample": 601,
+   "seats": {
+    "likud": 19,
+    "yashar": 23,
+    "beyachad": 14,
+    "dems": 9,
+    "otzma": 8,
+    "joint": 8,
+    "shas": 8,
+    "utj": 7,
+    "yb": 8,
+    "rzz": 6,
+    "raam": 6,
+    "miluim": 4,
+    "amcha": 0,
+    "bw": null
+   },
+   "url": "https://www.israelnationalnews.com/news/434891",
+   "urls": [
+    "https://www.israelnationalnews.com/news/434891",
+    "https://www.walla.co.il/news/politics/383958175"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-19_walla",
+   "verified": true,
+   "verifiedNote": "נבדק מול כתבת וואלה המקורית"
+  },
+  {
+   "date": "2026-10-19",
+   "outletEn": "Channel 12 News (N12)",
+   "outlet": "חדשות 12",
+   "pollsterEn": "Midgam (Mano Geva)",
+   "pollster": "מדגם (מנו גבע)",
+   "sample": 507,
+   "seats": {
+    "likud": 21,
+    "yashar": 24,
+    "beyachad": 14,
+    "dems": 9,
+    "otzma": 8,
+    "joint": 9,
+    "shas": 8,
+    "utj": 7,
+    "yb": 8,
+    "rzz": 7,
+    "raam": 5,
+    "miluim": 0,
+    "amcha": 0,
+    "bw": 0
+   },
+   "url": "https://www.mako.co.il/news-israel-elections/2026/Article-a6eb664b9d451a1026.htm",
+   "urls": [
+    "https://www.mako.co.il/news-israel-elections/2026/Article-a6eb664b9d451a1026.htm"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-19_channel12newsn12",
+   "verified": true,
+   "verifiedNote": "תואם את טבלת מסמך המקור ואת israelielections.com"
+  },
+  {
+   "date": "2026-10-19",
+   "outletEn": "Channel 13 News",
+   "outlet": "חדשות 13",
+   "pollsterEn": "Midgam Project (Camil Fuchs)",
+   "pollster": "מדגם פרויקט / המדד (קמיל פוקס)",
+   "sample": null,
+   "seats": {
+    "likud": 18,
+    "yashar": 20,
+    "beyachad": 14,
+    "dems": 9,
+    "otzma": 7,
+    "joint": 9,
+    "shas": 7,
+    "utj": 7,
+    "yb": 8,
+    "rzz": 7,
+    "raam": 6,
+    "miluim": 4,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://13tv.co.il/item/news/politics/politics/jw3wm-905406894/",
+   "urls": [
+    "https://13tv.co.il/item/news/politics/politics/jw3wm-905406894/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-19_channel13news",
+   "verified": true,
+   "verifiedNote": "תואם את טבלת מסמך המקור ואת israelielections.com"
+  },
+  {
+   "date": "2026-10-18",
+   "outletEn": "i24NEWS",
+   "outlet": "i24NEWS",
+   "pollsterEn": "Direct Polls (Shlomo Filber)",
+   "pollster": "דיירקט פולס (שלמה פילבר)",
+   "sample": 525,
+   "seats": {
+    "likud": 25,
+    "yashar": 21,
+    "beyachad": 13,
+    "dems": 9,
+    "otzma": 10,
+    "joint": 8,
+    "shas": 8,
+    "utj": 8,
+    "yb": 6,
+    "rzz": 6,
+    "raam": 6,
+    "miluim": 0,
+    "amcha": 0,
+    "bw": null
+   },
+   "url": "https://www.i24news.tv/he/news/israel-elections-2026/polls/artc-81805",
+   "urls": [
+    "https://www.i24news.tv/he/news/israel-elections-2026/polls/artc-81805"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-18_i24news",
+   "verified": null
+  },
+  {
+   "date": "2026-10-18",
+   "outletEn": "Channel 14",
+   "outlet": "ערוץ 14",
+   "pollsterEn": "Shlomo Filber",
+   "pollster": "שלמה פילבר",
+   "sample": null,
+   "seats": {
+    "likud": 29,
+    "yashar": 22,
+    "beyachad": 10,
+    "dems": 8,
+    "otzma": 7,
+    "joint": 7,
+    "shas": 10,
+    "utj": 8,
+    "yb": 6,
+    "rzz": 7,
+    "raam": 6,
+    "miluim": null,
+    "amcha": null,
+    "bw": null
+   },
+   "url": "https://www.kipa.co.il/%D7%97%D7%93%D7%A9%D7%95%D7%AA/1234001-0/",
+   "urls": [
+    "https://www.kipa.co.il/%D7%97%D7%93%D7%A9%D7%95%D7%AA/1234001-0/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-18_channel14",
+   "verified": true,
+   "verifiedNote": "תואם את ויקיפדיה"
+  },
+  {
+   "date": "2026-10-18",
+   "outletEn": "Kan 11",
+   "outlet": "כאן 11",
+   "pollsterEn": "Kantar",
+   "pollster": "קנטאר",
+   "sample": null,
+   "seats": {
+    "likud": 21,
+    "yashar": 23,
+    "beyachad": 12,
+    "dems": 9,
+    "otzma": 8,
+    "joint": 8,
+    "shas": 8,
+    "utj": 7,
+    "yb": 8,
+    "rzz": 7,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 0,
+    "bw": null
+   },
+   "url": "https://www.kan.org.il/content/kan-news/politic/1110393/",
+   "urls": [
+    "https://www.kan.org.il/content/kan-news/politic/1110393/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-18_kan11",
+   "verified": true,
+   "verifiedNote": "תואם את טבלת מסמך המקור ואת israelielections.com"
+  },
+  {
+   "date": "2026-10-15",
+   "outletEn": "Israel Hayom",
+   "outlet": "ישראל היום",
+   "pollsterEn": "Kantar",
+   "pollster": "קנטאר",
+   "sample": null,
+   "seats": {
+    "likud": 21,
+    "yashar": 24,
+    "beyachad": 12,
+    "dems": 8,
+    "otzma": 9,
+    "joint": 9,
+    "shas": 7,
+    "utj": 7,
+    "yb": 8,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 0,
+    "bw": 0
+   },
+   "url": "https://www.israelhayom.co.il/news/politics/article/21636491",
+   "urls": [
+    "https://www.israelhayom.co.il/news/politics/article/21636491"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-15_israelhayom",
+   "verified": true,
+   "verifiedNote": "תואם את טבלת מסמך המקור ואת israelielections.com"
+  },
+  {
+   "date": "2026-10-15",
+   "outletEn": "Maariv",
+   "outlet": "מעריב",
+   "pollsterEn": "Lazar Research",
+   "pollster": "מכון לזר (Panel4All)",
+   "sample": 700,
+   "seats": {
+    "likud": 18,
+    "yashar": 21,
+    "beyachad": 13,
+    "dems": 9,
+    "otzma": 8,
+    "joint": 8,
+    "shas": 7,
+    "utj": 8,
+    "yb": 8,
+    "rzz": 6,
+    "raam": 6,
+    "miluim": 4,
+    "amcha": 4,
+    "bw": 0
+   },
+   "url": "https://www.jpost.com/israel-election-2026/article-911902",
+   "urls": [
+    "https://www.jpost.com/israel-election-2026/article-911902",
+    "https://www.maariv.co.il/news/elections-2026/article-1377736"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-15_maariv",
+   "verified": true,
+   "verifiedNote": "תואם את ויקיפדיה"
+  },
+  {
+   "date": "2026-10-15",
+   "outletEn": "Zman Yisrael",
+   "outlet": "זמן ישראל",
+   "pollsterEn": "Yossi Tatika",
+   "pollster": "יוסי טאטיקה",
+   "sample": 500,
+   "seats": {
+    "likud": 20,
+    "yashar": 26,
+    "beyachad": 11,
+    "dems": 8,
+    "otzma": 7,
+    "joint": 8,
+    "shas": 8,
+    "utj": 8,
+    "yb": 9,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 0,
+    "bw": 0
+   },
+   "url": "https://www.timesofisrael.com/toi-poll-eisenkot-opens-up-big-lead-on-netanyahu-but-both-blocs-short-of-majority/",
+   "urls": [
+    "https://www.timesofisrael.com/toi-poll-eisenkot-opens-up-big-lead-on-netanyahu-but-both-blocs-short-of-majority/",
+    "https://www.zman.co.il/733625/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-15_zmanyisrael",
+   "verified": true,
+   "verifiedNote": "תואם את טבלת מסמך המקור ואת israelielections.com"
+  },
+  {
+   "date": "2026-10-14",
+   "outletEn": "Channel 14",
+   "outlet": "ערוץ 14",
+   "pollsterEn": "Shlomo Filber",
+   "pollster": "שלמה פילבר",
+   "sample": 568,
+   "seats": {
+    "likud": 29,
+    "yashar": 20,
+    "beyachad": 11,
+    "dems": 8,
+    "otzma": 8,
+    "joint": 9,
+    "shas": 10,
+    "utj": 8,
+    "yb": 5,
+    "rzz": 7,
+    "raam": 5,
+    "miluim": 0,
+    "amcha": 0,
+    "bw": 0
+   },
+   "url": "https://www.emess.co.il/radio/1944085",
+   "urls": [
+    "https://www.emess.co.il/radio/1944085"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-14_channel14",
+   "verified": null
+  },
+  {
+   "date": "2026-10-14",
+   "outletEn": "Channel 13 News",
+   "outlet": "חדשות 13",
+   "pollsterEn": "Midgam Project (Camil Fuchs)",
+   "pollster": "מדגם פרויקט / המדד (קמיל פוקס)",
+   "sample": 1018,
+   "seats": {
+    "likud": 18,
+    "yashar": 20,
+    "beyachad": 12,
+    "dems": 9,
+    "otzma": 8,
+    "joint": 9,
+    "shas": 7,
+    "utj": 8,
+    "yb": 9,
+    "rzz": 6,
+    "raam": 6,
+    "miluim": 4,
+    "amcha": 4,
+    "bw": 0
+   },
+   "url": "https://13tv.co.il/item/news/politics/politics/survey-905396904/?pid=106628",
+   "urls": [
+    "https://13tv.co.il/item/news/politics/politics/survey-905396904/?pid=106628"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-14_channel13news",
+   "verified": null
+  },
+  {
+   "date": "2026-10-14",
+   "outletEn": "Channel 13 News",
+   "outlet": "חדשות 13",
+   "pollsterEn": "Midgam Project (Camil Fuchs)",
+   "pollster": "מדגם פרויקט / המדד (קמיל פוקס)",
+   "sample": null,
+   "seats": {
+    "likud": 18,
+    "yashar": 20,
+    "beyachad": 12,
+    "dems": 9,
+    "otzma": 8,
+    "joint": 9,
+    "shas": 7,
+    "utj": 8,
+    "yb": 9,
+    "rzz": 6,
+    "raam": 6,
+    "miluim": 4,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.walla.co.il/news/politics/383957465",
+   "urls": [
+    "https://www.walla.co.il/news/politics/383957465"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-14_channel13newsb",
+   "verified": null
+  },
+  {
+   "date": "2026-10-13",
+   "outletEn": "i24NEWS",
+   "outlet": "i24NEWS",
+   "pollsterEn": "Direct Polls (Shlomo Filber)",
+   "pollster": "דיירקט פולס (שלמה פילבר)",
+   "sample": 1210,
+   "seats": {
+    "likud": 27,
+    "yashar": 21,
+    "beyachad": 13,
+    "dems": 9,
+    "otzma": 9,
+    "joint": 7,
+    "shas": 7,
+    "utj": 8,
+    "yb": 7,
+    "rzz": 6,
+    "raam": 6,
+    "miluim": 0,
+    "amcha": 0,
+    "bw": null
+   },
+   "url": "https://www.i24news.tv/he/news/israel-elections-2026/polls/artc-b9e16632",
+   "urls": [
+    "https://www.i24news.tv/he/news/israel-elections-2026/polls/artc-b9e16632"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-13_i24news",
+   "verified": true,
+   "verifiedNote": "תואם את טבלת מסמך המקור ואת israelielections.com"
+  },
+  {
+   "date": "2026-10-13",
+   "outletEn": "Channel 16 / 103FM",
+   "outlet": "ערוץ 16 / 103FM",
+   "pollsterEn": "Maagar Mochot",
+   "pollster": "מאגר מוחות",
+   "sample": 2000,
+   "seats": {
+    "likud": 18,
+    "yashar": 21,
+    "beyachad": 13,
+    "dems": 9,
+    "otzma": 9,
+    "joint": 8,
+    "shas": 7,
+    "utj": 8,
+    "yb": 7,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": 5,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.ch16.co.il/player/episode/6ace7ddac544041ace194b0b",
+   "urls": [
+    "https://www.ch16.co.il/player/episode/6ace7ddac544041ace194b0b"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-13_channel16103fm",
+   "verified": true,
+   "verifiedNote": "תואם את ויקיפדיה"
+  },
+  {
+   "date": "2026-10-12",
+   "outletEn": "Channel 14",
+   "outlet": "ערוץ 14",
+   "pollsterEn": "Shlomo Filber",
+   "pollster": "שלמה פילבר",
+   "sample": 538,
+   "seats": {
+    "likud": 29,
+    "yashar": 20,
+    "beyachad": 7,
+    "dems": 10,
+    "otzma": 7,
+    "joint": 8,
+    "shas": 10,
+    "utj": 8,
+    "yb": 5,
+    "rzz": 7,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 0,
+    "bw": 0
+   },
+   "url": "https://www.emess.co.il/radio/1942880",
+   "urls": [
+    "https://www.emess.co.il/radio/1942880"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-12_channel14",
+   "verified": null
+  },
+  {
+   "date": "2026-10-12",
+   "outletEn": "Walla",
+   "outlet": "וואלה",
+   "pollsterEn": "Lazar Research",
+   "pollster": "מכון לזר (Panel4All)",
+   "sample": 601,
+   "seats": {
+    "likud": 20,
+    "yashar": 22,
+    "beyachad": 13,
+    "dems": 10,
+    "otzma": 8,
+    "joint": 8,
+    "shas": 7,
+    "utj": 8,
+    "yb": 9,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 0,
+    "bw": 0
+   },
+   "url": "https://www.walla.co.il/news/politics/383957251",
+   "urls": [
+    "https://www.walla.co.il/news/politics/383957251"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-12_walla",
+   "verified": null
+  },
+  {
+   "date": "2026-10-12",
+   "outletEn": "Channel 12 News (N12)",
+   "outlet": "חדשות 12",
+   "pollsterEn": "Midgam (Mano Geva)",
+   "pollster": "מדגם (מנו גבע)",
+   "sample": 509,
+   "seats": {
+    "likud": 20,
+    "yashar": 23,
+    "beyachad": 13,
+    "dems": 9,
+    "otzma": 8,
+    "joint": 8,
+    "shas": 8,
+    "utj": 7,
+    "yb": 9,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 0,
+    "bw": 0
+   },
+   "url": "https://www.mako.co.il/news-israel-elections/2026/Article-cc91389788031a1026.htm",
+   "urls": [
+    "https://www.mako.co.il/news-israel-elections/2026/Article-cc91389788031a1026.htm"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-12_channel12newsn12",
+   "verified": null
+  },
+  {
+   "date": "2026-10-11",
+   "outletEn": "Kan 11",
+   "outlet": "כאן 11",
+   "pollsterEn": "Kantar",
+   "pollster": "קנטאר",
+   "sample": 552,
+   "seats": {
+    "likud": 20,
+    "yashar": 22,
+    "beyachad": 12,
+    "dems": 8,
+    "otzma": 9,
+    "joint": 8,
+    "shas": 7,
+    "utj": 8,
+    "yb": 8,
+    "rzz": 5,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 4,
+    "bw": 0
+   },
+   "url": "https://www.kan.org.il/content/kan-news/politic/1108256/",
+   "urls": [
+    "https://www.kan.org.il/content/kan-news/politic/1108256/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-11_kan11",
+   "verified": null
+  },
+  {
+   "date": "2026-10-08",
+   "outletEn": "i24NEWS",
+   "outlet": "i24NEWS",
+   "pollsterEn": "Direct Polls (Shlomo Filber)",
+   "pollster": "דיירקט פולס (שלמה פילבר)",
+   "sample": null,
+   "seats": {
+    "likud": 26,
+    "yashar": 20,
+    "beyachad": 11,
+    "dems": 10,
+    "otzma": 9,
+    "joint": 7,
+    "shas": 7,
+    "utj": 8,
+    "yb": 7,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": null,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.i24news.tv/en/news/israel-election-s-2026/artc-i24news-poll-netanyahu-and-eisenkot-fall-while-bennett-rises-full-poll",
+   "urls": [
+    "https://www.i24news.tv/en/news/israel-election-s-2026/artc-i24news-poll-netanyahu-and-eisenkot-fall-while-bennett-rises-full-poll",
+    "https://www.i24news.tv/he/news/israel-elections-2026/polls/artc-fa0f56f4",
+    "https://web.archive.org/web/20261009023215/https://www.i24news.tv/en/news/israel-election-s-2026/artc-i24news-poll-netanyahu-and-eisenkot-fall-while-bennett-rises-full-poll"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-08_i24news",
+   "verified": null
+  },
+  {
+   "date": "2026-10-08",
+   "outletEn": "Israel Hayom",
+   "outlet": "ישראל היום",
+   "pollsterEn": "Kantar",
+   "pollster": "קנטאר",
+   "sample": null,
+   "seats": {
+    "likud": 21,
+    "yashar": 22,
+    "beyachad": 13,
+    "dems": 8,
+    "otzma": 9,
+    "joint": 8,
+    "shas": 7,
+    "utj": 8,
+    "yb": 8,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": 5,
+    "amcha": null,
+    "bw": null
+   },
+   "url": "https://www.israelhayom.co.il/news/politics/article/21582636",
+   "urls": [
+    "https://www.israelhayom.co.il/news/politics/article/21582636",
+    "https://web.archive.org/web/20261008152813/https://www.israelhayom.co.il/news/politics/article/21582636"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-08_israelhayom",
+   "verified": null
+  },
+  {
+   "date": "2026-10-08",
+   "outletEn": "Maariv",
+   "outlet": "מעריב",
+   "pollsterEn": "Lazar Research",
+   "pollster": "מכון לזר (Panel4All)",
+   "sample": 700,
+   "seats": {
+    "likud": 20,
+    "yashar": 21,
+    "beyachad": 13,
+    "dems": 9,
+    "otzma": 8,
+    "joint": 7,
+    "shas": 7,
+    "utj": 7,
+    "yb": 9,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 4,
+    "bw": 0
+   },
+   "url": "https://www.jpost.com/israel-election-2026/article-911139",
+   "urls": [
+    "https://www.jpost.com/israel-election-2026/article-911139",
+    "https://www.maariv.co.il/news/politics/article-1375198",
+    "https://web.archive.org/web/20261009064216/https://www.jpost.com/israel-election-2026/article-911139"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-08_maariv",
+   "verified": null
+  },
+  {
+   "date": "2026-10-08",
+   "outletEn": "Zman Yisrael",
+   "outlet": "זמן ישראל",
+   "pollsterEn": "Yossi Tatika",
+   "pollster": "יוסי טאטיקה",
+   "sample": null,
+   "seats": {
+    "likud": 20,
+    "yashar": 24,
+    "beyachad": 13,
+    "dems": 8,
+    "otzma": 6,
+    "joint": 9,
+    "shas": 8,
+    "utj": 8,
+    "yb": 10,
+    "rzz": 5,
+    "raam": 5,
+    "miluim": null,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.zman.co.il/731622/",
+   "urls": [
+    "https://www.zman.co.il/731622/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-08_zmanyisrael",
+   "verified": null
+  },
+  {
+   "date": "2026-10-07",
+   "outletEn": "Channel 14",
+   "outlet": "ערוץ 14",
+   "pollsterEn": "Shlomo Filber",
+   "pollster": "שלמה פילבר",
+   "sample": null,
+   "seats": {
+    "likud": 31,
+    "yashar": 23,
+    "beyachad": 8,
+    "dems": 9,
+    "otzma": 8,
+    "joint": 7,
+    "shas": 10,
+    "utj": 8,
+    "yb": 5,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": null,
+    "amcha": null,
+    "bw": null
+   },
+   "url": "https://www.c14.co.il/article/1728552",
+   "urls": [
+    "https://www.c14.co.il/article/1728552",
+    "https://web.archive.org/web/20261007182106/https://www.c14.co.il/article/1728552"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-07_channel14",
+   "verified": null
+  },
+  {
+   "date": "2026-10-07",
+   "outletEn": "Channel 13 News",
+   "outlet": "חדשות 13",
+   "pollsterEn": "Midgam Project (Camil Fuchs)",
+   "pollster": "מדגם פרויקט / המדד (קמיל פוקס)",
+   "sample": null,
+   "seats": {
+    "likud": 20,
+    "yashar": 20,
+    "beyachad": 12,
+    "dems": 10,
+    "otzma": 8,
+    "joint": 9,
+    "shas": 7,
+    "utj": 8,
+    "yb": 8,
+    "rzz": 7,
+    "raam": 6,
+    "miluim": 0,
+    "amcha": 5,
+    "bw": 0
+   },
+   "url": "https://13tv.co.il/item/news/politics/politics/survey-905386103/",
+   "urls": [
+    "https://13tv.co.il/item/news/politics/politics/survey-905386103/",
+    "https://web.archive.org/web/20261008092027/https://13tv.co.il/item/news/politics/politics/survey-905386103/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-07_channel13news",
+   "verified": null
+  },
+  {
+   "date": "2026-10-06",
+   "outletEn": "Channel 16 / 103FM",
+   "outlet": "ערוץ 16 / 103FM",
+   "pollsterEn": "Maagar Mochot",
+   "pollster": "מאגר מוחות",
+   "sample": null,
+   "seats": {
+    "likud": 21,
+    "yashar": 23,
+    "beyachad": 14,
+    "dems": 9,
+    "otzma": 7,
+    "joint": 7,
+    "shas": 8,
+    "utj": 7,
+    "yb": 7,
+    "rzz": 7,
+    "raam": 6,
+    "miluim": null,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.skarim.org/channels/channel-16",
+   "urls": [
+    "https://www.skarim.org/channels/channel-16"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-06_channel16103fm",
+   "verified": null
+  },
+  {
+   "date": "2026-10-05",
+   "outletEn": "Channel 12 News (N12)",
+   "outlet": "חדשות 12",
+   "pollsterEn": "Midgam (Mano Geva)",
+   "pollster": "מדגם (מנו גבע)",
+   "sample": 501,
+   "seats": {
+    "likud": 21,
+    "yashar": 23,
+    "beyachad": 13,
+    "dems": 9,
+    "otzma": 7,
+    "joint": 8,
+    "shas": 7,
+    "utj": 8,
+    "yb": 9,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 0,
+    "bw": 0
+   },
+   "url": "https://www.mako.co.il/news-israel-elections/2026/Article-d7459e0cc7c01a1026.htm",
+   "urls": [
+    "https://www.mako.co.il/news-israel-elections/2026/Article-d7459e0cc7c01a1026.htm",
+    "https://web.archive.org/web/20261005211616/https://www.mako.co.il/news-israel-elections/2026/Article-d7459e0cc7c01a1026.htm"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-05_channel12newsn12",
+   "verified": null
+  },
+  {
+   "date": "2026-10-04",
+   "outletEn": "Kan 11",
+   "outlet": "כאן 11",
+   "pollsterEn": "Kantar",
+   "pollster": "קנטאר",
+   "sample": null,
+   "seats": {
+    "likud": 21,
+    "yashar": 23,
+    "beyachad": 12,
+    "dems": 8,
+    "otzma": 8,
+    "joint": 8,
+    "shas": 8,
+    "utj": 8,
+    "yb": 9,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": null,
+    "bw": null
+   },
+   "url": "https://www.kan.org.il/content/kan-news/politic/1105927/",
+   "urls": [
+    "https://www.kan.org.il/content/kan-news/politic/1105927/",
+    "https://web.archive.org/web/20261004180023/https://www.kan.org.il/content/kan-news/politic/1105927/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-04_kan11",
+   "verified": null
+  },
+  {
+   "date": "2026-10-01",
+   "outletEn": "i24NEWS",
+   "outlet": "i24NEWS",
+   "pollsterEn": "Direct Polls (Shlomo Filber)",
+   "pollster": "דיירקט פולס (שלמה פילבר)",
+   "sample": null,
+   "seats": {
+    "likud": 28,
+    "yashar": 22,
+    "beyachad": 9,
+    "dems": 9,
+    "otzma": 8,
+    "joint": 8,
+    "shas": 7,
+    "utj": 8,
+    "yb": 7,
+    "rzz": 5,
+    "raam": 5,
+    "miluim": null,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.i24news.tv/he/news/israel-elections-2026/polls/artc-761931ef",
+   "urls": [
+    "https://www.i24news.tv/he/news/israel-elections-2026/polls/artc-761931ef",
+    "https://web.archive.org/web/20261003070340/https://www.i24news.tv/he/news/israel-elections-2026/polls/artc-761931ef"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-01_i24news",
+   "verified": null
+  },
+  {
+   "date": "2026-10-01",
+   "outletEn": "Channel 14",
+   "outlet": "ערוץ 14",
+   "pollsterEn": "Shlomo Filber",
+   "pollster": "שלמה פילבר",
+   "sample": null,
+   "seats": {
+    "likud": 32,
+    "yashar": 21,
+    "beyachad": 8,
+    "dems": 9,
+    "otzma": 7,
+    "joint": 7,
+    "shas": 10,
+    "utj": 8,
+    "yb": 6,
+    "rzz": 7,
+    "raam": 5,
+    "miluim": null,
+    "amcha": null,
+    "bw": null
+   },
+   "url": "https://www.c14.co.il/article/1720749",
+   "urls": [
+    "https://www.c14.co.il/article/1720749",
+    "https://web.archive.org/web/20261002015649/https://www.c14.co.il/article/1720749"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-01_channel14",
+   "verified": null
+  },
+  {
+   "date": "2026-10-01",
+   "outletEn": "Maariv",
+   "outlet": "מעריב",
+   "pollsterEn": "Lazar Research",
+   "pollster": "מכון לזר (Panel4All)",
+   "sample": 602,
+   "seats": {
+    "likud": 19,
+    "yashar": 21,
+    "beyachad": 13,
+    "dems": 10,
+    "otzma": 9,
+    "joint": 7,
+    "shas": 7,
+    "utj": 7,
+    "yb": 9,
+    "rzz": 5,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 4,
+    "bw": 0
+   },
+   "url": "https://www.jpost.com/israel-election-2026/article-910396",
+   "urls": [
+    "https://www.jpost.com/israel-election-2026/article-910396",
+    "https://www.maariv.co.il/news/elections-2026/article-1372750",
+    "https://web.archive.org/web/20261002070149/http://www.jpost.com/israel-election-2026/article-910396"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-01_maariv",
+   "verified": null
+  },
+  {
+   "date": "2026-10-01",
+   "outletEn": "Zman Yisrael",
+   "outlet": "זמן ישראל",
+   "pollsterEn": "Yossi Tatika",
+   "pollster": "יוסי טאטיקה",
+   "sample": null,
+   "seats": {
+    "likud": 21,
+    "yashar": 21,
+    "beyachad": 10,
+    "dems": 8,
+    "otzma": 6,
+    "joint": 8,
+    "shas": 9,
+    "utj": 8,
+    "yb": 10,
+    "rzz": 5,
+    "raam": 5,
+    "miluim": 5,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.zman.co.il/729422/",
+   "urls": [
+    "https://www.zman.co.il/729422/",
+    "https://web.archive.org/web/20261001232246/https://www.zman.co.il/729422/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-10-01_zmanyisrael",
+   "verified": null
+  },
+  {
+   "date": "2026-09-30",
+   "outletEn": "Channel 13 News",
+   "outlet": "חדשות 13",
+   "pollsterEn": "Midgam Project (Camil Fuchs)",
+   "pollster": "מדגם פרויקט / המדד (קמיל פוקס)",
+   "sample": null,
+   "seats": {
+    "likud": 19,
+    "yashar": 21,
+    "beyachad": 11,
+    "dems": 11,
+    "otzma": 8,
+    "joint": 9,
+    "shas": 7,
+    "utj": 8,
+    "yb": 9,
+    "rzz": 7,
+    "raam": 5,
+    "miluim": 0,
+    "amcha": 5,
+    "bw": 0
+   },
+   "url": "https://13tv.co.il/item/news/politics/politics/survey-905376242/",
+   "urls": [
+    "https://13tv.co.il/item/news/politics/politics/survey-905376242/",
+    "https://web.archive.org/web/20261001021542/https://13tv.co.il/item/news/politics/politics/survey-905376242/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-30_channel13news",
+   "verified": null
+  },
+  {
+   "date": "2026-09-29",
+   "outletEn": "Channel 16 / 103FM",
+   "outlet": "ערוץ 16 / 103FM",
+   "pollsterEn": "Maagar Mochot",
+   "pollster": "מאגר מוחות",
+   "sample": null,
+   "seats": {
+    "likud": 19,
+    "yashar": 21,
+    "beyachad": 14,
+    "dems": 9,
+    "otzma": 8,
+    "joint": 7,
+    "shas": 8,
+    "utj": 7,
+    "yb": 7,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 5,
+    "bw": null
+   },
+   "url": "https://www.ch16.co.il/player/episode/6abc0121d203dfa22727649b",
+   "urls": [
+    "https://www.ch16.co.il/player/episode/6abc0121d203dfa22727649b",
+    "https://web.archive.org/web/20261002013459/https://www.ch16.co.il/player/episode/6abc0121d203dfa22727649b"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-29_channel16103fm",
+   "verified": null
+  },
+  {
+   "date": "2026-09-28",
+   "outletEn": "Channel 14",
+   "outlet": "ערוץ 14",
+   "pollsterEn": "Shlomo Filber",
+   "pollster": "שלמה פילבר",
+   "sample": null,
+   "seats": {
+    "likud": 31,
+    "yashar": 21,
+    "beyachad": 9,
+    "dems": 9,
+    "otzma": 7,
+    "joint": 7,
+    "shas": 10,
+    "utj": 8,
+    "yb": 6,
+    "rzz": 7,
+    "raam": 5,
+    "miluim": null,
+    "amcha": null,
+    "bw": null
+   },
+   "url": "https://www.c14.co.il/article/1716250",
+   "urls": [
+    "https://www.c14.co.il/article/1716250",
+    "https://web.archive.org/web/20260930070233/https://www.c14.co.il/article/1716250"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-28_channel14",
+   "verified": null
+  },
+  {
+   "date": "2026-09-27",
+   "outletEn": "Kan 11",
+   "outlet": "כאן 11",
+   "pollsterEn": "Kantar",
+   "pollster": "קנטאר",
+   "sample": null,
+   "seats": {
+    "likud": 21,
+    "yashar": 23,
+    "beyachad": 11,
+    "dems": 9,
+    "otzma": 7,
+    "joint": 7,
+    "shas": 7,
+    "utj": 7,
+    "yb": 9,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.kan.org.il/content/kan-news/politic/1103667/",
+   "urls": [
+    "https://www.kan.org.il/content/kan-news/politic/1103667/",
+    "https://web.archive.org/web/20260928041819/https://www.kan.org.il/content/kan-news/politic/1103667/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-27_kan11",
+   "verified": null
+  },
+  {
+   "date": "2026-09-24",
+   "outletEn": "i24NEWS",
+   "outlet": "i24NEWS",
+   "pollsterEn": "Direct Polls (Shlomo Filber)",
+   "pollster": "דיירקט פולס (שלמה פילבר)",
+   "sample": null,
+   "seats": {
+    "likud": 27,
+    "yashar": 22,
+    "beyachad": 9,
+    "dems": 9,
+    "otzma": 8,
+    "joint": 7,
+    "shas": 7,
+    "utj": 8,
+    "yb": 7,
+    "rzz": 6,
+    "raam": 6,
+    "miluim": null,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.i24news.tv/en/news/israeli-elections/artc-i24news-poll-ben-gvir-gains-as-lieberman-and-winter-lose-ground",
+   "urls": [
+    "https://www.i24news.tv/en/news/israeli-elections/artc-i24news-poll-ben-gvir-gains-as-lieberman-and-winter-lose-ground",
+    "https://www.i24news.tv/he/news/israel-elections-2026/polls/artc-5d1d4577",
+    "https://web.archive.org/web/20260924221040/https://www.i24news.tv/en/news/israeli-elections/artc-i24news-poll-ben-gvir-gains-as-lieberman-and-winter-lose-ground"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-24_i24news",
+   "verified": null
+  },
+  {
+   "date": "2026-09-24",
+   "outletEn": "Maariv",
+   "outlet": "מעריב",
+   "pollsterEn": "Lazar Research",
+   "pollster": "מכון לזר (Panel4All)",
+   "sample": 610,
+   "seats": {
+    "likud": 18,
+    "yashar": 22,
+    "beyachad": 13,
+    "dems": 11,
+    "otzma": 9,
+    "joint": 7,
+    "shas": 6,
+    "utj": 6,
+    "yb": 9,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 4,
+    "bw": 0
+   },
+   "url": "https://www.jpost.com/israel-election-2026/article-909659",
+   "urls": [
+    "https://www.jpost.com/israel-election-2026/article-909659",
+    "https://www.maariv.co.il/news/elections-2026/article-1370546",
+    "https://web.archive.org/web/20260925053734/https://www.jpost.com/israel-election-2026/article-909659"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-24_maariv",
+   "verified": null
+  },
+  {
+   "date": "2026-09-24",
+   "outletEn": "Channel 16 / 103FM",
+   "outlet": "ערוץ 16 / 103FM",
+   "pollsterEn": "Maagar Mochot",
+   "pollster": "מאגר מוחות",
+   "sample": null,
+   "seats": {
+    "likud": 19,
+    "yashar": 23,
+    "beyachad": 13,
+    "dems": 8,
+    "otzma": 9,
+    "joint": 7,
+    "shas": 8,
+    "utj": 7,
+    "yb": 8,
+    "rzz": 5,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.ch16.co.il/player/episode/6ab5727cc711a7bf85e73ac3",
+   "urls": [
+    "https://www.ch16.co.il/player/episode/6ab5727cc711a7bf85e73ac3",
+    "https://web.archive.org/web/20260926143924/https://www.ch16.co.il/player/episode/6ab5727cc711a7bf85e73ac3"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-24_channel16103fm",
+   "verified": null
+  },
+  {
+   "date": "2026-09-24",
+   "outletEn": "Zman Yisrael",
+   "outlet": "זמן ישראל",
+   "pollsterEn": "Yossi Tatika",
+   "pollster": "יוסי טאטיקה",
+   "sample": null,
+   "seats": {
+    "likud": 21,
+    "yashar": 23,
+    "beyachad": 12,
+    "dems": 8,
+    "otzma": 6,
+    "joint": 8,
+    "shas": 10,
+    "utj": 8,
+    "yb": 10,
+    "rzz": 4,
+    "raam": 6,
+    "miluim": null,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.timesofisrael.com/netanyahus-coalition-and-rival-change-bloc-draw-level-in-latest-toi-poll/",
+   "urls": [
+    "https://www.timesofisrael.com/netanyahus-coalition-and-rival-change-bloc-draw-level-in-latest-toi-poll/",
+    "https://www.zman.co.il/727390/",
+    "https://web.archive.org/web/20260925093757/https://www.timesofisrael.com/netanyahus-coalition-and-rival-change-bloc-draw-level-in-latest-toi-poll/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-24_zmanyisrael",
+   "verified": null
+  },
+  {
+   "date": "2026-09-23",
+   "outletEn": "Channel 14",
+   "outlet": "ערוץ 14",
+   "pollsterEn": "Shlomo Filber",
+   "pollster": "שלמה פילבר",
+   "sample": null,
+   "seats": {
+    "likud": 32,
+    "yashar": 22,
+    "beyachad": 7,
+    "dems": 9,
+    "otzma": 6,
+    "joint": 7,
+    "shas": 11,
+    "utj": 7,
+    "yb": 7,
+    "rzz": 7,
+    "raam": 5,
+    "miluim": 0,
+    "amcha": 0,
+    "bw": null
+   },
+   "url": "https://www.c14.co.il/article/1711606",
+   "urls": [
+    "https://www.c14.co.il/article/1711606",
+    "https://web.archive.org/web/20260924054641/https://www.c14.co.il/article/1711606"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-23_channel14",
+   "verified": null
+  },
+  {
+   "date": "2026-09-23",
+   "outletEn": "Channel 13 News",
+   "outlet": "חדשות 13",
+   "pollsterEn": "Midgam Project (Camil Fuchs)",
+   "pollster": "מדגם פרויקט / המדד (קמיל פוקס)",
+   "sample": 1503,
+   "seats": {
+    "likud": 18,
+    "yashar": 22,
+    "beyachad": 11,
+    "dems": 11,
+    "otzma": 7,
+    "joint": 8,
+    "shas": 7,
+    "utj": 8,
+    "yb": 8,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 5,
+    "bw": null
+   },
+   "url": "https://13tv.co.il/item/news/politics/politics/hcp4l-905367553/",
+   "urls": [
+    "https://13tv.co.il/item/news/politics/politics/hcp4l-905367553/",
+    "https://web.archive.org/web/20261002101307/https://13tv.co.il/item/news/politics/politics/hcp4l-905367553/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-23_channel13news",
+   "verified": null
+  },
+  {
+   "date": "2026-09-22",
+   "outletEn": "Channel 12 News (N12)",
+   "outlet": "חדשות 12",
+   "pollsterEn": "Midgam (Mano Geva)",
+   "pollster": "מדגם (מנו גבע)",
+   "sample": null,
+   "seats": {
+    "likud": 20,
+    "yashar": 23,
+    "beyachad": 13,
+    "dems": 9,
+    "otzma": 6,
+    "joint": 7,
+    "shas": 7,
+    "utj": 8,
+    "yb": 9,
+    "rzz": 5,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.mako.co.il/news-israel-elections/2026/Article-fad59e819c9c0a1027.htm",
+   "urls": [
+    "https://www.mako.co.il/news-israel-elections/2026/Article-fad59e819c9c0a1027.htm",
+    "https://web.archive.org/web/20261005230834/https://www.mako.co.il/news-israel-elections/2026/Article-fad59e819c9c0a1027.htm"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-22_channel12newsn12",
+   "verified": null
+  },
+  {
+   "date": "2026-09-17",
+   "outletEn": "i24NEWS",
+   "outlet": "i24NEWS",
+   "pollsterEn": "Direct Polls (Shlomo Filber)",
+   "pollster": "דיירקט פולס (שלמה פילבר)",
+   "sample": null,
+   "seats": {
+    "likud": 27,
+    "yashar": 21,
+    "beyachad": 9,
+    "dems": 10,
+    "otzma": 7,
+    "joint": 7,
+    "shas": 7,
+    "utj": 8,
+    "yb": 8,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": null,
+    "amcha": 5,
+    "bw": null
+   },
+   "url": "https://www.i24news.tv/he/news/israel-elections-2026/polls/artc-5b0e5baa",
+   "urls": [
+    "https://www.i24news.tv/he/news/israel-elections-2026/polls/artc-5b0e5baa",
+    "https://web.archive.org/web/20260918034622/https://www.i24news.tv/he/news/israel-elections-2026/polls/artc-5b0e5baa"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-17_i24news",
+   "verified": null
+  },
+  {
+   "date": "2026-09-17",
+   "outletEn": "Channel 14",
+   "outlet": "ערוץ 14",
+   "pollsterEn": "Shlomo Filber",
+   "pollster": "שלמה פילבר",
+   "sample": null,
+   "seats": {
+    "likud": 31,
+    "yashar": 20,
+    "beyachad": 9,
+    "dems": 8,
+    "otzma": 8,
+    "joint": 7,
+    "shas": 10,
+    "utj": 8,
+    "yb": 7,
+    "rzz": 7,
+    "raam": 5,
+    "miluim": null,
+    "amcha": null,
+    "bw": null
+   },
+   "url": "https://www.c14.co.il/article/1706627",
+   "urls": [
+    "https://www.c14.co.il/article/1706627",
+    "https://web.archive.org/web/20260918015109/https://www.c14.co.il/article/1706627"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-17_channel14",
+   "verified": null
+  },
+  {
+   "date": "2026-09-17",
+   "outletEn": "Israel Hayom",
+   "outlet": "ישראל היום",
+   "pollsterEn": "Kantar",
+   "pollster": "קנטאר",
+   "sample": null,
+   "seats": {
+    "likud": 20,
+    "yashar": 22,
+    "beyachad": 13,
+    "dems": 9,
+    "otzma": 8,
+    "joint": 7,
+    "shas": 7,
+    "utj": 7,
+    "yb": 8,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.israelhayom.co.il/news/politics/article/21444759",
+   "urls": [
+    "https://www.israelhayom.co.il/news/politics/article/21444759",
+    "https://web.archive.org/web/20260917211301/https://www.israelhayom.co.il/news/politics/article/21444759"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-17_israelhayom",
+   "verified": null
+  },
+  {
+   "date": "2026-09-17",
+   "outletEn": "Maariv",
+   "outlet": "מעריב",
+   "pollsterEn": "Lazar Research",
+   "pollster": "מכון לזר (Panel4All)",
+   "sample": 600,
+   "seats": {
+    "likud": 18,
+    "yashar": 23,
+    "beyachad": 13,
+    "dems": 9,
+    "otzma": 8,
+    "joint": 7,
+    "shas": 7,
+    "utj": 7,
+    "yb": 9,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.jpost.com/israel-election-2026/article-909028",
+   "urls": [
+    "https://www.jpost.com/israel-election-2026/article-909028",
+    "https://www.maariv.co.il/news/politics/article-1368599",
+    "https://web.archive.org/web/20260918072305/https://www.jpost.com/israel-election-2026/article-909028"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-17_maariv",
+   "verified": null
+  },
+  {
+   "date": "2026-09-17",
+   "outletEn": "Zman Yisrael",
+   "outlet": "זמן ישראל",
+   "pollsterEn": "Yossi Tatika",
+   "pollster": "יוסי טאטיקה",
+   "sample": null,
+   "seats": {
+    "likud": 22,
+    "yashar": 24,
+    "beyachad": 14,
+    "dems": 8,
+    "otzma": 7,
+    "joint": 8,
+    "shas": 9,
+    "utj": 9,
+    "yb": 9,
+    "rzz": 4,
+    "raam": 6,
+    "miluim": null,
+    "amcha": null,
+    "bw": null
+   },
+   "url": "https://www.zman.co.il/725468/",
+   "urls": [
+    "https://www.zman.co.il/725468/",
+    "https://web.archive.org/web/20260917220233/https://www.zman.co.il/725468//"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-17_zmanyisrael",
+   "verified": null
+  },
+  {
+   "date": "2026-09-16",
+   "outletEn": "Channel 16 / 103FM",
+   "outlet": "ערוץ 16 / 103FM",
+   "pollsterEn": "Maagar Mochot",
+   "pollster": "מאגר מוחות",
+   "sample": null,
+   "seats": {
+    "likud": 18,
+    "yashar": 21,
+    "beyachad": 16,
+    "dems": 9,
+    "otzma": 9,
+    "joint": 6,
+    "shas": 9,
+    "utj": 7,
+    "yb": 7,
+    "rzz": 5,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election74/he/Survey_4151.pdf",
+   "urls": [
+    "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election74/he/Survey_4151.pdf"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-16_channel16103fm",
+   "verified": null
+  },
+  {
+   "date": "2026-09-16",
+   "outletEn": "Channel 13 News",
+   "outlet": "חדשות 13",
+   "pollsterEn": "Midgam Project (Camil Fuchs)",
+   "pollster": "מדגם פרויקט / המדד (קמיל פוקס)",
+   "sample": null,
+   "seats": {
+    "likud": 18,
+    "yashar": 22,
+    "beyachad": 12,
+    "dems": 10,
+    "otzma": 8,
+    "joint": 8,
+    "shas": 7,
+    "utj": 7,
+    "yb": 8,
+    "rzz": 8,
+    "raam": 6,
+    "miluim": null,
+    "amcha": 6,
+    "bw": null
+   },
+   "url": "https://13tv.co.il/item/news/politics/politics/uo4p5-905360485/",
+   "urls": [
+    "https://13tv.co.il/item/news/politics/politics/uo4p5-905360485/",
+    "https://web.archive.org/web/20260917041142/https://13tv.co.il/item/news/politics/politics/uo4p5-905360485/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-16_channel13news",
+   "verified": null
+  },
+  {
+   "date": "2026-09-15",
+   "outletEn": "Channel 14",
+   "outlet": "ערוץ 14",
+   "pollsterEn": "Shlomo Filber",
+   "pollster": "שלמה פילבר",
+   "sample": null,
+   "seats": {
+    "likud": 30,
+    "yashar": 21,
+    "beyachad": 8,
+    "dems": 9,
+    "otzma": 8,
+    "joint": 7,
+    "shas": 10,
+    "utj": 8,
+    "yb": 6,
+    "rzz": 8,
+    "raam": 5,
+    "miluim": null,
+    "amcha": null,
+    "bw": null
+   },
+   "url": "https://www.c14.co.il/article/1703304",
+   "urls": [
+    "https://www.c14.co.il/article/1703304",
+    "https://web.archive.org/web/20260927042631/https://www.c14.co.il/article/1703304"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-15_channel14",
+   "verified": null
+  },
+  {
+   "date": "2026-09-14",
+   "outletEn": "Kan 11",
+   "outlet": "כאן 11",
+   "pollsterEn": "Kantar",
+   "pollster": "קנטאר",
+   "sample": null,
+   "seats": {
+    "likud": 20,
+    "yashar": 24,
+    "beyachad": 12,
+    "dems": 8,
+    "otzma": 8,
+    "joint": 7,
+    "shas": 7,
+    "utj": 7,
+    "yb": 8,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.kan.org.il/content/kan-news/politic/1099439/",
+   "urls": [
+    "https://www.kan.org.il/content/kan-news/politic/1099439/",
+    "https://web.archive.org/web/20260915075301/https://www.kan.org.il/content/kan-news/politic/1099439/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-14_kan11",
+   "verified": null
+  },
+  {
+   "date": "2026-09-14",
+   "outletEn": "Channel 12 News (N12)",
+   "outlet": "חדשות 12",
+   "pollsterEn": "Midgam (Mano Geva)",
+   "pollster": "מדגם (מנו גבע)",
+   "sample": 502,
+   "seats": {
+    "likud": 20,
+    "yashar": 23,
+    "beyachad": 13,
+    "dems": 10,
+    "otzma": 6,
+    "joint": 8,
+    "shas": 7,
+    "utj": 8,
+    "yb": 8,
+    "rzz": 5,
+    "raam": 4,
+    "miluim": 4,
+    "amcha": 4,
+    "bw": 0
+   },
+   "url": "https://www.mako.co.il/news-israel-elections/2026/Article-f91e6c26f80a0a1027.htm",
+   "urls": [
+    "https://www.mako.co.il/news-israel-elections/2026/Article-f91e6c26f80a0a1027.htm",
+    "https://web.archive.org/web/20260916040501/https://www.mako.co.il/news-israel-elections/2026/Article-f91e6c26f80a0a1027.htm"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-14_channel12newsn12",
+   "verified": null
+  },
+  {
+   "date": "2026-09-10",
+   "outletEn": "Maariv",
+   "outlet": "מעריב",
+   "pollsterEn": "Lazar Research",
+   "pollster": "מכון לזר (Panel4All)",
+   "sample": 601,
+   "seats": {
+    "likud": 19,
+    "yashar": 25,
+    "beyachad": 14,
+    "dems": 10,
+    "otzma": 8,
+    "joint": 7,
+    "shas": 7,
+    "utj": 7,
+    "yb": 9,
+    "rzz": 5,
+    "raam": 5,
+    "miluim": 0,
+    "amcha": 4,
+    "bw": 0
+   },
+   "url": "https://www.maariv.co.il/news/politics/article-1365318",
+   "urls": [
+    "https://www.maariv.co.il/news/politics/article-1365318",
+    "https://web.archive.org/web/20260911080416/https://www.maariv.co.il/news/politics/article-1365318"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-10_maariv",
+   "verified": null
+  },
+  {
+   "date": "2026-09-10",
+   "outletEn": "Zman Yisrael",
+   "outlet": "זמן ישראל",
+   "pollsterEn": "Yossi Tatika",
+   "pollster": "יוסי טאטיקה",
+   "sample": null,
+   "seats": {
+    "likud": 23,
+    "yashar": 23,
+    "beyachad": 15,
+    "dems": 8,
+    "otzma": 6,
+    "joint": 7,
+    "shas": 10,
+    "utj": 9,
+    "yb": 10,
+    "rzz": 4,
+    "raam": 5,
+    "miluim": null,
+    "amcha": null,
+    "bw": null
+   },
+   "url": "https://www.zman.co.il/723041/",
+   "urls": [
+    "https://www.zman.co.il/723041/",
+    "https://web.archive.org/web/20260917041140/https://www.zman.co.il/723041/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-10_zmanyisrael",
+   "verified": null
+  },
+  {
+   "date": "2026-09-09",
+   "outletEn": "i24NEWS",
+   "outlet": "i24NEWS",
+   "pollsterEn": "Direct Polls (Shlomo Filber)",
+   "pollster": "דיירקט פולס (שלמה פילבר)",
+   "sample": null,
+   "seats": {
+    "likud": 27,
+    "yashar": 22,
+    "beyachad": 10,
+    "dems": 9,
+    "otzma": 8,
+    "joint": 7,
+    "shas": 7,
+    "utj": 8,
+    "yb": 7,
+    "rzz": 6,
+    "raam": 5,
+    "miluim": 0,
+    "amcha": 4,
+    "bw": 0
+   },
+   "url": "https://www.i24news.tv/he/news/israel-elections-2026/polls/artc-a92f58d0",
+   "urls": [
+    "https://www.i24news.tv/he/news/israel-elections-2026/polls/artc-a92f58d0",
+    "https://web.archive.org/web/20260909215921/https://www.i24news.tv/he/news/israel-elections-2026/polls/artc-a92f58d0"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-09_i24news",
+   "verified": null
+  },
+  {
+   "date": "2026-09-09",
+   "outletEn": "Channel 14",
+   "outlet": "ערוץ 14",
+   "pollsterEn": "Shlomo Filber",
+   "pollster": "שלמה פילבר",
+   "sample": null,
+   "seats": {
+    "likud": 31,
+    "yashar": 22,
+    "beyachad": 7,
+    "dems": 8,
+    "otzma": 8,
+    "joint": 6,
+    "shas": 10,
+    "utj": 7,
+    "yb": 7,
+    "rzz": 8,
+    "raam": 6,
+    "miluim": null,
+    "amcha": null,
+    "bw": null
+   },
+   "url": "https://www.c14.co.il/article/1697000",
+   "urls": [
+    "https://www.c14.co.il/article/1697000",
+    "https://web.archive.org/web/20260910025313/https://www.c14.co.il/article/1697000"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-09_channel14",
+   "verified": null
+  },
+  {
+   "date": "2026-09-09",
+   "outletEn": "Kan 11",
+   "outlet": "כאן 11",
+   "pollsterEn": "Kantar",
+   "pollster": "קנטאר",
+   "sample": null,
+   "seats": {
+    "likud": 21,
+    "yashar": 24,
+    "beyachad": 12,
+    "dems": 9,
+    "otzma": 7,
+    "joint": 7,
+    "shas": 7,
+    "utj": 8,
+    "yb": 7,
+    "rzz": 5,
+    "raam": 5,
+    "miluim": 4,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.kan.org.il/content/kan-news/politic/1098105/",
+   "urls": [
+    "https://www.kan.org.il/content/kan-news/politic/1098105/",
+    "https://web.archive.org/web/20260911081927/https://www.kan.org.il/content/kan-news/politic/1098105/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-09_kan11",
+   "verified": null
+  },
+  {
+   "date": "2026-09-09",
+   "outletEn": "Walla",
+   "outlet": "וואלה",
+   "pollsterEn": "Lazar Research",
+   "pollster": "מכון לזר (Panel4All)",
+   "sample": 506,
+   "seats": {
+    "likud": 21,
+    "yashar": 25,
+    "beyachad": 14,
+    "dems": 9,
+    "otzma": 7,
+    "joint": 7,
+    "shas": 7,
+    "utj": 7,
+    "yb": 9,
+    "rzz": 5,
+    "raam": 5,
+    "miluim": 0,
+    "amcha": 4,
+    "bw": 0
+   },
+   "url": "https://www.walla.co.il/news/politics/3866713",
+   "urls": [
+    "https://www.walla.co.il/news/politics/3866713",
+    "https://web.archive.org/web/20260922152326/https://www.walla.co.il/news/politics/3866713"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-09_walla",
+   "verified": null
+  },
+  {
+   "date": "2026-09-09",
+   "outletEn": "Channel 16 / 103FM",
+   "outlet": "ערוץ 16 / 103FM",
+   "pollsterEn": "Maagar Mochot",
+   "pollster": "מאגר מוחות",
+   "sample": null,
+   "seats": {
+    "likud": 20,
+    "yashar": 23,
+    "beyachad": 16,
+    "dems": 9,
+    "otzma": 9,
+    "joint": 7,
+    "shas": 9,
+    "utj": 7,
+    "yb": 7,
+    "rzz": 4,
+    "raam": 5,
+    "miluim": null,
+    "amcha": 4,
+    "bw": null
+   },
+   "url": "https://www.ch16.co.il/vod.html?id=aab4640f-335f-44c1-8f41-c4fbf4671081&title=%D7%9E%D7%94%D7%93%D7%95%D7%A8%D7%94%20%D7%9E%D7%A8%D7%9B%D7%96%D7%99%D7%AA%2009.09.2026",
+   "urls": [
+    "https://www.ch16.co.il/vod.html?id=aab4640f-335f-44c1-8f41-c4fbf4671081&title=%D7%9E%D7%94%D7%93%D7%95%D7%A8%D7%94%20%D7%9E%D7%A8%D7%9B%D7%96%D7%99%D7%AA%2009.09.2026"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-09_channel16103fm",
+   "verified": null
+  },
+  {
+   "date": "2026-09-09",
+   "outletEn": "Channel 12 News (N12)",
+   "outlet": "חדשות 12",
+   "pollsterEn": "Midgam (Mano Geva)",
+   "pollster": "מדגם (מנו גבע)",
+   "sample": 504,
+   "seats": {
+    "likud": 21,
+    "yashar": 25,
+    "beyachad": 13,
+    "dems": 10,
+    "otzma": 6,
+    "joint": 7,
+    "shas": 7,
+    "utj": 8,
+    "yb": 9,
+    "rzz": 5,
+    "raam": 4,
+    "miluim": 0,
+    "amcha": 5,
+    "bw": 0
+   },
+   "url": "https://www.mako.co.il/news-israel-elections/2026/Article-c27dc00e8c680a1026.htm",
+   "urls": [
+    "https://www.mako.co.il/news-israel-elections/2026/Article-c27dc00e8c680a1026.htm",
+    "https://web.archive.org/web/20260909232150/https://www.mako.co.il/news-israel-elections/2026/Article-c27dc00e8c680a1026.htm"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-09_channel12newsn12",
+   "verified": null
+  },
+  {
+   "date": "2026-09-09",
+   "outletEn": "Channel 13 News",
+   "outlet": "חדשות 13",
+   "pollsterEn": "Midgam Project (Camil Fuchs)",
+   "pollster": "מדגם פרויקט / המדד (קמיל פוקס)",
+   "sample": null,
+   "seats": {
+    "likud": 19,
+    "yashar": 22,
+    "beyachad": 13,
+    "dems": 10,
+    "otzma": 9,
+    "joint": 8,
+    "shas": 7,
+    "utj": 8,
+    "yb": 8,
+    "rzz": 6,
+    "raam": 6,
+    "miluim": 0,
+    "amcha": 4,
+    "bw": 0
+   },
+   "url": "https://13tv.co.il/item/news/politics/politics/z10wm-905351997/",
+   "urls": [
+    "https://13tv.co.il/item/news/politics/politics/z10wm-905351997/",
+    "https://web.archive.org/web/20260910203810/https://13tv.co.il/item/news/politics/politics/z10wm-905351997/"
+   ],
+   "source": "israelielections.com",
+   "id": "2026-09-09_channel13news",
+   "verified": null
+  }
+ ],
+ "computed": {
+  "computedAt": "2026-10-20T22:46+03:00",
+  "asOf": "2026-10-20",
+  "window": [
+   "2026-10-14",
+   "2026-10-20"
+  ],
+  "included": [
+   "2026-10-19_channel13news",
+   "2026-10-20_channel14",
+   "2026-10-15_zmanyisrael",
+   "2026-10-15_israelhayom",
+   "2026-10-15_maariv",
+   "2026-10-20_i24news",
+   "2026-10-18_kan11",
+   "2026-10-19_walla",
+   "2026-10-19_channel12newsn12",
+   "2026-10-20_channel16103fm"
+  ],
+  "n": 10,
+  "average": {
+   "likud": 21.2,
+   "yashar": 22.2,
+   "beyachad": 12.6,
+   "dems": 8.8,
+   "joint": 8.4,
+   "otzma": 8.1,
+   "shas": 7.6,
+   "yb": 7.7,
+   "utj": 7.4,
+   "rzz": 6.5,
+   "raam": 5.5,
+   "miluim": 2.8,
+   "amcha": 1.2,
+   "bw": 0.0
+  },
+  "range": {
+   "likud": [
+    18,
+    30
+   ],
+   "yashar": [
+    20,
+    26
+   ],
+   "beyachad": [
+    9,
+    15
+   ],
+   "dems": [
+    8,
+    9
+   ],
+   "joint": [
+    8,
+    9
+   ],
+   "otzma": [
+    7,
+    9
+   ],
+   "shas": [
+    6,
+    9
+   ],
+   "yb": [
+    6,
+    9
+   ],
+   "utj": [
+    7,
+    8
+   ],
+   "rzz": [
+    6,
+    7
+   ],
+   "raam": [
+    5,
+    6
+   ],
+   "miluim": [
+    0,
+    4
+   ],
+   "amcha": [
+    0,
+    4
+   ],
+   "bw": [
+    0,
+    0
+   ]
+  },
+  "passesIn": {
+   "likud": 10,
+   "yashar": 10,
+   "beyachad": 10,
+   "dems": 10,
+   "joint": 10,
+   "otzma": 10,
+   "shas": 10,
+   "yb": 10,
+   "utj": 10,
+   "rzz": 10,
+   "raam": 10,
+   "miluim": 7,
+   "amcha": 3,
+   "bw": 0
+  },
+  "blocs": [
+   {
+    "id": "coalition",
+    "avg": 50.8,
+    "perPoll": {
+     "2026-10-19_channel13news": 46,
+     "2026-10-20_channel14": 62,
+     "2026-10-15_zmanyisrael": 49,
+     "2026-10-15_israelhayom": 50,
+     "2026-10-15_maariv": 47,
+     "2026-10-20_i24news": 58,
+     "2026-10-18_kan11": 51,
+     "2026-10-19_walla": 48,
+     "2026-10-19_channel12newsn12": 51,
+     "2026-10-20_channel16103fm": 46
+    }
+   },
+   {
+    "id": "opposition",
+    "avg": 51.3,
+    "perPoll": {
+     "2026-10-19_channel13news": 51,
+     "2026-10-20_channel14": 44,
+     "2026-10-15_zmanyisrael": 54,
+     "2026-10-15_israelhayom": 52,
+     "2026-10-15_maariv": 51,
+     "2026-10-20_i24news": 48,
+     "2026-10-18_kan11": 52,
+     "2026-10-19_walla": 54,
+     "2026-10-19_channel12newsn12": 55,
+     "2026-10-20_channel16103fm": 52
+    }
+   },
+   {
+    "id": "arab",
+    "avg": 13.9,
+    "perPoll": {
+     "2026-10-19_channel13news": 15,
+     "2026-10-20_channel14": 14,
+     "2026-10-15_zmanyisrael": 13,
+     "2026-10-15_israelhayom": 14,
+     "2026-10-15_maariv": 14,
+     "2026-10-20_i24news": 14,
+     "2026-10-18_kan11": 13,
+     "2026-10-19_walla": 14,
+     "2026-10-19_channel12newsn12": 14,
+     "2026-10-20_channel16103fm": 14
+    }
+   },
+   {
+    "id": "other",
+    "avg": 4.0,
+    "perPoll": {
+     "2026-10-19_channel13news": 8,
+     "2026-10-20_channel14": 0,
+     "2026-10-15_zmanyisrael": 4,
+     "2026-10-15_israelhayom": 4,
+     "2026-10-15_maariv": 8,
+     "2026-10-20_i24news": 0,
+     "2026-10-18_kan11": 4,
+     "2026-10-19_walla": 4,
+     "2026-10-19_channel12newsn12": 0,
+     "2026-10-20_channel16103fm": 8
+    }
+   }
+  ],
+  "trend": [
+   {
+    "date": "2026-09-15",
+    "n": 9,
+    "avg": {
+     "likud": 22.1,
+     "yashar": 23.1,
+     "beyachad": 12.8,
+     "dems": 9.1,
+     "joint": 7.2,
+     "otzma": 7.7,
+     "shas": 7.9,
+     "yb": 8.0,
+     "utj": 7.7,
+     "rzz": 5.4,
+     "raam": 5.0,
+     "miluim": 0.9,
+     "amcha": 3.1,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-09-16",
+    "n": 7,
+    "avg": {
+     "likud": 21.1,
+     "yashar": 22.7,
+     "beyachad": 12.9,
+     "dems": 9.1,
+     "joint": 7.1,
+     "otzma": 7.6,
+     "shas": 8.1,
+     "yb": 8.0,
+     "utj": 7.6,
+     "rzz": 5.9,
+     "raam": 5.0,
+     "miluim": 1.7,
+     "amcha": 3.1,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-09-17",
+    "n": 9,
+    "avg": {
+     "likud": 21.6,
+     "yashar": 22.2,
+     "beyachad": 12.3,
+     "dems": 9.0,
+     "joint": 7.2,
+     "otzma": 7.7,
+     "shas": 7.8,
+     "yb": 8.0,
+     "utj": 7.6,
+     "rzz": 5.9,
+     "raam": 5.1,
+     "miluim": 2.2,
+     "amcha": 3.4,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-09-22",
+    "n": 8,
+    "avg": {
+     "likud": 21.8,
+     "yashar": 22.0,
+     "beyachad": 12.4,
+     "dems": 9.0,
+     "joint": 7.1,
+     "otzma": 7.6,
+     "shas": 7.9,
+     "yb": 8.1,
+     "utj": 7.6,
+     "rzz": 5.9,
+     "raam": 5.2,
+     "miluim": 2.0,
+     "amcha": 3.4,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-09-23",
+    "n": 7,
+    "avg": {
+     "likud": 22.4,
+     "yashar": 22.4,
+     "beyachad": 11.4,
+     "dems": 9.3,
+     "joint": 7.3,
+     "otzma": 7.0,
+     "shas": 7.9,
+     "yb": 8.3,
+     "utj": 7.7,
+     "rzz": 5.7,
+     "raam": 5.1,
+     "miluim": 2.3,
+     "amcha": 3.1,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-09-24",
+    "n": 7,
+    "avg": {
+     "likud": 22.1,
+     "yashar": 22.4,
+     "beyachad": 11.1,
+     "dems": 9.3,
+     "joint": 7.3,
+     "otzma": 7.3,
+     "shas": 8.0,
+     "yb": 8.3,
+     "utj": 7.4,
+     "rzz": 5.6,
+     "raam": 5.3,
+     "miluim": 2.3,
+     "amcha": 3.6,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-09-27",
+    "n": 8,
+    "avg": {
+     "likud": 22.0,
+     "yashar": 22.5,
+     "beyachad": 11.1,
+     "dems": 9.2,
+     "joint": 7.2,
+     "otzma": 7.2,
+     "shas": 7.9,
+     "yb": 8.4,
+     "utj": 7.4,
+     "rzz": 5.6,
+     "raam": 5.2,
+     "miluim": 2.5,
+     "amcha": 3.6,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-09-28",
+    "n": 8,
+    "avg": {
+     "likud": 21.9,
+     "yashar": 22.4,
+     "beyachad": 11.4,
+     "dems": 9.2,
+     "joint": 7.2,
+     "otzma": 7.4,
+     "shas": 7.8,
+     "yb": 8.2,
+     "utj": 7.5,
+     "rzz": 5.6,
+     "raam": 5.2,
+     "miluim": 2.5,
+     "amcha": 3.6,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-09-29",
+    "n": 7,
+    "avg": {
+     "likud": 22.1,
+     "yashar": 22.0,
+     "beyachad": 11.3,
+     "dems": 9.4,
+     "joint": 7.3,
+     "otzma": 7.4,
+     "shas": 7.9,
+     "yb": 8.0,
+     "utj": 7.4,
+     "rzz": 5.9,
+     "raam": 5.3,
+     "miluim": 2.3,
+     "amcha": 3.7,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-09-30",
+    "n": 7,
+    "avg": {
+     "likud": 22.3,
+     "yashar": 21.9,
+     "beyachad": 11.3,
+     "dems": 9.4,
+     "joint": 7.4,
+     "otzma": 7.6,
+     "shas": 7.9,
+     "yb": 8.1,
+     "utj": 7.4,
+     "rzz": 6.0,
+     "raam": 5.3,
+     "miluim": 1.7,
+     "amcha": 3.7,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-10-01",
+    "n": 7,
+    "avg": {
+     "likud": 22.7,
+     "yashar": 21.4,
+     "beyachad": 10.9,
+     "dems": 9.3,
+     "joint": 7.6,
+     "otzma": 7.6,
+     "shas": 7.9,
+     "yb": 8.1,
+     "utj": 7.6,
+     "rzz": 5.9,
+     "raam": 5.0,
+     "miluim": 2.4,
+     "amcha": 3.7,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-10-04",
+    "n": 7,
+    "avg": {
+     "likud": 22.7,
+     "yashar": 21.4,
+     "beyachad": 11.0,
+     "dems": 9.1,
+     "joint": 7.7,
+     "otzma": 7.7,
+     "shas": 8.0,
+     "yb": 8.1,
+     "utj": 7.7,
+     "rzz": 5.9,
+     "raam": 5.0,
+     "miluim": 2.4,
+     "amcha": 3.1,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-10-05",
+    "n": 8,
+    "avg": {
+     "likud": 22.5,
+     "yashar": 21.6,
+     "beyachad": 11.2,
+     "dems": 9.1,
+     "joint": 7.8,
+     "otzma": 7.6,
+     "shas": 7.9,
+     "yb": 8.2,
+     "utj": 7.8,
+     "rzz": 5.9,
+     "raam": 5.0,
+     "miluim": 2.6,
+     "amcha": 2.8,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-10-06",
+    "n": 8,
+    "avg": {
+     "likud": 22.8,
+     "yashar": 21.9,
+     "beyachad": 11.2,
+     "dems": 9.1,
+     "joint": 7.8,
+     "otzma": 7.5,
+     "shas": 7.9,
+     "yb": 8.2,
+     "utj": 7.8,
+     "rzz": 6.0,
+     "raam": 5.1,
+     "miluim": 2.1,
+     "amcha": 2.6,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-10-07",
+    "n": 8,
+    "avg": {
+     "likud": 22.8,
+     "yashar": 22.0,
+     "beyachad": 11.4,
+     "dems": 9.0,
+     "joint": 7.8,
+     "otzma": 7.6,
+     "shas": 7.9,
+     "yb": 8.0,
+     "utj": 7.8,
+     "rzz": 5.9,
+     "raam": 5.2,
+     "miluim": 2.1,
+     "amcha": 2.6,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-10-08",
+    "n": 9,
+    "avg": {
+     "likud": 22.3,
+     "yashar": 22.1,
+     "beyachad": 12.1,
+     "dems": 8.9,
+     "joint": 7.8,
+     "otzma": 7.8,
+     "shas": 7.7,
+     "yb": 8.0,
+     "utj": 7.8,
+     "rzz": 6.1,
+     "raam": 5.2,
+     "miluim": 1.9,
+     "amcha": 2.3,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-10-11",
+    "n": 9,
+    "avg": {
+     "likud": 22.2,
+     "yashar": 22.0,
+     "beyachad": 12.1,
+     "dems": 8.9,
+     "joint": 7.8,
+     "otzma": 7.9,
+     "shas": 7.6,
+     "yb": 7.9,
+     "utj": 7.8,
+     "rzz": 6.0,
+     "raam": 5.2,
+     "miluim": 1.9,
+     "amcha": 2.8,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-10-12",
+    "n": 10,
+    "avg": {
+     "likud": 21.7,
+     "yashar": 21.7,
+     "beyachad": 12.1,
+     "dems": 9.1,
+     "joint": 7.9,
+     "otzma": 7.9,
+     "shas": 7.6,
+     "yb": 8.0,
+     "utj": 7.7,
+     "rzz": 6.1,
+     "raam": 5.2,
+     "miluim": 2.5,
+     "amcha": 2.5,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-10-13",
+    "n": 10,
+    "avg": {
+     "likud": 21.5,
+     "yashar": 21.6,
+     "beyachad": 12.2,
+     "dems": 9.0,
+     "joint": 8.0,
+     "otzma": 8.1,
+     "shas": 7.5,
+     "yb": 8.0,
+     "utj": 7.8,
+     "rzz": 6.0,
+     "raam": 5.2,
+     "miluim": 3.0,
+     "amcha": 2.1,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-10-14",
+    "n": 10,
+    "avg": {
+     "likud": 21.3,
+     "yashar": 21.6,
+     "beyachad": 12.6,
+     "dems": 8.7,
+     "joint": 8.1,
+     "otzma": 8.2,
+     "shas": 7.5,
+     "yb": 8.1,
+     "utj": 7.8,
+     "rzz": 5.9,
+     "raam": 5.2,
+     "miluim": 3.0,
+     "amcha": 2.0,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-10-15",
+    "n": 10,
+    "avg": {
+     "likud": 21.1,
+     "yashar": 22.0,
+     "beyachad": 12.3,
+     "dems": 8.7,
+     "joint": 8.2,
+     "otzma": 8.3,
+     "shas": 7.5,
+     "yb": 7.9,
+     "utj": 7.8,
+     "rzz": 6.0,
+     "raam": 5.3,
+     "miluim": 3.3,
+     "amcha": 1.6,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-10-18",
+    "n": 10,
+    "avg": {
+     "likud": 21.0,
+     "yashar": 22.3,
+     "beyachad": 12.2,
+     "dems": 8.8,
+     "joint": 8.1,
+     "otzma": 8.2,
+     "shas": 7.7,
+     "yb": 7.9,
+     "utj": 7.7,
+     "rzz": 6.2,
+     "raam": 5.4,
+     "miluim": 3.3,
+     "amcha": 1.2,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-10-19",
+    "n": 10,
+    "avg": {
+     "likud": 21.1,
+     "yashar": 22.2,
+     "beyachad": 12.6,
+     "dems": 8.9,
+     "joint": 8.3,
+     "otzma": 8.1,
+     "shas": 7.8,
+     "yb": 7.6,
+     "utj": 7.5,
+     "rzz": 6.4,
+     "raam": 5.4,
+     "miluim": 2.9,
+     "amcha": 1.2,
+     "bw": 0.0
+    }
+   },
+   {
+    "date": "2026-10-20",
+    "n": 10,
+    "avg": {
+     "likud": 21.2,
+     "yashar": 22.2,
+     "beyachad": 12.6,
+     "dems": 8.8,
+     "joint": 8.4,
+     "otzma": 8.1,
+     "shas": 7.6,
+     "yb": 7.7,
+     "utj": 7.4,
+     "rzz": 6.5,
+     "raam": 5.5,
+     "miluim": 2.8,
+     "amcha": 1.2,
+     "bw": 0.0
+    }
+   }
+  ]
+ }
+}

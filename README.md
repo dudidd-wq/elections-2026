@@ -1,0 +1,57 @@
+# השוואת מצעים – בחירות לכנסת 2026
+
+An interactive, neutral, Hebrew (RTL) comparison of the 2026 Knesset election platforms: 12 lists × 10 issues, a cross-cutting analysis, and a poll tracker.
+Election day: **27.10.2026**. Live site: https://dudidd-wq.github.io/elections-2026/
+
+Static HTML/CSS/JS. No build step and no dependencies. Every piece of content lives in `data/*.json`.
+
+## Structure
+| Path | What |
+|---|---|
+| `index.html`, `css/style.css`, `js/app.js` | The app: a hash-routed single page (`#/matrix`, `#/issue/<id>`, `#/list/<id>`, `#/compare/<a>,<b>[,<c>]`, `#/analysis/<tab>`, `#/polls`, `#/about`) |
+| `data/platforms.json` | Lists, issues, the 120 positions (summary, full text, source type, source URL, `star`), profiles, gaps, sources |
+| `data/analysis.json` | The cross-cutting analysis: splits ranking, camps per issue, cross-axis splits, consensus, overlaps, principle vs degree |
+| `data/polls.json` | Polls (date, outlet, pollster, sample, seats, source URLs, verification), method, blocs, computed average, trend |
+| `source/platforms.md` | Copy of the canonical research document the platform data is generated from |
+| `tools/build_data.py` | Regenerates `platforms.json` and `analysis.json` from `source/platforms.md` |
+| `tools/update_polls.py` | Adds or imports polls and recomputes the average, ranges, bloc sums and trend |
+| `sw.js` | Service worker (network-first, offline fallback). **Bump `VERSION` on every deploy.** |
+
+## Updating
+
+### Platform content
+1. Edit the research document and copy it to `source/platforms.md`. Keep the same headings and table layout.
+2. Run `python3 tools/build_data.py`. It prints `ok: lists 12 issues 10 cells 120 ...` and fails loudly if the structure changes.
+3. Bump `VERSION` in `sw.js`, then commit and push. GitHub Pages redeploys automatically.
+
+`*` comes from the short-code matrix in the analysis section ("ניתוח רוחבי", section 4). A cell with `*` there gets `"star": true`.
+
+### Polls
+```bash
+# add one poll manually (seats must sum to 120; below threshold = 0; passing lists get >= 4)
+python3 tools/update_polls.py add --date 2026-10-22 --outlet "חדשות 12" --outlet-en "Channel 12 News (N12)" \
+  --pollster "מדגם (מנו גבע)" --sample 500 --url https://www.mako.co.il/... \
+  likud=21 yashar=24 beyachad=14 dems=9 joint=9 otzma=8 shas=8 yb=8 utj=7 rzz=7 raam=5 miluim=0 amcha=0
+
+# or import new rows from the israelielections.com tracker (each row links to the original publication)
+python3 tools/update_polls.py import-iie            # fetches the live page
+python3 tools/update_polls.py import-iie --html saved.html
+
+# recompute only
+python3 tools/update_polls.py recompute
+```
+After an import, spot-check new rows against their original links. You can set `"verified": true` and a `verifiedNote` in `polls.json`. Then bump `sw.js` `VERSION`, commit and push.
+
+**Average method:** take the 7 days ending on the date of the most recent poll. Use the most recent poll from each media outlet in that window and average them with equal weight. A list below the threshold, or not reported, counts as 0. The trend line uses the same method on every date that has a poll. Election silence runs from the end of Friday 23.10.2026 until polls close (27.10.2026, 22:00), so no polls should be added for that period.
+
+## Neutrality rules
+- No vote recommendation, no "match" quiz, no scoring.
+- Every list gets the same layout. The ordering is explicit: alphabetical by default, or by poll average, and the user can switch.
+- Bloc definitions follow the lists' own declarations as recorded in the source document. Colors are neutral, not party colors.
+- `*` marks positions based on statements or votes rather than a written platform. `†` marks the two lists added on 20.10.2026.
+- Known gap: Ra'am appears in the polls but is not covered by the source document, so its positions are not shown. The site says so.
+
+## Local preview
+```bash
+python3 -m http.server 8000   # then open http://localhost:8000/
+```

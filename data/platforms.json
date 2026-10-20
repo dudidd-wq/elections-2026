@@ -1,0 +1,1682 @@
+{
+ "meta": {
+  "title": "השוואת מצעים – בחירות לכנסת 2026",
+  "subtitle": "הבחירות לכנסת ה-26 · יום שלישי, 27 באוקטובר 2026 · המסמך נכון ל-20 באוקטובר 2026",
+  "electionDate": "2026-10-27",
+  "documentAsOf": "2026-10-20",
+  "linksCheckedOn": "2026-10-20",
+  "source": "platforms.md (מסמך המחקר המקורי)",
+  "sourceSha1": "1cfab83601d7",
+  "generatedAt": "2026-10-20T22:57+03:00",
+  "intro": [
+   "מסמך זה משווה, באופן ניטרלי ועובדתי, את עמדותיהן של 10 הרשימות הגדולות לפי ממוצע הסקרים, ב-10 סוגיות מרכזיות. אין בו המלצה להצבעה ואין בו הערכה של איכות העמדות. כל עמדה מוצגת במסגור של המפלגה עצמה, ככל האפשר בלשונה, עם קישור למקור.",
+   "מועד הבחירות ורשימות המתמודדים: 38 רשימות הוגשו לוועדת הבחירות המרכזית עד 8.9.2026; הרשימות אושרו במליאת הוועדה ב-27.9.2026, והפרסום הרשמי נקבע ל-18.10.2026. ועדת הבחירות פסלה את הרשימה המשותפת ואת רע\"ם לפי סעיף 7א לחוק יסוד: הכנסת; לגבי הרשימה המשותפת, בג\"ץ ביטל את הפסילה ב-2.10.2026, ושתי הרשימות מופיעות בפתק.",
+   "בסיס הסקרים: ממוצע פשוט של הסקר האחרון של כל אחד מ-7 כלי תקשורת שפרסמו בין 13 ל-19 באוקטובר 2026 (ערוץ 14, חדשות 13, חדשות 12, כאן 11, זמן ישראל, ישראל היום, i24NEWS). הנתונים נלקחו מטבלת הסקרים של אתר \"הפתק\" ונבדקו מול פרסומי חדשות 12, כאן ו-ice (ערוץ 14), וכן מול ממוצעי MEF וסרוגים. הדירוג זהה בכל הממוצעים שנבדקו: רע\"ם (כ-5.3 מנדטים בממוצע) היא הרשימה ה-11. כל שאר הרשימות ממוצעות מתחת ל-4 מנדטים, אף שהמילואימניקים והכלכלית עוברת את אחוז החסימה בחלק מהסקרים. מעמד רע\"ם בפתק מבוסס על דף הרשימה ב-MEF.",
+   "איחודים ורשימות משותפות: \"ביחד\" היא רשימה משותפת של בנט 2026 ויש עתיד; הרשימה המשותפת מאחדת את חד\"ש, תע\"ל ובל\"ד (בלי רע\"ם); \"הציונות הדתית–זהות\" היא גוש טכני של סמוטריץ' ופייגלין; יהדות התורה מאחדת את דגל התורה ואגודת ישראל; \"הבית הציוני\" (טרופר) השתלב ב\"ישר!\"; מועמדי תקווה חדשה רצים במסגרת הליכוד.",
+   "*עדכון 20.10.2026:* נוספו שתי רשימות שמתחת לאחוז החסימה ברוב הסקרים – **המילואימניקים והכלכלית** בראשות יועז הנדל וירון זליכה (די), ו**עמך ישראל** בראשות עופר וינטר (ך). הן מופיעות כשורות נוספות (מסומנות †) במטריצה ובכל טבלת סוגיה, וגם בפרופילים, בקווי המחלוקת, בפערים ובמקורות. הממוצעים שלהן חושבו על אותם 7 סקרים, כשסקר שבו הרשימה מתחת לאחוז החסימה נספר כ-0.",
+   "שיטה: לכל רשימה חיפשנו קודם מצע רשמי. כשלא נמצא מצע (מצב נפוץ בישראל, למשל בליכוד, בש\"ס וביהדות התורה), השתמשנו במסמכי מדיניות רשמיים, בתשובות הרשמיות של המפלגה לשאלוני ynet/ידיעות אחרונות, בהצהרות של ראש הרשימה ושל מועמדים, ובהצבעות בכנסת. בכל תא מצוין סוג המקור. המקורות המשניים העיקריים, שמהם אותרו מקורות ראשוניים רבים, הם אתר \"הדיוט.\" (עמדות לפי נושא, נכון ל-12.10.2026), דפי המפלגות של Middle East Forum ו-N12. הקישורים נבדקו ב-20.10.2026; היכן שלא נגישים לבדיקה אוטומטית, הדבר מצוין ברשימת הפערים.",
+   "קריאת הטבלאות: \"מצע רשמי\" = מסמך מצע שפרסמה המפלגה. \"מסמך מדיניות רשמי\" = תוכנית או עמוד עקרונות באתר המפלגה. \"תשובה רשמית לשאלון\" = תשובת המפלגה לפניית כלי תקשורת. \"הצהרות\" = דברי ראש הרשימה או מועמדים, שאינם בהכרח מצע מוסכם. \"לא נמצאה עמדה\" אין פירושו שאין למפלגה עמדה, אלא שלא אותרה עמדה פומבית."
+  ]
+ },
+ "issueNote": [
+  "1. ביטחון: עזה וחמאס, לבנון, איראן",
+  "2. הסוגיה הפלסטינית: מדינה פלסטינית, ריבונות והתיישבות ביהודה ושומרון",
+  "3. גיוס חרדים ושוויון בנטל",
+  "4. מערכת המשפט, חוקה ושלטון החוק",
+  "5. ועדת חקירה ממלכתית לאירועי 7 באוקטובר",
+  "6. כלכלה ויוקר המחיה",
+  "7. דיור",
+  "8. דת ומדינה: תחבורה ציבורית בשבת ונישואים אזרחיים",
+  "9. פשיעה וביטחון אישי (כולל האלימות בחברה הערבית)",
+  "10. חינוך: השקעה במערכת, לימודי ליבה ותקצוב החינוך החרדי",
+  "הסוגיות נבחרו לפי שני קריטריונים: שהן במרכז השיח בבחירות, ושלכל הרשימות או כמעט לכולן יש בהן עמדה פומבית. תאים שבהם לא אותרה עמדה מסומנים בהתאם."
+ ],
+ "issues": [
+  {
+   "id": "security",
+   "n": 1,
+   "title": "ביטחון: עזה וחמאס, לבנון, איראן",
+   "short": "ביטחון (עזה/לבנון/איראן)",
+   "code": "ביטחון / עזה"
+  },
+  {
+   "id": "palestinian",
+   "n": 2,
+   "title": "הסוגיה הפלסטינית: מדינה פלסטינית, ריבונות והתיישבות ביהודה ושומרון",
+   "short": "הסוגיה הפלסטינית",
+   "code": "יו\"ש ומדינה פלסטינית"
+  },
+  {
+   "id": "draft",
+   "n": 3,
+   "title": "גיוס חרדים ושוויון בנטל",
+   "short": "גיוס חרדים",
+   "code": "גיוס"
+  },
+  {
+   "id": "judiciary",
+   "n": 4,
+   "title": "מערכת המשפט, חוקה ושלטון החוק",
+   "short": "מערכת המשפט",
+   "code": "מערכת המשפט"
+  },
+  {
+   "id": "inquiry",
+   "n": 5,
+   "title": "ועדת חקירה ממלכתית לאירועי 7 באוקטובר",
+   "short": "ועדת חקירה",
+   "code": "ועדת חקירה"
+  },
+  {
+   "id": "economy",
+   "n": 6,
+   "title": "כלכלה ויוקר המחיה",
+   "short": "יוקר המחיה",
+   "code": "יוקר המחיה"
+  },
+  {
+   "id": "housing",
+   "n": 7,
+   "title": "דיור",
+   "short": "דיור",
+   "code": "דיור"
+  },
+  {
+   "id": "religion",
+   "n": 8,
+   "title": "דת ומדינה: תחבורה ציבורית בשבת ונישואים אזרחיים",
+   "short": "דת ומדינה",
+   "code": "דת ומדינה"
+  },
+  {
+   "id": "crime",
+   "n": 9,
+   "title": "פשיעה וביטחון אישי (כולל האלימות בחברה הערבית)",
+   "short": "פשיעה",
+   "code": "פשיעה"
+  },
+  {
+   "id": "education",
+   "n": 10,
+   "title": "חינוך: השקעה במערכת, לימודי ליבה ותקצוב החינוך החרדי",
+   "short": "חינוך/ליבה",
+   "code": "חינוך / ליבה"
+  }
+ ],
+ "lists": [
+  {
+   "id": "likud",
+   "name": "הליכוד",
+   "letters": "מחל",
+   "docPollNote": "ממוצע 22.6",
+   "ballotName": "הליכוד בהנהגת בנימין נתניהו לראשות הממשלה",
+   "leader": "בנימין נתניהו (ראש הממשלה)",
+   "composition": "רץ לבד; מועמדי תקווה חדשה (גדעון סער) משובצים ברשימה לפי הסכם האיחוד (2025).",
+   "seats25": "32",
+   "platformStatus": "הצהרות – לא פורסם מצע רשמי לבחירות 2026 באתר המפלגה (נבדק ע\"י MEF, 3.9.2026). העמדות מבוססות על הצהרות נתניהו, דוברי המפלגה, שרים ומועמדים, ועל תשובות המפלגה לשאלוני ynet.",
+   "declaredBloc": "גוש נתניהו (מפלגות הממשלה ה-37).",
+   "mainSource": "https://www.likud.org.il/",
+   "tableName": "הליכוד",
+   "added20Oct": false,
+   "sources": [
+    "https://www.likud.org.il/",
+    "https://t.me/bnetanyahu/7096",
+    "https://t.me/bnetanyahu/7048",
+    "https://hediot.co.il/topics/issue_draft_law/",
+    "https://hediot.co.il/topics/issue_constitution_judiciary/",
+    "https://t.me/bnetanyahu/6555",
+    "https://hediot.co.il/topics/economy/",
+    "https://www.maariv.co.il/economy/israel/article-1306987",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14883243",
+    "https://t.me/bnetanyahu/6857",
+    "https://hediot.co.il/topics/issue_haredi_education_funding/"
+   ]
+  },
+  {
+   "id": "yashar",
+   "name": "ישר! (איזנקוט)",
+   "letters": "דרך",
+   "docPollNote": "ממוצע 22.4",
+   "ballotName": "ישר! עם איזנקוט לראשות הממשלה – מאחדים את ישראל",
+   "leader": "גדי איזנקוט (רמטכ\"ל לשעבר)",
+   "composition": "מפלגה חדשה (נוסדה 16.9.2025); מס' 2 יורם כהן (ראש שב\"כ לשעבר). \"הבית הציוני\" של חילי טרופר (מפלגת הרישום \"יסודות ישראל\") השתלב ברשימה ב-6.9.2026.",
+   "seats25": "—",
+   "platformStatus": "מסמכי מדיניות רשמיים – עקרונות ו\"אג'נדה\" מפורטים באתר המפלגה, וטיוטת מתווה לוועדת חקירה ממלכתית (אוג' 2026). אין מסמך מצע אחד מאוחד.",
+   "declaredBloc": "גוש האופוזיציה (\"גוש השינוי\"). איזנקוט הצהיר שלא ישב עם סמוטריץ'.",
+   "mainSource": "https://yasharwitheisenkot.com/agenda_point/",
+   "tableName": "ישר! (איזנקוט)",
+   "added20Oct": false,
+   "sources": [
+    "https://yasharwitheisenkot.com/agenda_point/",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14910407",
+    "https://yasharwitheisenkot.com/principles/service-for-all/",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14903844",
+    "https://yasharwitheisenkot.com/principles/economics/",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14883243",
+    "https://yasharwitheisenkot.com/principles/education/"
+   ]
+  },
+  {
+   "id": "beyachad",
+   "name": "ביחד (בנט–לפיד)",
+   "letters": "רק",
+   "docPollNote": "ממוצע 12.3",
+   "ballotName": "ביחד בראשות נפתלי בנט",
+   "leader": "נפתלי בנט (ראש ממשלה לשעבר); מס' 2 יאיר לפיד",
+   "composition": "רשימה משותפת (גוש טכני) של \"בנט 2026\" ו\"יש עתיד\", הוכרזה 26.4.2026; לפי דיווחים לפיד רשאי להיפרד לאחר הבחירות.",
+   "seats25": "24 (יש עתיד)",
+   "platformStatus": "מסמכי מדיניות רשמיים – \"תוכניות\" מפורטות ו\"המגילה\" באתר הרשימה. בחלק מהנושאים (דת ומדינה) עמדות שני המרכיבים אינן זהות.",
+   "declaredBloc": "גוש האופוזיציה. בנט: \"הממשלה תהיה ציונית\"; שולל שותפות עם מפלגות התומכות בפטור מגיוס.",
+   "mainSource": "https://be-yahad.org.il/plans/",
+   "tableName": "ביחד (בנט–לפיד)",
+   "added20Oct": false,
+   "sources": [
+    "https://be-yahad.org.il/plans/national-sec/",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14910407",
+    "https://be-yahad.org.il/plans/meshartim-law/",
+    "https://be-yahad.org.il/the-scroll/",
+    "https://be-yahad.org.il/plans/",
+    "https://be-yahad.org.il/plans/yokermichya/",
+    "https://www.ynet.co.il/economy/article/skmk4paofe",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14883243",
+    "https://be-yahad.org.il/plans/education/"
+   ]
+  },
+  {
+   "id": "dems",
+   "name": "הדמוקרטים",
+   "letters": "אמת",
+   "docPollNote": "ממוצע 8.9",
+   "ballotName": "הדמוקרטים בראשות יאיר גולן",
+   "leader": "יאיר גולן",
+   "composition": "מפלגת האיחוד של העבודה ומרצ; פריימריז 20.7.2026.",
+   "seats25": "4 (העבודה)",
+   "platformStatus": "מצע רשמי – \"תוכנית מדיניות\" (PDF, אוגוסט 2026) ומסמך חזון (אפריל 2026) באתר המפלגה.",
+   "declaredBloc": "גוש האופוזיציה. גולן: רע\"ם יכולה להיות \"שותפה ראויה\" להחלפת הממשלה.",
+   "mainSource": "https://democrats.org.il/",
+   "tableName": "הדמוקרטים",
+   "added20Oct": false,
+   "sources": [
+    "https://democrats.org.il/",
+    "https://democrats.org.il/wp-content/uploads/2026/08/plan-8-26-he.pdf",
+    "https://democrats.org.il/wp-content/uploads/2026/04/vision0426.pdf"
+   ]
+  },
+  {
+   "id": "joint",
+   "name": "הרשימה המשותפת",
+   "letters": "ודם",
+   "docPollNote": "ממוצע 8.3",
+   "ballotName": "הרשימה המשותפת",
+   "leader": "יוסף ג'בארין (חד\"ש); מס' 2 אחמד טיבי (תע\"ל)",
+   "composition": "איחוד מחודש (19.8.2026) של חד\"ש, תע\"ל ובל\"ד, ללא רע\"ם. ועדת הבחירות פסלה את הרשימה; בג\"ץ ביטל את הפסילה ב-2.10.2026. יו\"ר בל\"ד סאמי אבו שחאדה פרש מהרשימה.",
+   "seats25": "5 (חד\"ש-תע\"ל)",
+   "platformStatus": "הצהרות + מסמכי המרכיבים – לא אותר מצע משותף לרשימה. העמדות לפי תשובות הרשימה לשאלוני ynet, מסמכי מק\"י/חד\"ש ובל\"ד, ודברי המועמדים.",
+   "declaredBloc": "מחוץ לגושים (מפלגות ערביות). ג'בארין לא שלל \"רשת ביטחון\" לקואליציה חלופית.",
+   "mainSource": "https://www.ynet.co.il/news/elections2026/article/yokra14910407",
+   "tableName": "הרשימה המשותפת",
+   "added20Oct": false,
+   "sources": [
+    "https://www.ynet.co.il/news/article/bjuparwbzg",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14910407",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14898966",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14903844",
+    "https://www.mako.co.il/news-israel-elections/2026/Article-133c9c0bc8c01a1026.htm",
+    "https://maki.org.il/",
+    "https://hediot.co.il/topics/housing/",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14883243",
+    "https://hediot.co.il/topics/crime_personal_security/",
+    "https://hediot.co.il/topics/education/"
+   ]
+  },
+  {
+   "id": "otzma",
+   "name": "עוצמה יהודית",
+   "letters": "ב",
+   "docPollNote": "ממוצע 7.9",
+   "ballotName": "עוצמה יהודית בראשות איתמר בן גביר",
+   "leader": "איתמר בן גביר (השר לביטחון לאומי)",
+   "composition": "רצה לבד.",
+   "seats25": "6 (במסגרת רשימת הציונות הדתית)",
+   "platformStatus": "חלקי – עמוד \"עקרונות\" כללי ללא תאריך באתר, ותוכניות נקודתיות לבחירות (\"התנתקות 710\", \"תוכנית הביטחון\"). אין מצע מלא ומתוארך.",
+   "declaredBloc": "גוש נתניהו.",
+   "mainSource": "https://ozma-yeudit.com/program/?lang=he",
+   "tableName": "עוצמה יהודית",
+   "added20Oct": false,
+   "sources": [
+    "https://www.inn.co.il/news/705555",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14910407",
+    "https://t.me/bengvir/6799",
+    "https://t.me/bengvir/6797",
+    "https://www.mako.co.il/news-israel-elections/2026/Article-133c9c0bc8c01a1026.htm",
+    "https://hediot.co.il/topics/economy/",
+    "https://hediot.co.il/topics/housing/",
+    "https://ozma-yeudit.com/program/?lang=he",
+    "https://hediot.co.il/topics/crime_personal_security/",
+    "https://hediot.co.il/topics/education/"
+   ]
+  },
+  {
+   "id": "shas",
+   "name": "ש\"ס",
+   "letters": "שס",
+   "docPollNote": "ממוצע 7.9",
+   "ballotName": "ש\"ס – התאחדות הספרדים שומרי תורה, תנועתו של מרן הרב עובדיה יוסף זצ\"ל",
+   "leader": "אריה דרעי",
+   "composition": "רצה לבד; הרשימה נקבעה ע\"י מועצת חכמי התורה.",
+   "seats25": "11",
+   "platformStatus": "הצהרות – לא נמצא מצע 2026; אתר המפלגה לא היה נגיש בבדיקה. העמדות לפי הודעות המפלגה, דברי דרעי ונציגיה, והצבעות בכנסת.",
+   "declaredBloc": "גוש נתניהו. דרעי: \"אנחנו תומכים בנתניהו, נקודה\".",
+   "mainSource": "https://israelvote.meforum.org/parties/shas/",
+   "tableName": "ש\"ס",
+   "added20Oct": false,
+   "sources": [
+    "https://israelvote.meforum.org/parties/shas/",
+    "https://hediot.co.il/topics/security/",
+    "https://main.knesset.gov.il/News/PressReleases/pages/press23072025v.aspx",
+    "https://hediot.co.il/topics/issue_draft_law/",
+    "https://t.me/dovrutshas/5161",
+    "https://www.mako.co.il/news-israel-elections/2026/Article-133c9c0bc8c01a1026.htm",
+    "https://www.israelhayom.co.il/magazine/special/israelelections/article/21419871",
+    "https://hediot.co.il/topics/housing/",
+    "https://hediot.co.il/topics/issue_civil_marriage_shabbat/",
+    "https://hediot.co.il/topics/crime_personal_security/",
+    "https://hediot.co.il/topics/issue_haredi_education_funding/"
+   ]
+  },
+  {
+   "id": "yb",
+   "name": "ישראל ביתנו",
+   "letters": "ל",
+   "docPollNote": "ממוצע 7.7",
+   "ballotName": "ישראל ביתנו בראשות אביגדור ליברמן",
+   "leader": "אביגדור ליברמן",
+   "composition": "רצה לבד.",
+   "seats25": "6",
+   "platformStatus": "מצע רשמי – \"מצע לממשלה הבאה\" באתר המפלגה (ללא תאריך מודפס; מנוסח לבחירות 2026).",
+   "declaredBloc": "גוש האופוזיציה. שולל קואליציה עם ש\"ס ויהדות התורה ועם מפלגות ערביות.",
+   "mainSource": "https://beytenu.org.il/party-platform/",
+   "tableName": "ישראל ביתנו",
+   "added20Oct": false,
+   "sources": [
+    "https://beytenu.org.il/party-platform/",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14910407"
+   ]
+  },
+  {
+   "id": "utj",
+   "name": "יהדות התורה",
+   "letters": "ג",
+   "docPollNote": "ממוצע 7.4",
+   "ballotName": "יהדות התורה והשבת – אגודת ישראל – דגל התורה",
+   "leader": "יעקב אשר (דגל התורה); מס' 2 יצחק גולדקנופף (אגודת ישראל)",
+   "composition": "רשימה משותפת של דגל התורה ואגודת ישראל; דגל התורה הוציאה את משה גפני ואורי מקלב מהמקומות הריאליים (5.9.2026).",
+   "seats25": "7",
+   "platformStatus": "הצהרות – לא נמצא מצע לרשימה או למרכיביה. העמדות לפי הצבעות, נאומים בכנסת ותשובות לשאלוני ynet.",
+   "declaredBloc": "גוש נתניהו באופן מסורתי; הרב דב לנדו אמר שדגל התורה \"אינה מחויבת לאף פוליטיקאי\".",
+   "mainSource": "https://israelvote.meforum.org/parties/utj/",
+   "tableName": "יהדות התורה",
+   "added20Oct": false,
+   "sources": [
+    "https://israelvote.meforum.org/parties/utj/",
+    "https://www.ynet.co.il/news/article/bjuparwbzg",
+    "https://hediot.co.il/topics/issue_draft_law/",
+    "https://hediot.co.il/topics/issue_constitution_judiciary/",
+    "https://www.mako.co.il/news-israel-elections/2026/Article-133c9c0bc8c01a1026.htm",
+    "https://hediot.co.il/topics/economy/",
+    "https://www.ynet.co.il/economy/article/skmk4paofe",
+    "https://www.ynet.co.il/news/article/hy3j0ukx11e",
+    "https://hediot.co.il/topics/crime_personal_security/",
+    "https://hediot.co.il/topics/issue_haredi_education_funding/"
+   ]
+  },
+  {
+   "id": "rzz",
+   "name": "הציונות הדתית–זהות",
+   "letters": "ט",
+   "docPollNote": "ממוצע 6.6",
+   "ballotName": "הציונות הדתית בראשות בצלאל סמוטריץ' וזהות בראשות משה פייגלין",
+   "leader": "בצלאל סמוטריץ' (שר האוצר); מס' 2 משה פייגלין",
+   "composition": "גוש טכני (הסכם 1.9.2026) – המפלגות שומרות על זהות נפרדת.",
+   "seats25": "7 (הציונות הדתית, לאחר הפיצול מעוצמה יהודית)",
+   "platformStatus": "מסמכי המרכיבים – לזהות מצע מלא (מאי 2026); לציונות הדתית עמודי מדיניות והצהרות. אין מצע משותף; בכל תא מסומן לאיזה מרכיב העמדה שייכת.",
+   "declaredBloc": "גוש נתניהו.",
+   "mainSource": "https://zehut.org.il/platform/summary",
+   "tableName": "הציונות הדתית–זהות",
+   "added20Oct": false,
+   "sources": [
+    "https://zehut.org.il/platform/summary",
+    "https://hediot.co.il/topics/issue_palestinian_state_sovereignty/",
+    "https://miluim.zionutdatit.digital/",
+    "https://zehut.org.il/docs/zehut-platform-full-he.pdf",
+    "https://t.me/smutrich/857",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14883243"
+   ]
+  },
+  {
+   "id": "miluim",
+   "name": "המילואימניקים והכלכלית",
+   "letters": "די",
+   "docPollNote": "ממוצע סקרים 2.3 (עוברת את החסימה ב-4 מתוך 7 סקרים)",
+   "ballotName": "המילואימניקים והכלכלית בראשות יועז הנדל וירון זליכה",
+   "leader": "יועז הנדל (המילואימניקים); מס' 2 ירון זליכה (הכלכלית החדשה); מס' 3 עינת וילף; מס' 4 חביב ווליבוביץ",
+   "composition": "ריצה משותפת של מפלגת המילואימניקים והמפלגה הכלכלית החדשה (הוכרזה ב-6.9.2026, בחלוקה שווה של המקומות ברשימה).",
+   "seats25": "0 (שתי המפלגות לא היו מיוצגות בכנסת ה-25)",
+   "platformStatus": "מצעי המרכיבים (אתר המילואימניקים ומצע הכלכלית), תשובות רשמיות לשאלוני ynet וטקסט רשמי בישראל היום. אין מסמך מצע משותף אחד; בתאים מסומן לאיזה מרכיב העמדה שייכת.",
+   "declaredBloc": "מחוץ לגושים (\"לשון מאזניים\"). תשב רק ב\"ממשלה ציונית\" בלי מפלגות חרדיות או ערביות, ותמליץ על המועמד ש\"יביא יותר מנדטים ציוניים\". אין הסכם עודפים.",
+   "mainSource": "https://www.themiluimnikim.org.il/platform/",
+   "tableName": "המילואימניקים והכלכלית (הנדל–זליכה)",
+   "added20Oct": true,
+   "sources": [
+    "https://www.themiluimnikim.org.il/platform/",
+    "https://www.hakalkalit.org/%D7%9E%D7%A6%D7%A2-%D7%94%D7%9E%D7%A4%D7%9C%D7%92%D7%94-%D7%94%D7%9B%D7%9C%D7%9B%D7%9C%D7%99%D7%AA",
+    "https://www.israelhayom.co.il/magazine/special/israelelections/article/21419871",
+    "https://www.israelhayom.co.il/magazine/special/israelelections/article/21331313",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14910407",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14898966",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14903844",
+    "https://www.maariv.co.il/news/elections-2026/article-1364043",
+    "https://www.ynet.co.il/news/elections2026/article/sywy11bjize",
+    "https://www.ynet.co.il/news/elections2026/article/hjextlj2gl",
+    "https://hediot.co.il/topics/issue_civil_marriage_shabbat/",
+    "https://www.news1.co.il/Archive/001-D-445022-00.html"
+   ]
+  },
+  {
+   "id": "amcha",
+   "name": "עמך ישראל",
+   "letters": "ך",
+   "docPollNote": "ממוצע סקרים 0.6 (עוברת את החסימה ב-1 מתוך 7 סקרים)",
+   "ballotName": "עמך ישראל בראשות עופר וינטר",
+   "leader": "עופר וינטר (תא\"ל במיל'); מס' 2 יוסף חדאד; מס' 3 נטעלי שם טוב",
+   "composition": "מפלגה אחת, ללא איחוד (המפלגה הרשומה: \"עמי חי לעד\"); 18 מועמדים. הושקה ב-25.8.2026.",
+   "seats25": "0 (מפלגה חדשה)",
+   "platformStatus": "מצע מקוון: עקרונות יסוד, תוכנית ביטחון בת 18 נקודות והצעה למנגנון חקירה; וכן תשובות רשמיות לשאלוני ynet. בדת ומדינה יש במצע רק עיקרון כללי.",
+   "declaredBloc": "מחנה הימין: \"נמליץ רק על נתניהו\". מתנה כניסה לממשלה בחקיקת \"חוק משרתים\" לפני ההשבעה ושוללת ממשלה עם איזנקוט. אין הסכם עודפים.",
+   "mainSource": "https://amchaisrael.co.il/foundations",
+   "tableName": "עמך ישראל (וינטר)",
+   "added20Oct": true,
+   "sources": [
+    "https://amchaisrael.co.il/foundations",
+    "https://amchaisrael.co.il/security",
+    "https://amchaisrael.co.il/inquiry",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14910407",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14898966",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14903844",
+    "https://www.ynet.co.il/news/elections2026/article/yokra14914571",
+    "https://www.ynet.co.il/news/elections2026/article/bjolf0avmx",
+    "https://www.news1.co.il/Archive/001-D-525080-00.html",
+    "https://www.gov.il/he/pages/amcha-israel_list6",
+    "https://www.bhol.co.il/news/1737212",
+    "https://www.ynet.co.il/news/elections2026/article/hjextlj2gl"
+   ]
+  }
+ ],
+ "positions": {
+  "likud": {
+   "security": {
+    "full": "פירוק חמאס מנשקו ופירוז עזה כתנאי לכל נסיגה; דחיית מסמך 15 הנקודות של \"מועצת השלום\". השארת צה\"ל ברצועת הביטחון בדרום לבנון \"ככל שיידרש\"; מניעת גרעין איראני \"עם או בלי הסכם\".",
+    "sourceType": "הצהרות מנהיג",
+    "url": "https://t.me/bnetanyahu/7096",
+    "summary": "פירוק חמאס כתנאי לנסיגה; רצועת ביטחון בלבנון; מניעת גרעין",
+    "code": "פירוק חמאס כתנאי לנסיגה",
+    "star": true,
+    "notFound": false
+   },
+   "palestinian": {
+    "full": "\"כל עוד אני ראש ממשלה לא תקום מדינה פלסטינית – לא בעזה ולא ביו\"ש\" (נתניהו); המשך ההתיישבות והסדרת חוות. הליכוד בין 7 הסיעות שהגישו ב-2025 הצעה להחלת ריבונות.",
+    "sourceType": "הצהרות מנהיג",
+    "url": "https://t.me/bnetanyahu/7048",
+    "summary": "נגד מדינה פלסטינית; המשך התיישבות",
+    "code": "נגד מדינה; התיישבות",
+    "star": true,
+    "notFound": false
+   },
+   "draft": {
+    "full": "חוק גיוס עם יעדים וסנקציות לצד \"שמירה על עולם התורה\"; דובר הליכוד: לחוקק מיד אחרי הבחירות, לפני הקמת הממשלה, במסגרת ההסכמים הקואליציוניים.",
+    "sourceType": "הצהרות דוברות/שרים",
+    "url": "https://hediot.co.il/topics/issue_draft_law/",
+    "summary": "יעדים וסנקציות לצד \"שמירה על עולם התורה\"",
+    "code": "יעדים + סנקציות",
+    "star": true,
+    "notFound": false
+   },
+   "judiciary": {
+    "full": "לא נמצאה הצעה לחוקה כתובה. שלמה קרעי: בית משפט לחוקה שייבחר בידי הכנסת, ולבג\"ץ אין סמכות לבטל חוקי יסוד; בכנסת ה-25 קידם הליכוד את שינוי הוועדה לבחירת שופטים.",
+    "sourceType": "הצהרות מועמדים / רקורד",
+    "url": "https://hediot.co.il/topics/issue_constitution_judiciary/",
+    "summary": "ריסון בג\"ץ; בימ\"ש לחוקה (מועמד)",
+    "code": "ריסון בג\"ץ",
+    "star": true,
+    "notFound": false
+   },
+   "inquiry": {
+    "full": "מתנגד לוועדה ממלכתית בהרכב שקובע נשיא העליון; מציע ועדה \"מאוזנת\" בסמכויות מלאות שחבריה ימונו חציים בידי הקואליציה וחציים בידי האופוזיציה.",
+    "sourceType": "הצהרות מנהיג",
+    "url": "https://t.me/bnetanyahu/6555",
+    "summary": "נגד ממלכתית; ועדה בהרכב קואליציה-אופוזיציה",
+    "code": "ועדה קואליציה–אופוזיציה",
+    "star": true,
+    "notFound": false
+   },
+   "economy": {
+    "full": "יעד לתחבורה ציבורית חינם בכל הארץ; הגדלת תקציב הביטחון בלי העלאת מסים; רפורמה בבנקים הקטנים בתקציב שאושר. קו של שוק חופשי.",
+    "sourceType": "הצהרות מועמדים",
+    "url": "https://hediot.co.il/topics/economy/",
+    "summary": "תח\"צ חינם (יעד); בלי העלאת מסים",
+    "code": "שוק חופשי",
+    "star": true,
+    "notFound": false
+   },
+   "housing": {
+    "full": "אלי כהן: \"להעיר\" את רשות מקרקעי ישראל כדי להוריד את מחירי הקרקע, והמשך \"מחיר למשתכן\".",
+    "sourceType": "הצהרות מועמד",
+    "url": "https://www.maariv.co.il/economy/israel/article-1306987",
+    "summary": "הורדת מחירי קרקע; מחיר למשתכן",
+    "code": "קרקע והיצע",
+    "star": true,
+    "notFound": false
+   },
+   "religion": {
+    "full": "תחבורה ציבורית \"בששת ימי המעשה תוך שמירת השבת\" (סטטוס קוו), בלי למנוע הסעות פרטיות לא מסובסדות; לא נמצאה עמדה על נישואים אזרחיים.",
+    "sourceType": "תשובה רשמית לשאלון",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14883243",
+    "summary": "תח\"צ בימי חול בלבד (סטטוס קוו)",
+    "code": "סטטוס קוו",
+    "star": false,
+    "notFound": false
+   },
+   "crime": {
+    "full": "נתניהו הנחה להגביר את האכיפה והכריז על \"החזרת חוק וסדר\" בנגב בשילוב כוחות; לא נמצאה תוכנית כוללת.",
+    "sourceType": "הצהרות מנהיג",
+    "url": "https://t.me/bnetanyahu/6857",
+    "summary": "הגברת אכיפה; \"חוק וסדר\" בנגב",
+    "code": "אכיפה (כללי)",
+    "star": true,
+    "notFound": false
+   },
+   "education": {
+    "full": "יואב קיש: הקטנת כיתות ל-19 תלמידים, מינהל לגיל הרך; דרישה מהרשתות החרדיות ל-100% ליבה ופיקוח, אך התנגדות לעיגון הדרישה בחוק.",
+    "sourceType": "הצהרות שר/מועמד",
+    "url": "https://hediot.co.il/topics/issue_haredi_education_funding/",
+    "summary": "ליבה ברשתות חרדיות – בלי חקיקה",
+    "code": "ליבה בלי חקיקה",
+    "star": true,
+    "notFound": false
+   }
+  },
+  "yashar": {
+   "security": {
+    "full": "גיבוש תפיסת ביטחון חדשה בתוך 150 יום; השמדת היכולת הצבאית-שלטונית של חמאס או פירוקה – הסדר שמשאיר את חמאס הוא \"כישלון מוחלט\"; פירוז דרום לבנון ופירוק חזבאללה; הגדלת צה\"ל ותקרה של 50 ימי מילואים בשנה.",
+    "sourceType": "מסמך מדיניות רשמי",
+    "url": "https://yasharwitheisenkot.com/agenda_point/",
+    "summary": "פירוק חמאס וחזבאללה; תפיסת ביטחון חדשה",
+    "code": "פירוק חמאס",
+    "star": false,
+    "notFound": false
+   },
+   "palestinian": {
+    "full": "מדינה פלסטינית \"לא על הפרק\" ו\"לא תקום בממשלה שנקים\"; חיזוק גושי ההתיישבות והשליטה בבקעה, ללא תוכנית פינוי; התנגדות למהלכים שיובילו למדינה דו-לאומית.",
+    "sourceType": "תשובה רשמית לשאלון / הצהרות",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14910407",
+    "summary": "\"מדינה לא על הפרק\"; חיזוק גושים",
+    "code": "נגד מדינה; בלי סיפוח",
+    "star": false,
+    "notFound": false
+   },
+   "draft": {
+    "full": "\"שירות ממלכתי לכל\" – חרדים וערבים, בעדיפות לצה\"ל; עד 3% מכל מחזור יקבלו דחייה ללימוד תורה לפי קריטריונים שוויוניים, וגם הם יעברו הכשרה בסיסית.",
+    "sourceType": "מסמך מדיניות רשמי",
+    "url": "https://yasharwitheisenkot.com/principles/service-for-all/",
+    "summary": "שירות לכל; עד 3% דחייה ללומדי תורה",
+    "code": "חובה; עד 3% דחייה",
+    "star": false,
+    "notFound": false
+   },
+   "judiciary": {
+    "full": "חוקה על בסיס מגילת העצמאות וחוקי היסוד, וחוק יסוד: החקיקה; ביטול החוק לשינוי הוועדה לבחירת שופטים; התנגדות לפסקת התגברות.",
+    "sourceType": "מסמך מדיניות / תשובה לשאלון",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14903844",
+    "summary": "חוק יסוד החקיקה; ביטול חוק השופטים",
+    "code": "ביטול חוק השופטים; חוק יסוד: החקיקה",
+    "star": false,
+    "notFound": false
+   },
+   "inquiry": {
+    "full": "ועדת חקירה ממלכתית בשבועות הראשונים של הממשלה, על 7.10, העשור שקדם לו וניהול המלחמה; פרסמה טיוטת החלטת ממשלה.",
+    "sourceType": "מסמך מדיניות רשמי",
+    "url": "https://yasharwitheisenkot.com/agenda_point/",
+    "summary": "ממלכתית בשבועות הראשונים",
+    "code": "ממלכתית",
+    "star": false,
+    "notFound": false
+   },
+   "economy": {
+    "full": "מבנה מס והטבות שיתגמל עבודה ושירות; הסרת חסמי יבוא ותקינה; הפחתת מס הכנסה במימון מסים על מוצרים מזיקים.",
+    "sourceType": "מסמך מדיניות רשמי",
+    "url": "https://yasharwitheisenkot.com/principles/economics/",
+    "summary": "תמריצי עבודה; הסרת חסמי יבוא",
+    "code": "תחרות; יבוא",
+    "star": false,
+    "notFound": false
+   },
+   "housing": {
+    "full": "הגדלת ההיצע והאצת הבנייה; מס על קרקעות שאינן מקודמות לבנייה; התחדשות עירונית מבוססת מיגון; הסדרת שוק השכירות.",
+    "sourceType": "מסמך מדיניות רשמי",
+    "url": "https://yasharwitheisenkot.com/principles/economics/",
+    "summary": "הגדלת היצע; מס על קרקע לא מפותחת",
+    "code": "היצע; מס על קרקע",
+    "star": false,
+    "notFound": false
+   },
+   "religion": {
+    "full": "\"יהדות מכילה\"; הרחבת סמכות הרשויות המקומיות לקבוע תחבורה בשבת לפי צביונן. לא נמצאה עמדה מפורשת על נישואים אזרחיים.",
+    "sourceType": "תשובה רשמית לשאלון",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14883243",
+    "summary": "\"יהדות מכילה\"; שבת לפי רשות",
+    "code": "שבת מקומית",
+    "star": false,
+    "notFound": false
+   },
+   "crime": {
+    "full": "מהלך חירום: קבינט לאומי למאבק בפשיעה בראשות רה\"מ; מערך חקירה, מודיעין, תביעה ובתי משפט ייעודיים לפשיעה מאורגנת.",
+    "sourceType": "מסמך מדיניות רשמי",
+    "url": "https://yasharwitheisenkot.com/agenda_point/",
+    "summary": "קבינט לאומי נגד פשיעה",
+    "code": "קבינט חירום",
+    "star": false,
+    "notFound": false
+   },
+   "education": {
+    "full": "כל הזרמים בחינוך הממלכתי; מימון ציבורי מלא מותנה בלימודי ליבה מלאים ובפיקוח, כולל מסלול ממלכתי-חרדי.",
+    "sourceType": "מסמך מדיניות רשמי",
+    "url": "https://yasharwitheisenkot.com/principles/education/",
+    "summary": "מימון מלא מותנה בליבה",
+    "code": "מימון מותנה בליבה",
+    "star": false,
+    "notFound": false
+   }
+  },
+  "beyachad": {
+   "security": {
+    "full": "מעבר מ\"סבבים\" להכרעה ו\"אפס הכלה\"; תוספת 20 אלף חיילים; הוצאת טורקיה וקטאר מעזה והכנסת מצרים, תוך חופש פעולה; \"כל תקיפה של חזבאללה תוביל לתקיפה באיראן\"; הסכם עם איראן רק בפירוק מלא של תוכנית הגרעין.",
+    "sourceType": "מסמך מדיניות רשמי",
+    "url": "https://be-yahad.org.il/plans/national-sec/",
+    "summary": "הכרעה, \"אפס הכלה\"; +20 אלף חיילים",
+    "code": "הכרעה; גורם אזורי",
+    "star": false,
+    "notFound": false
+   },
+   "palestinian": {
+    "full": "מתנגדת למדינה פלסטינית, למסירת שטחים ולפינוי יישובים חוקיים; שטחי C כחלק ריבוני עתידי (\"תוכנית בנט\" 2012) בשיקול עיתוי; אכיפה נגד בנייה בלתי חוקית על קרקע פרטית.",
+    "sourceType": "תשובה רשמית לשאלון",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14910407",
+    "summary": "נגד מדינה; שטחי C כריבוניים בעתיד",
+    "code": "נגד מדינה; ריבונות ב-C",
+    "star": false,
+    "notFound": false
+   },
+   "draft": {
+    "full": "גיוס לצה\"ל או שירות לאומי-אזרחי לכל אזרח \"ללא פטורים, מכסות או יעדים\"; \"חוק המשרתים\" – הטבות מותנות בשירות. בנט: לא תצטרף לממשלתו מפלגה התומכת בפטור.",
+    "sourceType": "מסמך מדיניות רשמי",
+    "url": "https://be-yahad.org.il/plans/meshartim-law/",
+    "summary": "שירות לכל, ללא פטורים; חוק המשרתים",
+    "code": "חובה, בלי פטורים",
+    "star": false,
+    "notFound": false
+   },
+   "judiciary": {
+    "full": "חוקה שפרקה הראשון מגילת העצמאות; חוק יסוד: החקיקה וביקורת שיפוטית בהסכמה רחבה; ביטול חוק בחירת השופטים החדש; הגבלת כהונת רה\"מ ל-8 שנים.",
+    "sourceType": "מסמך מדיניות רשמי",
+    "url": "https://be-yahad.org.il/the-scroll/",
+    "summary": "חוקה; ביטול חוק השופטים; 8 שנים לרה\"מ",
+    "code": "ביטול חוק השופטים; חוקה",
+    "star": false,
+    "notFound": false
+   },
+   "inquiry": {
+    "full": "ועדת חקירה ממלכתית כהחלטה הראשונה של הממשלה, על 7.10 והתנהלות המדינה לאחריו.",
+    "sourceType": "מסמך מדיניות רשמי",
+    "url": "https://be-yahad.org.il/plans/",
+    "summary": "ממלכתית – החלטת ממשלה ראשונה",
+    "code": "ממלכתית",
+    "star": false,
+    "notFound": false
+   },
+   "economy": {
+    "full": "הורדת מחיר סל הסופר ב-30% בתוך 3 שנים בפירוק קרטלים ומונופולים; סגירת 7 משרדי ממשלה וביזור סמכויות לרשויות.",
+    "sourceType": "מסמך מדיניות רשמי",
+    "url": "https://be-yahad.org.il/plans/yokermichya/",
+    "summary": "סל הסופר ‎-30%; פירוק קרטלים",
+    "code": "פירוק קרטלים",
+    "star": false,
+    "notFound": false
+   },
+   "housing": {
+    "full": "כ-100 אלף דירות להשכרה ארוכת טווח בעשור (40% בהנחה של 30%); הטבות מס לחוזים של 5 שנים ומעלה; העברת ניהול קרקעות לרשויות המקומיות.",
+    "sourceType": "תשובה רשמית לשאלון",
+    "url": "https://www.ynet.co.il/economy/article/skmk4paofe",
+    "summary": "100 אלף דירות להשכרה ארוכה",
+    "code": "שכירות ארוכה",
+    "star": false,
+    "notFound": false
+   },
+   "religion": {
+    "full": "בנט: כל עיר תחליט על תחבורה בשבת לפי צביונה, קווים לבתי חולים ולבסיסים; יש עתיד: חקיקת תחבורה בשבת ביישובים חילוניים ו\"ברית הזוגיות\". לבנט לא נמצאה עמדה על נישואים אזרחיים.",
+    "sourceType": "תשובה לשאלון / הצהרות",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14883243",
+    "summary": "שבת לפי עיר (בנט); ברית זוגיות (יש עתיד)",
+    "code": "שבת מקומית (בנט); ברית זוגיות (יש עתיד)",
+    "star": false,
+    "notFound": false
+   },
+   "crime": {
+    "full": "הגדרת הפשיעה המאורגנת והברחות הנשק כאיום ביטחוני לאומי בטיפול הקבינט, שב\"כ וצה\"ל; נוהל \"סגר וסיכול\" ומיקוד בארגוני הפשיעה המרכזיים.",
+    "sourceType": "מסמך מדיניות רשמי",
+    "url": "https://be-yahad.org.il/plans/",
+    "summary": "פשיעה מאורגנת = איום ביטחוני",
+    "code": "איום ביטחוני",
+    "star": false,
+    "notFound": false
+   },
+   "education": {
+    "full": "שכר התחלתי של 12 אלף ₪ למורה ו\"מצב חירום\" בחינוך; מימון רק למוסדות המלמדים 100% ליבה.",
+    "sourceType": "מסמך מדיניות רשמי",
+    "url": "https://be-yahad.org.il/plans/education/",
+    "summary": "מימון רק עם 100% ליבה",
+    "code": "מימון מותנה בליבה",
+    "star": false,
+    "notFound": false
+   }
+  },
+  "dems": {
+   "security": {
+    "full": "\"יד חזקה\" וחופש פעולה מלא לצה\"ל ולשב\"כ, לצד יוזמה מדינית אזורית עם ארה\"ב ומדינות ערב מתונות. בעזה: פירוז והחלפת שלטון חמאס בסיוע אזורי ובינ\"ל; בלבנון: כוח בינ\"ל; נגד איראן: ברית אזורית וגלובלית בכל הכלים.",
+    "sourceType": "מצע רשמי",
+    "url": "https://democrats.org.il/wp-content/uploads/2026/08/plan-8-26-he.pdf",
+    "summary": "יד חזקה + יוזמה מדינית אזורית",
+    "code": "פירוז; גורם אזורי",
+    "star": false,
+    "notFound": false
+   },
+   "palestinian": {
+    "full": "היפרדות מהפלסטינים בגבולות קבע שישמרו רוב יהודי; פירוז מלא של מדינה פלסטינית עתידית ושליטה ביטחונית בבקעה; עצירת הסיפוח, פינוי מאחזים וחיזוק התיאום עם הרש\"פ.",
+    "sourceType": "מצע רשמי",
+    "url": "https://democrats.org.il/wp-content/uploads/2026/04/vision0426.pdf",
+    "summary": "היפרדות; מדינה פלסטינית מפורזת בעתיד",
+    "code": "היפרדות; מדינה מפורזת בעתיד",
+    "star": false,
+    "notFound": false
+   },
+   "draft": {
+    "full": "חובת שירות שוויוני לכלל האזרחים (צבאי או אזרחי-לאומי לפי צורכי צה\"ל); שלילת הטבות (מעונות יום, ארנונה) ממי שלא ישרת.",
+    "sourceType": "מצע רשמי",
+    "url": "https://democrats.org.il/wp-content/uploads/2026/08/plan-8-26-he.pdf",
+    "summary": "חובת שירות לכולם",
+    "code": "חובה + סנקציות",
+    "star": false,
+    "notFound": false
+   },
+   "judiciary": {
+    "full": "ביטול \"חוקי ההפיכה המשטרית\" (כולל חוק הוועדה לבחירת שופטים); חוק \"אפס נאשמים בממשלה\"; חוק יסוד: החקיקה להסדרת היחסים בין הרשויות.",
+    "sourceType": "מצע רשמי",
+    "url": "https://democrats.org.il/wp-content/uploads/2026/08/plan-8-26-he.pdf",
+    "summary": "ביטול \"חוקי ההפיכה\"; אפס נאשמים",
+    "code": "ביטול \"חוקי ההפיכה\"",
+    "star": false,
+    "notFound": false
+   },
+   "inquiry": {
+    "full": "ועדת חקירה ממלכתית ויישום מלא של מסקנותיה, כולל בבניין הכוח ובתקציב הביטחון.",
+    "sourceType": "מצע רשמי",
+    "url": "https://democrats.org.il/wp-content/uploads/2026/08/plan-8-26-he.pdf",
+    "summary": "ממלכתית ויישום מלא",
+    "code": "ממלכתית",
+    "star": false,
+    "notFound": false
+   },
+   "economy": {
+    "full": "פירוק קרטלי המזון, התרופות והאנרגיה; הגדרת \"מחיר מופרז\" בחוק; פיקוח מחירים והעלאת השכר הנמוך; הוזלת תחבורה ציבורית.",
+    "sourceType": "מצע רשמי",
+    "url": "https://democrats.org.il/wp-content/uploads/2026/08/plan-8-26-he.pdf",
+    "summary": "פירוק קרטלים; פיקוח מחירים",
+    "code": "פיקוח מחירים",
+    "star": false,
+    "notFound": false
+   },
+   "housing": {
+    "full": "המדינה כשחקן מרכזי: קרקע מוזלת לדיור בר-השגה, דיור ציבורי בכל מתחם חדש על קרקע מדינה, ושכירות ארוכת טווח במחיר מפוקח.",
+    "sourceType": "מצע רשמי",
+    "url": "https://democrats.org.il/wp-content/uploads/2026/08/plan-8-26-he.pdf",
+    "summary": "דיור ציבורי ובר-השגה",
+    "code": "דיור ציבורי",
+    "star": false,
+    "notFound": false
+   },
+   "religion": {
+    "full": "תחבורה ציבורית בשבת בין כל ערי ישראל; סיום המונופול של הרבנות על נישואים, גירושים וקבורה; הכרה ביהדות ליברלית.",
+    "sourceType": "מצע רשמי",
+    "url": "https://democrats.org.il/wp-content/uploads/2026/08/plan-8-26-he.pdf",
+    "summary": "תח\"צ בשבת; נישואים אזרחיים",
+    "code": "נישואים אזרחיים; תח\"צ בשבת",
+    "star": false,
+    "notFound": false
+   },
+   "crime": {
+    "full": "הכרזת מצב חירום לאומי, כוח משימה וקבינט פשיעה; תוכנית רב-שנתית לבניין כוח המשטרה.",
+    "sourceType": "מצע רשמי",
+    "url": "https://democrats.org.il/wp-content/uploads/2026/08/plan-8-26-he.pdf",
+    "summary": "מצב חירום; קבינט פשיעה",
+    "code": "קבינט חירום",
+    "star": false,
+    "notFound": false
+   },
+   "education": {
+    "full": "השקעה בחינוך הממלכתי וביטול אפליה תקציבית; הפסקת תקצוב מוסדות שאינם מלמדים מתמטיקה, אנגלית ואזרחות.",
+    "sourceType": "מצע רשמי",
+    "url": "https://democrats.org.il/wp-content/uploads/2026/08/plan-8-26-he.pdf",
+    "summary": "בלי ליבה – בלי תקציב",
+    "code": "מימון מותנה בליבה",
+    "star": false,
+    "notFound": false
+   }
+  },
+  "joint": {
+   "security": {
+    "full": "הסדר מדיני עם הפלסטינים וסיום \"הכיבוש והמלחמות\" כדרך לביטחון; נורמליזציה אזורית לפי יוזמת השלום הערבית (2002). לא אותרה עמדה מפורסמת של הרשימה על איראן.",
+    "sourceType": "תשובה רשמית לשאלון / הצהרות",
+    "url": "https://www.ynet.co.il/news/article/bjuparwbzg",
+    "summary": "הסדר מדיני; סיום הכיבוש",
+    "code": "הסדר מדיני",
+    "star": false,
+    "notFound": false
+   },
+   "palestinian": {
+    "full": "מדינה פלסטינית עצמאית בגבולות 4.6.1967 ובירתה מזרח ירושלים, לצד ישראל; סיום הכיבוש ופינוי ההתנחלויות.",
+    "sourceType": "תשובה רשמית לשאלון",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14910407",
+    "summary": "מדינה פלסטינית בגבולות 1967",
+    "code": "מדינה בגבולות 1967",
+    "star": false,
+    "notFound": false
+   },
+   "draft": {
+    "full": "מתנגדת לסנקציות על מי שאינו מתגייס; חד\"ש ובל\"ד מתנגדות לכל תוכנית גיוס או שירות אזרחי לצעירים ערבים.",
+    "sourceType": "תשובה רשמית לשאלון",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14898966",
+    "summary": "נגד חובת שירות לערבים",
+    "code": "נגד חובה לערבים",
+    "star": false,
+    "notFound": false
+   },
+   "judiciary": {
+    "full": "איזון בין הרשויות ומנגנון מאוזן לבחירת שופטים; התנגדות ל\"הפיכה המשפטית\"; חוק יסוד: שוויון (טיבי); בל\"ד – \"מדינת כל אזרחיה\".",
+    "sourceType": "תשובה רשמית לשאלון",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14903844",
+    "summary": "איזון רשויות; חוק יסוד שוויון",
+    "code": "נגד \"ההפיכה\"",
+    "star": false,
+    "notFound": false
+   },
+   "inquiry": {
+    "full": "תומכת בוועדה ממלכתית, ומבקשת להרחיב את המנדט גם למדיניות בגדה וברצועה.",
+    "sourceType": "נאומים בכנסת / הצהרות",
+    "url": "https://www.mako.co.il/news-israel-elections/2026/Article-133c9c0bc8c01a1026.htm",
+    "summary": "בעד ממלכתית (מנדט מורחב)",
+    "code": "ממלכתית, מנדט רחב",
+    "star": true,
+    "notFound": false
+   },
+   "economy": {
+    "full": "(מק\"י/חד\"ש) העלאת שכר המינימום ל-60% מהשכר הממוצע, עצירת הפרטת שירותים ציבוריים; הגדלת תקציבים לחברה הערבית ולרשויותיה.",
+    "sourceType": "מסמכי מרכיבים / הצהרות",
+    "url": "https://maki.org.il/",
+    "summary": "שכר מינימום; נגד הפרטה",
+    "code": "שכר מינימום",
+    "star": true,
+    "notFound": false
+   },
+   "housing": {
+    "full": "עמדה כללית: קורת גג כזכות יסוד והשקעה ציבורית בדיור \"ולא בהתנחלויות\"; לא נמצאה תוכנית דיור כוללת.",
+    "sourceType": "הצהרות מועמדים",
+    "url": "https://hediot.co.il/topics/housing/",
+    "summary": "כללי: דיור כזכות יסוד",
+    "code": "כללי",
+    "star": true,
+    "notFound": false
+   },
+   "religion": {
+    "full": "תמיכה בתחבורה ציבורית עירונית ובין-עירונית בשבת; מק\"י – הפרדת הדת מהמדינה. לא נמצאה עמדה מפורשת על נישואים אזרחיים.",
+    "sourceType": "תשובה לשאלון / מסמך מרכיב",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14883243",
+    "summary": "בעד תח\"צ בשבת; הפרדת דת (מק\"י)",
+    "code": "תח\"צ בשבת",
+    "star": false,
+    "notFound": false
+   },
+   "crime": {
+    "full": "מאבק בארגוני הפשיעה ופירוק תשתיות הנשק הבלתי חוקי, תוכנית פיתוח ותקציבים לחברה הערבית; ביקורת על תפקוד המשטרה.",
+    "sourceType": "הצהרות",
+    "url": "https://hediot.co.il/topics/crime_personal_security/",
+    "summary": "מאבק בפשיעה; תקציבים לחברה הערבית",
+    "code": "אכיפה + פיתוח",
+    "star": true,
+    "notFound": false
+   },
+   "education": {
+    "full": "(חד\"ש) חינוך חינם לגיל הרך ובאקדמיה, יועצים חינוכיים בבתי הספר; לא נמצאה עמדה על ליבה בחינוך החרדי.",
+    "sourceType": "הצהרות / מסמכי מרכיב",
+    "url": "https://hediot.co.il/topics/education/",
+    "summary": "חינוך חינם לגיל הרך",
+    "code": "אין עמדה על ליבה",
+    "star": true,
+    "notFound": false
+   }
+  },
+  "otzma": {
+   "security": {
+    "full": "תוכנית \"התנתקות 710\": משרד ממשלתי ל\"הגירה מרצון\" של תושבי עזה (יעד 1.86 מיליון בתוך 7 שנים) – תנאי קואליציוני. פירוז הרשות הפלסטינית, שינוי הוראות הפתיחה באש והקוד האתי של צה\"ל; בן גביר מתנגד למשא ומתן עם איראן.",
+    "sourceType": "תוכנית בחירות רשמית",
+    "url": "https://www.inn.co.il/news/705555",
+    "summary": "\"הגירה מרצון\" מעזה (התנתקות 710)",
+    "code": "הגירה מרצון",
+    "star": false,
+    "notFound": false
+   },
+   "palestinian": {
+    "full": "התנגדות למדינה פלסטינית בכל צורה; ריבונות מלאה ביהודה, שומרון ובקעת הירדן; פירוק הרשות הפלסטינית; יישובים חדשים בכל יו\"ש.",
+    "sourceType": "תשובה רשמית לשאלון",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14910407",
+    "summary": "ריבונות מלאה; פירוק הרש\"פ",
+    "code": "ריבונות מלאה",
+    "star": false,
+    "notFound": false
+   },
+   "draft": {
+    "full": "עמדה כללית: נגד גיוס בכפייה – \"לומדי תורה אמיתיים\" יישארו בישיבה, ומי שאינו לומד יעודד להתגייס \"בחיבוק\"; מסלולים חרדיים במשטרה ובמג\"ב. לא נמצאה עמדה על נוסח חוק.",
+    "sourceType": "הצהרות מנהיג",
+    "url": "https://t.me/bengvir/6799",
+    "summary": "נגד כפייה; מסלולים במשטרה",
+    "code": "נגד כפייה",
+    "star": true,
+    "notFound": false
+   },
+   "judiciary": {
+    "full": "רפורמה משפטית כ\"דרישה ראשונה\": פיצול תפקיד היועמ\"ש, החלפת היועמ\"שית, שינוי הוועדה לבחירת שופטים; לבית המשפט \"אין סמכות להדיח שר\".",
+    "sourceType": "הצהרות מנהיג",
+    "url": "https://t.me/bengvir/6797",
+    "summary": "פיצול היועמ\"ש; שינוי מינוי שופטים",
+    "code": "ריסון בג\"ץ",
+    "star": true,
+    "notFound": false
+   },
+   "inquiry": {
+    "full": "לא פורסמה עמדה רשמית; לפי N12 חברי הסיעה הצביעו נגד הקמת ועדת חקירה ממלכתית.",
+    "sourceType": "רקורד הצבעות",
+    "url": "https://www.mako.co.il/news-israel-elections/2026/Article-133c9c0bc8c01a1026.htm",
+    "summary": "לא פורסמה עמדה; הצביעה נגד",
+    "code": "הצביעה נגד",
+    "star": true,
+    "notFound": false
+   },
+   "economy": {
+    "full": "לא נמצאה תוכנית כלכלית. בן גביר הודיע שיתנגד לתקציבים המקצצים במשטרה, בשב\"ס ובכבאות.",
+    "sourceType": "הצהרות מנהיג",
+    "url": "https://hediot.co.il/topics/economy/",
+    "summary": "לא נמצאה תוכנית",
+    "code": "אין תוכנית",
+    "star": true,
+    "notFound": true
+   },
+   "housing": {
+    "full": "הסרת חסמי תכנון והגדלת ההיצע בעיקר בנגב ובגליל, כולל הקמת יישובים חדשים (יצחק קרויזר).",
+    "sourceType": "הצהרות מועמד",
+    "url": "https://hediot.co.il/topics/housing/",
+    "summary": "הסרת חסמי תכנון בנגב ובגליל",
+    "code": "היצע בנגב ובגליל",
+    "star": true,
+    "notFound": false
+   },
+   "religion": {
+    "full": "לא השיבה לשאלון על תחבורה בשבת. בעקרונותיה: מדינה יהודית \"בערכיה המשפטיים\" והטמעת המשפט העברי; סון הר-מלך תמכה בהחזרת סמכויות לבתי הדין הרבניים.",
+    "sourceType": "עקרונות באתר / הצהרות",
+    "url": "https://ozma-yeudit.com/program/?lang=he",
+    "summary": "משפט עברי; לא השיבה על שבת",
+    "code": "משפט עברי",
+    "star": true,
+    "notFound": false
+   },
+   "crime": {
+    "full": "הרחבת רישוי נשק לאזרחים ו\"כיתות כוננות\", הגדלת תקציב המשטרה, מאבק בפרוטקשן, הריסת מבנים לא חוקיים ויישום חוק עונש מוות למחבלים.",
+    "sourceType": "הצהרות מנהיג",
+    "url": "https://hediot.co.il/topics/crime_personal_security/",
+    "summary": "חימוש אזרחים; עונש מוות למחבלים",
+    "code": "חימוש אזרחים",
+    "star": true,
+    "notFound": false
+   },
+   "education": {
+    "full": "מסלולים נפרדים לגברים ולנשים באקדמיה, בחירת הורים וחינוך למורשת ולאהבת הארץ; לא נמצאה עמדה על ליבה או על תקציב החינוך.",
+    "sourceType": "עקרונות / חקיקה",
+    "url": "https://hediot.co.il/topics/education/",
+    "summary": "הפרדה באקדמיה; מורשת",
+    "code": "אין עמדה על ליבה",
+    "star": false,
+    "notFound": false
+   }
+  },
+  "shas": {
+   "security": {
+    "full": "לא פרסמה תוכנית ביטחונית. תמכה בחוק עונש מוות למחבלים ובמניעת ביקורי הצלב האדום אצל מחבלי נוח'בה; דרעי אמר ביוני 2025 שלדעתו נוצרו התנאים לסיום המלחמה בעזה.",
+    "sourceType": "הודעות מפלגה / הצבעות",
+    "url": "https://hediot.co.il/topics/security/",
+    "summary": "כללי; תמיכה בעונש מוות למחבלים",
+    "code": "כללי",
+    "star": true,
+    "notFound": false
+   },
+   "palestinian": {
+    "full": "ש\"ס הייתה בין 7 הסיעות שהגישו (7/2025) הצעה להחלת ריבונות ביו\"ש ובבקעה, שלפיה מדינה פלסטינית היא \"סכנה קיומית\". לא נמצא מסמך 2026 נפרד.",
+    "sourceType": "הצבעה/הצהרה פרלמנטרית",
+    "url": "https://main.knesset.gov.il/News/PressReleases/pages/press23072025v.aspx",
+    "summary": "תמכה בהצעת ריבונות (2025)",
+    "code": "ריבונות (הצבעה)",
+    "star": true,
+    "notFound": false
+   },
+   "draft": {
+    "full": "עיגון מעמד לומדי התורה בחוק, ללא מכסות – תנאי לכניסה לקואליציה. דרעי: אין צורך לקרוא לחרדים להתגייס; \"הצבא לא באמת רוצה חרדים\".",
+    "sourceType": "הודעות מפלגה / הצהרות",
+    "url": "https://hediot.co.il/topics/issue_draft_law/",
+    "summary": "חוק ללומדי תורה – תנאי קואליציוני",
+    "code": "עיגון לימוד תורה",
+    "star": true,
+    "notFound": false
+   },
+   "judiciary": {
+    "full": "צמצום סמכויות בג\"ץ והיועמ\"ש ופיצול תפקיד היועמ\"ש; תמיכה בחוק למניעת התערבות בג\"ץ במינוי ופיטורי שרים; \"תיקון מערכת המשפט מן היסוד\".",
+    "sourceType": "הודעות מפלגה",
+    "url": "https://t.me/dovrutshas/5161",
+    "summary": "צמצום סמכויות בג\"ץ ויועמ\"ש",
+    "code": "ריסון בג\"ץ",
+    "star": true,
+    "notFound": false
+   },
+   "inquiry": {
+    "full": "לא פורסמה עמדה רשמית; הסיעה הצביעה נגד ועדה ממלכתית. דרעי קרא לוועדה \"מקובלת על רוב העם\" בלי להתחייב למתכונת ממלכתית.",
+    "sourceType": "רקורד הצבעות / הצהרות",
+    "url": "https://www.mako.co.il/news-israel-elections/2026/Article-133c9c0bc8c01a1026.htm",
+    "summary": "לא פורסמה עמדה; הצביעה נגד",
+    "code": "הצביעה נגד",
+    "star": true,
+    "notFound": false
+   },
+   "economy": {
+    "full": "הסרת חסמי יבוא במזון ובתמרוקים, הקלות לעסקים קטנים ובינוניים; תקציבים לסלי מזון ולכרטיסי מזון.",
+    "sourceType": "טקסט רשמי של המפלגה (ישראל היום)",
+    "url": "https://www.israelhayom.co.il/magazine/special/israelelections/article/21419871",
+    "summary": "הסרת חסמי יבוא; סלי מזון",
+    "code": "תחרות; יבוא",
+    "star": false,
+    "notFound": false
+   },
+   "housing": {
+    "full": "תמיכה בהקצאת 7% מכל בנייה חדשה לדיור ציבורי; לא נמצאה עמדה על שוק השכירות.",
+    "sourceType": "עמדה בוועדת הכנסת",
+    "url": "https://hediot.co.il/topics/housing/",
+    "summary": "7% מכל בנייה לדיור ציבורי",
+    "code": "דיור ציבורי",
+    "star": true,
+    "notFound": false
+   },
+   "religion": {
+    "full": "מניעת פגיעה בשבת ושמירה על נישואין \"כדת משה וישראל\" כחלק מזהותה היהודית של המדינה; לא הוצגה הצעה מעשית.",
+    "sourceType": "הודעות מפלגה",
+    "url": "https://hediot.co.il/topics/issue_civil_marriage_shabbat/",
+    "summary": "שמירת שבת; נישואין כדת",
+    "code": "סטטוס קוו",
+    "star": true,
+    "notFound": false
+   },
+   "crime": {
+    "full": "עמדה כללית: קריאות להגברת אכיפה ולהחמרה עם אלימות נגד צוותים רפואיים; לא נמצאה מדיניות כוללת.",
+    "sourceType": "הצהרות",
+    "url": "https://hediot.co.il/topics/crime_personal_security/",
+    "summary": "כללי: הגברת אכיפה",
+    "code": "אכיפה (כללי)",
+    "star": true,
+    "notFound": false
+   },
+   "education": {
+    "full": "עמדה כללית: התנגדות להקפאת תקציבים ולסנקציות על החינוך החרדי, טענה לאפליה; הוספת תכני מורשת. לא נמצאה עמדה על התניית תקצוב בליבה.",
+    "sourceType": "הודעות מפלגה",
+    "url": "https://hediot.co.il/topics/issue_haredi_education_funding/",
+    "summary": "נגד סנקציות על החינוך החרדי",
+    "code": "נגד סנקציות",
+    "star": true,
+    "notFound": false
+   }
+  },
+  "yb": {
+   "security": {
+    "full": "\"אפס הכלה\", מכות מקדימות ו\"תם עידן התיקו\"; הגדלת תקציב הביטחון ל-95 מיליארד ₪ בשנה. בעזה: סיום האחריות הישראלית (סגירת מעברים וניתוק אספקה) והעברתה לגוף בינ\"ל בהובלת מצרים ומדינות המפרץ; עדיפות להכרעת איראן, חזבאללה וחמאס.",
+    "sourceType": "מצע רשמי",
+    "url": "https://beytenu.org.il/party-platform/",
+    "summary": "\"אפס הכלה\"; 95 מיליארד ₪; סיום האחריות לעזה",
+    "code": "אפס הכלה; גורם בינלאומי",
+    "star": false,
+    "notFound": false
+   },
+   "palestinian": {
+    "full": "התנגדות למדינה פלסטינית; ריבונות בשטחי C ובנייה ב-E1 ללא פינוי יישובים; ליברמן מציע הסדר עם ירדן לניהול שטחי A ו-B (\"קונפדרציה\").",
+    "sourceType": "מצע / תשובה לשאלון",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14910407",
+    "summary": "נגד מדינה; ריבונות ב-C; הסדר עם ירדן",
+    "code": "נגד מדינה; ריבונות ב-C",
+    "star": false,
+    "notFound": false
+   },
+   "draft": {
+    "full": "חובת שירות צבאי או אזרחי לכל בן/בת 18 ללא הבדל דת; מי שלא ישרת – שלילת קצבאות, הטבות ותעסוקה בשירות המדינה; לעריקים – סנקציות פליליות.",
+    "sourceType": "מצע רשמי",
+    "url": "https://beytenu.org.il/party-platform/",
+    "summary": "חובת שירות לכל בני 18 + סנקציות",
+    "code": "חובה + סנקציות",
+    "star": false,
+    "notFound": false
+   },
+   "judiciary": {
+    "full": "חוקה לפי מתווה רייכמן-פרידמן-נסים שתאושר במשאל עם; בית משפט לחוקה; הגבלת כהונת רה\"מ וצמצום מספר השרים.",
+    "sourceType": "מצע רשמי",
+    "url": "https://beytenu.org.il/party-platform/",
+    "summary": "חוקה במשאל עם; בימ\"ש לחוקה",
+    "code": "חוקה במשאל עם",
+    "star": false,
+    "notFound": false
+   },
+   "inquiry": {
+    "full": "ועדת חקירה ממלכתית כהחלטת הממשלה הראשונה, עם מנדט לקבוע אחריות בדרג המדיני, הצבאי והמודיעיני.",
+    "sourceType": "מצע רשמי",
+    "url": "https://beytenu.org.il/party-platform/",
+    "summary": "ממלכתית – החלטת ממשלה ראשונה",
+    "code": "ממלכתית",
+    "star": false,
+    "notFound": false
+   },
+   "economy": {
+    "full": "אימוץ מסקנות ועדת בלניקוב, ביטול מכסים והרחבת יבוא מקביל; \"עסקת חבילה\" של הפחתת רגולציה וצמצום משרדי ממשלה.",
+    "sourceType": "מצע רשמי",
+    "url": "https://beytenu.org.il/party-platform/",
+    "summary": "ועדת בלניקוב; ביטול מכסים",
+    "code": "ביטול מכסים",
+    "star": false,
+    "notFound": false
+   },
+   "housing": {
+    "full": "מכרזי קרקע לפי המחיר הסופי לצרכן ולא מחיר הקרקע; 2,500 היתרים בכל מועצה אזורית בארבע שנים; עידוד שכירות ארוכת טווח.",
+    "sourceType": "מצע רשמי",
+    "url": "https://beytenu.org.il/party-platform/",
+    "summary": "מכרזים לפי מחיר לצרכן",
+    "code": "היצע; מכרזים",
+    "star": false,
+    "notFound": false
+   },
+   "religion": {
+    "full": "נישואים וגירושים אזרחיים למי שיבחר; תחבורה ופתיחת עסקים בשבת בהחלטת הרשויות; רב ראשי אחד, ביטול המועצות הדתיות וגיור לפי דו\"ח נסים.",
+    "sourceType": "מצע רשמי",
+    "url": "https://beytenu.org.il/party-platform/",
+    "summary": "נישואים אזרחיים; שבת לפי רשות",
+    "code": "נישואים אזרחיים; שבת מקומית",
+    "star": false,
+    "notFound": false
+   },
+   "crime": {
+    "full": "תוכנית של 3 מיליארד ₪: 3,000 שוטרים, 3 בתי משפט לפשיעה חמורה, מעצרים מנהליים ושימוש ברוגלות נגד ראשי ארגונים.",
+    "sourceType": "מצע רשמי",
+    "url": "https://beytenu.org.il/party-platform/",
+    "summary": "3 מיליארד ₪; 3,000 שוטרים",
+    "code": "בתי משפט ייעודיים",
+    "star": false,
+    "notFound": false
+   },
+   "education": {
+    "full": "חוק לימודי ליבה לכל התלמידים; ליבה כתנאי לכל תקצוב עם מבחנים חיצוניים; שנת י\"ב כשנת הכנה לשירות.",
+    "sourceType": "מצע רשמי",
+    "url": "https://beytenu.org.il/party-platform/",
+    "summary": "ליבה כתנאי לכל תקצוב",
+    "code": "מימון מותנה בליבה",
+    "star": false,
+    "notFound": false
+   }
+  },
+  "utj": {
+   "security": {
+    "full": "עמדה כללית בלבד: \"עמידה נחושה מול הטרור, ענישה מחמירה והרתעה\" (גולדקנופף). לא נמצאה התייחסות לסיום המלחמה, ללבנון או לאיראן.",
+    "sourceType": "תשובה לשאלון (מועמד)",
+    "url": "https://www.ynet.co.il/news/article/bjuparwbzg",
+    "summary": "כללי: הרתעה מול טרור",
+    "code": "כללי",
+    "star": true,
+    "notFound": false
+   },
+   "palestinian": {
+    "full": "גולדקנופף: החלת ריבונות \"בכל חלקי הארץ\"; פרוש תמך בהצעת חוק ריבונות; אשר התבטא נגד פתרון שתי המדינות.",
+    "sourceType": "הצהרות מועמדים",
+    "url": "https://www.ynet.co.il/news/article/bjuparwbzg",
+    "summary": "ריבונות (מועמדים)",
+    "code": "ריבונות (מועמדים)",
+    "star": true,
+    "notFound": false
+   },
+   "draft": {
+    "full": "הסדרת מעמד לומדי התורה בחוק \"בלי סנקציות ובלי מכסות\" כתנאי להצטרפות לקואליציה; פרשה מהממשלה ביולי 2025 בשל הנושא.",
+    "sourceType": "נאומים בכנסת / פעולה פוליטית",
+    "url": "https://hediot.co.il/topics/issue_draft_law/",
+    "summary": "חוק ללומדי תורה בלי סנקציות – תנאי",
+    "code": "עיגון לימוד תורה",
+    "star": true,
+    "notFound": false
+   },
+   "judiciary": {
+    "full": "תמיכה בפיצול תפקיד היועמ\"ש ובהצעת לוין-סער לבחירת שופטים; קידום חוק יסוד: לימוד תורה.",
+    "sourceType": "נאומים בכנסת",
+    "url": "https://hediot.co.il/topics/issue_constitution_judiciary/",
+    "summary": "פיצול יועמ\"ש; חוק יסוד לימוד תורה",
+    "code": "ריסון בג\"ץ",
+    "star": true,
+    "notFound": false
+   },
+   "inquiry": {
+    "full": "לא פורסמה עמדה רשמית; הסיעה הצביעה נגד. פינדרוס: ההתנגדות היא למינוי החברים בידי נשיא העליון.",
+    "sourceType": "רקורד הצבעות / הצהרות",
+    "url": "https://www.mako.co.il/news-israel-elections/2026/Article-133c9c0bc8c01a1026.htm",
+    "summary": "לא פורסמה עמדה; הצביעה נגד",
+    "code": "הצביעה נגד",
+    "star": true,
+    "notFound": false
+   },
+   "economy": {
+    "full": "חברי הכנסת תמכו בהעלאה מזערית של מסים, קיצוץ הוצאות והקפאת שכר; הסדרת ייעוץ המשכנתאות.",
+    "sourceType": "נאומים בכנסת",
+    "url": "https://hediot.co.il/topics/economy/",
+    "summary": "קיצוץ הוצאות; הקפאת שכר",
+    "code": "ריסון תקציבי",
+    "star": true,
+    "notFound": false
+   },
+   "housing": {
+    "full": "(דגל התורה) שינוי מדיניות רמ\"י והוזלת קרקע לחסרי דירה ולזוגות צעירים; האצת שיווק וקיצור הליכי תכנון.",
+    "sourceType": "תשובה רשמית לשאלון",
+    "url": "https://www.ynet.co.il/economy/article/skmk4paofe",
+    "summary": "הוזלת קרקע לזוגות צעירים",
+    "code": "הוזלת קרקע",
+    "star": false,
+    "notFound": false
+   },
+   "religion": {
+    "full": "שמירת הסטטוס קוו; התנגדות להצעת חוק הנישואים האזרחיים (דצמבר 2025). לא נמצאה עמדה על תחבורה בשבת.",
+    "sourceType": "הצהרות / הצבעות",
+    "url": "https://www.ynet.co.il/news/article/hy3j0ukx11e",
+    "summary": "סטטוס קוו; נגד נישואים אזרחיים",
+    "code": "סטטוס קוו",
+    "star": true,
+    "notFound": false
+   },
+   "crime": {
+    "full": "לא נמצאה עמדה מפורסמת בנושא.",
+    "sourceType": "—",
+    "url": "https://hediot.co.il/topics/crime_personal_security/",
+    "summary": "לא נמצאה עמדה",
+    "code": "לא נמצאה עמדה",
+    "star": false,
+    "notFound": true
+   },
+   "education": {
+    "full": "התנגדות לקיצוץ בתקציבי החינוך החרדי; שכר שווה למורים ולגננות בחינוך החרדי; חינוך חינם מגיל אפס (פרוש).",
+    "sourceType": "נאומים / הצעות חוק",
+    "url": "https://hediot.co.il/topics/issue_haredi_education_funding/",
+    "summary": "נגד קיצוץ בחינוך החרדי",
+    "code": "נגד סנקציות",
+    "star": true,
+    "notFound": false
+   }
+  },
+  "rzz": {
+   "security": {
+    "full": "צ\"ד: סמוטריץ' – ישראל צריכה לקחת אחריות על עזה, \"לכבוש אותה לגמרי\", ממשל צבאי והתיישבות יהודית; החזרת כ-50 אלף חיילים למילואים פעילים. זהות: \"כיבוש, גירוש והתיישבות\" בכל שטח שממנו תותקף ישראל.",
+    "sourceType": "הצהרות (צ\"ד) / מצע (זהות)",
+    "url": "https://zehut.org.il/platform/summary",
+    "summary": "כיבוש עזה והתיישבות (צ\"ד)",
+    "code": "כיבוש והתיישבות",
+    "star": false,
+    "notFound": false
+   },
+   "palestinian": {
+    "full": "שני המרכיבים: ריבונות מלאה ביהודה ושומרון. זהות: ביטול הסכמי אוסלו. צ\"ד: הבאת מאות אלפי מתיישבים נוספים.",
+    "sourceType": "מצע (זהות) / הצהרות (צ\"ד)",
+    "url": "https://hediot.co.il/topics/issue_palestinian_state_sovereignty/",
+    "summary": "ריבונות מלאה; ביטול אוסלו (זהות)",
+    "code": "ריבונות מלאה",
+    "star": false,
+    "notFound": false
+   },
+   "draft": {
+    "full": "צ\"ד: חוק גיוס לחרדים ו\"חוק יסוד המשרתים\" כדרישה קואליציונית, אך תמכה ביולי 2026 בחוק הקפאת המעצרים של משתמטים. זהות: שירות חובה קצר (עד חודש) לכלל האוכלוסייה.",
+    "sourceType": "עמוד מדיניות (צ\"ד) / מצע (זהות)",
+    "url": "https://miluim.zionutdatit.digital/",
+    "summary": "דרישה לחוק גיוס (צ\"ד); שירות קצר (זהות)",
+    "code": "חוק גיוס (צ\"ד); שירות קצר (זהות)",
+    "star": false,
+    "notFound": false
+   },
+   "judiciary": {
+    "full": "שני המרכיבים: פיצול תפקיד היועמ\"ש ושינוי שיטת מינוי השופטים. זהות: בחירה ישירה של שופטי העליון ושלילת הסמכות לבטל חוקים.",
+    "sourceType": "מצע (זהות) / הצהרות (צ\"ד)",
+    "url": "https://zehut.org.il/docs/zehut-platform-full-he.pdf",
+    "summary": "פיצול יועמ\"ש; שינוי בחירת שופטים",
+    "code": "ריסון בג\"ץ",
+    "star": false,
+    "notFound": false
+   },
+   "inquiry": {
+    "full": "צ\"ד: ועדה לאחר המלחמה שתמונה בידי הקואליציה והאופוזיציה (לא בידי נשיא העליון). זהות: פייגלין – \"אין טעם בוועדת חקירה\".",
+    "sourceType": "הצהרות מנהיגים",
+    "url": "https://t.me/smutrich/857",
+    "summary": "ועדה בהרכב קואליציה-אופוזיציה",
+    "code": "ועדה קואליציה–אופוזיציה (צ\"ד); \"אין טעם\" (זהות)",
+    "star": false,
+    "notFound": false
+   },
+   "economy": {
+    "full": "צ\"ד: פירוק מונופולים בשוק המזון והגבלת נתח השוק של החברות הגדולות. זהות: מס שטוח, ביטול מכסים והעברת חלק משירותי הביטוח הלאומי לשוק הפרטי.",
+    "sourceType": "מצע (זהות) / הצהרות (צ\"ד)",
+    "url": "https://zehut.org.il/docs/zehut-platform-full-he.pdf",
+    "summary": "פירוק מונופולים / מס שטוח",
+    "code": "פירוק מונופולים; מס שטוח",
+    "star": false,
+    "notFound": false
+   },
+   "housing": {
+    "full": "זהות: פירוק רמ\"י והעברת קרקעות פנויות לציבור, תכנון ברמת הרובע. צ\"ד: דרישה לאחריות על רמ\"י ומינהל התכנון.",
+    "sourceType": "מצע (זהות) / הצהרות (צ\"ד)",
+    "url": "https://zehut.org.il/docs/zehut-platform-full-he.pdf",
+    "summary": "פירוק רמ\"י (זהות)",
+    "code": "פירוק רמ\"י",
+    "star": false,
+    "notFound": false
+   },
+   "religion": {
+    "full": "צ\"ד: שמירת השבת במרחב הציבורי כביטוי למדינה יהודית – נגד שינוי. זהות: הפרטת התחבורה הציבורית והכרעת השבת ברמת הקהילה; צמצום התערבות המדינה בנישואים.",
+    "sourceType": "תשובה לשאלון (צ\"ד) / מצע (זהות)",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14883243",
+    "summary": "נגד שינוי בשבת (צ\"ד)",
+    "code": "סטטוס קוו (צ\"ד); קהילה (זהות)",
+    "star": false,
+    "notFound": false
+   },
+   "crime": {
+    "full": "צ\"ד: הוראת שעה לאומית נגד פשיעה מאורגנת והגדרת החזקת נשק בלתי חוקי כטרור. זהות: פרוטקשן כטרור בטיפול שב\"כ, רישיון נשק ליוצאי צבא.",
+    "sourceType": "מצע (זהות) / הצהרות (צ\"ד)",
+    "url": "https://zehut.org.il/platform/summary",
+    "summary": "נשק בלתי חוקי = טרור",
+    "code": "נשק לא חוקי = טרור",
+    "star": false,
+    "notFound": false
+   },
+   "education": {
+    "full": "זהות: שוברי חינוך וצמצום משרד החינוך לפיקוח בלבד. צ\"ד: לא נמצאה עמדה מחייבת על התניית תקצוב בליבה.",
+    "sourceType": "מצע (זהות)",
+    "url": "https://zehut.org.il/platform/summary",
+    "summary": "שוברי חינוך (זהות)",
+    "code": "שוברי חינוך (זהות)",
+    "star": false,
+    "notFound": false
+   }
+  },
+  "miluim": {
+   "security": {
+    "full": "מצע המילואימניקים: מעבר מ\"הכלה ותגובתיות\" ל\"יוזמה והתקפיות\". בעזה – שליטה בפרימטר, ברכסים ובציר פילדלפי, חופש פעולה \"מודל איו\"ש\" ו\"מנהלת הגירה מרצון\"; מערכה לפירוק חיזבאללה אם לא יפורק לפי ההסכם ושליטה ברכסים בלבנון; איראן: \"המשימה לא הסתיימה\" ואין יכולת \"להכיל\" אותה לאורך זמן; הגדלת הצבא.",
+    "sourceType": "מצע (מרכיב: המילואימניקים)",
+    "url": "https://www.themiluimnikim.org.il/platform/",
+    "summary": "הכרעה; \"הגירה מרצון\" מעזה; מערכה מול חיזבאללה",
+    "code": "הגירה מרצון; מערכה בלבנון",
+    "star": false,
+    "notFound": false
+   },
+   "palestinian": {
+    "full": "מניעת מדינה פלסטינית בזירה המדינית לצד \"הכרעה בשטח\"; התיישבות \"בכל שטחי מדינת ישראל\" ותפיסת שטחים שולטים; ללא פינוי יישובים שהוקמו באישור המדינה; תמיכה בהחלת החוק על בקעת הירדן, על גוש או על אזור אסטרטגי \"אם תהיה אפשרות\" (\"ריבונות דרך מעשים\").",
+    "sourceType": "תשובה רשמית לשאלון / מצע",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14910407",
+    "summary": "נגד מדינה; \"ריבונות דרך מעשים\"",
+    "code": "נגד מדינה; ריבונות חלקית",
+    "star": false,
+    "notFound": false
+   },
+   "draft": {
+    "full": "\"חוק גיוס לכולם\" – תנאי להקמת ממשלה: כל אזרח (יהודי, ערבי, חילוני, חרדי) ישרת בצבא או בשירות לאומי, למעט פטור רפואי; מי שלא ישרת יאבד הטבות, הנחות מס וארנונה, רישיון נהיגה, יציאה מהארץ ומשרות ציבוריות, ומוסדותיו יאבדו תקציב; במצע המילואימניקים גם שלילת הזכות לבחור ולהיבחר. פטור זמני לעילויים.",
+    "sourceType": "תשובה רשמית לשאלון / מצע",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14898966",
+    "summary": "גיוס לכולם + סנקציות; תנאי לממשלה",
+    "code": "חובה + סנקציות; תנאי",
+    "star": false,
+    "notFound": false
+   },
+   "judiciary": {
+    "full": "חוק יסוד: החקיקה; הרכב \"מאוזן\" לוועדה לבחירת שופטים שייקבע בחקיקה; התגברות על פסילת בג\"ץ ברוב של יותר מ-72 ח\"כים; צמצום (לא ביטול) עילת הסבירות; חוקי יסוד ברוב 61 לפחות; פיצול תפקיד היועמ\"ש; \"בהסכמות רחבות\". הגבלת כהונת רה\"מ ל-8 שנים.",
+    "sourceType": "תשובה רשמית לשאלון / מצע",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14903844",
+    "summary": "חוק יסוד החקיקה; התגברות ב-72+",
+    "code": "חוק יסוד: החקיקה + התגברות ברוב 72+",
+    "star": false,
+    "notFound": false
+   },
+   "inquiry": {
+    "full": "ועדת חקירה – אחד משלושת התנאים להקמת ממשלה. המצע: \"המילה ממלכתית הפכה לתירוץ כדי לא לחקור\"; הנדל כתב לפני הקמת הרשימה (11/2025) על \"ועדת חקירה ממלכתית\". לא פורטו הרכב, אופן מינוי וסמכויות.",
+    "sourceType": "מצע / הצהרות מנהיג",
+    "url": "https://www.themiluimnikim.org.il/platform/",
+    "summary": "ועדת חקירה כתנאי; מתכונת לא פורטה",
+    "code": "ועדה כתנאי; לא פורטה",
+    "star": false,
+    "notFound": false
+   },
+   "economy": {
+    "full": "הגברת התחרות, הסרת חסמי יבוא ופירוק או הגבלת גופים דומיננטיים. (הכלכלית:) הורדת מע\"מ מ-18% ל-12% בתוך 6 שנים, מס שולי מרבי 40%, ביטול מכסים על מזון ותוצרת חקלאית, חיוב הבנקים לשלם ריבית על עו\"ש. (המילואימניקים:) העברת תקציבים \"מהציבור המשתמט אל הציבור המשרת\".",
+    "sourceType": "טקסט רשמי (ישראל היום) / מצעי המרכיבים",
+    "url": "https://www.israelhayom.co.il/magazine/special/israelelections/article/21419871",
+    "summary": "מע\"מ 12%; פירוק מונופולים",
+    "code": "מע\"מ 12%",
+    "star": false,
+    "notFound": false
+   },
+   "housing": {
+    "full": "(הכלכלית:) יעד להוריד בהדרגה את מחירי הדירות לכ-120 משכורות ממוצעות, באמצעות האצת צמיחה שתוציא משקיעים משוק הדיור; הגדלת ההיצע, האצת תכנון והעברת סמכויות לרשויות; חיזוק הדיור הציבורי. (המילואימניקים:) שירות כקריטריון להנחות במשכנתאות ובמחיר למשתכן.",
+    "sourceType": "טקסט רשמי (ישראל היום) / מצעי המרכיבים",
+    "url": "https://www.israelhayom.co.il/magazine/special/israelelections/article/21419871",
+    "summary": "יעד: 120 משכורות לדירה",
+    "code": "יעד מחיר; דיור ציבורי",
+    "star": false,
+    "notFound": false
+   },
+   "religion": {
+    "full": "לא נמצאה עמדה פומבית של הרשימה (נבדקו המצעים, אתרי המרכיבים וחשבונות המועמדים). רקע בלבד: הנדל, כשר התקשורת (9/2021), תמך בהכרעה של ראשי ערים על תחבורה בשבת ובחלופה למי שאינו יכול להינשא – אמירה שקדמה להקמת המפלגה ואינה עמדת הרשימה.",
+    "sourceType": "— (לא נמצאה עמדה)",
+    "url": "https://hediot.co.il/topics/issue_civil_marriage_shabbat/",
+    "summary": "לא נמצאה עמדה",
+    "code": "לא נמצאה עמדה",
+    "star": false,
+    "notFound": true
+   },
+   "crime": {
+    "full": "השבת המשילות כ\"משימה לאומית\": חטיבה בשב\"כ לפשיעה בחברה הערבית (בשינוי חוק); בתי משפט ייעודיים ומסלול מהיר, הכפלת מספר השופטים; ירי ונשק בלתי חוקי כטרור ועונשי מינימום; רשות משולבת (משטרה, שב\"כ, רשות המסים, הלבנת הון); יעד: ירידה של 15% ברציחות בחברה הערבית בשנה הראשונה ו-50% עד סוף הקדנציה; משטרות מקומיות (הנדל).",
+    "sourceType": "מצע / טקסט רשמי (ישראל היום)",
+    "url": "https://www.themiluimnikim.org.il/platform/",
+    "summary": "שב\"כ נגד פשיעה; בתי משפט ייעודיים",
+    "code": "שב\"כ; בתי משפט ייעודיים",
+    "star": false,
+    "notFound": false
+   },
+   "education": {
+    "full": "תקציבי חינוך \"רק למי שתורם למדינה\" – ללא תקצוב למוסדות שאינם \"שותפים בשירות\". התנאי הוא שירות; לא נמצאה התחייבות להתנות תקצוב בלימודי ליבה (הנדל כתב על נזקי חינוך ללא ליבה). (הכלכלית:) הגדלת תקציבי תנועות הנוער; זליכה: כיתות של 18 תלמידים וחינוך פיננסי.",
+    "sourceType": "מצע / הצהרות מועמדים",
+    "url": "https://www.themiluimnikim.org.il/platform/",
+    "summary": "תקציב רק למוסדות \"שותפים בשירות\"",
+    "code": "מימון מותנה בשירות",
+    "star": false,
+    "notFound": false
+   }
+  },
+  "amcha": {
+   "security": {
+    "full": "מעבר מ\"הכלה\" ל\"הכרעה\" ו\"מחיר טריטוריאלי\". עזה: \"אין הכרעה בלי הגירה\" – הפרדת האוכלוסייה מחמאס, שליטה ביטחונית, מניעת שיקום ותוכנית \"הגירה מרצון\"; וינטר תומך בחידוש ההתיישבות ברצועה. לבנון: חופש פעולה בכל לבנון \"כל עוד יש זכר לחיזבאללה\". איראן: סיכול הגרעין והטילים ופעילות \"להפלת משטר הרפובליקה האיסלמית\".",
+    "sourceType": "מצע (תוכנית 18 הנקודות) / ריאיון מנהיג",
+    "url": "https://amchaisrael.co.il/security",
+    "summary": "\"אין הכרעה בלי הגירה\"; הפלת משטר איראן",
+    "code": "הגירה מרצון; הפלת משטר איראן",
+    "star": false,
+    "notFound": false
+   },
+   "palestinian": {
+    "full": "\"לעולם לא תקום לצדנו מדינה פלסטינית\"; החלת ריבונות ביהודה ושומרון \"ובכל מקום בארץ\" והקמת יישובים בכל חבלי הארץ; פינוי יישובים הוא \"סכנה קיומית\"; הריסת בנייה פלסטינית בלתי חוקית; פירוז הרש\"פ (למעט נשק קל לשיטור).",
+    "sourceType": "תשובה רשמית לשאלון / מצע",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14910407",
+    "summary": "נגד מדינה; ריבונות והתיישבות בכל הארץ",
+    "code": "ריבונות מלאה",
+    "star": false,
+    "notFound": false
+   },
+   "draft": {
+    "full": "\"חוק משרתים\" שיחוקק לפני השבעת הממשלה – תנאי סף לכניסה לכל ממשלה; חוק יסוד: השירות (כל אזרח ישרת, בצבא או בשירות לאומי), מנהלת שירות ו\"פרמטרים אובייקטיביים\" למכסות לומדי תורה, עם שימור מסלולי מצוינות תורנית; תגמול דיפרנציאלי למשרתים ושלילת הטבות ממי שלא ישרת; וינטר: עשרות פלוגות חרדיות.",
+    "sourceType": "תשובה רשמית לשאלון / מצע",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14898966",
+    "summary": "חוק משרתים לפני השבעה – תנאי סף",
+    "code": "חוק משרתים; מכסות; תנאי",
+    "star": false,
+    "notFound": false
+   },
+   "judiciary": {
+    "full": "ערכאה נוספת שבה ימונו שופטים \"על בסיס רצון הציבור\" וזכות ערעור על החלטות בג\"ץ; הוצאת נציגי לשכת עורכי הדין מהוועדה לבחירת שופטים; צמצום עילת הסבירות; פיצול תפקיד היועמ\"ש לתובע כללי וליועץ לממשלה; צמצום השפעת מערכת המשפט על כוחות הביטחון.",
+    "sourceType": "תשובה רשמית לשאלון / מצע",
+    "url": "https://www.ynet.co.il/news/elections2026/article/yokra14903844",
+    "summary": "ערכאת ערעור על בג\"ץ; צמצום סבירות",
+    "code": "ערכאת ערעור על בג\"ץ",
+    "star": false,
+    "notFound": false
+   },
+   "inquiry": {
+    "full": "גוף חקירה \"עצמאי\" עם מלוא סמכויות ועדה ממלכתית וסמכות לאכוף את מסקנותיו: 9 חברים (שופטים, מומחים ונציגות נפגעים); יו\"ר וסגנו – שופטים שייבחרו בהצבעה חשאית של 120 ח\"כים (לא בידי נשיא העליון ולא בידי הממשלה); תחילת עבודה תוך 60 יום ומסקנות ראשוניות תוך 6 חודשים; מנדט מ\"צוק איתן\". וינטר: ועדה מיידית \"רק בלי המילה ממלכתית\".",
+    "sourceType": "מצע (הצעה למנגנון חקירה) / ריאיון",
+    "url": "https://amchaisrael.co.il/inquiry",
+    "summary": "גוף עצמאי, יו\"ר נבחר בכנסת",
+    "code": "גוף עצמאי, יו\"ר נבחר בכנסת",
+    "star": false,
+    "notFound": false
+   },
+   "economy": {
+    "full": "שוק חופשי ו\"פירוק מוקדי ריכוזיות וכוח מונופוליסטיים\", הסרת חסמי יבוא ורגולציה; הטבות מס לעסקים המעסיקים משרתים; הסרת חסמים לעסקים קטנים ובינוניים. רונן בודנרו (מס' 7): צמצום הכספים הקואליציוניים. לא פורטו יעד, היקף או לוח זמנים.",
+    "sourceType": "מצע",
+    "url": "https://amchaisrael.co.il/foundations",
+    "summary": "שוק חופשי; פירוק ריכוזיות",
+    "code": "שוק חופשי",
+    "star": false,
+    "notFound": false
+   },
+   "housing": {
+    "full": "עמדה כללית: הרחבת התחדשות עירונית בערים וביישובים \"בקצוות הארץ\" בשילוב הגדלת היצע ומיגון; קרקעות והטבות למשרתים באזורי עדיפות. לא נמצאו יעד או היקף, ולא עמדה על מחירי הדיור.",
+    "sourceType": "מצע",
+    "url": "https://amchaisrael.co.il/foundations",
+    "summary": "כללי: התחדשות עירונית בפריפריה",
+    "code": "התחדשות עירונית",
+    "star": false,
+    "notFound": false
+   },
+   "religion": {
+    "full": "במצע רק עיקרון כללי: יהדות \"מזמינה ולא כופה\". ערן בן ארי (מס' 4) בריאיון לגלי צה\"ל (14.10.2026): ההכרעה על תחבורה ציבורית בשבת – בידי השלטון המקומי; בנישואים אזרחיים \"הסטטוס-קוו לא ייפגע\". עמדה מדברי מועמד, לא ממצע כתוב.",
+    "sourceType": "הצהרות מועמד / מצע כללי",
+    "url": "https://www.news1.co.il/Archive/001-D-525080-00.html",
+    "summary": "שבת לפי רשות; סטטוס קוו בנישואים (מועמד)",
+    "code": "שבת מקומית; סטטוס קוו בנישואים",
+    "star": true,
+    "notFound": false
+   },
+   "crime": {
+    "full": "חבילת חקיקה נגד ארגוני הפשיעה ואחריה מבצע אכיפה ארצי; גוף לאומי מתכלל (מודיעין, אכיפה וסנקציות כלכליות); החמרת אכיפה וענישה על פרוטקשן, נשק לא חוקי והברחות; אובדן משילות בנגב, בגליל ובערים המעורבות מוגדר \"איום ביטחוני\".",
+    "sourceType": "מצע",
+    "url": "https://amchaisrael.co.il/foundations",
+    "summary": "חבילת חקיקה + מבצע אכיפה ארצי",
+    "code": "איום ביטחוני; מבצע אכיפה",
+    "star": false,
+    "notFound": false
+   },
+   "education": {
+    "full": "ביזור סמכויות ההפעלה לרשויות ולבתי הספר, כשמשרד החינוך קובע ליבה, רגולציה ומדידה; \"לימודי ליבה איכותיים לכל ילד\" וסטנדרט בסיסי משותף; ללא תקצוב לבתי ספר עם תכנים \"אנטי-ציוניים\"; וינטר: תקצוב הישיבות מותנה בהסדרת מעמד מול משרד הביטחון. לא נמצאה התחייבות להתנות תקצוב בליבה.",
+    "sourceType": "מצע / ריאיון",
+    "url": "https://amchaisrael.co.il/foundations",
+    "summary": "ביזור; ליבה לכל ילד",
+    "code": "ליבה לכל ילד, בלי התניה",
+    "star": false,
+    "notFound": false
+   }
+  }
+ },
+ "starLegend": "כוכבית (*) מסמנת עמדה שמבוססת על הצהרות, הודעות, נאומים, ראיונות או הצבעות, ולא על מצע, מסמך מדיניות או תשובה רשמית לשאלון.",
+ "daggerLegend": "† רשימה שנוספה למסמך ב-20.10.2026; מתחת לאחוז החסימה ברוב הסקרים שבבסיס המסמך.",
+ "readingGuide": "קריאת הטבלאות: \"מצע רשמי\" = מסמך מצע שפרסמה המפלגה. \"מסמך מדיניות רשמי\" = תוכנית או עמוד עקרונות באתר המפלגה. \"תשובה רשמית לשאלון\" = תשובת המפלגה לפניית כלי תקשורת. \"הצהרות\" = דברי ראש הרשימה או מועמדים, שאינם בהכרח מצע מוסכם. \"לא נמצאה עמדה\" אין פירושו שאין למפלגה עמדה, אלא שלא אותרה עמדה פומבית.",
+ "mainSplits": [
+  "גושים: מצד אחד גוש נתניהו (הליכוד, עוצמה יהודית, ש\"ס, יהדות התורה, הציונות הדתית–זהות); מצד שני גוש האופוזיציה (ישר!, ביחד, הדמוקרטים, ישראל ביתנו); והרשימה המשותפת מחוץ לשניהם. בממוצעי הסקרים אף גוש אינו מגיע ל-61 מנדטים.",
+  "גיוס חרדים: ישר!, ביחד, הדמוקרטים וישראל ביתנו מתחייבים לשירות לכולם (ישר! מאפשרת עד 3% דחייה ללומדי תורה). הליכוד מציע יעדים וסנקציות לצד \"שמירה על עולם התורה\". ש\"ס ויהדות התורה מתנות כניסה לקואליציה בעיגון מעמד לומדי התורה בחוק. הרשימה המשותפת מתנגדת לכל חובת שירות על ערבים.",
+  "7 באוקטובר: כל רשימות האופוזיציה והרשימה המשותפת תומכות בוועדת חקירה ממלכתית. הליכוד והציונות הדתית מציעים ועדה שחבריה ימונו בידי הקואליציה והאופוזיציה. ש\"ס, יהדות התורה ועוצמה יהודית לא פרסמו עמדה רשמית והצביעו נגד ועדה ממלכתית.",
+  "מערכת המשפט: מפלגות הקואליציה תומכות בצמצום סמכויות בג\"ץ, בפיצול תפקיד היועמ\"ש ובשינוי מינוי השופטים. ישר!, ביחד והדמוקרטים מתחייבים לבטל את חוק הוועדה לבחירת שופטים ולחוקק חוק יסוד: החקיקה או חוקה. ישראל ביתנו מציעה חוקה שתאושר במשאל עם.",
+  "הסוגיה הפלסטינית: שמונה מתוך עשר הרשימות מתנגדות למדינה פלסטינית, אך נבדלות זו מזו – מריבונות מלאה (עוצמה, הציונות הדתית–זהות, וברוח זו גם ש\"ס ויהדות התורה), דרך ריבונות בשטחי C (ישראל ביתנו, ביחד) ועד חיזוק גושים בלי סיפוח (ישר!). הדמוקרטים תומכים בהיפרדות ובמדינה פלסטינית מפורזת בעתיד, והרשימה המשותפת – במדינה פלסטינית בגבולות 1967.",
+  "עזה: התוכניות נעות מכיבוש, ממשל צבאי והתיישבות (סמוטריץ'), דרך \"הגירה מרצון\" (עוצמה), פירוק חמאס כתנאי לנסיגה (הליכוד, ישר!), העברת האחריות לגורם אזורי או בינ\"ל (ישראל ביתנו, ביחד, הדמוקרטים) ועד הסדר מדיני (הרשימה המשותפת).",
+  "דת ומדינה ויוקר המחיה: הדמוקרטים וישראל ביתנו תומכים בנישואים אזרחיים, ומרבית רשימות האופוזיציה – בתחבורה בשבת לפי הכרעה מקומית. הליכוד והמפלגות הדתיות מעדיפים את הסטטוס קוו. ביוקר המחיה קיימת הסכמה רחבה על הגברת התחרות והסרת חסמי יבוא, עם הבדלי דגש (פיקוח מחירים, מס שטוח, שכר מינימום).",
+  "שתי הרשימות שנוספו (מתחת לאחוז החסימה ברוב הסקרים): שתיהן מתנגדות למדינה פלסטינית, תומכות ב\"הגירה מרצון\" מעזה ומציבות חוק גיוס או שירות לכולם כתנאי להצטרפות לממשלה. שתיהן גם תומכות בצמצום עילת הסבירות ובפיצול תפקיד היועמ\"ש. ההבדל העיקרי הוא בשאלת הגוש: עמך ישראל הודיעה שתמליץ רק על נתניהו, ואילו המילואימניקים והכלכלית מגדירה את עצמה מחוץ לגושים ומתחייבת לשבת רק ב\"ממשלה ציונית\" בלי מפלגות חרדיות או ערביות. הבדלים נוספים: ועדת החקירה (עמך ישראל – גוף עצמאי שהיו\"ר שלו ייבחר בכנסת; המילואימניקים והכלכלית – ועדה כתנאי לממשלה, בלי פירוט המתכונת), ומערכת המשפט (עמך ישראל – ערכאת ערעור על בג\"ץ; המילואימניקים והכלכלית – חוק יסוד: החקיקה והתגברות ברוב של יותר מ-72 ח\"כים). בכלכלה, המילואימניקים והכלכלית מציגה יעדים מספריים (מע\"מ 12%, מס שולי מרבי 40%), ועמך ישראל מציגה עקרונות כלליים."
+ ],
+ "gaps": [
+  "מצע רשמי: לליכוד, לש\"ס וליהדות התורה לא אותר מצע לבחירות 2026. לרשימה המשותפת ולהציונות הדתית–זהות אין מצע משותף (רק מסמכי המרכיבים). לעוצמה יהודית יש עמוד עקרונות כללי ותוכניות נקודתיות. לכן בחלק מהתאים מוצגות הצהרות או הצבעות, ולא מצע.",
+  "תאים שבהם לא נמצאה עמדה פומבית: יהדות התורה – פשיעה; עוצמה יהודית – עמדה רשמית על ועדת חקירה (מוצגת לפי הצבעות) ומדיניות כלכלית כוללת; ישר! והליכוד – נישואים אזרחיים; הרשימה המשותפת – איראן ולימודי ליבה בחינוך החרדי; ש\"ס – מדיניות כוללת בפשיעה ובחינוך.",
+  "עמדות רבות בתוך רשימות משותפות אינן אחידות (ביחד: בנט מול יש עתיד בדת ומדינה; הציונות הדתית מול זהות בכלכלה ובגיוס; חד\"ש מול בל\"ד). בטבלאות סומן לאיזה מרכיב שייכת כל עמדה.",
+  "פער בין הצהרות לרקורד: לדוגמה, הציונות הדתית מציגה דרישה לחוק גיוס אך תמכה ב-7/2026 בחוק הקפאת המעצרים של משתמטים. הליכוד הודיע שהוא מקבל את דרישת ש\"ס לחוקק את חוק הגיוס לפני הקמת הממשלה. על משמעות הדברים יש מחלוקת פוליטית.",
+  "סקרים: פער גדול בין המכונים – הליכוד בין 18 (חדשות 13) ל-30 (ערוץ 14) מנדטים. סדר המקומות 4–10 צפוף (6.6–8.9 מנדטים), ולכן הסדר ביניהם רגיש. רע\"ם (כ-5.3) קרובה למקום העשירי. המילואימניקים והכלכלית ועמך ישראל קרובות לאחוז החסימה.",
+  "נגישות מקורות: אתר הדמוקרטים (democrats.org.il) נטען בבדיקה, אך קובץ ה-PDF של המצע לא נטען מהשרת שלנו (timeout) – תוכנו אומת דרך ציטוטים ב\"הדיוט.\" וב-MEF. gov.il ו-Times of Israel חוסמים בדיקה אוטומטית (403), אך הופיעו בחיפוש. shas.org.il לא היה נגיש. קישורי פייסבוק הוחלפו בדפי הנושא של \"הדיוט.\", שבהם מופיעים הציטוטים המקוריים.",
+  "המילואימניקים והכלכלית: אין מסמך מצע משותף אחד. העמדות נשענות על מצעי שתי המפלגות המרכיבות (המילואימניקים והכלכלית החדשה), על התשובות הרשמיות לשאלוני ynet ועל טקסט רשמי שפורסם בישראל היום. ב-3.9.2026 פורסם טקסט בשם \"בית ציוני – המילואימניקים\" (הנדל וטרופר), לפני שמפלגת טרופר חברה לישר!. הוא אינו משקף בהכרח את הרשימה הנוכחית ולא שימש מקור.",
+  "המילואימניקים והכלכלית – דת ומדינה: לא נמצאה עמדה פומבית של הרשימה. דברי הנדל מ-2021, כשהיה שר התקשורת, מובאים כרקע בלבד.",
+  "עמך ישראל – דת ומדינה: העמדה הקונקרטית מבוססת על ריאיון של מועמד (ערן בן ארי, מס' 4) ולא על מצע כתוב. ועדת חקירה: המצע מציע גוף \"עצמאי\" בסמכויות של ועדה ממלכתית, ווינטר אמר שהוא בעד ועדה \"בלי המילה ממלכתית\". זו אינה ועדת חקירה ממלכתית כהגדרתה בחוק, ואופן המינוי שונה.",
+  "סקרים לשתי הרשימות שנוספו: ב-7 הסקרים שבבסיס המסמך, המילואימניקים והכלכלית עוברת את אחוז החסימה ב-4 מתוך 7 (4 מנדטים בכל אחד מהם), ועמך ישראל ב-1 מתוך 7 (4 מנדטים). הממוצעים (2.3 ו-0.6) מחושבים כשסקר מתחת לחסימה נספר כ-0, ולכן אינם משקפים את נתח הקולות. לפי מודל MEF, ההסתברות שכל אחת מהן לא תעבור את החסימה אינה זניחה. אף אחת מהשתיים לא חתמה על הסכם עודפים.",
+  "המסמך נכון ל-20.10.2026. עמדות, רשימות וסקרים עשויים להשתנות בשבוע האחרון שלפני הבחירות. המיפוי מבוסס על מקורות פומביים ואינו ממצה את כל עמדות המפלגות."
+ ],
+ "generalSources": [
+  {
+   "label": "ועדת הבחירות המרכזית – רשימות המועמדים לכנסת ה-26 (gov.il)",
+   "url": "https://www.gov.il/he/pages/candidates-lists-26"
+  },
+  {
+   "label": "Times of Israel – 38 רשימות הוגשו (9.9.2026)",
+   "url": "https://www.timesofisrael.com/israels-election-takes-shape-as-38-parties-submit-slates-from-likud-to-joint-list/"
+  },
+  {
+   "label": "Jerusalem Post – בג\"ץ ביטל את פסילת הרשימה המשותפת (2.10.2026)",
+   "url": "https://www.jpost.com/israel-election-2026/article-910410"
+  },
+  {
+   "label": "MEF – דפי מפלגות (רקע, רשימות, עמדות)",
+   "url": "https://israelvote.meforum.org/parties/"
+  },
+  {
+   "label": "הדיוט. – עמדות המפלגות לפי נושא (נכון ל-12.10.2026)",
+   "url": "https://hediot.co.il/topics/"
+  },
+  {
+   "label": "ynet – סדרת שאלוני המפלגות לבחירות 2026 (יו\"ש)",
+   "url": "https://www.ynet.co.il/news/elections2026/article/yokra14910407"
+  },
+  {
+   "label": "ynet – שאלון גיוס",
+   "url": "https://www.ynet.co.il/news/elections2026/article/yokra14898966"
+  },
+  {
+   "label": "ynet – שאלון מערכת המשפט",
+   "url": "https://www.ynet.co.il/news/elections2026/article/yokra14903844"
+  },
+  {
+   "label": "ynet – תחבורה ציבורית בשבת (31.8.2026)",
+   "url": "https://www.ynet.co.il/news/elections2026/article/yokra14883243"
+  },
+  {
+   "label": "N12 – עמדות המפלגות בנושא ועדת חקירה ממלכתית",
+   "url": "https://www.mako.co.il/news-israel-elections/2026/Article-133c9c0bc8c01a1026.htm"
+  },
+  {
+   "label": "פתק 2026 – השוואת עמדות",
+   "url": "https://www.israelielection.org/he/compare"
+  },
+  {
+   "label": "הפתק – מעקב סקרים (טבלת כל הסקרים, עודכן 19.10.2026)",
+   "url": "https://www.thepetek.com/he/polls"
+  },
+  {
+   "label": "Middle East Forum – Poll of Polls (ממוצע 7 מכונים, 4–18.10.2026)",
+   "url": "https://israelvote.meforum.org/"
+  },
+  {
+   "label": "סרוגים – ממוצע הסקרים (20.10.2026)",
+   "url": "https://www.srugim.co.il/elections/elections2026"
+  },
+  {
+   "label": "N12 – סקר חדשות 12, 19.10.2026",
+   "url": "https://www.mako.co.il/news-israel-elections/2026/Article-a6eb664b9d451a1026.htm"
+  },
+  {
+   "label": "כאן חדשות – סקר 18.10.2026",
+   "url": "https://www.kan.org.il/content/kan-news/politic/1110393/"
+  },
+  {
+   "label": "ice – סקר חדשות 14, 18.10.2026",
+   "url": "https://www.ice.co.il/research/news/article/1134101"
+  },
+  {
+   "label": "ועדת הבחירות המרכזית – רשימות המועמדים לכנסת ה-26 (כולל \"די\" ו\"ך\")",
+   "url": "https://www.gov.il/he/pages/candidates-lists-26"
+  },
+  {
+   "label": "ועדת הבחירות המרכזית – דף הרשימה עמך ישראל בראשות עופר וינטר",
+   "url": "https://www.gov.il/he/pages/amcha-israel_list6"
+  },
+  {
+   "label": "Middle East Forum – Poll of Polls (נתוני מעבר אחוז החסימה לרשימות הקטנות)",
+   "url": "https://israelvote.meforum.org/"
+  }
+ ],
+ "aliases": {
+  "likud": [
+   "הליכוד",
+   "ליכוד"
+  ],
+  "yashar": [
+   "ישר!"
+  ],
+  "beyachad": [
+   "ביחד",
+   "יש עתיד"
+  ],
+  "dems": [
+   "הדמוקרטים"
+  ],
+  "joint": [
+   "הרשימה המשותפת",
+   "חד\"ש",
+   "בל\"ד",
+   "מק\"י"
+  ],
+  "otzma": [
+   "עוצמה יהודית",
+   "עוצמה",
+   "בן גביר"
+  ],
+  "shas": [
+   "ש\"ס",
+   "דרעי"
+  ],
+  "yb": [
+   "ישראל ביתנו"
+  ],
+  "utj": [
+   "יהדות התורה",
+   "פינדרוס",
+   "פרוש"
+  ],
+  "rzz": [
+   "הציונות הדתית–זהות",
+   "צ\"ד",
+   "זהות",
+   "פייגלין",
+   "סמוטריץ'"
+  ],
+  "miluim": [
+   "המילואימניקים והכלכלית"
+  ],
+  "amcha": [
+   "עמך ישראל",
+   "וינטר"
+  ]
+ }
+}

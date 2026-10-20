@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>השוואת מצעים – בחירות לכנסת 2026</title>
+<meta name="description" content="השוואה ניטרלית ואינטראקטיבית של עמדות 12 רשימות ב-10 סוגיות לקראת הבחירות לכנסת ה-26 (27.10.2026), עם מקורות, ניתוח רוחבי וסקרי מנדטים.">
+<meta name="theme-color" content="#1d3557">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<link rel="preload" href="data/platforms.json" as="fetch" crossorigin>
+<link rel="preload" href="data/polls.json" as="fetch" crossorigin>
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="#/"><span class="brand-t">השוואת מצעים</span> <span class="brand-s">בחירות לכנסת ה-26 · 27.10.2026</span></a>
+  </div>
+  <nav class="nav" aria-label="ניווט ראשי">
+    <ul class="wrap">
+      <li><a href="#/" data-nav="home">ראשי</a></li>
+      <li><a href="#/matrix" data-nav="matrix">מטריצה</a></li>
+      <li><a href="#/issue" data-nav="issue">לפי סוגיה</a></li>
+      <li><a href="#/list" data-nav="list">לפי רשימה</a></li>
+      <li><a href="#/compare" data-nav="compare">השוואה</a></li>
+      <li><a href="#/analysis" data-nav="analysis">ניתוח רוחבי</a></li>
+      <li><a href="#/polls" data-nav="polls">סקרים</a></li>
+      <li><a href="#/about" data-nav="about">שיטה ומקורות</a></li>
+    </ul>
+  </nav>
+</header>
+<main id="main" class="wrap" tabindex="-1">
+  <p class="loading">טוען נתונים…</p>
+  <noscript><p>האתר דורש JavaScript כדי להציג את הנתונים. את הנתונים הגולמיים אפשר לקרוא ישירות בקבצים <a href="data/platforms.json">platforms.json</a>, <a href="data/analysis.json">analysis.json</a> ו-<a href="data/polls.json">polls.json</a>.</p></noscript>
+</main>
+<footer class="foot">
+  <div class="wrap" id="foot"></div>
+</footer>
+<dialog id="dlg" aria-labelledby="dlg-title">
+  <div class="dlg-in">
+    <button type="button" class="dlg-x" id="dlg-x" aria-label="סגירה">✕</button>
+    <div id="dlg-body"></div>
+  </div>
+</dialog>
+<script src="js/app.js" defer></script>
+</body>
+</html>
