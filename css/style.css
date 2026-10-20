@@ -22,7 +22,7 @@ p{margin:.5em 0}
 .nav a{display:flex;align-items:center;min-height:48px;padding:0 12px;color:#fff;text-decoration:none;font-size:.97rem;border-bottom:3px solid transparent}
 .nav a[aria-current=page]{border-bottom-color:#ffd166;font-weight:700}
 .nav a:hover{background:rgba(255,255,255,.08)}
-main{padding-bottom:40px;min-height:60vh}
+main{padding-bottom:40px;min-height:100vh}
 main:focus{outline:none}
 .loading{padding:30px 0;color:var(--mut)}
 .lead{font-size:1.05rem;color:var(--mut)}
