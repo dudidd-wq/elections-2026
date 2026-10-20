@@ -1,5 +1,5 @@
 /* Service worker: bump VERSION on every change. Network-first for everything (fresh data), cache as offline fallback. */
-var VERSION = 'v3-2026-10-20c';
+var VERSION = 'v4-2026-10-20d';
 var CORE = ['./', 'index.html', 'css/style.css', 'js/app.js', 'data/platforms.json', 'data/analysis.json', 'data/polls.json', 'icon.svg', 'manifest.webmanifest'];
 self.addEventListener('install', function (e) { e.waitUntil(caches.open(VERSION).then(function (c) { return c.addAll(CORE); }).then(function () { return self.skipWaiting(); })); });
 self.addEventListener('activate', function (e) { e.waitUntil(caches.keys().then(function (ks) { return Promise.all(ks.filter(function (k) { return k !== VERSION; }).map(function (k) { return caches.delete(k); })); }).then(function () { return self.clients.claim(); })); });

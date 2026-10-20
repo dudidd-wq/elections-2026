@@ -70,7 +70,7 @@
   }
   function hlSelect() {
     var o = '<option value="">ללא הדגשה</option>' + orderedLists().map(function (l) { return '<option value="' + l.id + '"' + (state.hl === l.id ? ' selected' : '') + '>' + esc(l.tableName) + '</option>'; }).join('');
-    return '<label class="controls"><span>הדגשת אזכורים של רשימה:</span> <select id="hl">' + o + '</select></label>';
+    return '<div class="controls"><label for="hl">הדגשת אזכורים של רשימה:</label> <select id="hl">' + o + '</select> <span id="hlcount" class="meta" role="status"></span></div>';
   }
 
   // ---------- dialog
@@ -386,6 +386,8 @@
       default: r.page = 'home'; html = pageHome();
     }
     $main.innerHTML = html;
+    var hc = document.getElementById('hlcount');
+    if (hc && state.hl) { var nOn = $main.querySelectorAll('mark.m.on').length; hc.textContent = nOn === 1 ? 'אזכור אחד מודגש בעמוד זה' : nOn ? nOn + ' אזכורים מודגשים בעמוד זה' : 'אין אזכורים של הרשימה בעמוד זה'; }
     document.title = (sub ? sub + ' – ' : '') + TITLES[r.page] + ' | השוואת מצעים – בחירות 2026';
     document.querySelectorAll('[data-nav]').forEach(function (a) { if (a.getAttribute('data-nav') === r.page) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     var key = r.page + '/' + r.arg;
