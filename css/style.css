@@ -383,3 +383,9 @@ details.note.method p{margin:var(--s2) 0 0}
 /* perf: skip layout of off-screen heavy blocks until needed */
 .tbl-wrap,.multi,.cmp-issue,.grid-pos{content-visibility:auto;contain-intrinsic-size:auto 700px}
 @media print{.tbl-wrap,.multi,.cmp-issue,.grid-pos{content-visibility:visible}}
+/* mobile: show all 8 nav items (no hidden off-screen items) */
+@media (max-width:759px){
+ .nav{overflow:visible;mask-image:none;-webkit-mask-image:none;margin:0;padding:0 0 var(--s1)}
+ .nav ul{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;white-space:normal}
+ .nav a{justify-content:center;text-align:center;padding:0 4px;font-size:.86rem;line-height:1.15}
+}
