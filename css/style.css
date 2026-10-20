@@ -380,3 +380,6 @@ details.note.method p{margin:var(--s2) 0 0}
 .bar-row{min-height:48px}
 .bar-row>span:first-child a{display:inline-flex;align-items:center;min-height:48px;min-width:48px}
 .cmp-issue h2 a{display:inline-flex;align-items:center;min-height:48px}
+/* perf: skip layout of off-screen heavy blocks until needed */
+.tbl-wrap,.multi,.cmp-issue,.grid-pos{content-visibility:auto;contain-intrinsic-size:auto 700px}
+@media print{.tbl-wrap,.multi,.cmp-issue,.grid-pos{content-visibility:visible}}

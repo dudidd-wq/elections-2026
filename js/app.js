@@ -17,6 +17,7 @@
   function fmtShort(iso) { var d = iso.slice(0, 10).split('-'); return +d[2] + '.' + +d[1]; }
   function fmtStamp(iso) { if (!iso) return ''; var t = iso.slice(11, 16); return fmtDate(iso) + (t ? ' ' + t : '') + ' (שעון ישראל)'; }
   function fmtN(x) { return (Math.round(x * 10) / 10).toFixed(1); }
+  var COLL = (window.Intl && Intl.Collator) ? new Intl.Collator('he') : { compare: function (a, b) { return a < b ? -1 : a > b ? 1 : 0; } };
   function byId(arr) { var o = {}; arr.forEach(function (x) { o[x.id] = x; }); return o; }
   var LIST, ISS, PARTY, COLOR = {};
 
@@ -33,18 +34,23 @@
   var PALETTE = ['#4a75a5', '#9f643c', '#487f4f', '#995c99', '#887030', '#3a7b82', '#b45750', '#7867ad', '#657b37', '#a35c80', '#3a7898', '#886f49', '#447e6b'];
   function assignColors() {
     var ids = D.parties.filter(function (p) { return !p.withdrawn; }).map(function (p) { return p.id; });
-    ids.sort(function (a, b) { return lname(a).localeCompare(lname(b), 'he'); });
+    ids.sort(function (a, b) { return COLL.compare(lname(a), lname(b)); });
     ids.forEach(function (id, k) { COLOR[id] = PALETTE[k % PALETTE.length]; });
     D.parties.forEach(function (p) { if (!COLOR[p.id]) COLOR[p.id] = '#737373'; });
   }
   function dot(id) { return '<span class="dot" style="--c:' + COLOR[id] + '" aria-hidden="true"></span>'; }
 
   function avgOf(id) { return (D.computed.average[id] || 0); }
+  var SORTC = {};
   function sortIds(ids) {
+    var ck = state.order + '|' + ids.join(','); if (SORTC[ck]) return SORTC[ck].slice();
+    var r = sortIds0(ids); SORTC[ck] = r; return r.slice();
+  }
+  function sortIds0(ids) {
     var names = {}; ids.forEach(function (id) { names[id] = lname(id); });
     return ids.slice().sort(function (a, b) {
       if (state.order === 'polls') { var d = avgOf(b) - avgOf(a); if (Math.abs(d) > 1e-9) return d; }
-      return names[a].localeCompare(names[b], 'he');
+      return COLL.compare(names[a], names[b]);
     });
   }
   function orderedLists() { return sortIds(P.lists.map(function (l) { return l.id; })).map(function (id) { return LIST[id]; }); }
@@ -491,9 +497,9 @@
     }).join('') + '<div class="bar-row" aria-hidden="true"><span></span><span class="bar-axis"><span style="right:0">0</span><span style="right:' + (30 / BM * 100) + '%">30</span><span style="right:' + (61 / BM * 100) + '%;font-weight:800;color:var(--ink)">61</span></span><span></span></div></div>' +
       '<p class="meta">כל גוש מוצג בפס נפרד באותו קנה מידה (0–70 מנדטים); הקו השחור מסמן 61 מנדטים, הרוב בכנסת. סדר הגושים קבוע ואינו משתנה לפי התוצאות. ההרכב: ' + D.blocs.map(function (b) { return esc(b.name); }).join('; ') + '.</p>';
     var outlets = []; D.polls.forEach(function (p) { if (outlets.indexOf(p.outlet) < 0) outlets.push(p.outlet); });
-    outlets.sort(function (a, b) { return a.localeCompare(b, 'he'); });
+    outlets.sort(function (a, b) { return COLL.compare(a, b); });
     var of = q.outlet && outlets.indexOf(q.outlet) >= 0 ? q.outlet : '';
-    var rows = D.polls.slice().sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : a.outlet.localeCompare(b.outlet, 'he'); }).filter(function (p) { return !of || p.outlet === of; });
+    var rows = D.polls.slice().sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : COLL.compare(a.outlet, b.outlet); }).filter(function (p) { return !of || p.outlet === of; });
     var tbl = '<div class="tbl-wrap" tabindex="0" role="region" aria-label="טבלת הסקרים, אפשר לגלול אופקית"><table class="tbl polls"><caption>' + rows.length + ' סקרים' + (of ? ' של ' + esc(of) : '') + ' · שורה מוצללת = נכללת בממוצע העדכני</caption><thead><tr><th scope="col">תאריך</th><th scope="col">כלי תקשורת</th><th scope="col">מכון הסקרים</th><th scope="col" class="n">מדגם</th>' +
       ids.map(function (id) { return '<th scope="col" class="n">' + esc(PARTY[id].name) + '</th>'; }).join('') +
       D.blocs.map(function (b) { return '<th scope="col" class="n">' + esc(b.id === 'coalition' ? 'גוש הקואליציה' : b.id === 'opposition' ? 'גוש האופוזיציה' : b.id === 'arab' ? 'רשימות ערביות' : 'אחרות') + '</th>'; }).join('') +
@@ -580,9 +586,9 @@
     document.title = (sub ? sub + ' – ' : '') + TITLES[r.page] + ' | השוואת מצעים – בחירות 2026';
     document.querySelectorAll('[data-nav]').forEach(function (a) { if (a.getAttribute('data-nav') === r.page) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     var cur = document.querySelector('[data-nav][aria-current]'), nv = cur && cur.closest('.nav');
-    if (cur && nv && nv.scrollWidth > nv.clientWidth) { var nr = nv.getBoundingClientRect(), cr = cur.getBoundingClientRect(); nv.scrollLeft += (cr.left + cr.width / 2) - (nr.left + nr.width / 2); }
+    if (cur && nv) requestAnimationFrame(function () { setTimeout(function () { if (nv.scrollWidth > nv.clientWidth) { var nr = nv.getBoundingClientRect(), cr = cur.getBoundingClientRect(); nv.scrollLeft += (cr.left + cr.width / 2) - (nr.left + nr.width / 2); } }, 0); });
     var key = r.page + '/' + r.arg;
-    if (!keepScroll && key !== lastPage) { window.scrollTo(0, 0); $main.focus({ preventScroll: true }); }
+    if (!keepScroll && lastPage !== null && key !== lastPage) { window.scrollTo(0, 0); $main.focus({ preventScroll: true }); }
     lastPage = key;
   }
   function setHash(h) { if (location.hash === h) render(true); else { history.replaceState(null, '', h); render(true); } }
