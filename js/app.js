@@ -209,7 +209,7 @@
       '<dt>ראש הרשימה</dt><dd>' + esc(l.leader) + '</dd><dt>הרכב</dt><dd>' + esc(l.composition) + '</dd>' +
       '<dt>מנדטים בכנסת ה-25</dt><dd>' + esc(l.seats25) + '</dd><dt>מעמד המצע</dt><dd>' + esc(l.platformStatus) + '</dd>' +
       '<dt>גוש / שותפויות מוצהרות</dt><dd>' + esc(l.declaredBloc) + '</dd><dt>מקור מרכזי</dt><dd>' + srcLink(l.mainSource, 'אתר / מקור מרכזי') + '</dd>' +
-      '<dt>עמדות מבוססות הצהרות</dt><dd>' + stars + ' מתוך 10 הסוגיות מסומנות <span class="star">*</span></dd></dl>' +
+      '<dt>עמדות שמבוססות על הצהרות</dt><dd>' + stars + ' מתוך 10 הסוגיות מסומנות <span class="star">*</span></dd></dl>' +
       '<h2>סקרים</h2><div class="kpis"><div class="kpi">ממוצע עדכני<b>' + fmtN(s.avg) + '</b><span class="meta">מנדטים, ' + s.n + ' סקרים, ' + fmtDate(D.computed.window[0]) + '–' + fmtDate(D.computed.window[1]) + '</span></div>' +
       '<div class="kpi">טווח<b>' + s.rng[0] + '–' + s.rng[1] + '</b><span class="meta">מנדטים באותם סקרים</span></div>' +
       '<div class="kpi">עוברת את החסימה<b>' + s.pass + ' / ' + s.n + '</b><span class="meta">סקרים בחלון הממוצע</span></div>' +
@@ -315,9 +315,9 @@
     var of = q.outlet && outlets.indexOf(q.outlet) >= 0 ? q.outlet : '';
     var rows = D.polls.slice().sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : a.outlet.localeCompare(b.outlet, 'he'); }).filter(function (p) { return !of || p.outlet === of; });
     var inc = {}; c.included.forEach(function (x) { inc[x] = 1; });
-    var tbl = '<div class="tbl-wrap" tabindex="0" role="region" aria-label="טבלת הסקרים, אפשר לגלול אופקית"><table class="tbl polls"><caption>' + rows.length + ' סקרים' + (of ? ' של ' + esc(of) : '') + ' · שורה מוצללת = נכללת בממוצע העדכני</caption><thead><tr><th scope="col">תאריך</th><th scope="col">כלי תקשורת</th><th scope="col">סוקר</th><th scope="col" class="n">מדגם</th>' +
+    var tbl = '<div class="tbl-wrap" tabindex="0" role="region" aria-label="טבלת הסקרים, אפשר לגלול אופקית"><table class="tbl polls"><caption>' + rows.length + ' סקרים' + (of ? ' של ' + esc(of) : '') + ' · שורה מוצללת = נכללת בממוצע העדכני</caption><thead><tr><th scope="col">תאריך</th><th scope="col">כלי תקשורת</th><th scope="col">מכון הסקרים</th><th scope="col" class="n">מדגם</th>' +
       ids.map(function (id) { return '<th scope="col" class="n">' + esc(PARTY[id].name) + '</th>'; }).join('') +
-      D.blocs.map(function (b) { return '<th scope="col" class="n">' + esc(b.id === 'coalition' ? 'גוש נתניהו' : b.id === 'opposition' ? 'גוש האופוזיציה' : b.id === 'arab' ? 'ערביות' : 'אחרות') + '</th>'; }).join('') +
+      D.blocs.map(function (b) { return '<th scope="col" class="n">' + esc(b.id === 'coalition' ? 'גוש הקואליציה' : b.id === 'opposition' ? 'גוש האופוזיציה' : b.id === 'arab' ? 'רשימות ערביות' : 'אחרות') + '</th>'; }).join('') +
       '<th scope="col">מקור</th></tr></thead><tbody>' + rows.map(function (p) {
         return '<tr' + (inc[p.id] ? ' class="inwin"' : '') + '><td class="n">' + fmtDate(p.date) + (inc[p.id] ? '<span class="sr"> (בממוצע)</span>' : '') + '</td><td>' + esc(p.outlet) + '</td><td>' + esc(p.pollster) + '</td><td class="n">' + (p.sample || '—') + '</td>' +
           ids.map(function (id) { var v = p.seats[id]; return '<td class="n">' + (v == null ? '<span title="לא דווח / מתחת לחסימה">–</span>' : v) + '</td>'; }).join('') +
@@ -341,7 +341,7 @@
       '<div class="multi">' + ids.map(function (id) { var t = c.trend; return '<div class="spark"><h3><span>' + esc(lname(id)) + '</span><span class="ltr">' + fmtN(t[0].avg[id]) + ' → ' + fmtN(t[t.length - 1].avg[id]) + '</span></h3>' + sparkSvg(id) + '</div>'; }).join('') + '</div>' +
       '<h3>מגמת הגושים</h3><div class="multi">' + D.blocs.map(function (b) { var t = c.trend; return '<div class="spark"><h3><span>' + esc(b.name) + '</span><span class="ltr">' + fmtN(blocSum(t[0].avg, b.id)) + ' → ' + fmtN(blocSum(t[t.length - 1].avg, b.id)) + '</span></h3>' + sparkSvg(b.id, 260, 110, true) + '</div>'; }).join('') + '</div>' +
       '<h2>כל הסקרים</h2><label class="controls">סינון לפי כלי תקשורת: <select id="outlet"><option value="">כל כלי התקשורת</option>' + outlets.map(function (o) { return '<option' + (o === of ? ' selected' : '') + '>' + esc(o) + '</option>'; }).join('') + '</select></label>' +
-      '<p class="meta">"–" = הרשימה לא דווחה בסקר או דווחה רק באחוזים מתחת לחסימה (נספר כ-0). התאריך הוא תאריך הסקר כפי שמופיע במקור המעקב (ברוב המקרים יום עבודת השטח). ' + esc(PARTY.bw.note) + ' בכל הסקרים מאז 9.9.2026 היא לא עברה את אחוז החסימה, ולכן אינה מוצגת.</p>' + tbl +
+      '<p class="meta">"–" = הרשימה לא דווחה בסקר או דווחה רק באחוזים, מתחת לאחוז החסימה (נספרת כ-0). התאריך הוא תאריך הסקר כפי שמופיע במקור המעקב (ברוב המקרים יום עבודת השטח). ' + esc(PARTY.bw.note) + ' בכל הסקרים מאז 9.9.2026 היא לא עברה את אחוז החסימה, ולכן אינה מוצגת.</p>' + tbl +
       '<h2>בדיקת נתוני המסמך</h2><p>' + esc(base.text) + '</p><p class="note">' + esc(base.verification) + '</p>' + baseT +
       '<h2>מקורות הסקרים</h2><ul class="srcs"><li>' + srcLink(D.meta.primarySource.url, D.meta.primarySource.label) + '</li>' + D.meta.crossCheck.map(function (s) { return '<li>' + srcLink(s.url, s.label) + '</li>'; }).join('') + '</ul><p class="meta">' + esc(D.meta.scope) + ' לכל סקר בטבלה יש קישור לפרסום המקורי. עדכון אחרון של נתוני הסקרים: ' + fmtStamp(D.meta.updatedAt) + '.</p>';
   }
