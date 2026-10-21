@@ -3,7 +3,7 @@
    scheduled live (window.ClipAudio.Live) or rendered offline (ClipAudio.renderOffline) for the MP4. 120 BPM, A minor. */
 (function () {
   'use strict';
-  var BPM = 120, SPB = 60 / BPM;
+  var BPM = 120, SPB = 60 / BPM, MG = .7; // MG: master gain after the limiter (leaves >= 1 dB true-peak headroom after AAC encoding)
   // A minor: Am – F – C – G (one bar each)
   var PROG = [{ r: 45, t: [57, 60, 64, 69] }, { r: 41, t: [53, 57, 60, 65] }, { r: 48, t: [55, 60, 64, 67] }, { r: 43, t: [55, 59, 62, 67] }];
   var LEAD = [0, 2, 1, 3, 2, 1, 0, 1]; // chord-tone indices, 8ths
@@ -82,7 +82,7 @@
     var G = { ctx: ctx, noise: noiseBuf(ctx) };
     var comp = ctx.createDynamicsCompressor(); comp.threshold.value = -16; comp.knee.value = 10; comp.ratio.value = 3; comp.attack.value = .006; comp.release.value = .2;
     var lim = ctx.createDynamicsCompressor(); lim.threshold.value = -4; lim.knee.value = 0; lim.ratio.value = 20; lim.attack.value = .001; lim.release.value = .08;
-    var out = ctx.createGain(); out.gain.value = .78; comp.connect(lim); lim.connect(out); out.connect(dest);
+    var out = ctx.createGain(); out.gain.value = MG; comp.connect(lim); lim.connect(out); out.connect(dest);
     var rev = ctx.createConvolver(); rev.buffer = impulse(ctx); var revG = ctx.createGain(); revG.gain.value = .32; rev.connect(revG); revG.connect(comp);
     var del = ctx.createDelay(1); del.delayTime.value = SPB * .75; var fb = ctx.createGain(); fb.gain.value = .34; var dlp = ctx.createBiquadFilter(); dlp.type = 'lowpass'; dlp.frequency.value = 3200;
     del.connect(dlp); dlp.connect(fb); fb.connect(del); var delG = ctx.createGain(); delG.gain.value = .3; dlp.connect(delG); delG.connect(comp);
@@ -102,7 +102,7 @@
   function env(g, t, a, peak, d, floor) { g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(peak, t + a); g.gain.exponentialRampToValueAtTime(floor || 0.0001, t + a + d); }
   function noiseSrc(G, t, dur) { var n = G.ctx.createBufferSource(); n.buffer = G.noise; n.loop = true; n.start(t, (t * 7.31) % 1.5); n.stop(t + dur + .05); return n; }
   var V = {
-    lvl: function (G, B, t, p) { G.out.gain.setTargetAtTime(.78 * p.g, t, .12); },
+    lvl: function (G, B, t, p) { G.out.gain.setTargetAtTime(MG * p.g, t, .12); },
     fade: function (G, B, t, p) { G.out.gain.setTargetAtTime(0, t, p.tc); },
     shk: function (G, B, t, p) {
       var c = G.ctx, n = noiseSrc(G, t, .08), hp = c.createBiquadFilter(), g = c.createGain(); hp.type = 'highpass'; hp.frequency.value = 6500;
@@ -237,7 +237,7 @@
         kill(); if (ctx.state === 'suspended') ctx.resume();
         B = bus(G); busT = T; anchorCtx = ctx.currentTime + .05; anchorT = T; idx = find(T - .02);
         for (var j = Math.min(idx, events.length) - 1, g0 = 1; j >= 0; j--) if (events[j].k === 'lvl') { g0 = events[j].p.g; break; }
-        G.out.gain.cancelScheduledValues(ctx.currentTime); G.out.gain.setValueAtTime(.78 * g0, ctx.currentTime);
+        G.out.gain.cancelScheduledValues(ctx.currentTime); G.out.gain.setValueAtTime(MG * g0, ctx.currentTime);
         // a whoosh/riser that started before T is skipped; the groove resumes on the next 16th
         running = true; clearInterval(timer); timer = setInterval(tick, 40); tick();
       },
