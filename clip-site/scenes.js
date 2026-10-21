@@ -48,10 +48,10 @@
   scene('polls', 'סקרים', 4, 's-polls',
     '<p class="eyebrow"' + A(.3, 'up') + '>סקרים</p>' +
     '<h2 style="font-size:66px">' + mask('ממוצע הסקרים, נכון ל-' + P.asOf, .5) + '</h2>' +
-    '<p class="lead" style="font-size:32px;margin-top:14px"' + A(1.4, 'up') + '>ממוצע של ' + P.n + ' סקרים (' + P.window[0] + '–' + P.window[1] + ') · במנדטים · לפי סדר האלף-בית · סקרים אינם תוצאות בחירות</p>' +
+    '<p class="lead" style="font-size:32px;margin-top:14px"' + A(1.4, 'up') + '>ממוצע של ' + P.n + ' סקרים (' + P.window[0] + '–' + P.window[1] + ') · במנדטים · לפי סדר האלף-בית · בצד: הממוצע ב-' + esc(P.from) + ' · סקרים אינם תוצאות בחירות</p>' +
     '<div class="pgrid">' + LISTS.map(function (l, i) {
       var b0 = 2.4 + i * .3, v = P.avg[l.id];
-      return '<div class="prow"' + A(b0, 'fade', .8) + '><span class="lab">' + esc(l.name) + '</span><span class="trk"><i class="fil" data-w="' + Math.min(1, v / MAX).toFixed(4) + '" data-win="' + B(b0 + .2) + '"></i></span><span class="val">' + count(v, b0 + .2, 2.4, { dec: 1 }) + '</span><span class="was">' + esc(P.from.replace(/\.\d{4}$/, '')) + ': <span class="num">' + P.fromAvg[l.id].toFixed(1) + '</span></span></div>';
+      return '<div class="prow"' + A(b0, 'fade', .8) + '><span class="lab">' + esc(l.name) + '</span><span class="trk"><i class="fil" data-w="' + Math.min(1, v / MAX).toFixed(4) + '" data-win="' + B(b0 + .2) + '"></i></span><span class="val">' + count(v, b0 + .2, 2.4, { dec: 1 }) + '</span><span class="was">ב-' + esc(P.from.replace(/\.\d{4}$/, '')) + ' · <span class="num">' + P.fromAvg[l.id].toFixed(1) + '</span></span></div>';
     }).join('') + '</div>' +
     '<p class="foot" style="bottom:56px"' + A(8.5, 'fade') + '>' + esc(P.method) + ' ' + esc(P.threshold) + '<br>' + esc(P.silence) + '</p>');
 
