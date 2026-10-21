@@ -580,7 +580,8 @@
     var w = PD.window;
     return '<header class="page-head"><p class="eyebrow">פודקאסטים וראיונות</p><h1>ראשי הרשימות בפודקאסטים ובראיונות ארוכים</h1>' +
       '<p class="lead">מה אמרו ראשי ' + lists.length + ' הרשימות בפודקאסטים ובראיונות אודיו ווידאו ארוכים בחודש שלפני הבחירות. לכל הופעה: פרטים, קישור, עיקרי הדברים בפרפרזה, וציטוטים רק אם נבדקו מול תמלול או מול דף המקור.</p>' +
-      '<p class="meta"><b>עדכון אחרון: ' + fmtDate(PD.updated) + '</b> · חלון הסקירה: ' + fmtDate(w[0]) + '–' + fmtDate(w[1]) + ' · הנתונים: <a href="data/podcasts.json">podcasts.json</a></p></header>' +
+      '<p class="meta"><b>עדכון אחרון: ' + fmtDate(PD.updated) + '</b> · חלון הסקירה: ' + fmtDate(w[0]) + '–' + fmtDate(w[1]) + ' · הנתונים: <a href="data/podcasts.json">podcasts.json</a></p>' +
+      '<p class="pod-clip"><a href="clip/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>קליפ סיכום מונפש של הממצאים (כ-3 דקות)</a></p></header>' +
       '<div class="kpis"><div class="kpi"><b>' + PD.total + '</b><span>הופעות שאותרו</span></div><div class="kpi"><b>' + lists.length + '</b><span>ראשי רשימות</span></div><div class="kpi"><b class="stamp">' + fmtShort(w[0]) + '–' + fmtShort(w[1]) + '</b><span>חלון הסקירה</span></div><div class="kpi"><b class="stamp">' + fmtDate(PD.updated) + '</b><span>עדכון אחרון</span></div></div>' +
       '<div class="legend pod-legend" role="note" aria-label="מקרא"><span><span class="kind quote">ציטוט מאומת</span> נוסח שנבדק מול תמלול או מול דף המקור; שיטת האימות מצוינת לצדו</span><span><span class="kind para">פרפרזה</span> סיכום שלנו, לא ציטוט</span></div>' +
       '<details class="note method"><summary><b>שיטה וניטרליות</b></summary>' + PD.method.map(function (m) { return '<p>' + esc(m) + '</p>'; }).join('') + '</details>' +

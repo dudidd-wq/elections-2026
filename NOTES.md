@@ -39,3 +39,9 @@ Source: /workspace/elections-2026/platforms.md (canonical). Repo: dudidd-wq/elec
 - Content: copy md to source/platforms.md ; python3 tools/build_data.py ; bump VERSION ; push.
 - Audit scripts: /workspace/elections-2026-audit/*.mjs (node_modules symlink -> /tmp/pw/node_modules).
 - Local preview server used: port 8937 (8811 is taken by another app on the box).
+
+## Clip (/clip/) – animated summary of the podcasts section
+- [x] 21.10 15:45 /clip/index.html (+clip.css, clip.js, clip-data.js, fonts/): self-running 16:9 motion-graphics clip, 177.5 s, Hebrew RTL, pure HTML/CSS/JS (own rAF timeline, deterministic: frame = f(T); ?t=SEC seek, ?paused=1, ?rec=1 hides controls). Controls: play/pause, scrubber with chapter ticks, Space/K, ←/→ ±5 s, F fullscreen, M generated Web-Audio music (OFF by default). Link from #/podcasts header (.pod-clip). SW v12-2026-10-21a (clip files in CORE).
+- Content ONLY from data/podcasts.json via tools/build_clip.py -> clip/clip-data.js (asserts every quote verbatim, numbers computed; audience split parsed from the site's computed finding). After any podcasts.json change: python3 tools/build_clip.py, bump SW.
+- Neutrality: 13 list scenes, alphabetical (Intl.Collator he), 6.5 s each (guard in clip.js), identical structure, one verified quote each (QUOTE_PICK in build_clip.py), no counts per list, single neutral accent, no faces.
+- Tests: /workspace/clipwork/test.mjs (controls, equal time, alphabetical, verbatim quotes, numbers vs data, colours, overflow sweep, axe, 4 viewports). MP4: /workspace/podcasts-2026/clip.mp4 (rec.mjs + ffmpeg). Frames: /workspace/podcasts-2026/clip-frames/.

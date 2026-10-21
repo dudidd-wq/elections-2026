@@ -441,3 +441,7 @@ details.note.method summary::before{content:"◂";color:var(--ink3);transition:t
 details.note.method[open] summary::before{transform:rotate(-90deg)}
 details.note.method summary::after{content:"(לחצו להצגה)";color:var(--ink3);font-size:.85rem}
 details.note.method[open] summary::after{content:""}
+.pod-clip{margin:var(--s2) 0 0}
+.pod-clip a{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 14px;border:1px solid var(--line2);border-radius:999px;background:var(--surf);color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.pod-clip a:hover{border-color:var(--ink3);background:var(--surf2)}
+.pod-clip svg{width:18px;height:18px;fill:var(--acc);flex:none}
