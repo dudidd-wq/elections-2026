@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>מה יש באתר – קליפ היכרות | השוואת מצעים 2026</title>
+<meta name="description" content="קליפ מונפש (HTML) שמציג את אתר השוואת המצעים לבחירות 2026: 13 רשימות, 10 סוגיות, איך מסומנות העמדות, הניתוח הרוחבי וממוצע הסקרים. ניטרלי, לפי סדר האלף-בית, ללא המלצה.">
+<meta name="theme-color" content="#f5f3ee">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="../icon.svg" type="image/svg+xml">
+<link rel="preload" href="../clip/fonts/heebo-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../clip/clip.css">
+</head>
+<body>
+<div id="app" class="app" tabindex="-1">
+  <div id="viewport" class="viewport">
+    <div id="stage" class="stage" role="region" aria-roledescription="קליפ" aria-label="קליפ היכרות: מה יש באתר השוואת המצעים">
+      <canvas id="bg" class="bg" width="192" height="108" aria-hidden="true"></canvas>
+      <i class="paper" aria-hidden="true"></i>
+      <canvas id="wave" class="wave" width="1920" height="120" aria-hidden="true"></canvas>
+      <header class="chrome" aria-hidden="true">
+        <span class="brand"><span class="tag">היכרות</span><svg viewBox="0 0 24 24"><rect x="3.5" y="4" width="5" height="16" rx="1.2"/><rect x="9.5" y="4" width="5" height="16" rx="1.2"/><rect x="15.5" y="4" width="5" height="16" rx="1.2"/></svg>השוואת מצעים · בחירות 2026</span>
+        <span id="chap" class="chap"></span>
+      </header>
+      <i class="rule" aria-hidden="true"></i>
+      <div id="scenes"></div>
+      <div class="tline" aria-hidden="true"><i id="tline"></i></div>
+    </div>
+  </div>
+  <div id="sound" class="sound" hidden>
+    <div class="sbox">
+      <button id="sBtn" class="sbtn" type="button"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg><span>הפעל עם סאונד</span></button>
+      <p class="ssub">מוזיקת רקע שקטה שנוצרת בדפדפן · אפשר לכבות בכל רגע (M)</p>
+      <button id="sSkip" class="sskip" type="button">צפייה בלי סאונד</button>
+    </div>
+  </div>
+  <div id="controls" class="controls" dir="rtl">
+    <button id="bPlay" class="cb" type="button" aria-label="השהיה" title="השהיה (רווח)"><svg viewBox="0 0 24 24"><path id="icPlay" d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button>
+    <span id="time" class="time" dir="ltr" aria-hidden="true">0:00 / 0:00</span>
+    <div id="scrub" class="scrub" dir="ltr" role="slider" tabindex="0" aria-label="מיקום בקליפ" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" aria-valuetext="0:00">
+      <div class="track"><i id="fill" class="fill"></i><span id="ticks" class="ticks"></span><i id="knob" class="knob"></i></div>
+    </div>
+    <button id="bMusic" class="cb" type="button" aria-pressed="false" aria-label="מוזיקה (כבויה)" title="מוזיקה (M)"><svg viewBox="0 0 24 24"><path d="M9 18V6l10-2v12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="6.5" cy="18" r="2.6"/><circle cx="16.5" cy="16" r="2.6"/><path id="icMute" d="M3 3l18 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+    <button id="bFull" class="cb" type="button" aria-label="מסך מלא" title="מסך מלא (F)"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+    <a class="cb back" href="../" title="לעמוד הראשי של האתר">לאתר</a>
+  </div>
+  <p id="rot" class="rot" aria-hidden="true">לצפייה נוחה יותר – סובבו את המכשיר לרוחב</p>
+  <p id="live" class="sr" aria-live="polite"></p>
+</div>
+<noscript><p class="nojs">הקליפ דורש JavaScript. הנתונים המלאים: <a href="../">אתר השוואת המצעים</a>.</p></noscript>
+<script src="site-data.js"></script>
+<script src="../clip/audio.js"></script>
+<script src="../clip/engine.js"></script>
+<script src="scenes.js"></script>
+</body>
+</html>

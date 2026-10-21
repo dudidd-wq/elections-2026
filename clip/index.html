@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>ראשי הרשימות בפודקאסטים ובראיונות ארוכים – קליפ סיכום | השוואת מצעים 2026</title>
 <meta name="description" content="קליפ מונפש (HTML) המסכם את 47 ההופעות של ראשי 13 הרשימות בפודקאסטים ובראיונות ארוכים, 21.9–21.10.2026. ניטרלי, לפי סדר האלף-בית, ציטוטים מאומתים בלבד.">
-<meta name="theme-color" content="#04050d">
-<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#f5f3ee">
+<meta name="color-scheme" content="light">
 <link rel="icon" href="../icon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/heebo-hebrew.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="clip.css">
@@ -15,26 +15,22 @@
 <div id="app" class="app" tabindex="-1">
   <div id="viewport" class="viewport">
     <div id="stage" class="stage" role="region" aria-roledescription="קליפ" aria-label="קליפ סיכום: ראשי הרשימות בפודקאסטים ובראיונות ארוכים">
-      <canvas id="aurora" class="aurora" width="192" height="108" aria-hidden="true"></canvas>
-      <i class="grid" id="grid" aria-hidden="true"></i>
-      <canvas id="parts" class="parts" width="960" height="540" aria-hidden="true"></canvas>
-      <i class="vign" aria-hidden="true"></i>
-      <canvas id="wave" class="wave" width="1920" height="240" aria-hidden="true"></canvas>
+      <canvas id="bg" class="bg" width="192" height="108" aria-hidden="true"></canvas>
+      <i class="paper" aria-hidden="true"></i>
+      <canvas id="wave" class="wave" width="1920" height="120" aria-hidden="true"></canvas>
       <header class="chrome" aria-hidden="true">
-        <span class="brand"><span class="live"><i id="liveDot"></i>סיכום</span><svg viewBox="0 0 24 24" class="mic"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/></svg>השוואת מצעים · פודקאסטים וראיונות</span>
+        <span class="brand"><span class="tag">סיכום</span><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/></svg>השוואת מצעים · פודקאסטים וראיונות</span>
         <span id="chap" class="chap"></span>
       </header>
+      <i class="rule" aria-hidden="true"></i>
       <div id="scenes"></div>
-      <i id="leak" class="leak" aria-hidden="true"></i>
-      <i id="flash" class="flash" aria-hidden="true"></i>
-      <i class="scan" aria-hidden="true"></i>
       <div class="tline" aria-hidden="true"><i id="tline"></i></div>
     </div>
   </div>
   <div id="sound" class="sound" hidden>
     <div class="sbox">
       <button id="sBtn" class="sbtn" type="button"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg><span>הפעל עם סאונד</span></button>
-      <p class="ssub">מוזיקה מסונתזת בדפדפן · אפשר לכבות בכל רגע (M)</p>
+      <p class="ssub">מוזיקת רקע שקטה שנוצרת בדפדפן · אפשר לכבות בכל רגע (M)</p>
       <button id="sSkip" class="sskip" type="button">צפייה בלי סאונד</button>
     </div>
   </div>
@@ -54,6 +50,7 @@
 <noscript><p class="nojs">הקליפ דורש JavaScript. הנתונים המלאים: <a href="../#/podcasts">פודקאסטים וראיונות באתר</a>.</p></noscript>
 <script src="clip-data.js"></script>
 <script src="audio.js"></script>
-<script src="clip.js"></script>
+<script src="engine.js"></script>
+<script src="scenes.js"></script>
 </body>
 </html>
