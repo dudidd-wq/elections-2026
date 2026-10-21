@@ -131,75 +131,76 @@
   function pan(c, x, dst) { if (!c.createStereoPanner) return dst; var p = c.createStereoPanner(); p.pan.value = x; p.connect(dst); return p; }
   // envelope: linear attack to peak, exponential-style decay (setTarget), then a short linear tail to exact 0 before the source stops
   function env(g, t, a, peak, tc, stopAt) { g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(peak, t + a); g.gain.setTargetAtTime(0, t + a + .0007, tc); if (stopAt) { g.gain.setValueAtTime(peak * Math.exp(-(stopAt - .012 - t - a) / tc), stopAt - .012); g.gain.linearRampToValueAtTime(0, stopAt - .002); } }
+  function gz(c) { var g = c.createGain(); g.gain.value = 0; return g; } // envelope gains start silent (a source can start one frame before the first automation event)
   var V = {
     lvl: function (G, B, t, p) { G.out.gain.setTargetAtTime(MG * p.g, t, .08); },
     fade: function (G, B, t, p) { G.out.gain.setTargetAtTime(0, t, p.tc); },
     kick: function (G, B, t, p) { // tight kick: pitch-swept sine + short click; ducks the pumped bus
-      var c = G.ctx, o = osc(c, 'sine', 160, t, t + .42), g = c.createGain();
+      var c = G.ctx, o = osc(c, 'sine', 160, t, t + .42), g = gz(c);
       o.frequency.setValueAtTime(165, t); o.frequency.exponentialRampToValueAtTime(52, t + .085);
       env(g, t, .002, .68 * p.v, .08, t + .42); o.connect(g); g.connect(B.s);
-      var n = shortSrc(G, t, 0, .03), hp = c.createBiquadFilter(), cg = c.createGain(); hp.type = 'highpass'; hp.frequency.value = 2500;
+      var n = shortSrc(G, t, 0, .03), hp = c.createBiquadFilter(), cg = gz(c); hp.type = 'highpass'; hp.frequency.value = 2500;
       env(cg, t, .001, .12 * p.v, .004, t + .03); n.connect(hp); hp.connect(cg); cg.connect(B.s);
       B.p.gain.setTargetAtTime(.38, t, .004); B.p.gain.setTargetAtTime(1, t + .05, .075);
     },
     clap: function (G, B, t, p) { // clap (3 micro-bursts + tail) layered with a snare body
-      var c = G.ctx, bp = c.createBiquadFilter(), hp = c.createBiquadFilter(), g = c.createGain(), n = shortSrc(G, t, 1, .4);
+      var c = G.ctx, bp = c.createBiquadFilter(), hp = c.createBiquadFilter(), g = gz(c), n = shortSrc(G, t, 1, .4);
       bp.type = 'bandpass'; bp.frequency.value = 1500; bp.Q.value = .8; hp.type = 'highpass'; hp.frequency.value = 700;
       var a = .44 * p.v; g.gain.setValueAtTime(0, t);
       [0, .011, .022].forEach(function (d, i) { g.gain.linearRampToValueAtTime(a * (i === 2 ? 1 : .8), t + d + .001); g.gain.setTargetAtTime(a * .15, t + d + .0017, .004); });
       g.gain.linearRampToValueAtTime(a * .55, t + .031); g.gain.setTargetAtTime(0, t + .0317, .055);
       g.gain.setValueAtTime(a * .55 * Math.exp(-(.36 - .0317) / .055), t + .36); g.gain.linearRampToValueAtTime(0, t + .385);
       n.connect(hp); hp.connect(bp); bp.connect(g); g.connect(B.s); g.connect(B.rv);
-      var o = osc(c, 'triangle', 210, t, t + .2), og = c.createGain(); o.frequency.setValueAtTime(220, t); o.frequency.exponentialRampToValueAtTime(170, t + .06);
+      var o = osc(c, 'triangle', 210, t, t + .2), og = gz(c); o.frequency.setValueAtTime(220, t); o.frequency.exponentialRampToValueAtTime(170, t + .06);
       env(og, t, .002, .16 * p.v, .035, t + .2); o.connect(og); og.connect(B.s);
-      var sn = shortSrc(G, t, 2, .25), sh = c.createBiquadFilter(), sg = c.createGain(); sh.type = 'highpass'; sh.frequency.value = 5000;
+      var sn = shortSrc(G, t, 2, .25), sh = c.createBiquadFilter(), sg = gz(c); sh.type = 'highpass'; sh.frequency.value = 5000;
       env(sg, t, .001, .07 * p.v, .05, t + .25); sn.connect(sh); sh.connect(sg); sg.connect(B.s);
     },
     snare: function (G, B, t, p) { // fill snare
-      var c = G.ctx, n = shortSrc(G, t, 3, .2), bp = c.createBiquadFilter(), g = c.createGain(); bp.type = 'bandpass'; bp.frequency.value = 2400; bp.Q.value = .6;
+      var c = G.ctx, n = shortSrc(G, t, 3, .2), bp = c.createBiquadFilter(), g = gz(c); bp.type = 'bandpass'; bp.frequency.value = 2400; bp.Q.value = .6;
       env(g, t, .001, .22 * p.v, .045, t + .2); n.connect(bp); bp.connect(g); g.connect(B.s); g.connect(B.rv);
-      var o = osc(c, 'triangle', 190, t, t + .15), og = c.createGain(); env(og, t, .002, .12 * p.v, .03, t + .15); o.connect(og); og.connect(B.s);
+      var o = osc(c, 'triangle', 190, t, t + .15), og = gz(c); env(og, t, .002, .12 * p.v, .03, t + .15); o.connect(og); og.connect(B.s);
     },
     hat: function (G, B, t, p) { // closed hi-hat
-      var c = G.ctx, n = shortSrc(G, t, 4 + Math.round(t * 8) % 2, .09), hp = c.createBiquadFilter(), g = c.createGain(); hp.type = 'highpass'; hp.frequency.value = 7800;
+      var c = G.ctx, n = shortSrc(G, t, 4 + Math.round(t * 8) % 2, .09), hp = c.createBiquadFilter(), g = gz(c); hp.type = 'highpass'; hp.frequency.value = 7800;
       env(g, t, .001, .13 * p.v, .018, t + .09); n.connect(hp); hp.connect(g); g.connect(pan(c, p.pan || 0, B.s));
     },
     ohat: function (G, B, t, p) { // open hi-hat on the offbeat
-      var c = G.ctx, n = shortSrc(G, t, 5, .32), hp = c.createBiquadFilter(), g = c.createGain(); hp.type = 'highpass'; hp.frequency.value = 7200;
+      var c = G.ctx, n = shortSrc(G, t, 5, .32), hp = c.createBiquadFilter(), g = gz(c); hp.type = 'highpass'; hp.frequency.value = 7200;
       env(g, t, .002, .1 * p.v, .08, t + .32); n.connect(hp); hp.connect(g); g.connect(pan(c, p.pan || 0, B.s)); g.connect(B.rv);
     },
     tamb: function (G, B, t, p) { // tambourine on 2 & 4
-      var c = G.ctx, n = shortSrc(G, t, 3, .22), bp = c.createBiquadFilter(), g = c.createGain(); bp.type = 'bandpass'; bp.frequency.value = 9500; bp.Q.value = 1.2;
+      var c = G.ctx, n = shortSrc(G, t, 3, .22), bp = c.createBiquadFilter(), g = gz(c); bp.type = 'bandpass'; bp.frequency.value = 9500; bp.Q.value = 1.2;
       g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.13 * p.v, t + .002); g.gain.setTargetAtTime(.03 * p.v, t + .0027, .01); g.gain.linearRampToValueAtTime(.05 * p.v, t + .025); g.gain.setTargetAtTime(0, t + .0257, .04);
       g.gain.setValueAtTime(.05 * p.v * Math.exp(-(.2 - .0257) / .04), t + .2); g.gain.linearRampToValueAtTime(0, t + .215);
       n.connect(bp); bp.connect(g); g.connect(pan(c, -.3, B.s));
     },
     crash: function (G, B, t, p) { // soft bright crash
-      var c = G.ctx, n = noiseSrc(G, t, 2.2), hp = c.createBiquadFilter(), lp = c.createBiquadFilter(), g = c.createGain(); hp.type = 'highpass'; hp.frequency.value = 4800; lp.type = 'lowpass'; lp.frequency.value = 13000;
+      var c = G.ctx, n = noiseSrc(G, t, 2.2), hp = c.createBiquadFilter(), lp = c.createBiquadFilter(), g = gz(c); hp.type = 'highpass'; hp.frequency.value = 4800; lp.type = 'lowpass'; lp.frequency.value = 13000;
       env(g, t, .004, .075 * p.v, .45, t + 2.2); n.connect(hp); hp.connect(lp); lp.connect(g); g.connect(B.s); g.connect(B.rv);
     },
     riser: function (G, B, t, p) { // short noise riser into a section change
-      var c = G.ctx, n = noiseSrc(G, t, p.d), bp = c.createBiquadFilter(), g = c.createGain(); bp.type = 'bandpass'; bp.Q.value = 1.1;
+      var c = G.ctx, n = noiseSrc(G, t, p.d), bp = c.createBiquadFilter(), g = gz(c); bp.type = 'bandpass'; bp.Q.value = 1.1;
       bp.frequency.setValueAtTime(900, t); bp.frequency.exponentialRampToValueAtTime(8000, t + p.d);
       g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.045 * p.v, t + p.d * .97); g.gain.linearRampToValueAtTime(0, t + p.d + .02);
       n.connect(bp); bp.connect(g); g.connect(B.s); g.connect(B.rv);
     },
     swish: function (G, B, t, p) { // very short swish into a cut
-      var c = G.ctx, n = noiseSrc(G, t, p.d), bp = c.createBiquadFilter(), g = c.createGain(); bp.type = 'bandpass'; bp.Q.value = 1.4;
+      var c = G.ctx, n = noiseSrc(G, t, p.d), bp = c.createBiquadFilter(), g = gz(c); bp.type = 'bandpass'; bp.Q.value = 1.4;
       bp.frequency.setValueAtTime(2500, t); bp.frequency.exponentialRampToValueAtTime(9000, t + p.d);
       g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.028 * p.v, t + p.d * .9); g.gain.linearRampToValueAtTime(0, t + p.d + .015);
       n.connect(bp); bp.connect(g); g.connect(pan(c, .15, B.s));
     },
     bass: function (G, B, t, p) { // warm bass: sine + filtered saw, pumped
-      var c = G.ctx, f = hz(p.n), lp = c.createBiquadFilter(), g = c.createGain(), d = Math.max(.12, p.d), stop = t + d + .2;
+      var c = G.ctx, f = hz(p.n), lp = c.createBiquadFilter(), g = gz(c), d = Math.max(.12, p.d), stop = t + d + .2;
       lp.type = 'lowpass'; lp.Q.value = 2; lp.frequency.setValueAtTime(1300, t); lp.frequency.setTargetAtTime(520, t, .06);
       var a = .13 * p.v; g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(a, t + .006); g.gain.setTargetAtTime(a * .75, t + .0067, .12);
       g.gain.setTargetAtTime(0, t + d + .0007, .022);
-      osc(c, 'sine', f, t, stop).connect(g); var sw = osc(c, 'sawtooth', f, t, stop, 4), sg = c.createGain(); sg.gain.value = .5; sw.connect(sg); sg.connect(lp); lp.connect(g);
+      osc(c, 'sine', f, t, stop).connect(g); var sw = osc(c, 'sawtooth', f, t, stop, 4), sg = gz(c); sg.gain.value = .5; sw.connect(sg); sg.connect(lp); lp.connect(g);
       g.connect(B.p);
     },
     pluck: function (G, B, t, p) { // plucky synth chord voice: 2 detuned saws, fast filter envelope, pumped
-      var c = G.ctx, f = hz(p.n), lp = c.createBiquadFilter(), g = c.createGain(), d = p.d || .22, stop = t + d + .42;
+      var c = G.ctx, f = hz(p.n), lp = c.createBiquadFilter(), g = gz(c), d = p.d || .22, stop = t + d + .42;
       lp.type = 'lowpass'; lp.Q.value = 1.4; lp.frequency.setValueAtTime(Math.min(9000, f * 14), t); lp.frequency.setTargetAtTime(Math.min(2400, f * 3.2), t, .07);
       var a = .042 * p.v; g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(a, t + .003); g.gain.setTargetAtTime(a * .25, t + .0037, d * .5);
       g.gain.setTargetAtTime(0, t + d + .0007, .05);
@@ -207,19 +208,19 @@
       lp.connect(g); g.connect(B.p); g.connect(B.dl); g.connect(B.rv);
     },
     lead: function (G, B, t, p) { // bright hook lead: triangle + soft square + bell partial
-      var c = G.ctx, f = hz(p.n), lp = c.createBiquadFilter(), g = c.createGain(), d = Math.max(.15, p.d), stop = t + d + .5;
+      var c = G.ctx, f = hz(p.n), lp = c.createBiquadFilter(), g = gz(c), d = Math.max(.15, p.d), stop = t + d + .5;
       lp.type = 'lowpass'; lp.frequency.value = 7500;
       var a = .075 * p.v; g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(a, t + .006); g.gain.setTargetAtTime(a * .6, t + .0067, .12);
       g.gain.setTargetAtTime(0, t + d + .0007, .06);
       osc(c, 'triangle', f, t, stop).connect(lp);
-      var sq = osc(c, 'square', f, t, stop, 5), sqg = c.createGain(); sqg.gain.value = .12; sq.connect(sqg); sqg.connect(lp);
-      var be = osc(c, 'sine', f * 4, t, stop), beg = c.createGain(); env(beg, t, .002, .18, .06, stop - .01); be.connect(beg); beg.connect(lp);
+      var sq = osc(c, 'square', f, t, stop, 5), sqg = gz(c); sqg.gain.value = .12; sq.connect(sqg); sqg.connect(lp);
+      var be = osc(c, 'sine', f * 4, t, stop), beg = gz(c); env(beg, t, .002, .18, .06, stop - .01); be.connect(beg); beg.connect(lp);
       lp.connect(g); g.connect(pan(c, -.1, B.s)); g.connect(B.dl); g.connect(B.rv);
     },
     blip: function (G, B, t, p) { // bright blip on number reveals
-      var c = G.ctx, f = hz(p.n), g = c.createGain(), stop = t + .5;
+      var c = G.ctx, f = hz(p.n), g = gz(c), stop = t + .5;
       env(g, t, .002, .05 * p.v, .07, stop);
-      [[1, 1], [2, .3], [3, .12]].forEach(function (x) { var o = osc(c, x[0] === 1 ? 'triangle' : 'sine', f * x[0], t, stop), og = c.createGain(); og.gain.value = x[1]; o.connect(og); og.connect(g); });
+      [[1, 1], [2, .3], [3, .12]].forEach(function (x) { var o = osc(c, x[0] === 1 ? 'triangle' : 'sine', f * x[0], t, stop), og = gz(c); og.gain.value = x[1]; o.connect(og); og.connect(g); });
       g.connect(B.s); g.connect(B.dl);
     }
   };
