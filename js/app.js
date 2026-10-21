@@ -102,6 +102,7 @@
     compare: '<path d="M4 5h6v14H4zM14 5h6v14h-6z" fill="none" stroke="currentColor" stroke-width="1.8"/>',
     analysis: '<path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/>',
     polls: '<path d="M5 20V11M10 20V6M15 20v-7M20 20V9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+    podcasts: '<rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
     about: '<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v6M12 7.5v.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
   };
   function icon(k) { return '<span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24">' + ICON[k] + '</svg></span>'; }
@@ -219,6 +220,7 @@
       card('#/compare', 'השוואה', 'בחירה של 2–3 רשימות והשוואה ביניהן זו לצד זו.', 'compare') +
       card('#/analysis', 'ניתוח רוחבי', 'קווי המחלוקת החדים, המכנה המשותף והחפיפות בין הגושים.', 'analysis') +
       card('#/polls', 'סקרים', 'ממוצע, טווח, סכומי גושים וקו 61, מגמה וטבלת כל הסקרים.', 'polls') +
+      card('#/podcasts', 'פודקאסטים וראיונות', 'מה אמרו ראשי הרשימות בפודקאסטים ובראיונות ארוכים בחודש שלפני הבחירות, עם קישורים וציטוטים מאומתים.', 'podcasts') +
       '</div>' +
       '<h2>10 הסוגיות</h2><nav class="issue-strip" aria-label="מעבר לסוגיה">' + P.issues.map(function (i) { return '<a href="#/issue/' + i.id + '"><span class="n">' + i.n + '</span>' + esc(i.short) + '</a>'; }).join('') + '</nav>' +
       '<h2>איך לקרוא את האתר</h2><div class="principles">' +
@@ -532,15 +534,69 @@
       '<h2>פערים ואי-ודאויות</h2><ul>' + P.gaps.map(function (g) { return '<li>' + esc(g) + '</li>'; }).join('') + '</ul>' +
       '<h2>מקורות כלליים</h2><ul class="srcs">' + P.generalSources.map(function (s) { return '<li>' + (s.url ? srcLink(s.url, s.label) : esc(s.label)) + '</li>'; }).join('') + '</ul>' +
       '<p>המקורות של כל רשימה מופיעים בעמוד הפרופיל שלה, ומקור לכל עמדה מופיע לצדה.</p>' +
-      '<h2>איך מתעדכנים הנתונים</h2><p>כל התוכן נמצא בקבצי נתונים: <a href="data/platforms.json">platforms.json</a> (רשימות, סוגיות ועמדות), <a href="data/analysis.json">analysis.json</a> (ניתוח רוחבי) ו-<a href="data/polls.json">polls.json</a> (סקרים). הקבצים נבנים מ-source/platforms.md ומ-source/additions.json. עדכון נעשה בקבצים האלה בלבד. סקר חדש נוסף בעזרת הסקריפט tools/update_polls.py, שמחשב מחדש את הממוצע, את סכומי הגושים ואת המגמה. התיעוד המלא נמצא ב-<a href="' + REPO + '#readme" target="_blank" rel="noopener noreferrer">מאגר הקוד<span class="sr"> (נפתח בחלון חדש)</span></a>.</p>' +
+      '<h2>איך מתעדכנים הנתונים</h2><p>כל התוכן נמצא בקבצי נתונים: <a href="data/platforms.json">platforms.json</a> (רשימות, סוגיות ועמדות), <a href="data/analysis.json">analysis.json</a> (ניתוח רוחבי), <a href="data/polls.json">polls.json</a> (סקרים) ו-<a href="data/podcasts.json">podcasts.json</a> (פודקאסטים וראיונות; נבנה בנפרד ממסמך המחקר על הופעות ראשי הרשימות ואינו מושפע מעדכון הסקרים). הקבצים נבנים מ-source/platforms.md ומ-source/additions.json. עדכון נעשה בקבצים האלה בלבד. סקר חדש נוסף בעזרת הסקריפט tools/update_polls.py, שמחשב מחדש את הממוצע, את סכומי הגושים ואת המגמה. התיעוד המלא נמצא ב-<a href="' + REPO + '#readme" target="_blank" rel="noopener noreferrer">מאגר הקוד<span class="sr"> (נפתח בחלון חדש)</span></a>.</p>' +
       '<h2>חותמות זמן</h2><ul><li>העמדות נכונות ל-' + fmtDate(P.meta.documentAsOf) + '.</li><li>קובצי הנתונים של המצעים נוצרו ב-' + fmtStamp(P.meta.generatedAt) + ' (מזהה גרסת המקור: <span class="ltr">' + esc(P.meta.sourceSha1) + '</span>).</li><li>נתוני הסקרים עודכנו ב-' + fmtStamp(D.meta.updatedAt) + '; הסקר האחרון מ-' + fmtDate(D.meta.latestPollDate) + '.</li></ul>' +
       '<h2>עיצוב ונגישות</h2><p>גופן Heebo (רישיון SIL OFL, מאוחסן באתר), מצב בהיר וכהה, ניגודיות AA, יעדי מגע של 48 פיקסלים לפחות, ניווט מלא במקלדת, וטבלה לכל גרף.</p>';
+  }
+
+  // ---------- podcasts & long interviews (data/podcasts.json, loaded on demand)
+  var PD = null, PDerr = '';
+  function loadPodcasts() {
+    return getJSON('data/podcasts.json').then(function (d) { PD = d; }).catch(function (e) { PDerr = e.message; });
+  }
+  function podLang(t) { return /[\u0600-\u06FF]/.test(t) ? ' lang="ar" dir="rtl"' : (/[A-Za-z]/.test(t) && !/[\u0590-\u05FF]/.test(t) ? ' lang="en" dir="ltr"' : ''); }
+  function podItem(it) {
+    var meta = [fmtDate(it.date) + (it.dateNote ? ' (' + it.dateNote + ')' : ''), it.host, it.outlet, it.type, 'אורך: ' + it.length, 'שפה: ' + it.lang];
+    var tags = '<span class="ptag aud">' + esc(it.audience) + '</span>' + it.topics.map(function (t) { return '<span class="ptag iss"><span class="sr">סוגיה: </span>' + esc(ISS[t].short) + '</span>'; }).join('');
+    var pts = '<div class="pod-pts"><p class="pod-lab">עיקרי הדברים <span class="kind para">פרפרזה</span></p><ul>' + it.points.map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ul></div>';
+    var qs = it.quotes.map(function (q) {
+      return '<figure class="pq"><blockquote' + podLang(q.text) + '>„' + esc(q.text) + '”</blockquote><figcaption><span class="kind quote">ציטוט מאומת</span> ' + esc(q.verified_by) + (q.ts ? ' · <span class="ltr">' + esc(q.ts) + '</span>' : '') + ' · ' + srcLink(q.source_url, 'מקור הציטוט') + '</figcaption></figure>';
+    }).join('');
+    var src = '<div class="src">' + srcLink(it.url, 'להאזנה או לצפייה') + it.also.map(function (u, k) { return srcLink(u, 'מקור נוסף' + (it.also.length > 1 ? ' ' + (k + 1) : '')); }).join('') + '</div>';
+    return '<article class="pod" id="pi-' + esc(it.id) + '"><h3>' + esc(it.show) + '</h3><p class="pod-meta">' + meta.map(esc).join(' · ') + '</p><p class="ptags">' + tags + '</p>' + pts + qs + (it.note ? '<p class="meta">הערה: ' + esc(it.note) + '</p>' : '') + src + '</article>';
+  }
+  function pageNotFoundPod() { return '<div class="empty" role="alert"><b>לא ניתן לטעון את נתוני הפודקאסטים</b><p>' + esc(PDerr) + '. נסו לרענן את הדף.</p></div>'; }
+  function pagePodcasts(arg, q) {
+    if (!PD) return PDerr ? pageNotFoundPod() : '<div class="skel" aria-hidden="true"><i></i><i></i><i></i></div><p class="sr" role="status">טוען…</p>';
+    var fi = q.issue && ISS[q.issue] ? q.issue : '';
+    var lists = PD.lists.filter(function (l) { return LIST[l.id]; }).sort(function (a, b) { return COLL.compare(LIST[a.id].tableName, LIST[b.id].tableName); });
+    var shown = 0;
+    var secs = lists.map(function (l) {
+      var its = l.items.filter(function (it) { return !fi || it.topics.indexOf(fi) >= 0; }).sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
+      shown += its.length;
+      var cmp = l.compare.filter(function (c) { return !fi || c.issue === fi; });
+      var n = l.items.length;
+      return '<section class="pod-list" id="pl-' + l.id + '" aria-labelledby="plh-' + l.id + '"><h2 id="plh-' + l.id + '"><a href="#/list/' + l.id + '">' + esc(LIST[l.id].tableName) + '</a> <span class="pod-leader">' + esc(l.leader) + '</span></h2>' +
+        '<p class="meta">' + (n === 1 ? 'הופעה אחת' : n + ' הופעות') + ' בחלון הסקירה' + (fi ? ' · מוצגות ' + its.length + ' בסוגיה הנבחרת' : '') + '</p>' +
+        (n === 0 ? '<p class="note">לא נמצאו הופעות ארוכות של ראש הרשימה בחלון הסקירה.</p>' : its.length ? '<div class="pod-grid">' + its.map(podItem).join('') + '</div>' : '<p class="meta">אין הופעות שעסקו בסוגיה הנבחרת.</p>') +
+        (cmp.length ? '<div class="pod-cmp"><h3>השוואה לעמדות באתר</h3><ul>' + cmp.map(function (c) {
+          return '<li><span class="kind cmpk">' + esc(c.kind) + '</span> <a href="#/issue/' + c.issue + '">' + esc(ISS[c.issue].short) + '</a>: ' + esc(c.text) + ' <span class="meta">(' + c.items.map(function (iid) { var it = l.items.filter(function (x) { return x.id === iid; })[0]; return it ? esc(it.show) + ', ' + fmtShort(it.date) : ''; }).join('; ') + ')</span></li>';
+        }).join('') + '</ul></div>' : '') +
+        ((l.context.length || l.unverified.length) && !fi ? '<details class="pod-more"><summary>הקשר נוסף' + ' (' + (l.context.length + l.unverified.length) + ')</summary>' +
+          (l.context.length ? '<p class="pod-lab">מחוץ לחלון הסקירה – לא נספר</p><ul>' + l.context.map(function (c) { return '<li>' + esc(c.show) + ' (' + esc(c.host) + ', ' + fmtDate(c.date) + '): ' + esc(c.point) + ' ' + srcLink(c.url, 'מקור') + '</li>'; }).join('') + '</ul>' : '') +
+          (l.unverified.length ? '<p class="pod-lab">דווח אך לא אומת – לא נספר</p><ul>' + l.unverified.map(function (u) { return '<li>' + esc(u) + '</li>'; }).join('') + '</ul>' : '') + '</details>' : '') +
+        '<p class="pod-up"><a href="#/podcasts' + (fi ? '?issue=' + fi : '') + '">↑ לראש העמוד ולרשימת הרשימות</a></p></section>';
+    }).join('');
+    var w = PD.window;
+    return '<header class="page-head"><p class="eyebrow">פודקאסטים וראיונות</p><h1>ראשי הרשימות בפודקאסטים ובראיונות ארוכים</h1>' +
+      '<p class="lead">מה אמרו ראשי ' + lists.length + ' הרשימות בפודקאסטים ובראיונות אודיו ווידאו ארוכים בחודש שלפני הבחירות. לכל הופעה: פרטים, קישור, עיקרי הדברים בפרפרזה, וציטוטים רק אם נבדקו מול תמלול או מול דף המקור.</p>' +
+      '<p class="meta"><b>עדכון אחרון: ' + fmtDate(PD.updated) + '</b> · חלון הסקירה: ' + fmtDate(w[0]) + '–' + fmtDate(w[1]) + ' · הנתונים: <a href="data/podcasts.json">podcasts.json</a></p></header>' +
+      '<div class="kpis"><div class="kpi"><b>' + PD.total + '</b><span>הופעות שאותרו</span></div><div class="kpi"><b>' + lists.length + '</b><span>ראשי רשימות</span></div><div class="kpi"><b class="stamp">' + fmtShort(w[0]) + '–' + fmtShort(w[1]) + '</b><span>חלון הסקירה</span></div><div class="kpi"><b class="stamp">' + fmtDate(PD.updated) + '</b><span>עדכון אחרון</span></div></div>' +
+      '<div class="legend pod-legend" role="note" aria-label="מקרא"><span><span class="kind quote">ציטוט מאומת</span> נוסח שנבדק מול תמלול או מול דף המקור; שיטת האימות מצוינת לצדו</span><span><span class="kind para">פרפרזה</span> סיכום שלנו, לא ציטוט</span></div>' +
+      '<details class="note method"><summary><b>שיטה וניטרליות</b></summary>' + PD.method.map(function (m) { return '<p>' + esc(m) + '</p>'; }).join('') + '</details>' +
+      '<h2>ממצאים רוחביים</h2><ul class="pod-find">' + PD.findings.map(function (f) { var k = f.indexOf(':'); return '<li>' + (k > 0 && k < 30 ? '<b>' + esc(f.slice(0, k)) + ':</b>' + esc(f.slice(k + 1)) : esc(f)) + '</li>'; }).join('') + '</ul>' +
+      '<nav class="pod-index" aria-label="מעבר לרשימה"><p class="pod-lab">מעבר לרשימה</p><ul>' + lists.map(function (l) { return '<li><a href="#/podcasts/' + l.id + (fi ? '?issue=' + fi : '') + '"><span>' + esc(LIST[l.id].tableName) + '</span><small>' + esc(l.leader) + ' · ' + l.items.length + '</small></a></li>'; }).join('') + '</ul></nav>' +
+      '<div class="toolbar panel tight"><div class="tb-row">' +
+      '<label>סינון לפי סוגיה: <select id="podissue"><option value="">כל הסוגיות</option>' + P.issues.map(function (i) { return '<option value="' + i.id + '"' + (i.id === fi ? ' selected' : '') + '>' + i.n + '. ' + esc(i.short) + '</option>'; }).join('') + '</select></label></div>' +
+      '<p class="order-note">' + esc('סדר הרשימות: לפי סדר האלף-בית של שם הרשימה. הסדר אינו מבטא דירוג או העדפה.') + (fi ? ' מוצגות ' + shown + ' הופעות בסוגיה "' + esc(ISS[fi].short) + '".' : '') + '</p></div>' +
+      secs +
+      '<h2 id="pod-gaps">פערים ומגבלות</h2><ul>' + (PD.gaps.noAppearances.length ? '<li>ראשי רשימות שלא נמצאה להם הופעה בחלון: ' + PD.gaps.noAppearances.map(esc).join(', ') + '.</li>' : '') + PD.gaps.notes.map(function (g) { return '<li>' + esc(g) + '</li>'; }).join('') + '</ul>';
   }
 
   function foot() {
     document.getElementById('foot').innerHTML =
       '<p><b>אתר מידע ניטרלי.</b> אין בו המלצה להצבעה. העמדות נכונות ל-' + fmtDate(P.meta.documentAsOf) + '; הסקרים עודכנו ב-' + fmtStamp(D.meta.updatedAt) + ' (סקר אחרון: ' + fmtDate(D.meta.latestPollDate) + ', ' + D.polls.length + ' סקרים).</p>' +
-      '<p><a href="#/about">שיטה ומקורות</a> · <a href="data/platforms.json">platforms.json</a> · <a href="data/analysis.json">analysis.json</a> · <a href="data/polls.json">polls.json</a> · <a href="' + REPO + '" target="_blank" rel="noopener noreferrer">קוד המקור<span class="sr"> (נפתח בחלון חדש)</span></a></p>';
+      '<p><a href="#/about">שיטה ומקורות</a> · <a href="data/platforms.json">platforms.json</a> · <a href="data/analysis.json">analysis.json</a> · <a href="data/polls.json">polls.json</a> · <a href="data/podcasts.json">podcasts.json</a> · <a href="' + REPO + '" target="_blank" rel="noopener noreferrer">קוד המקור<span class="sr"> (נפתח בחלון חדש)</span></a></p>';
   }
 
   // ---------- router
@@ -550,7 +606,7 @@
     var parts = h.split('/').filter(Boolean);
     return { page: parts[0] || 'home', arg: parts[1] ? decodeURIComponent(parts[1]) : '', q: qs };
   }
-  var TITLES = { home: 'ראשי', matrix: 'מטריצה', issue: 'לפי סוגיה', list: 'לפי רשימה', compare: 'השוואה', analysis: 'ניתוח רוחבי', polls: 'סקרים', about: 'שיטה ומקורות' };
+  var TITLES = { home: 'ראשי', matrix: 'מטריצה', issue: 'לפי סוגיה', list: 'לפי רשימה', compare: 'השוואה', analysis: 'ניתוח רוחבי', polls: 'סקרים', podcasts: 'פודקאסטים וראיונות', about: 'שיטה ומקורות' };
   var lastPage = null;
   function render(keepScroll) {
     var r = parseHash(), html, sub = '';
@@ -563,6 +619,7 @@
       case 'analysis': html = pageAnalysis(r.arg, r.q); break;
       case 'polls': html = pagePolls(r.q); break;
       case 'about': html = pageAbout(); break;
+      case 'podcasts': html = pagePodcasts(r.arg, r.q); if (!PD && !PDerr) loadPodcasts().then(function () { if (parseHash().page === 'podcasts') { render(true); podScroll(); } }); break;
       default: r.page = 'home'; html = pageHome();
     }
     $main.innerHTML = html;
@@ -575,7 +632,9 @@
     var key = r.page + '/' + r.arg;
     if (!keepScroll && lastPage !== null && key !== lastPage) { window.scrollTo(0, 0); $main.focus({ preventScroll: true }); }
     lastPage = key;
+    if (r.page === 'podcasts' && PD) podScroll();
   }
+  function podScroll() { var r = parseHash(); if (r.page !== 'podcasts' || !r.arg) return; var el = document.getElementById('pl-' + r.arg); if (el) el.scrollIntoView({ block: 'start' }); }
   function setHash(h) { if (location.hash === h) render(true); else { history.replaceState(null, '', h); render(true); } }
   function curQ() { return parseHash(); }
   function withIssues(r, list) {
@@ -666,6 +725,7 @@
     var t = e.target;
     if (t.id === 'goissue') location.hash = '#/issue/' + t.value;
     else if (t.id === 'golist') location.hash = '#/list/' + t.value;
+    else if (t.id === 'podissue') { var pr = parseHash(); setHash('#/podcasts' + (pr.arg ? '/' + pr.arg : '') + (t.value ? '?issue=' + t.value : '')); var pi = document.getElementById('podissue'); if (pi) pi.focus(); }
     else if (t.id === 'hl' || t.id === 'hlrow') { state.hl = t.value; render(true); var el = document.getElementById(t.id); if (el) el.focus(); }
     else if (t.id === 'outlet') { setHash('#/polls' + (t.value ? '?outlet=' + encodeURIComponent(t.value) : '')); var o = document.getElementById('outlet'); if (o) o.focus(); }
   });

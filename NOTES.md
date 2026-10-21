@@ -13,8 +13,15 @@ Source: /workspace/elections-2026/platforms.md (canonical). Repo: dudidd-wq/elec
 - [x] 21.10 00:13 perf fixes (collator cache, no forced layout, content-visibility) v7; 00:21 mobile nav 4x2 grid v8 (8b59d75). Live tests: smoke/axe 0, content 120/120, raam 10/10, extra OK (offline 130), LH ≥95 (polls mobile noisy under box load).
 - [x] AUDIT.md updated (Ra'am/Joint, design critique 3 rounds → 9/9/9/9).
 - [x] 21.10 07:15 Dudi: "רע"ם ככל המפלגות" → removed ALL Ra'am-specific notes and the ‡ marker/legend (home banner, profile note, cell/dialog badges, analysis note/tags/cards, rank note, consensus meta note, codes-matrix note, about "מה נוסף באתר" section, Ra'am gap entry, asOf "תוספות האתר", polls addedBySite). Ra'am analysis text now merged INTO the regular items (consensus texts replaced, camps/crossAxis appended, overlaps appended, headings 10–12 מתוך 13, intro 13 lists). '*' kept. SW v9-2026-10-21e. Check: /workspace/elections-2026-audit/noraamnotes.mjs.
+- [x] 21.10 08:45 new section "פודקאסטים וראיונות" (#/podcasts, #/podcasts/<list>?issue=<id>): 36 appearances of the 13 list heads, 21.9–21.10.2026, 34 verified quotes. SW v10-2026-10-21a. Audits: smoke/axe 0 errors mobile+desktop, podsmoke.mjs (alphabetical, links, labels, no party colors, Ra'am same structure, overflow 0), content/raam/noraamnotes OK. Critic review (design/neutrality/accuracy/usability) 9/9.5/9/9 after fixes (bidi RLM after Latin runs, neutral audience labels, list index chips + back links, method box affordance, quotes for Bennett/Hendel).
 
-## Findings
+## Podcasts section (data/podcasts.json)
+- Built ONLY by /workspace/podcasts-2026/build.py from /workspace/podcasts-2026/items.py (+ analysis.py). Validate: python3 tools/check_podcasts.py -> "ok: lists 13 items N".
+- NOT touched by the twice-daily routine (build_data.py / update_polls.py never read or write it). Routine: leave it alone.
+- To update: edit items.py (quotes need verified_by + a source_url / local transcript; run python3 check.py), python3 build.py, report.py, pdf.py, then check_podcasts.py + podsmoke.mjs, bump sw.js VERSION, commit, push.
+- Rules: lists alphabetical by name (Intl.Collator he), no ranking, no party colors, every item linked, paraphrase labeled "פרפרזה", quotes labeled with method, Ra'am identical structure, no list-specific notes. Latin runs in Hebrew text get a U+200F after them (build.py _bidi).
+- Audit: node /workspace/elections-2026-audit/podsmoke.mjs [BASE] -> errors [] axe {} ; screenshots shots-podcasts/.
+
 - md poll baseline (7 outlets 13–19.10) matches IIE 77/77 + added lists 14/14; Wikipedia matches 5 of 7 (IH 15.10 & i24 13.10 not on WP).
 - md omitted Maariv 15.10, Ch16 13.10, Walla 19.10 from the 7-outlet window. Site uses all outlets, 7-day window.
 - New since md: Ch14 20.10, i24 20.10, Ch16 20.10 (and Walla 19.10, i24 18.10, Ch14 18.10).
