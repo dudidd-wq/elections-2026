@@ -45,6 +45,9 @@
       if ((m === 'g2arp' || m === 'drop' || m === 'lists' || m === 'outro' || m === 'build') ) add(t, 'arp', { n: ch.t[(q * 3 + (q >> 2)) % 4] + 12, v: m === 'drop' ? 1 : .7 });
       // lead on the drop: 8ths melody
       if (m === 'drop' && sixteenth % 2 === 0) add(t, 'lead', { n: ch.t[LEAD[(q / 2) % 8]] + 12, d: SPB * .48 });
+      if ((m === 'lists' || m === 'outro') && sixteenth % 2 === 0 && bar % 4 >= 2) add(t, 'lead', { n: ch.t[LEAD[(q / 2) % 8]] + 12, d: SPB * .4, v: .55 });
+      // shaker 16ths for top-end drive in the full sections
+      if ((m === 'drop' || m === 'lists' || m === 'outro' || m === 'g2arp') && sixteenth % 2 === 1) add(t, 'shk', { v: m === 'drop' ? 1 : .8 });
       // master level per bar: dynamics across the piece (quiet intro groove -> rising build -> loud drop -> lists -> soft breakdown -> outro)
       if (q % 16 === 0) add(t, 'lvl', { g: m === 'build' ? .8 + .3 * rel / len : (LVL[m] || 1) });
       // crash on the first downbeat of drop / lists / outro sections
@@ -59,11 +62,12 @@
     // transitions: whoosh into every cut + impact on it (list cuts: identical lighter version for every list)
     cfg.cuts.forEach(function (c) {
       var t = c.b * SPB;
-      if (c.kind === 'list') { add(t - .42, 'whoosh', { d: .42, v: .55 }); add(t, 'impact', { v: .45 }); }
+      if (c.kind === 'list') { add(t - .42, 'whoosh', { d: .42, v: .55 }); add(t, 'impact', { v: .45 }); add(t, 'crash', { v: .7 }); }
       else { add(t - .5, 'whoosh', { d: .5, v: .9 }); add(t, 'impact', { v: c.kind === 'drop' ? 1.25 : .9 }); }
     });
     cfg.hits.forEach(function (h) { add(h.t, h.kind, { v: h.v || 1, n: h.n }); });
     add(end * SPB - SPB * 2, 'impact', { v: 1.3, big: 1 });
+    add(end * SPB - .7, 'fade', { tc: .16 });   // master fade so the last sample lands on silence (no click at the end)
     ev.sort(function (a, b) { return a.t - b.t; });
     return ev;
   }
@@ -99,6 +103,11 @@
   function noiseSrc(G, t, dur) { var n = G.ctx.createBufferSource(); n.buffer = G.noise; n.loop = true; n.start(t, (t * 7.31) % 1.5); n.stop(t + dur + .05); return n; }
   var V = {
     lvl: function (G, B, t, p) { G.out.gain.setTargetAtTime(.78 * p.g, t, .12); },
+    fade: function (G, B, t, p) { G.out.gain.setTargetAtTime(0, t, p.tc); },
+    shk: function (G, B, t, p) {
+      var c = G.ctx, n = noiseSrc(G, t, .08), hp = c.createBiquadFilter(), g = c.createGain(); hp.type = 'highpass'; hp.frequency.value = 6500;
+      env(g, t, .004, .16 * p.v, .05); n.connect(hp); hp.connect(g); g.connect(B.drums);
+    },
     kick: function (G, B, t, p) {
       var c = G.ctx, o = c.createOscillator(), g = c.createGain(); o.type = 'sine';
       o.frequency.setValueAtTime(170, t); o.frequency.exponentialRampToValueAtTime(46, t + .12);
@@ -117,7 +126,7 @@
     },
     hat: function (G, B, t, p) {
       var c = G.ctx, n = noiseSrc(G, t, .25), hp = c.createBiquadFilter(), g = c.createGain(); hp.type = 'highpass'; hp.frequency.value = p.open ? 7000 : 9000;
-      env(g, t, .001, (p.open ? .3 : .22) * p.v, p.open ? .16 : .035); n.connect(hp); hp.connect(g); g.connect(B.drums);
+      env(g, t, .001, (p.open ? .36 : .28) * p.v, p.open ? .16 : .035); n.connect(hp); hp.connect(g); g.connect(B.drums);
     },
     bass: function (G, B, t, p) {
       var c = G.ctx, f = hz(p.n), lp = c.createBiquadFilter(), g = c.createGain(); lp.type = 'lowpass'; lp.Q.value = 5;
@@ -133,12 +142,12 @@
       lp.connect(g); g.connect(B.duckAt(t)); g.connect(B.rv);
     },
     arp: function (G, B, t, p) {
-      var c = G.ctx, o = c.createOscillator(), lp = c.createBiquadFilter(), g = c.createGain(); o.type = 'square'; o.frequency.value = hz(p.n); lp.type = 'lowpass'; lp.frequency.value = 3000; lp.Q.value = 3;
+      var c = G.ctx, o = c.createOscillator(), lp = c.createBiquadFilter(), g = c.createGain(); o.type = 'square'; o.frequency.value = hz(p.n); lp.type = 'lowpass'; lp.frequency.value = 4200; lp.Q.value = 3;
       env(g, t, .003, .075 * p.v, .11); o.connect(lp); lp.connect(g); g.connect(B.duckAt(t)); g.connect(B.dl); o.start(t); o.stop(t + .16);
     },
     lead: function (G, B, t, p) {
       var c = G.ctx, lp = c.createBiquadFilter(), g = c.createGain(); lp.type = 'lowpass'; lp.frequency.setValueAtTime(5200, t); lp.frequency.exponentialRampToValueAtTime(1600, t + p.d); lp.Q.value = 4;
-      g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(.1, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + p.d);
+      g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(.1 * (p.v || 1), t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + p.d);
       [-12, 12].forEach(function (d) { var o = c.createOscillator(); o.type = 'sawtooth'; o.frequency.value = hz(p.n); o.detune.value = d; o.connect(lp); o.start(t); o.stop(t + p.d + .02); });
       lp.connect(g); g.connect(B.duckAt(t)); g.connect(B.dl); g.connect(B.rv);
     },
@@ -227,6 +236,8 @@
       start: function (T) { // (re)start from timeline position T
         kill(); if (ctx.state === 'suspended') ctx.resume();
         B = bus(G); busT = T; anchorCtx = ctx.currentTime + .05; anchorT = T; idx = find(T - .02);
+        for (var j = Math.min(idx, events.length) - 1, g0 = 1; j >= 0; j--) if (events[j].k === 'lvl') { g0 = events[j].p.g; break; }
+        G.out.gain.cancelScheduledValues(ctx.currentTime); G.out.gain.setValueAtTime(.78 * g0, ctx.currentTime);
         // a whoosh/riser that started before T is skipped; the groove resumes on the next 16th
         running = true; clearInterval(timer); timer = setInterval(tick, 40); tick();
       },

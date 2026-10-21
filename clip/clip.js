@@ -8,7 +8,7 @@
   var REC = Q.get('rec') === '1';
   var CALM = Q.get('calm') === '1' || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
   var SPB = AU.SPB;                     // seconds per beat
-  var LIST_BEATS = 13;                  // equal screen time for every list (6.5 s)
+  var LIST_BEATS = 16;                  // equal screen time for every list (8 s = exactly 4 bars: every list gets the identical musical bed)
   var SITE = 'https://dudidd-wq.github.io/elections-2026/#/podcasts';
   var COLL = new Intl.Collator('he');
   var ENTRIES = D.entries.slice().sort(function (a, b) { return COLL.compare(a.name, b.name); });
@@ -53,11 +53,11 @@
   var SC = [];
   function scene(id, chap, beats, cls, html, x) { x = x || {}; SC.push({ id: id, chap: chap, beats: beats, dur: beats * SPB, cls: cls, html: html, x: x, tr: x.tr || 'zoom' }); }
 
-  scene('title', '', 20, 's-title',
+  scene('title', '', 16, 's-title',
     '<div class="rings" data-ring="1"><i></i><i></i><i></i>' + IC.mic + '</div>' +
     '<p class="eyebrow"' + A(1.5, 'flicker', 2) + '>בחירות לכנסת ה-26 · 27.10.2026</p>' +
     '<h1 class="glow"><span class="l1">' + chars('ראשי הרשימות', 4, 0.55, 'char') + '</span><span class="l2 gtxt">' + chars('בפודקאסטים ובראיונות ארוכים', 4.6, 0.9, 'char') + '</span></h1>' +
-    '<p class="lead"' + A(7, 'blur') + '>מה אמרו ראשי ' + D.lists + ' הרשימות בחודש שלפני הבחירות – הממצאים, בשלוש דקות</p>' +
+    '<p class="lead"' + A(7, 'blur') + '>מה אמרו ראשי ' + D.lists + ' הרשימות בחודש שלפני הבחירות – הממצאים, בכשלוש דקות</p>' +
     '<div class="pill card"' + A(8.5, 'pop') + '>חלון הסקירה <b>' + D.window[0] + '–' + D.window[1] + '</b></div>', { tr: 'none' });
 
   scene('scope', 'היקף', 24, 's-scope',
@@ -79,7 +79,7 @@
     '<li class="card"' + A(9, 'wipe', 1.2) + ' data-hitin="blip">' + IC.ban + '<span>לא נכללו פודקאסטים בהפקת המפלגות עצמן</span></li></ul>' +
     '<div class="big39 card"' + A(1.5, 'flip', 1.5) + ' data-spin="1"><b data-count="' + D.quotes + '" data-cin="' + B(2) + '" data-cd="' + B(4) + '" data-hit="hit">0</b><span>ציטוטים מאומתים</span><small>בכל ההופעות יחד. מספר ההופעות משקף את מה שאותר בחיפוש, ואינו מדד לחשיבות או דירוג.</small></div></div>', { tr: 'slide' });
 
-  scene('stage', 'ממצאים', 24, 's-stage',
+  scene('stage', 'ממצאים', 20, 's-stage',
     '<p class="eyebrow"' + A(0.3, 'skew') + '>ממצא · בחירת במה</p>' +
     '<h2>' + chars('לאיזה קהל פנו ההופעות', 0.5, 0.6, 'char') + '</h2>' +
     '<p class="lead"' + A(2, 'blur') + '>לפי סיווג הקהל שמוצג באתר בכל הופעה · ' + D.total + ' הופעות, לכל הרשימות יחד</p>' +
@@ -89,13 +89,13 @@
   var ft = D.findTopics, mFrame = ft.match(/בעיקר במסגור קואליציוני \(([^)]*)\)/);
   var chipsT = ft.split('נושאים חוזרים נוספים:')[1].replace(/\.\s*$/, '').trim().split(/,\s*/);
   var styleF = D.findStyle.replace(/^סגנון:\s*/, '');
-  scene('topics', 'ממצאים', 22, 's-topics',
+  scene('topics', 'ממצאים', 24, 's-topics',
     '<p class="eyebrow"' + A(0.3, 'skew') + '>ממצא · נושאים</p>' +
     '<p class="bigq">' + words('גיוס חרדים עלה אצל רוב ראשי הרשימות', 0.5, 1.4, 'slam') + '</p>' +
     '<p class="lead"' + A(4, 'blur') + '>בעיקר במסגור קואליציוני: ' + esc(mFrame ? mFrame[1] : '') + '</p>' +
     '<p class="sub2"' + A(6, 'skew') + '>נושאים חוזרים נוספים</p>' +
     '<div class="chips">' + chipsT.map(function (c, i) { return '<span class="chip" data-pulse="1"' + A(7 + i, 'pop', 1) + ' data-hitin="blip">' + esc(c) + '</span>'; }).join('') + '</div>' +
-    '<p class="foot"' + A(11, 'fade') + '>ועוד: ' + esc(styleF) + '</p>', { tr: 'slide', build: [14, 22] });
+    '<p class="foot"' + A(11, 'fade') + '>ועוד: ' + esc(styleF) + '</p>', { tr: 'slide', build: [16, 24] });
 
   scene('bars', 'ממצאים', 20, 's-bars',
     '<p class="eyebrow"' + A(0.3, 'skew') + '>נתונים · 10 הסוגיות של האתר</p>' +
@@ -106,7 +106,7 @@
     }).join('') + '</div>' +
     '<p class="foot"' + A(9, 'fade') + '>סוגיה נספרת לרשימה אם תויגה לפחות באחת מהופעות ראש הרשימה. הופעה יכולה לעסוק בכמה סוגיות. התיוג לפי 10 הסוגיות של האתר בלבד.</p>', { tr: 'drop' });
 
-  scene('index', '13 הרשימות', 14, 's-index',
+  scene('index', '13 הרשימות', 16, 's-index',
     '<p class="eyebrow"' + A(0.3, 'skew') + '>13 הרשימות</p>' +
     '<h2>' + chars('לפי סדר האלף-בית', 0.5, 0.5, 'char') + '</h2>' +
     '<p class="lead" style="font-size:38px"' + A(1.5, 'blur') + '>ציטוט מאומת אחד מכל ראש רשימה · אותו מבנה ואותו זמן מסך לכל רשימה · הסדר אינו דירוג</p>' +
@@ -116,16 +116,17 @@
     var qlang = e.lang === 'he' ? '' : ' lang="' + e.lang + '" dir="' + (e.lang === 'en' ? 'ltr' : 'rtl') + '"';
     scene('list-' + e.id, '13 הרשימות', LIST_BEATS, 's-list',
       '<div class="prog"' + A(0, 'fade', .5) + '><span>לפי סדר האלף-בית · ' + (i + 1) + ' מתוך ' + ENTRIES.length + '</span><span class="ticks13">' + ENTRIES.map(function (_, k) { return '<i class="' + (k < i ? 'done' : k === i ? 'cur' : '') + '">' + (k === i ? '<b></b>' : '') + '</i>'; }).join('') + '</span></div>' +
+      '<i class="bigL" aria-hidden="true" data-l="' + esc(e.name.charAt(0)) + '"' + A(0.15, 'blur', 1.5) + '></i>' +
       '<div class="lname' + (e.name.length > 22 ? ' longn' : '') + '">' + chars(e.name, 0.25, 0.55, 'char') + '</div>' +
       '<div class="lleader"' + A(1, 'skew') + '><span class="eq" data-eq="1"><i></i><i></i><i></i><i></i><i></i></span>' + esc(e.leader) + '</div>' +
-      '<figure class="qcard card"' + A(1.25, 'wipe', 1.2) + '><span class="qmark" aria-hidden="true">”</span><blockquote class="qtext' + (e.quote.length > 60 ? ' long' : '') + '"' + qlang + ' style="margin:0">' +
-      words((e.lang === 'he' ? '„' : '“') + e.quote + '”', 1.8, 1.6, 'word') + '</blockquote>' +
-      '<figcaption><div class="qattr"' + A(5, 'fade', 1) + '><span class="dash">—</span> ' + esc(e.leader) + ' · ' + esc(e.show) + (e.outlet && e.show.indexOf(e.outlet) < 0 ? ' (' + esc(e.outlet) + ')' : '') + ' · ' + esc(e.date) + '</div>' +
-      '<div class="qmeta"' + A(5.6, 'fade', 1) + '><span>' + esc(e.type) + '</span><span class="ok">' + IC.ok + esc(e.method) + (e.ts ? ' · בזמן <span class="ltr">' + esc(e.ts) + '</span>' : '') + '</span>' +
+      '<figure class="qcard card"' + A(1, 'wipe', 1) + '><span class="qmark" aria-hidden="true">”</span><blockquote class="qtext' + (e.quote.length > 60 ? ' long' : '') + '"' + qlang + ' style="margin:0">' +
+      words((e.lang === 'he' ? '„' : '“') + e.quote + '”', 1.6 * SPB, 1.6, 'word') + '</blockquote>' +
+      '<figcaption><div class="qattr"' + A(6, 'fade', 1) + '><span class="dash">—</span> ' + esc(e.leader) + ' · ' + esc(e.show) + (e.outlet && e.show.indexOf(e.outlet) < 0 ? ' (' + esc(e.outlet) + ')' : '') + ' · ' + esc(e.date) + '</div>' +
+      '<div class="qmeta"' + A(6.5, 'fade', 1) + '><span>' + esc(e.type) + '</span><span class="ok">' + IC.ok + esc(e.method) + (e.ts ? ' · בזמן <span class="ltr">' + esc(e.ts) + '</span>' : '') + '</span>' +
       '<a href="' + esc(e.src) + '" target="_blank" rel="noopener noreferrer" tabindex="-1">למקור הציטוט ↗</a></div></figcaption></figure>', { tr: 'list', entry: e });
   });
 
-  scene('gaps', 'מגבלות', 22, 's-gaps',
+  scene('gaps', 'מגבלות', 20, 's-gaps',
     '<p class="eyebrow" style="color:var(--am);text-shadow:0 0 16px rgba(255,190,59,.6)"' + A(0.3, 'skew') + '>פערים ומגבלות</p>' +
     '<h2>' + chars('מה לא נכלל, ומה חשוב לדעת', 0.5, 0.7, 'char') + '</h2>' +
     '<ul class="glist">' + [
@@ -166,6 +167,9 @@
     var dh = el.querySelector('[data-dots]'); if (dh) s.dots = buildDots(dh, dh.getAttribute('data-dots'));
   });
   var BEATS = b0, DUR = BEATS * SPB;
+  // music guard: the drop, the list section, every list, the breakdown and the outro start on a bar downbeat
+  SC.forEach(function (s) { if ((s.id.indexOf('list-') === 0 || ['bars', 'index', 'gaps', 'close'].indexOf(s.id) >= 0) && s.b0 % 4) throw new Error('scene ' + s.id + ' not on a bar'); });
+  if (BEATS % 4) throw new Error('clip length not whole bars');
 
   // ---------- score (same data drives the live music, the offline WAV and the visual beat pulses)
   function sec(id) { return SC.filter(function (s) { return s.id === id; })[0]; }
@@ -173,7 +177,7 @@
   var sections = [
     { b0: 0, b1: 4, mode: 'intro' }, { b0: 4, b1: sec('scope').b0, mode: 'g1' },
     { b0: sec('scope').b0, b1: sec('method').b0, mode: 'g2' }, { b0: sec('method').b0, b1: sec('topics').b0, mode: 'g2arp' },
-    { b0: sec('topics').b0, b1: sec('topics').b0 + 14, mode: 'g2' }, { b0: sec('topics').b0 + 14, b1: sec('bars').b0, mode: 'build' },
+    { b0: sec('topics').b0, b1: sec('topics').b0 + 16, mode: 'g2' }, { b0: sec('topics').b0 + 16, b1: sec('bars').b0, mode: 'build' },
     { b0: sec('bars').b0, b1: sec('index').b0, mode: 'drop' }, { b0: sec('index').b0, b1: L0[0].b0, mode: 'g2arp' },
     { b0: L0[0].b0, b1: sec('gaps').b0, mode: 'lists' }, { b0: sec('gaps').b0, b1: sec('close').b0, mode: 'breakdown' },
     { b0: sec('close').b0, b1: BEATS - 2, mode: 'outro' }, { b0: BEATS - 2, b1: BEATS, mode: 'tail' }];
@@ -372,7 +376,8 @@
     if (s.rings) { var rs = s.rings.children; for (var r = 0; r < 3; r++) { var ph = ((T * .5 + r / 3) % 1); rs[r].style.transform = 'scale(' + (.6 + ph * 2.2 + .15 * ke).toFixed(3) + ')'; rs[r].style.opacity = ((1 - ph) * (.5 + .5 * en)).toFixed(3); } if (s.id === 'title') s.rings.style.opacity = ex(clamp(lt / 1.6)).toFixed(3); var mic = s.rings.querySelector('.bigmic'); if (mic) mic.style.transform = 'scale(' + (1 + .08 * ke).toFixed(3) + ')'; }
     if (s.ext) s.ext(lt);
     if (s.spin) s.spin.style.setProperty('--ang', (T * 90 % 360).toFixed(1) + 'deg');
-    if (s.x.entry) { if (!s.cur) s.cur = s.el.querySelector('.ticks13 .cur b'); s.cur.style.transform = 'scaleX(' + clamp(lt / s.dur).toFixed(4) + ')'; }
+    if (s.x.entry) { if (!s.bigL) s.bigL = s.el.querySelector('.bigL'); s.bigL.style.setProperty('--k', CALM ? '0' : (ke * en).toFixed(3));
+      if (!s.cur) s.cur = s.el.querySelector('.ticks13 .cur b'); s.cur.style.transform = 'scaleX(' + clamp(lt / s.dur).toFixed(4) + ')'; }
     if (s.chap !== curChap) { curChap = s.chap; chapEl.textContent = s.chap; }
     // global layers
     drawAurora(T, en, ke); drawParts(T, en, ke); drawWave(T, en, ke, se);
