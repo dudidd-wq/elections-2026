@@ -226,3 +226,47 @@ h2{font-size:84px}
 .navc{display:flex;align-items:center;gap:22px;padding:36px 34px;border-radius:20px;font-size:40px}
 .navc svg{flex:none;width:52px;height:52px;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .navc b{font-weight:700}
+
+/* ---------- v4: list scene counter, clip B findings */
+.prog .num{font-weight:700;color:var(--ink2);min-width:70px}
+.rank.r2{margin-top:30px;gap:12px}
+.rank.r2 li{font-size:40px}
+.rank.r2 li:first-child span,.rank.r2 li:nth-child(2) span{font-weight:800}
+.s-deep .inner,.s-axes .inner{justify-content:center;padding-bottom:180px}
+h2.big{font-size:104px}
+.bigq2{font-size:56px;font-weight:600;line-height:1.3;margin:34px 0 0;max-width:1560px;text-wrap:balance;color:var(--ink)}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:40px}
+.ccol{padding:30px 40px;border-radius:24px}
+.ccol>b{display:block;font-size:36px;color:var(--acc);font-weight:800;margin-bottom:10px}
+.ccol ol{margin:0;padding:0 44px 0 0;font-size:36px;line-height:1.5}
+.ccol li::marker{color:var(--acc2);font-weight:800}
+.pvd{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:40px}
+.pcol{padding:32px 40px;border-radius:24px;border-top:8px solid var(--acc)}
+.pcol.alt{border-top-color:var(--sage)}
+.pcol>b{display:block;font-size:36px;font-weight:800;line-height:1.3}
+.pcol .chips{gap:12px;margin-top:18px}
+.pcol .chip{font-size:30px;padding:10px 24px;background:var(--surf2)}
+.nlist{list-style:none;margin:34px 0 0;padding:0;display:grid;gap:14px}
+.nlist li{display:flex;align-items:center;gap:28px;padding:18px 30px;border-radius:20px;font-size:38px;font-weight:600}
+.badge{flex:none;min-width:220px;text-align:center;font-size:32px;font-weight:800;color:var(--sage);background:var(--sage-soft);border-radius:999px;padding:6px 20px}
+.s-consensus .sub2{margin-top:30px}
+.s-consensus .chip{font-size:29px;padding:10px 24px}
+.s-consensus .chip b{color:var(--acc)}
+.bstack{display:flex;height:84px;border-radius:18px;overflow:hidden;margin-top:56px;background:var(--bg2)}
+.bstack .seg{height:100%;display:block}
+.seg.plat,.sw.plat{background:var(--acc)}
+.seg.stmt,.sw.stmt{background:var(--sand)}
+.seg.nf,.sw.nf{background:var(--line2)}
+.blegend{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:40px}
+.bl{display:grid;grid-template-columns:28px auto;column-gap:18px;align-items:center}
+.bl .sw{width:28px;height:28px;border-radius:8px}
+.bl b.num{font-size:96px;font-weight:800;line-height:1}
+.bl span{grid-column:1/-1;font-size:32px;color:var(--ink2);margin-top:8px}
+.star{color:var(--sand)}
+.prow .was{font-size:26px;color:var(--ink2);font-weight:700;text-align:left}
+.mvgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:44px}
+.mv{padding:34px 36px;border-radius:24px;display:flex;flex-direction:column;gap:10px}
+.mv .nm{font-size:38px;font-weight:800;line-height:1.2;text-wrap:balance}
+.mv .ft{font-size:40px;color:var(--ink2);align-self:flex-start}
+.mv .dl{font-size:72px;font-weight:800;color:var(--acc);line-height:1}
+.s-moves .foot{font-size:25px}

@@ -1,4 +1,4 @@
-/* Clip engine v3 (shared by /clip/ and /clip-site/) – calm, editorial motion. Deterministic timeline at 90 BPM:
+/* Clip engine v4 (shared by /clip/ and /clip-site/) – fast, smooth editorial motion. Deterministic timeline at 120 BPM:
    every frame is a pure function of the clock T, so play / pause / scrub / ?t= seeking / frame-exact recording all
    render identically. requestAnimationFrame only.
    Stability rules: text is only ever faded or moved by whole pixels while it enters; at rest it has no transform,
@@ -22,8 +22,8 @@
   function A(beat, type, dBeats, outBeat) { return ' data-in="' + B(beat) + '"' + (type ? ' data-a="' + type + '"' : '') + (dBeats ? ' data-d="' + B(dBeats) + '"' : '') + (outBeat != null ? ' data-out="' + B(outBeat) + '"' : ''); }
   function words(text, beat0, spanBeats) { // word-by-word soft rise; whole words, so bidi and line breaks stay natural
     var ws = String(text).split(/(\s+)/), n = ws.filter(function (w) { return w.trim(); }).length, k = 0, out = '';
-    var st = Math.min(.16, spanBeats * SPB / Math.max(1, n));
-    ws.forEach(function (w) { if (!w.trim()) { out += w; return; } out += '<span class="w" data-a="word" data-in="' + (beat0 * SPB + k * st).toFixed(3) + '" data-d="0.6">' + esc(w) + '</span>'; k++; });
+    var st = Math.min(.07, spanBeats * SPB / Math.max(1, n));
+    ws.forEach(function (w) { if (!w.trim()) { out += w; return; } out += '<span class="w" data-a="word" data-in="' + (beat0 * SPB + k * st).toFixed(3) + '" data-d="0.34">' + esc(w) + '</span>'; k++; });
     return out;
   }
   function count(v, beat, dBeats, opt) { opt = opt || {}; return '<b class="num" data-count="' + v + '" data-dec="' + (opt.dec || 0) + '" data-cin="' + B(beat) + '" data-cd="' + B(dBeats || 3) + '"' + (opt.ping ? ' data-ping="' + opt.ping + '"' : '') + '>' + (opt.dec ? (0).toFixed(opt.dec) : '0') + '</b>'; }
@@ -70,8 +70,8 @@
   function renderDots(o, lt) {
     var tm = o.tm;
     for (var i = 0; i < o.dots.length; i++) {
-      var f = eq(clamp((lt - tm.in - i * .025) / .8));              // appear in place (hemicycle) – fade + settle 12px
-      var m = o.H ? eio(clamp((lt - tm.move - (i % 10) * .03) / 1.4)) : 1;
+      var f = eq(clamp((lt - tm.in - i * .012) / .4));              // appear in place (hemicycle) – fade + settle 12px
+      var m = o.H ? eio(clamp((lt - tm.move - (i % 10) * .015) / .75)) : 1;
       var sx = o.H ? o.H[i].x : o.E[i].x, sy = o.H ? o.H[i].y : o.E[i].y;
       var x = Math.round(sx + (o.E[i].x - sx) * m), y = Math.round(sy + (o.E[i].y - sy) * m + (1 - f) * 12);
       var key = x * 10000 + y + f;
@@ -79,7 +79,7 @@
       var st = o.dots[i].style; st.opacity = f >= 1 ? '' : f.toFixed(3); st.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
     }
     o.labs.forEach(function (l) {
-      var p = clamp((lt - tm.lab - l.gi * .3) / .7), e = eo(p), v = Math.round(l.n * eo(clamp((lt - tm.lab - l.gi * .3) / 1.2)));
+      var p = clamp((lt - tm.lab - l.gi * .15) / .4), e = eo(p), v = Math.round(l.n * eo(clamp((lt - tm.lab - l.gi * .15) / .7)));
       l.el.style.opacity = p >= 1 ? '' : e.toFixed(3); l.el.style.transform = p >= 1 ? '' : 'translate3d(0,' + Math.round((1 - e) * 16) + 'px,0)';
       if (v !== l.last) { l.last = v; l.b.textContent = v; }
     });
@@ -112,18 +112,18 @@
     SC.forEach(function (s) {
       s.b0 = b0; s.start = b0 * SPB; b0 += s.beats;
       var el = document.createElement('section'); el.className = 'scene ' + s.cls; el.setAttribute('aria-hidden', 'true');
-      el.innerHTML = '<div class="inner">' + s.html + '</div>'; host.appendChild(el); tidy(el); s.el = el;
+      el.innerHTML = '<div class="inner">' + s.html + '</div>'; host.appendChild(el); tidy(el); s.el = el; s.inner = el.firstChild; s.lastX = null;
       s.anims = [].map.call(el.querySelectorAll('[data-in]'), function (n) {
         n.classList.add('a'); var t = n.getAttribute('data-a') || 'up'; if (CALM && t !== 'fade') t = 'fade';
-        return { el: n, t0: +n.getAttribute('data-in'), d: +(n.getAttribute('data-d') || .9), out: n.hasAttribute('data-out') ? +n.getAttribute('data-out') : null, type: t, last: -1 };
+        return { el: n, t0: +n.getAttribute('data-in'), d: +(n.getAttribute('data-d') || .45), out: n.hasAttribute('data-out') ? +n.getAttribute('data-out') : null, type: t, last: -1 };
       });
       s.counts = [].map.call(el.querySelectorAll('[data-count]'), function (n) { return { el: n, v: +n.getAttribute('data-count'), dec: +n.getAttribute('data-dec') || 0, t0: +n.getAttribute('data-cin'), d: +n.getAttribute('data-cd'), last: null }; });
-      s.fills = [].map.call(el.querySelectorAll('[data-w]'), function (n) { return { el: n, w: +n.getAttribute('data-w'), t0: +n.getAttribute('data-win'), d: +(n.getAttribute('data-wd') || 1.6), last: -1 }; });
+      s.fills = [].map.call(el.querySelectorAll('[data-w]'), function (n) { return { el: n, w: +n.getAttribute('data-w'), t0: +n.getAttribute('data-win'), d: +(n.getAttribute('data-wd') || .8), last: -1 }; });
       s.prog = el.querySelector('[data-progress]');
       var dh = el.querySelector('[data-dots]'); if (dh && cfg.dots) s.dots = buildDots(dh, cfg.dots[dh.getAttribute('data-dots')]);
     });
     var BEATS = b0, DUR = BEATS * SPB;
-    SC.forEach(function (s) { if (s.b0 % 4) throw new Error('scene ' + s.id + ' not on a bar'); });
+    SC.forEach(function (s) { if (s.b0 % 2) throw new Error('scene ' + s.id + ' not on a strong beat'); });
 
     // ---------- score (one deterministic event list drives the live music and the offline WAV)
     function sec(id) { return SC.filter(function (s) { return s.id === id; })[0]; }
@@ -132,7 +132,7 @@
     var hits = [];
     SC.forEach(function (s) {
       s.counts.forEach(function (c) { var n = c.el.getAttribute('data-ping'); if (n) hits.push({ t: s.start + c.t0 + c.d * .55, n: +n, v: .9 }); });
-      if (s.dots) s.dots.labs.forEach(function (l) { hits.push({ t: s.start + s.dots.tm.lab + l.gi * .3 + .5, n: [81, 84, 88, 86][l.gi % 4], v: .8 }); });
+      if (s.dots) s.dots.labs.forEach(function (l) { hits.push({ t: s.start + s.dots.tm.lab + l.gi * .15 + .3, n: [81, 84, 88, 86][l.gi % 4], v: .8 }); });
     });
     var EVENTS = AU.score({ beats: BEATS, sections: sections, cuts: cuts, hits: hits });
     window.CLIP = { duration: DUR, bpm: AU.BPM, bar: BAR, scenes: SC.map(function (s) { return { id: s.id, start: s.start, dur: s.dur, bars: s.bars, list: !!s.x.list }; }), events: EVENTS, sections: sections };
@@ -142,7 +142,7 @@
     var TINTS = [[47, 79, 134, .075], [111, 143, 114, .085], [176, 138, 79, .07]];
     function drawBg(T) {
       bg.globalCompositeOperation = 'source-over'; bg.fillStyle = '#f5f3ee'; bg.fillRect(0, 0, 192, 108);
-      var sp = CALM ? .4 : 1;
+      var sp = CALM ? .4 : 2.2;
       for (var i = 0; i < TINTS.length; i++) {
         var c = TINTS[i], x = 96 + Math.sin(T * .021 * sp + i * 2.1) * 62, y = 54 + Math.cos(T * .017 * sp + i * 1.7) * 30, r = 70 + 10 * Math.sin(T * .013 + i);
         var g = bg.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + c[3] + ')'); g.addColorStop(1, 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',0)');
@@ -187,17 +187,19 @@
       s.transform = y ? 'translate3d(0,' + y + 'px,0)' : '';
       s.clipPath = clip;
     }
-    function transition(s, lt) { // calm, short dip through the paper: fade in .4 s, fade out over the last .35 s
-      var op = Math.min(eo(clamp(lt / .4)), s.x.last ? 1 : eo(clamp((s.dur - lt) / .35)));
-      if (s.tr === 'none' && lt < .4) op = 1;
+    function transition(s, lt) { // fast cut on the beat: fade in .22 s while the scene slides in 48 px (whole pixels), fade out over the last .16 s
+      var pin = clamp(lt / .36), op = Math.min(eo(clamp(lt / .22)), s.x.last ? 1 : eo(clamp((s.dur - lt) / .16)));
+      if (s.tr === 'none' && lt < .4) { op = 1; pin = 1; }
       s.el.style.opacity = op >= 1 ? '' : op.toFixed(3);
+      var x = CALM ? 0 : Math.round((1 - eq(pin)) * 48);
+      if (x !== s.lastX) { s.lastX = x; s.inner.style.transform = x ? 'translate3d(' + x + 'px,0,0)' : ''; }
     }
     function render(T) {
       var s = sceneAt(T), lt = T - s.start;
       if (s !== curScene) {
         if (curScene) { curScene.el.classList.remove('on'); curScene.el.setAttribute('aria-hidden', 'true'); }
         s.el.classList.add('on'); s.el.removeAttribute('aria-hidden'); curScene = s;
-        s.anims.forEach(function (n) { n.last = -1; }); s.counts.forEach(function (c) { c.last = null; }); s.fills.forEach(function (f) { f.last = -1; }); if (s.dots) s.dots.last = []; if (s.dots) s.dots.labs.forEach(function (l) { l.last = -1; });
+        s.anims.forEach(function (n) { n.last = -1; }); s.counts.forEach(function (c) { c.last = null; }); s.fills.forEach(function (f) { f.last = -1; }); if (s.dots) s.dots.last = []; if (s.dots) s.dots.labs.forEach(function (l) { l.last = -1; }); s.lastX = null;
         if (!REC) { var txt = s.el.textContent.replace(/\s+/g, ' ').trim(); live.textContent = ''; setTimeout(function () { live.textContent = txt.slice(0, 400); }, 50); }
       }
       transition(s, lt);
