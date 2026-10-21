@@ -89,12 +89,9 @@ main:focus{outline:none}
 .note{background:var(--surf2);border:1px solid var(--line);border-inline-start:4px solid var(--acc-line);padding:var(--s3) var(--s4);border-radius:var(--r1);margin:var(--s3) 0;font-size:.94rem;color:var(--ink2)}
 .note b{color:var(--ink)}
 .note.warn{border-inline-start-color:var(--warn);background:var(--warn-bg)}
-.note.add{border-inline-start-color:var(--acc);background:var(--acc-soft)}
 .badge{display:inline-flex;align-items:center;gap:4px;font-size:.78rem;font-weight:600;line-height:1.5;padding:2px 9px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);color:var(--ink2);white-space:nowrap}
-.badge.add{background:var(--acc-soft);border-color:var(--acc-line);color:var(--ink)}
 .star{color:var(--star);font-weight:800}
 .dagger{color:var(--ink3);font-weight:700}
-.added-m{color:var(--acc);font-weight:800}
 
 /* ===== legend ===== */
 .legend{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);align-items:flex-start;font-size:.88rem;color:var(--ink2);margin:var(--s3) 0;padding:var(--s3) var(--s4);background:var(--surf2);border:1px solid var(--line);border-radius:var(--r1)}
@@ -261,9 +258,7 @@ table{border-collapse:collapse}
 .camp h2,.camp h3{margin:0 0 var(--s2)}
 .camp ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 .camp li{padding:var(--s2) var(--s3);border-radius:var(--r1);background:var(--surf2);border:1px solid var(--line)}
-.camp li.add{background:var(--acc-soft);border-color:var(--acc-line)}
 .camp .lab{font-weight:700;color:var(--ink)}
-.add-tag{display:inline-flex;align-items:center;gap:4px;font-size:.74rem;font-weight:800;color:var(--acc);border:1px solid var(--acc-line);border-radius:999px;padding:0 8px;margin-inline-end:6px;background:var(--surf);vertical-align:1px}
 mark.m{background:transparent;color:inherit;border-bottom:2px solid var(--line2);padding:0 1px;border-radius:2px;transition:background .2s}
 mark.m.on{background:var(--hl);color:var(--hl-ink);border-bottom-color:var(--star)}
 .items{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:var(--s3);margin:var(--s3) 0}
@@ -291,8 +286,6 @@ mark.m.on{background:var(--hl);color:var(--hl-ink);border-bottom-color:var(--sta
 .bar-axis span{position:absolute;transform:translateX(50%)}
 .bloc .bar-fill{background:var(--c)}
 .bar-pt{position:absolute;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:var(--bg);border:1.5px solid var(--ink);opacity:.75;z-index:1}
-.add-card{border-inline-start:4px solid var(--add,var(--acc));cursor:default}
-.add-card:hover{transform:none}
 .stamp{font-size:1rem}
 @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 .trend svg,.spark svg{width:100%;height:auto;display:block;direction:ltr;overflow:visible}

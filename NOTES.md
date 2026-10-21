@@ -12,20 +12,21 @@ Source: /workspace/elections-2026/platforms.md (canonical). Repo: dudidd-wq/elec
 
 - [x] 21.10 00:13 perf fixes (collator cache, no forced layout, content-visibility) v7; 00:21 mobile nav 4x2 grid v8 (8b59d75). Live tests: smoke/axe 0, content 120/120, raam 10/10, extra OK (offline 130), LH ≥95 (polls mobile noisy under box load).
 - [x] AUDIT.md updated (Ra'am/Joint, design critique 3 rounds → 9/9/9/9).
+- [x] 21.10 07:15 Dudi: "רע"ם ככל המפלגות" → removed ALL Ra'am-specific notes and the ‡ marker/legend (home banner, profile note, cell/dialog badges, analysis note/tags/cards, rank note, consensus meta note, codes-matrix note, about "מה נוסף באתר" section, Ra'am gap entry, asOf "תוספות האתר", polls addedBySite). Ra'am analysis text now merged INTO the regular items (consensus texts replaced, camps/crossAxis appended, overlaps appended, headings 10–12 מתוך 13, intro 13 lists). '*' kept. SW v9-2026-10-21e. Check: /workspace/elections-2026-audit/noraamnotes.mjs.
 
 ## Findings
 - md poll baseline (7 outlets 13–19.10) matches IIE 77/77 + added lists 14/14; Wikipedia matches 5 of 7 (IH 15.10 & i24 13.10 not on WP).
 - md omitted Maariv 15.10, Ch16 13.10, Walla 19.10 from the 7-outlet window. Site uses all outlets, 7-day window.
 - New since md: Ch14 20.10, i24 20.10, Ch16 20.10 (and Walla 19.10, i24 18.10, Ch14 18.10).
-- Ra'am was not profiled in md -> ADDED 20.10 via source/additions.json (marked ‡, all positions *). Site now = 13 lists x 10 issues = 130 cells.
+- Ra'am is not profiled in md -> lives in source/additions.json, merged like every other list (NO ‡ / no special notes, per Dudi 21.10; positions * as statement-based). Site = 13 lists x 10 issues = 130 cells.
 - Joint List verified (ynet s100kfzesze, inn 707577, israelielections joint-list): Hadash+Ta'al+Balad, letters ודם, Balad stayed after Abu Shehadeh withdrew (2.10); Awawdeh #4. One column in all polls. No polls fix needed.
 - Walla 19.10: fieldwork 19.10, published 20.10. Dates = tracker dates (mostly fieldwork).
 
 ## Update procedure (short) – twice-daily routine, 13 lists
 - Polls: python3 tools/update_polls.py import-iie --html <saved page> (or add ...). Party ids incl. raam & joint (Joint = one column; do NOT split Balad). Check seats sum 120.
-- Ra'am / site additions: edit source/additions.json only (positions need summary, code, full, sourceType, url; star=true unless a written platform appears; keep "(‡)" labels). Then python3 tools/build_data.py -> must print lists 13 / cells 130.
-- If the md gets a new version that itself covers Ra'am: remove raam from additions.json lists/positions, rebuild, and drop the ‡ notes.
-- After any change: node /workspace/elections-2026-audit/content.mjs (120 md cells must match) + smoke.mjs; bump sw.js VERSION.
+- Ra'am: edit source/additions.json only (positions need summary, code, full, sourceType, url; star defaults true – set "star": false on a position if a written platform appears). analysis section: consensusBroad/Partial = full replacement text matched by md label; camps/crossAxis appended; overlaps appended; headings/intro replacements. NEVER add ‡ / "תוספת" / Ra'am-specific disclaimers. Then python3 tools/build_data.py -> must print lists 13 / cells 130 and no WARNING lines (a WARNING = md label changed; fix the label in additions.json).
+- If the md gets a new version that itself covers Ra'am: remove raam from additions.json (lists/positions/aliases/analysis/mainSplits), rebuild.
+- After any change: node /workspace/elections-2026-audit/content.mjs (120 md cells must match) + smoke.mjs + raam.mjs + noraamnotes.mjs (hits must be {}); bump sw.js VERSION.
 - New poll: python3 tools/update_polls.py add ... | import-iie ; bump sw.js VERSION ; commit with git -c user.name=Dudi -c user.email=dudidd@gmail.com ; push.
 - Content: copy md to source/platforms.md ; python3 tools/build_data.py ; bump VERSION ; push.
 - Audit scripts: /workspace/elections-2026-audit/*.mjs (node_modules symlink -> /tmp/pw/node_modules).

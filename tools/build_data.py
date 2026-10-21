@@ -247,33 +247,51 @@ aliases = {
  'miluim': ['המילואימניקים והכלכלית'], 'amcha': ['עמך ישראל', 'וינטר']}
 platforms['aliases'] = aliases
 
-# ---- site additions (not part of platforms.md): source/additions.json, every item flagged added=True
+# ---- lists/positions not in platforms.md (source/additions.json), merged exactly like every other list (no special flags)
 ADD = json.load(open(os.path.join(ROOT, 'source', 'additions.json'), encoding='utf-8'))
 for d in ADD['lists']:
-    d = dict(d, added=True, added20Oct=False)
+    d = dict(d, added20Oct=False)
     platforms['lists'].append(d)
     platforms['positions'][d['id']] = {}
     for I in ISSUE_IDS:
         q = dict(ADD['positions'][d['id']][I])
-        q.update(star=True, added=True, notFound=q['summary'].startswith('לא נמצאה'))
+        q['star'] = q.get('star', True)
+        q['notFound'] = q['summary'].startswith('לא נמצאה')
         platforms['positions'][d['id']][I] = q
 for L, v in ADD.get('verify', {}).items():
     for d in platforms['lists']:
         if d['id'] == L:
             d['verify'] = v
 platforms['aliases'].update(ADD['aliases'])
-platforms['addedLegend'] = ADD['addedLegend']
-platforms['gapsAdded'] = ADD['gaps']
-platforms['mainSplitsAdded'] = ADD['mainSplits']
+platforms['gaps'] += ADD.get('gaps', [])
+platforms['mainSplits'] += ADD.get('mainSplits', [])
 AA = ADD['analysis']
 for c in analysis['camps']:
-    c['added'] = AA['camps'][c['issue']]
-analysis['addedNote'] = AA['note']
-analysis['rankAdded'] = AA['rank']
-analysis['crossAxisAdded'] = AA['crossAxis']
-analysis['consensusBroadAdded'] = AA['consensusBroad']
-analysis['consensusPartialAdded'] = AA['consensusPartial']
-analysis['overlapsAdded'] = AA['overlaps']
+    t = AA['camps'].get(c['issue'])
+    if t:
+        c['segments'].append({'label': None, 'who': t})
+        c['text'] += ' ' + t
+for key in ('consensusBroad', 'consensusPartial'):
+    for o in AA.get(key, []):
+        hit = [x for x in analysis[key] if x['label'] == o['label']]
+        if hit:
+            hit[0]['text'] = o['text']
+        else:
+            print('WARNING: %s item not found in md, appended: %s' % (key, o['label']))
+            analysis[key].append(dict(o))
+analysis['overlaps'] += AA.get('overlaps', [])
+ca = AA.get('crossAxis')
+if ca:
+    hit = [x for x in analysis['crossAxis'] if x['label'] == ca['label']]
+    if hit:
+        hit[0]['text'] += ' ' + ca['append']
+    else:
+        print('WARNING: crossAxis item not found:', ca['label'])
+analysis['headings'].update(AA.get('headings', {}))
+for a, b in AA.get('intro', []):
+    if not any(a in p for p in analysis['intro']):
+        print('WARNING: intro text not found:', a)
+    analysis['intro'] = [p.replace(a, b) for p in analysis['intro']]
 os.makedirs(os.path.join(ROOT, 'data'), exist_ok=True)
 json.dump(platforms, open(os.path.join(ROOT, 'data', 'platforms.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 json.dump(analysis, open(os.path.join(ROOT, 'data', 'analysis.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)

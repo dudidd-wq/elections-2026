@@ -57,7 +57,6 @@
   function lname(id) { var l = LIST && LIST[id]; return l ? l.tableName : PARTY[id].name; }
   function dagger(id) {
     if (!LIST[id]) return '';
-    if (LIST[id].added) return ' <span class="added-m" title="נוספה באתר ב-20.10.2026, לא מהמסמך המקורי">‡<span class="sr"> (נוספה באתר)</span></span>';
     return LIST[id].added20Oct ? ' <span class="dagger" title="נוספה למסמך ב-20.10.2026">†</span>' : '';
   }
   function starMark(p) { return p.star ? '<span class="star" title="מבוסס על הצהרות, הודעות או הצבעות">*</span>' : ''; }
@@ -74,19 +73,18 @@
       '<span class="order-note">' + esc(orderNote()) + '</span></div>';
   }
   function asOfLine() {
-    return '<p class="meta">העמדות נכונות ל-' + fmtDate(P.meta.documentAsOf) + ' · הקישורים נבדקו ב-' + fmtDate(P.meta.linksCheckedOn) + ' · מקור: מסמך המחקר "' + esc(P.meta.title) + '" ותוספות האתר (‡).</p>';
+    return '<p class="meta">העמדות נכונות ל-' + fmtDate(P.meta.documentAsOf) + ' · הקישורים נבדקו ב-' + fmtDate(P.meta.linksCheckedOn) + ' · מקור: מסמך המחקר "' + esc(P.meta.title) + '".</p>';
   }
   function legend(heat) {
     return '<div class="legend" role="note" aria-label="מקרא">' +
       (heat ? '<span><i class="sw plat"></i>מצע, מסמך מדיניות או תשובה רשמית</span><span><i class="sw stmt"></i>הצהרות, הודעות או הצבעות (*)</span><span><i class="sw nf"></i>לא נמצאה עמדה פומבית</span>' : '') +
       '<span><b class="star">*</b> ' + esc(P.starLegend.replace(/^כוכבית \(\*\) /, '')) + '</span>' +
       '<span><b class="dagger">†</b> ' + esc(P.daggerLegend.replace(/^† /, '')) + '</span>' +
-      '<span><b class="added-m">‡</b> ' + esc(P.addedLegend.replace(/^‡ /, '')) + '</span>' +
       '<span>"לא נמצאה עמדה" פירושו שלא אותרה עמדה פומבית, ולא שאין לרשימה עמדה.</span></div>';
   }
   function legendCompact(heat) {
     return '<div class="legend compact" role="note" aria-label="מקרא">' + (heat === false ? '<span><b class="star">*</b> מבוסס על הצהרות או הצבעות</span>' : '<span><i class="sw plat"></i>מצע / מסמך / תשובה רשמית</span><span><i class="sw stmt"></i>הצהרות או הצבעות <b class="star">*</b></span><span><i class="sw nf"></i>לא נמצאה עמדה פומבית</span>') +
-      '<span><b class="dagger">†</b> נוספה למסמך ב-20.10</span><span><b class="added-m">‡</b> תוספת של האתר</span>' +
+      '<span><b class="dagger">†</b> נוספה למסמך ב-20.10</span>' +
       '<details><summary>מקרא מלא</summary>' + legend(false).replace('class="legend"', 'class="legend inner"') + '</details></div>';
   }
   function host(url) { return url.replace(/^https?:\/\/(www\.)?/, '').split('/')[0]; }
@@ -128,7 +126,6 @@
     var o = '<option value="">ללא הדגשה</option>' + orderedLists().map(function (l) { return '<option value="' + l.id + '"' + (state.hl === l.id ? ' selected' : '') + '>' + esc(l.tableName) + '</option>'; }).join('');
     return '<div class="controls"><label for="hl">הדגשת אזכורים של רשימה:</label> <select id="hl">' + o + '</select> <span id="hlcount" class="meta" role="status"></span></div>';
   }
-  var ADDTAG = '<span class="add-tag" title="תוספת של האתר, לא מהמסמך המקורי">‡ תוספת</span>';
 
   // ---------- tooltip
   function showTip(html, x, y) {
@@ -145,7 +142,7 @@
     var h = '<h2 id="dlg-title"><span class="lname">' + dot(lid) + esc(l.tableName) + '</span>' + dagger(lid) + ' · ' + esc(i.title) + '</h2>' +
       '<p class="sum"><b>בתמצית:</b> ' + esc(p.summary) + '</p>' +
       '<p><b>העמדה המלאה (במסגור הרשימה):</b> ' + esc(p.full) + ' ' + starMark(p) + '</p>' +
-      '<p><span class="badge">סוג מקור: ' + esc(p.sourceType) + '</span> ' + (p.star ? '<span class="badge"><span class="star">*</span> מבוסס על הצהרות/הצבעות</span> ' : '') + (p.added ? '<span class="badge add">‡ תוספת של האתר</span>' : '') + '</p>' +
+      '<p><span class="badge">סוג מקור: ' + esc(p.sourceType) + '</span> ' + (p.star ? '<span class="badge"><span class="star">*</span> מבוסס על הצהרות/הצבעות</span> ' : '') + '</p>' +
       '<p>' + srcLink(p.url, 'מקור העמדה') + '</p>' + extraSrc(p) +
       '<p class="meta">קוד קצר בניתוח הרוחבי: ' + esc(p.code) + '</p>' +
       '<p class="pager"><a class="btn sec" href="#/issue/' + iid + '">כל הרשימות בסוגיה זו</a> <a class="btn sec" href="#/list/' + lid + '">פרופיל הרשימה</a></p>' +
@@ -229,8 +226,7 @@
       '<div><b>שקוף</b><p>לכל עמדה סוג מקור וקישור. <span class="star">*</span> מסמנת עמדה שמבוססת על הצהרות או הצבעות.</p></div>' +
       '<div><b>עקבי</b><p>' + esc(orderNote()) + '</p></div>' +
       '<div><b>מתוארך</b><p>העמדות נכונות ל-' + fmtDate(P.meta.documentAsOf) + '; הסקרים עודכנו ב-' + fmtStamp(D.meta.updatedAt) + '.</p></div></div>' +
-      legend(false) +
-      '<p class="note add"><b>‡ רע"ם נוספה באתר כרשימה מלאה.</b> מסמך המחקר המקורי כלל 12 רשימות; רע"ם נוספה ב-20.10.2026 עם פרופיל, עמדות ב-10 הסוגיות ושילוב בניתוח הרוחבי. כל מה שנוסף מסומן ‡. פרטים ב<a href="#/about">שיטה ומקורות</a>.</p>';
+      legend(false);
   }
   function card(href, t, d, ic) { return '<a class="card" href="' + href + '">' + (ic ? icon(ic) : '') + GO + '<h3>' + esc(t) + '</h3><p>' + esc(d) + '</p></a>'; }
 
@@ -255,7 +251,7 @@
       return '<tr' + (state.hl === l.id ? ' class="hl"' : '') + '><th scope="row"><a href="#/list/' + l.id + '">' + dot(l.id) + esc(l.tableName) + '</a>' + dagger(l.id) + '</th>' + sel.map(function (iid) {
         var p = P.positions[l.id][iid];
         var t = mode === 'code' ? p.code : p.summary;
-        return '<td><button type="button" class="cell ' + cellClass(p) + '" data-cell="' + l.id + '|' + iid + '" aria-label="' + esc(l.tableName + ', ' + ISS[iid].short + ': ' + t + (p.star ? ' (מבוסס על הצהרות או הצבעות)' : '') + (p.added ? ' (תוספת של האתר)' : '') + '. לחיצה לעמדה המלאה ולמקור') + '">' + esc(t) + (p.star ? ' <span class="star" aria-hidden="true">*</span>' : '') + '</button></td>';
+        return '<td><button type="button" class="cell ' + cellClass(p) + '" data-cell="' + l.id + '|' + iid + '" aria-label="' + esc(l.tableName + ', ' + ISS[iid].short + ': ' + t + (p.star ? ' (מבוסס על הצהרות או הצבעות)' : '') + '. לחיצה לעמדה המלאה ולמקור') + '">' + esc(t) + (p.star ? ' <span class="star" aria-hidden="true">*</span>' : '') + '</button></td>';
       }).join('') + '</tr>';
     }).join('');
     return '<div class="mx-wrap" tabindex="0" role="region" aria-label="מטריצת עמדות, אפשר לגלול אופקית ואנכית"><table class="mx' + (mode === 'code' ? ' code' : '') + '"><caption class="sr">עמדות הרשימות לפי סוגיה</caption><thead>' + headRow + '</thead><tbody>' + body + '</tbody></table></div>';
@@ -282,14 +278,13 @@
   function posBlock(lid, iid, headWith) {
     var p = P.positions[lid][iid];
     var title = headWith === 'list' ? '<a href="#/list/' + lid + '">' + esc(lname(lid)) + '</a>' + dagger(lid) : '<a href="#/issue/' + iid + '">' + esc(ISS[iid].n + '. ' + ISS[iid].title) + '</a>';
-    return '<article class="pos' + (p.notFound ? ' nf' : '') + '" style="--c:' + COLOR[lid] + '"><h3>' + (headWith === 'list' ? dot(lid) : '') + title + ' ' + (p.star ? '<span class="badge"><span class="star">*</span> הצהרות/הצבעות</span>' : '') + (p.added ? ' <span class="badge add">‡ תוספת</span>' : '') + '</h3>' +
+    return '<article class="pos' + (p.notFound ? ' nf' : '') + '" style="--c:' + COLOR[lid] + '"><h3>' + (headWith === 'list' ? dot(lid) : '') + title + ' ' + (p.star ? '<span class="badge"><span class="star">*</span> הצהרות/הצבעות</span>' : '') + '</h3>' +
       '<p class="sum">בתמצית: ' + esc(p.summary) + '</p><p class="full">' + esc(p.full) + '</p>' +
       '<div class="src"><span class="badge">סוג מקור: ' + esc(p.sourceType) + '</span>' + srcLink(p.url, 'מקור') +
       (p.extraUrls && p.extraUrls.length ? p.extraUrls.map(function (u, k) { return srcLink(u, 'מקור ' + (k + 2)); }).join('') : '') + '</div></article>';
   }
   function campList(c) {
-    return '<ul>' + c.segments.map(function (s) { return '<li>' + (s.label ? '<span class="lab">' + mark(s.label) + '</span> – ' : '') + mark(s.who) + '</li>'; }).join('') +
-      (c.added ? '<li class="add">' + ADDTAG + mark(c.added) + '</li>' : '') + '</ul>';
+    return '<ul>' + c.segments.map(function (s) { return '<li>' + (s.label ? '<span class="lab">' + mark(s.label) + '</span> – ' : '') + mark(s.who) + '</li>'; }).join('') + '</ul>';
   }
 
   function pageIssue(id) {
@@ -337,8 +332,7 @@
     var h = '<header class="page-head"><p class="eyebrow">פרופיל רשימה</p><h1><span class="lname">' + dot(id) + esc(l.tableName) + '</span>' + dagger(id) + '</h1>' +
       '<p class="lead"><span class="letters" aria-label="אותיות בפתק">' + esc(l.letters) + '</span> &nbsp;' + esc(l.leader) + '</p>' + asOfLine() + '</header>' +
       '<label class="controls">מעבר לרשימה: <select id="golist">' + orderedLists().map(function (x) { return '<option value="' + x.id + '"' + (x.id === id ? ' selected' : '') + '>' + esc(x.tableName) + '</option>'; }).join('') + '</select></label>' +
-      (l.added ? '<p class="note add"><b>‡ רשימה שנוספה באתר.</b> ' + esc(P.addedLegend.replace(/^‡ /, '')) + '</p>' : '') +
-      (l.verify ? '<p class="note add"><b>‡ בדיקת הרכב:</b> ' + esc(l.verify.text) + ' ' + l.verify.sources.map(function (u, k) { return srcLink(u, 'מקור ' + (k + 1)); }).join(' · ') + '</p>' : '') +
+      (l.verify ? '<p class="note"><b>בדיקת הרכב:</b> ' + esc(l.verify.text) + ' ' + l.verify.sources.map(function (u, k) { return srcLink(u, 'מקור ' + (k + 1)); }).join(' · ') + '</p>' : '') +
       '<div class="prof-hero"><div class="panel"><dl class="prof">' +
       '<dt>שם בפתק</dt><dd>' + esc(l.ballotName) + '</dd><dt>אותיות</dt><dd>' + esc(l.letters) + '</dd>' +
       '<dt>ראש הרשימה</dt><dd>' + esc(l.leader) + '</dd><dt>הרכב</dt><dd>' + esc(l.composition) + '</dd>' +
@@ -375,36 +369,29 @@
     return h;
   }
 
-  function addedItems(arr) {
-    if (!arr || !arr.length) return '';
-    return '<div class="items">' + arr.map(function (t) { var m = t.match(/^([^:]{2,90}?) \(‡\): (.*)$/); return '<div class="card add-card"><h3>' + ADDTAG + mark(m ? m[1] : 'תוספת') + '</h3><p>' + mark(m ? m[2] : t) + '</p></div>'; }).join('') + '</div>';
-  }
   function pageAnalysis(tab, q) {
     tab = tab || 'splits';
     var tabs = [['splits', 'קווי המחלוקת'], ['consensus', 'המכנה המשותף'], ['overlaps', 'חפיפות ועיקרון מול מידה'], ['codes', 'מטריצת קודים']];
     var h = head('ניתוח רוחבי', esc(A.title), '') + A.intro.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') +
-      '<p class="note add"><b>‡ שילוב רע"ם בניתוח:</b> ' + esc(A.addedNote) + '</p>' +
       '<nav class="tabs" aria-label="חלקי הניתוח">' + tabs.map(function (t) { return '<a href="#/analysis/' + t[0] + '"' + (t[0] === tab ? ' aria-current="page"' : '') + '>' + t[1] + '</a>'; }).join('') + '</nav>' + (tab === 'codes' ? '' : hlSelect());
     if (tab === 'splits') {
       var iss = selIssues(q.issues);
       h += '<h2>דירוג הסוגיות לפי עומק המחלוקת</h2><p class="meta">1 = המחלוקת העמוקה ביותר. הדירוג נשען על שלושה מבחנים: עיקרון או מידה, מספר המחנות, ותנאים קואליציוניים סותרים.</p><ol class="rank">' +
         A.rank.map(function (r) { return '<li><span class="num" aria-hidden="true">' + r.rank + '</span><div><b>' + esc(r.label) + '</b> <span class="sr">מקום ' + r.rank + '</span><p>' + mark(r.text) + '</p><p class="meta">' + r.issues.map(function (i) { return '<a href="#/issue/' + i + '">' + esc(ISS[i].short) + '</a>'; }).join(' · ') + '</p></div></li>'; }).join('') + '</ol>' +
-        '<p class="note add">' + ADDTAG + mark(A.rankAdded) + '</p>' +
         '<h2>המחנות בכל סוגיה</h2>' + issueChips(iss, 'an') +
         A.camps.filter(function (c) { return iss.indexOf(c.issue) >= 0; }).map(function (c) {
           return '<section class="camp"><h3><a href="#/issue/' + c.issue + '">' + esc(c.title.replace(/:$/, '')) + '</a></h3>' + campList(c) + '</section>';
         }).join('') +
-        '<h2>מחלוקות שחוצות את ציר ימין–שמאל</h2>' + items(A.crossAxis) + '<p class="note add">' + ADDTAG + mark(A.crossAxisAdded) + '</p>' +
-        '<h2>קווי המחלוקת המרכזיים (סיכום ניטרלי מתוך המסמך)</h2><ul>' + P.mainSplits.map(function (s) { return '<li>' + mark(s) + '</li>'; }).join('') +
-        P.mainSplitsAdded.map(function (s) { return '<li>' + ADDTAG + mark(s) + '</li>'; }).join('') + '</ul>';
+        '<h2>מחלוקות שחוצות את ציר ימין–שמאל</h2>' + items(A.crossAxis) +
+        '<h2>קווי המחלוקת המרכזיים (סיכום ניטרלי מתוך המסמך)</h2><ul>' + P.mainSplits.map(function (s) { return '<li>' + mark(s) + '</li>'; }).join('') + '</ul>';
     } else if (tab === 'consensus') {
-      h += '<h2>' + esc(A.headings.broad) + '</h2><p class="meta">הספירות בכותרות ובטקסט המקורי מתייחסות ל-12 הרשימות של המסמך; ההשפעה של רע"ם מופיעה בתוספות (‡).</p>' + items(A.consensusBroad) + addedItems(A.consensusBroadAdded) +
-        '<h2>' + esc(A.headings.partial) + '</h2>' + items(A.consensusPartial) + addedItems(A.consensusPartialAdded);
+      h += '<h2>' + esc(A.headings.broad) + '</h2>' + items(A.consensusBroad) +
+        '<h2>' + esc(A.headings.partial) + '</h2>' + items(A.consensusPartial);
     } else if (tab === 'overlaps') {
-      h += '<h2>חפיפות בין גושים</h2><ul class="items" style="list-style:none;padding:0">' + A.overlaps.map(function (s) { return '<li class="card">' + mark(s) + '</li>'; }).join('') + '</ul>' + addedItems(A.overlapsAdded) +
+      h += '<h2>חפיפות בין גושים</h2><ul class="items" style="list-style:none;padding:0">' + A.overlaps.map(function (s) { return '<li class="card">' + mark(s) + '</li>'; }).join('') + '</ul>' +
         '<h2>מחלוקת על עיקרון מול מחלוקת על מידה</h2>' + items(A.principleVsDegree);
     } else {
-      h += '<h2>מטריצה תמציתית (קודים קצרים)</h2><p class="note">' + esc(A.codeMatrixLegend) + ' שורת רע"ם (‡) נוספה באתר.</p><p><a class="btn" href="#/matrix">פתיחה במטריצה האינטראקטיבית</a></p>';
+      h += '<h2>מטריצה תמציתית (קודים קצרים)</h2><p class="note">' + esc(A.codeMatrixLegend) + '</p><p><a class="btn" href="#/matrix">פתיחה במטריצה האינטראקטיבית</a></p>';
       h += orderCtl() + legend(true) + matrixTable(P.issues.map(function (i) { return i.id; }), 'code');
     }
     return h;
@@ -537,17 +524,15 @@
   }
 
   function pageAbout() {
-    var raam = LIST.raam, joint = LIST.joint;
+    var joint = LIST.joint;
     return head('שיטה ומקורות', 'שיטה, ניטרליות ומקורות', '') +
       '<h2>עקרונות</h2><div class="principles"><div><b>בלי המלצה</b><p>אין באתר המלצה להצבעה, אין שאלון התאמה ואין ציון לעמדות.</p></div><div><b>במסגור הרשימה</b><p>כל עמדה מוצגת במסגור של הרשימה עצמה, ככל האפשר בלשונה, עם סוג המקור וקישור.</p></div><div><b>יחס שווה</b><p>כל הרשימות מוצגות באותו מבנה ובאותו סדר בכל העמודים. ' + esc(orderNote()) + '</p></div><div><b>צבעים ניטרליים</b><p>צבעי הרשימות עמומים ונקבעים לפי סדר האלף-בית של שמות הרשימות, ולא לפי צבעי המפלגות. החלוקה לגושים מבוססת על הצהרות הרשימות.</p></div></div>' + legend(true) +
       '<h2>שיטת המסמך</h2>' + P.meta.intro.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') +
-      '<h2>מה נוסף באתר (‡)</h2>' +
-      '<p class="note add"><b>רע"ם כרשימה מלאה.</b> מסמך המחקר המקורי כלל 12 רשימות ולא כלל את רע"ם, אף שממוצע הסקרים שלה (' + fmtN(avgOf('raam')) + ' מנדטים) גבוה מזה של שתי רשימות שנכללו. ב-20.10.2026 הוספנו את רע"ם באותה שיטה: פרופיל, עמדה בכל אחת מ-10 הסוגיות עם סוג מקור וקישור, ושילוב בניתוח הרוחבי (מחנות, דירוג, הסכמה, חפיפות ומטריצת הקודים). ' + esc(raam.platformStatus) + ' לכן כל עמדותיה מסומנות *. כל טקסט שנוסף מסומן ‡, וטקסט המסמך המקורי לא שונה.</p>' +
-      '<p class="note add"><b>בדיקת הרשימה המשותפת.</b> ' + esc(joint.verify.text) + ' ' + joint.verify.sources.map(function (u, k) { return srcLink(u, 'מקור ' + (k + 1)); }).join(' · ') + '</p>' +
-      '<h2>פערים ואי-ודאויות</h2><ul>' + P.gaps.map(function (g) { return '<li>' + esc(g) + '</li>'; }).join('') + P.gapsAdded.map(function (g) { return '<li>' + ADDTAG + esc(g) + '</li>'; }).join('') + '</ul>' +
+      '<p class="note"><b>בדיקת הרשימה המשותפת.</b> ' + esc(joint.verify.text) + ' ' + joint.verify.sources.map(function (u, k) { return srcLink(u, 'מקור ' + (k + 1)); }).join(' · ') + '</p>' +
+      '<h2>פערים ואי-ודאויות</h2><ul>' + P.gaps.map(function (g) { return '<li>' + esc(g) + '</li>'; }).join('') + '</ul>' +
       '<h2>מקורות כלליים</h2><ul class="srcs">' + P.generalSources.map(function (s) { return '<li>' + (s.url ? srcLink(s.url, s.label) : esc(s.label)) + '</li>'; }).join('') + '</ul>' +
       '<p>המקורות של כל רשימה מופיעים בעמוד הפרופיל שלה, ומקור לכל עמדה מופיע לצדה.</p>' +
-      '<h2>איך מתעדכנים הנתונים</h2><p>כל התוכן נמצא בקבצי נתונים: <a href="data/platforms.json">platforms.json</a> (רשימות, סוגיות ועמדות), <a href="data/analysis.json">analysis.json</a> (ניתוח רוחבי) ו-<a href="data/polls.json">polls.json</a> (סקרים). תוספות האתר (‡) נשמרות בנפרד בקובץ source/additions.json. עדכון נעשה בקבצים האלה בלבד. סקר חדש נוסף בעזרת הסקריפט tools/update_polls.py, שמחשב מחדש את הממוצע, את סכומי הגושים ואת המגמה. התיעוד המלא נמצא ב-<a href="' + REPO + '#readme" target="_blank" rel="noopener noreferrer">מאגר הקוד<span class="sr"> (נפתח בחלון חדש)</span></a>.</p>' +
+      '<h2>איך מתעדכנים הנתונים</h2><p>כל התוכן נמצא בקבצי נתונים: <a href="data/platforms.json">platforms.json</a> (רשימות, סוגיות ועמדות), <a href="data/analysis.json">analysis.json</a> (ניתוח רוחבי) ו-<a href="data/polls.json">polls.json</a> (סקרים). הקבצים נבנים מ-source/platforms.md ומ-source/additions.json. עדכון נעשה בקבצים האלה בלבד. סקר חדש נוסף בעזרת הסקריפט tools/update_polls.py, שמחשב מחדש את הממוצע, את סכומי הגושים ואת המגמה. התיעוד המלא נמצא ב-<a href="' + REPO + '#readme" target="_blank" rel="noopener noreferrer">מאגר הקוד<span class="sr"> (נפתח בחלון חדש)</span></a>.</p>' +
       '<h2>חותמות זמן</h2><ul><li>העמדות נכונות ל-' + fmtDate(P.meta.documentAsOf) + '.</li><li>קובצי הנתונים של המצעים נוצרו ב-' + fmtStamp(P.meta.generatedAt) + ' (מזהה גרסת המקור: <span class="ltr">' + esc(P.meta.sourceSha1) + '</span>).</li><li>נתוני הסקרים עודכנו ב-' + fmtStamp(D.meta.updatedAt) + '; הסקר האחרון מ-' + fmtDate(D.meta.latestPollDate) + '.</li></ul>' +
       '<h2>עיצוב ונגישות</h2><p>גופן Heebo (רישיון SIL OFL, מאוחסן באתר), מצב בהיר וכהה, ניגודיות AA, יעדי מגע של 48 פיקסלים לפחות, ניווט מלא במקלדת, וטבלה לכל גרף.</p>';
   }

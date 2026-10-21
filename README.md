@@ -1,6 +1,6 @@
 # השוואת מצעים – בחירות לכנסת 2026
 
-An interactive, neutral, Hebrew (RTL) comparison of the 2026 Knesset election platforms: 13 lists × 10 issues (12 from the source document + Ra'am, added by the site and marked ‡), a cross-cutting analysis, and a poll tracker.
+An interactive, neutral, Hebrew (RTL) comparison of the 2026 Knesset election platforms: 13 lists × 10 issues, a cross-cutting analysis, and a poll tracker.
 Election day: **27.10.2026**. Live site: https://dudidd-wq.github.io/elections-2026/
 
 Static HTML/CSS/JS. No build step and no dependencies. Every piece of content lives in `data/*.json`.
@@ -14,7 +14,7 @@ Static HTML/CSS/JS. No build step and no dependencies. Every piece of content li
 | `data/polls.json` | Polls (date, outlet, pollster, sample, seats, source URLs, verification), method, blocs, computed average, trend |
 | `source/platforms.md` | Copy of the canonical research document the platform data is generated from |
 | `tools/build_data.py` | Regenerates `platforms.json` and `analysis.json` from `source/platforms.md`, then merges `source/additions.json` |
-| `source/additions.json` | Site additions (‡): the Ra'am list (profile, 10 positions, sources), its analysis additions, and the Joint List verification note. Never edit the md for these. |
+| `source/additions.json` | Lists not covered by the md (currently Ra'am: profile, 10 positions, sources, analysis text merged into the regular analysis items) and the Joint List verification note. Merged exactly like every other list – no special marking. Never edit the md for these. |
 | `tools/update_polls.py` | Adds or imports polls and recomputes the average, ranges, bloc sums and trend |
 | `sw.js` | Service worker (network-first, offline fallback). **Bump `VERSION` on every deploy.** |
 
@@ -50,7 +50,6 @@ After an import, spot-check new rows against their original links. You can set `
 - Every list gets the same layout. The ordering is explicit: alphabetical by default, or by poll average, and the user can switch.
 - Bloc definitions follow the lists' own declarations as recorded in the source document. Colors are neutral, not party colors.
 - `*` marks positions based on statements or votes rather than a written platform. `†` marks the two lists added on 20.10.2026.
-- `‡` marks site additions that are not in the source document (Ra'am and its analysis additions). The original text is unchanged.
 - The Joint List (Hadash + Ta'al + Balad) appears as one list in every poll; there is no separate Balad column.
 
 ## Local preview
