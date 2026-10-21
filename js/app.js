@@ -207,7 +207,8 @@
       '<div class="count">' + kpiDays +
       '<div class="kpi"><b>' + nLists() + '</b><span>רשימות</span></div><div class="kpi"><b>10</b><span>סוגיות</span></div>' +
       '<div class="kpi"><b>' + D.polls.length + '</b><span>סקרים · אחרון ' + fmtShort(c.asOf) + '</span></div></div>' +
-      '<div class="controls"><a class="btn" href="#/matrix">למטריצת העמדות</a><a class="btn sec" href="#/compare">השוואה בין רשימות</a></div>' + asOfLine() + '</div>' +
+      '<div class="controls"><a class="btn" href="#/matrix">למטריצת העמדות</a><a class="btn sec" href="#/compare">השוואה בין רשימות</a></div>' +
+      '<p class="pod-clip hero-clip"><a href="clip-site/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>סרטון היכרות קצר עם האתר (כ-2.5 דקות)</a></p>' + asOfLine() + '</div>' +
       '<div class="arc-card"><div class="arc-head"><h2>ממוצע הסקרים, כמושבים</h2><span class="meta">' + c.n + ' סקרים, ' + fmtShort(c.window[0]) + '–' + fmtShort(c.window[1]) + '</span></div>' +
       '<div class="arc" id="arc">' + arcSvg(seats) + '</div>' +
       '<ul class="arc-legend" aria-label="מושבים לפי רשימה">' + ids.map(function (id) { return '<li><button type="button" data-arc="' + id + '" aria-label="' + esc(lname(id) + ': ' + seats[id] + ' מושבים (ממוצע ' + fmtN(avgOf(id)) + '), לפרופיל הרשימה') + '">' + dot(id) + '<span>' + esc(lname(id)) + '</span><b>' + seats[id] + '</b></button></li>'; }).join('') + '</ul>' +

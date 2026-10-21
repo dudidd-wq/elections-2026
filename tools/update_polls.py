@@ -168,9 +168,10 @@ def main():
     c = d['computed']
     print('polls:', len(d['polls']), '| latest:', c['asOf'], '| window:', c['window'], '| n:', c['n'])
     print('average:', ' '.join(f"{k}={v}" for k, v in sorted(c['average'].items(), key=lambda x: -x[1])))
-    # clip B (/clip-site/) embeds the poll averages: regenerate it from the new data (fails loudly on any mismatch)
+    # clip B (/clip-site/) embeds the poll averages: regenerate it from the new data (non-fatal for the routine: on any mismatch the old, dated site-data.js is kept and a WARNING is printed)
     import subprocess
-    subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'build_clip_site.py')], check=True)
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'build_clip_site.py')])
+    if r.returncode: print('WARNING: build_clip_site.py failed - clip-site/site-data.js NOT updated (it keeps its previous, dated data). Fix before the next commit.', file=sys.stderr)
 
 if __name__ == '__main__':
     main()
