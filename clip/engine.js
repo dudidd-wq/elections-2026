@@ -85,6 +85,24 @@
     });
   }
 
+  // ---------- Hebrew line-break hygiene (textContent is left byte-identical): a word joined by a hyphen, maqaf or dash
+  // (האלף-בית, הנדל–זליכה, הדתית–זהות) never breaks inside, and a spaced dash never starts a line (it is kept with the
+  // word before it). Custom inline tags, so no scene CSS (e.g. '.lchip span') applies to them; inside a flex/grid
+  // container the whole text run is wrapped once, so it stays a single item exactly like the original anonymous text.
+  var JOINED = /[^\s]+(?:[-\u2010\u2011\u2013\u2014\u05be][^\s]+)+(?: [-\u2013\u2014](?=\s))?|[^\s]+ [-\u2013\u2014](?=\s)/g;
+  function tidy(root) {
+    var tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), nodes = [], n;
+    while ((n = tw.nextNode())) if (!n.parentNode.closest('.w,x-nw,svg,.ltr')) nodes.push(n);
+    nodes.forEach(function (t) {
+      var d = t.data; JOINED.lastIndex = 0; if (!JOINED.test(d)) return;
+      var box = /flex|grid/.test(getComputedStyle(t.parentNode).display) ? document.createElement('x-tx') : document.createDocumentFragment();
+      var last = 0, m; JOINED.lastIndex = 0;
+      while ((m = JOINED.exec(d))) { if (m.index > last) box.appendChild(document.createTextNode(d.slice(last, m.index))); var sp = document.createElement('x-nw'); sp.textContent = m[0]; box.appendChild(sp); last = m.index + m[0].length; }
+      if (last < d.length) box.appendChild(document.createTextNode(d.slice(last)));
+      t.parentNode.replaceChild(box, t);
+    });
+  }
+
   // ---------- run
   function run(cfg) {
     var app = document.getElementById('app'), stage = document.getElementById('stage'), host = document.getElementById('scenes');
@@ -94,7 +112,7 @@
     SC.forEach(function (s) {
       s.b0 = b0; s.start = b0 * SPB; b0 += s.beats;
       var el = document.createElement('section'); el.className = 'scene ' + s.cls; el.setAttribute('aria-hidden', 'true');
-      el.innerHTML = '<div class="inner">' + s.html + '</div>'; host.appendChild(el); s.el = el;
+      el.innerHTML = '<div class="inner">' + s.html + '</div>'; host.appendChild(el); tidy(el); s.el = el;
       s.anims = [].map.call(el.querySelectorAll('[data-in]'), function (n) {
         n.classList.add('a'); var t = n.getAttribute('data-a') || 'up'; if (CALM && t !== 'fade') t = 'fade';
         return { el: n, t0: +n.getAttribute('data-in'), d: +(n.getAttribute('data-d') || .9), out: n.hasAttribute('data-out') ? +n.getAttribute('data-out') : null, type: t, last: -1 };
@@ -169,9 +187,9 @@
       s.transform = y ? 'translate3d(0,' + y + 'px,0)' : '';
       s.clipPath = clip;
     }
-    function transition(s, lt) { // calm dip through the paper: fade in .5 s, fade out over the last .45 s
-      var op = Math.min(eo(clamp(lt / .5)), s.x.last ? 1 : eo(clamp((s.dur - lt) / .45)));
-      if (s.tr === 'none' && lt < .5) op = 1;
+    function transition(s, lt) { // calm, short dip through the paper: fade in .4 s, fade out over the last .35 s
+      var op = Math.min(eo(clamp(lt / .4)), s.x.last ? 1 : eo(clamp((s.dur - lt) / .35)));
+      if (s.tr === 'none' && lt < .4) op = 1;
       s.el.style.opacity = op >= 1 ? '' : op.toFixed(3);
     }
     function render(T) {

@@ -79,7 +79,7 @@
 
   scene('close', 'סיום', 3, 's-close',
     '<p class="eyebrow"' + A(.5, 'up') + '>לכל הפרטים</p>' +
-    '<h2>' + mask('כל העמדות, המקורות והסקרים', 1) + mask('– באתר', 1.6) + '</h2>' +
+    '<h2>' + mask('כל העמדות, המקורות', 1) + mask('והסקרים – באתר', 1.6) + '</h2>' +
     '<a class="url" href="' + D.site + '" target="_top" rel="noopener" tabindex="-1"' + A(3.5, 'up') + '>' + IC.link + '<span class="ltr">dudidd-wq.github.io/elections-2026</span></a>' +
     '<p class="neutral"' + A(5, 'up') + '><b>אתר מידע ניטרלי.</b> אין בו המלצה להצבעה · המסמך נכון ל-' + esc(D.updated) + ' · הסקרים נכון ל-' + esc(P.asOf) + '</p>', { last: true });
 

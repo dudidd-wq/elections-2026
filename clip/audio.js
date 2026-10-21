@@ -1,12 +1,13 @@
 /* Clip soundtrack v3 – serious, warm "news-explainer" score, fully generated with the Web Audio API
-   (no recorded or copyrighted audio): soft piano motif, warm string pad, round bass, light percussion pulse.
+   (no recorded or copyrighted audio): soft piano motif, warm string pad with an airy high string layer, round bass, light percussion pulse
+   (heartbeat kick, brushed rim, gentle closed hi-hat + shaker). v3.1: brighter, more open mix (air shelf, low-mid trim).
    90 BPM, A minor. A deterministic score is built from the clip timeline (sections in bars, scene cuts, number
    reveals), then scheduled live (ClipAudio.Live) or rendered offline (ClipAudio.renderOffline) for the MP4.
    Shared by /clip/ and /clip-site/. */
 (function () {
   'use strict';
   var BPM = 90, SPB = 60 / BPM, BAR = 4 * SPB;
-  var MG = .61;                         // master gain after the limiter (tuned for ~-16 LUFS integrated)
+  var MG = .66;                         // master gain after the limiter (tuned for ~-16 LUFS integrated)
   // chords (bass root, voicing) – section-relative progressions so every list gets the identical musical bed
   var CH = {
     Am: { r: 45, v: [57, 60, 64, 69] }, F: { r: 41, v: [53, 57, 60, 65] }, C: { r: 48, v: [55, 60, 64, 67] },
@@ -34,7 +35,7 @@
         var lastOfList = m === 'list' && rb % prog.length === prog.length - 1;
         add(t, 'lvl', { g: m === 'build' ? LVL.build + .14 * rb / Math.max(1, nb - 1) : LVL[m] });
         // string pad: every bar (warm bed); brighter in build/peak
-        if (m !== 'tail') add(t, 'pad', { n: ch.v, d: BAR, v: m === 'reflect' || m === 'intro' ? .8 : 1, cut: m === 'peak' ? 3200 : m === 'build' ? 1100 + 1300 * rb / Math.max(1, nb - 1) : m === 'intro' ? 1200 : 2100 });
+        if (m !== 'tail') add(t, 'pad', { n: ch.v, d: BAR, v: m === 'reflect' || m === 'intro' ? .8 : 1, cut: m === 'peak' ? 5200 : m === 'build' ? 2200 + 2400 * rb / Math.max(1, nb - 1) : m === 'intro' || m === 'reflect' ? 2600 : 3800 });
         // bass
         if (m !== 'intro' && m !== 'tail') {
           if (m === 'reflect' || m === 'a' || m === 'outro') add(t, 'bass', { n: ch.r, d: BAR * .96, v: .9 });
@@ -61,7 +62,9 @@
           if (m === 'peak' || m === 'list' || m === 'build') { add(t + SPB, 'rim', { v: m === 'peak' ? 1 : .7 }); if (!dropLastBeat) add(t + 3 * SPB, 'rim', { v: m === 'peak' ? 1 : .7 }); }
           var step = m === 'build' && rb >= nb - 2 ? 4 : 2;
           for (var q = 0; q < 4 * step; q++) { if (dropLastBeat && q >= 3 * step) break; add(t + q * SPB / step, 'shaker', { v: (q % step === step / 2 ? .9 : .5) * (m === 'peak' ? 1 : .8) }); }
-        } else if (m === 'a') for (var q2 = 0; q2 < 8; q2++) add(t + q2 * SPB / 2, 'shaker', { v: q2 % 2 ? .45 : .25 });
+          for (var hh = 0; hh < 8; hh++) { if (dropLastBeat && hh >= 6) break; add(t + hh * SPB / 2, 'hat', { v: (hh % 2 ? .85 : .45) * (m === 'peak' ? 1.1 : m === 'outro' ? .7 : 1) }); }
+        } else if (m === 'a') { for (var q2 = 0; q2 < 8; q2++) add(t + q2 * SPB / 2, 'shaker', { v: q2 % 2 ? .5 : .3 }); for (var h2 = 0; h2 < 4; h2++) add(t + (h2 + .5) * SPB, 'hat', { v: .5 }); }
+        else if (m === 'reflect') for (var h3 = 0; h3 < 4; h3++) add(t + (h3 + .5) * SPB, 'hat', { v: .35 });
         // gentle swell into the key finding (last bar of the build) and into the outro
         if (m === 'build' && last) add(t, 'swell', { d: BAR, v: 1 });
         if (m === 'peak' && rb === 0) add(t, 'cym', { v: .8 });
@@ -91,10 +94,13 @@
     var G = { ctx: ctx, noise: noiseBuf(ctx), shk: [1, 2, 3, 4].map(function (k) { return shortNoise(ctx, 20 + k); }) };
     var comp = ctx.createDynamicsCompressor(); comp.threshold.value = -20; comp.knee.value = 12; comp.ratio.value = 2.2; comp.attack.value = .02; comp.release.value = .3;
     var lim = ctx.createDynamicsCompressor(); lim.threshold.value = -5; lim.knee.value = 0; lim.ratio.value = 20; lim.attack.value = .002; lim.release.value = .12;
-    var hs = ctx.createBiquadFilter(); hs.type = 'highshelf'; hs.frequency.value = 6000; hs.gain.value = -1;   // keep the top end soft
-    var out = ctx.createGain(); out.gain.value = MG; comp.connect(hs); hs.connect(lim); lim.connect(out); out.connect(dest);
+    var hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 32; hp.Q.value = .6;          // no sub rumble
+    var ls = ctx.createBiquadFilter(); ls.type = 'lowshelf'; ls.frequency.value = 160; ls.gain.value = -4;      // less boom / mud
+    var pk = ctx.createBiquadFilter(); pk.type = 'peaking'; pk.frequency.value = 2800; pk.Q.value = .7; pk.gain.value = 3;  // presence
+    var hs = ctx.createBiquadFilter(); hs.type = 'highshelf'; hs.frequency.value = 7000; hs.gain.value = 2.5;     // air
+    var out = ctx.createGain(); out.gain.value = MG; comp.connect(hp); hp.connect(ls); ls.connect(pk); pk.connect(hs); hs.connect(lim); lim.connect(out); out.connect(dest);
     var rev = ctx.createConvolver(); rev.buffer = impulse(ctx); var revG = ctx.createGain(); revG.gain.value = .5; rev.connect(revG); revG.connect(comp);
-    var del = ctx.createDelay(1.5); del.delayTime.value = SPB * .75; var fb = ctx.createGain(); fb.gain.value = .25; var dlp = ctx.createBiquadFilter(); dlp.type = 'lowpass'; dlp.frequency.value = 2400;
+    var del = ctx.createDelay(1.5); del.delayTime.value = SPB * .75; var fb = ctx.createGain(); fb.gain.value = .25; var dlp = ctx.createBiquadFilter(); dlp.type = 'lowpass'; dlp.frequency.value = 4500;
     del.connect(dlp); dlp.connect(fb); fb.connect(del); var delG = ctx.createGain(); delG.gain.value = .22; dlp.connect(delG); delG.connect(comp);
     G.comp = comp; G.out = out; G.rev = rev; G.del = del;
     return G;
@@ -112,11 +118,17 @@
     fade: function (G, B, t, p) { G.out.gain.setTargetAtTime(0, t, p.tc); },
     piano: function (G, B, t, p) { // 3 partials, hammer-like attack, long natural decay, gentle lowpass
       var c = G.ctx, f = hz(p.n), lp = c.createBiquadFilter(), g = c.createGain(), d = p.d || 1.2, stop = t + d + 2.1;
-      lp.type = 'lowpass'; lp.frequency.setValueAtTime(Math.min(7000, f * 9), t); lp.frequency.setTargetAtTime(Math.min(4200, f * 5), t, .25);
+      lp.type = 'lowpass'; lp.frequency.setValueAtTime(Math.min(12000, f * 16), t); lp.frequency.setTargetAtTime(Math.min(7000, f * 8), t, .3);
       var amp = (p.mel ? .16 : .1) * p.v;
       g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(amp, t + .006); g.gain.setTargetAtTime(amp * .35, t + .006 + .0007, .28); g.gain.setTargetAtTime(0, t + d + .0007, .3);
-      [[1, 1, 0], [2, .36, 3], [3, .14, -4], [4.01, .07, 0], [5.02, .03, 2]].forEach(function (x) { var o = osc(c, 'sine', f * x[0], t, stop, x[2]), og = c.createGain(); og.gain.value = x[1]; o.connect(og); og.connect(lp); });
+      [[1, 1, 0], [2, .46, 3], [3, .22, -4], [4.01, .12, 0], [5.02, .07, 2], [6.04, .035, -3], [7.05, .018, 4]].forEach(function (x) { var o = osc(c, 'sine', f * x[0], t, stop, x[2]), og = c.createGain(); og.gain.value = x[1]; o.connect(og); og.connect(lp); });
       lp.connect(g); g.connect(B.s); g.connect(B.rv); if (p.mel) g.connect(B.dl);
+      if (f > 180) { // felt-hammer touch: a very short, soft band of noise at the attack (gives the piano its 'air')
+        var hn = c.createBufferSource(), hb = c.createBiquadFilter(), hg = c.createGain(); hn.buffer = G.shk[(p.n + (p.mel ? 1 : 0)) % 4];
+        hb.type = 'bandpass'; hb.frequency.value = Math.min(9000, f * 6); hb.Q.value = 1.4;
+        hg.gain.setValueAtTime(0, t); hg.gain.linearRampToValueAtTime(amp * .22, t + .002); hg.gain.setTargetAtTime(0, t + .0027, .012);
+        hn.start(t); hn.stop(t + .12); hn.connect(hb); hb.connect(hg); hg.connect(B.s);
+      }
     },
     pad: function (G, B, t, p) { // warm string ensemble: detuned saws, slow attack, lowpass
       var c = G.ctx, lp = c.createBiquadFilter(), g = c.createGain(), d = p.d, stop = t + d + 1.4;
@@ -125,11 +137,17 @@
       g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(a, t + .7); g.gain.setValueAtTime(a, t + d - .1); g.gain.linearRampToValueAtTime(0, t + d + 1.2);
       p.n.forEach(function (m, i) { [-7, 0, 7].forEach(function (dt) { var o = osc(c, 'sawtooth', hz(m), t, stop, dt + (i - 1.5) * 1.3); o.connect(lp); }); });
       lp.connect(g); g.connect(B.s); g.connect(B.rv);
+      // airy high strings: the top two voices an octave up, band-limited, slow bow, mostly into the reverb (shimmer)
+      var hp2 = c.createBiquadFilter(), lp2 = c.createBiquadFilter(), g2 = c.createGain(), a2 = .0075 * p.v;
+      hp2.type = 'highpass'; hp2.frequency.value = 1500; lp2.type = 'lowpass'; lp2.frequency.value = 9000;
+      g2.gain.setValueAtTime(0, t); g2.gain.linearRampToValueAtTime(a2, t + 1.1); g2.gain.setValueAtTime(a2, t + d - .1); g2.gain.linearRampToValueAtTime(0, t + d + 1.2);
+      p.n.slice(2).forEach(function (m, i) { [-5, 5].forEach(function (dt) { osc(c, 'sawtooth', hz(m + 12), t, stop, dt + i * 2).connect(hp2); }); });
+      hp2.connect(lp2); lp2.connect(g2); g2.connect(B.s); g2.connect(B.rv);
     },
     bass: function (G, B, t, p) {
       var c = G.ctx, f = hz(p.n), lp = c.createBiquadFilter(), g = c.createGain(), stop = t + p.d + .4;
       lp.type = 'lowpass'; lp.frequency.value = 520; lp.Q.value = .7;
-      var a = .13 * p.v; g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(a, t + .015); g.gain.setTargetAtTime(a * .7, t + .015 + .0007, .3); g.gain.setTargetAtTime(0, t + p.d * .92 + .0007, .06);
+      var a = .105 * p.v; g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(a, t + .015); g.gain.setTargetAtTime(a * .7, t + .015 + .0007, .3); g.gain.setTargetAtTime(0, t + p.d * .92 + .0007, .06);
       osc(c, 'sine', f, t, stop).connect(lp); var tri = osc(c, 'triangle', f * 2, t, stop), tg = c.createGain(); tg.gain.value = .25; tri.connect(tg); tg.connect(lp);
       lp.connect(g); g.connect(B.s);
     },
@@ -144,9 +162,15 @@
     },
     shaker: function (G, B, t, p) {
       var c = G.ctx, n = c.createBufferSource(), hp = c.createBiquadFilter(), g = c.createGain(); hp.type = 'bandpass'; hp.frequency.value = 7000; hp.Q.value = 1.2;
-      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.075 * p.v, t + .012); g.gain.linearRampToValueAtTime(.02 * p.v, t + .04); g.gain.linearRampToValueAtTime(0, t + .11);
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.1 * p.v, t + .012); g.gain.linearRampToValueAtTime(.026 * p.v, t + .04); g.gain.linearRampToValueAtTime(0, t + .11);
       n.buffer = G.shk[Math.round(t * 3) % 4]; n.start(t); n.stop(t + .13);
       n.connect(hp); hp.connect(g); g.connect(B.s);
+    },
+    hat: function (G, B, t, p) { // gentle closed hi-hat (high-passed noise, very short)
+      var c = G.ctx, n = c.createBufferSource(), hp = c.createBiquadFilter(), g = c.createGain(); hp.type = 'highpass'; hp.frequency.value = 7500; hp.Q.value = .7; var hl = c.createBiquadFilter(); hl.type = 'lowpass'; hl.frequency.value = 12500;
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.055 * p.v, t + .0015); g.gain.setTargetAtTime(0, t + .0022, .022);
+      n.buffer = G.shk[(Math.round(t * 4) + 2) % 4]; n.start(t); n.stop(t + .14);
+      n.connect(hp); hp.connect(hl); hl.connect(g); g.connect(B.s); g.connect(B.rv);
     },
     cym: function (G, B, t, p) { // soft cymbal bloom
       var c = G.ctx, n = noiseSrc(G, t, 4.4), hp = c.createBiquadFilter(), g = c.createGain(); hp.type = 'highpass'; hp.frequency.value = 4500;
