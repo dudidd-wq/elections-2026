@@ -89,7 +89,27 @@ def recompute(d):
     d['meta']['pollCount'] = len(polls)
     return d
 
+IIE_HEAD = {'Likud': 'likud', 'Yashar!': 'yashar', 'Together': 'beyachad', 'Democrats': 'dems', 'Joint List': 'joint',
+            'Otzma': 'otzma', 'United Torah': 'utj', 'Shas': 'shas', 'Yisrael Beiteinu': 'yb', 'Religious Zionism': 'rzz',
+            "Ra'am": 'raam', 'Reservists': 'miluim', 'Amcha': 'amcha', 'Blue and White': 'bw'}
+
+def iie_cols(text):
+    # column order is read from the table header (the tracker reordered columns on 21-22.10.2026)
+    st = text.find('newest first')
+    th = text[text.find('<thead', st):]
+    th = html.unescape(th[:th.find('</thead>')])
+    cols = []
+    for cell in re.findall(r'<th[^>]*>(.*?)</th>', th, re.S):
+        c = re.sub('<[^>]+>', ' ', cell)
+        hit = [v for k, v in IIE_HEAD.items() if k in c]
+        if len(hit) == 1:
+            cols.append(hit[0])
+    if sorted(cols) != sorted(IIE_COLS):
+        sys.exit('iie header not recognised: ' + repr(cols))
+    return cols
+
 def parse_iie(text, since):
+    cols = iie_cols(text)
     tb = text[text.find('<tbody', text.find('newest first')):]
     tb = tb[:tb.find('</tbody>')]
     out = []
@@ -109,7 +129,7 @@ def parse_iie(text, since):
             sample = int(ms.group(1).replace(',', ''))
         outl = outl.split(' · ')[0].strip()
         nums = [clean(x) for x in tds[2:2 + len(IIE_COLS)]]
-        seats = {k: (int(v) if v.isdigit() else None) for k, v in zip(IIE_COLS, nums)}
+        seats = {k: (int(v) if v.isdigit() else None) for k, v in zip(cols, nums)}
         links = [html.unescape(u) for u in re.findall(r'href="([^"]+)"', tds[2 + len(IIE_COLS)])]
         prim = [u for u in links if 'web.archive.org' not in u]
         out.append({'date': date, 'outletEn': outl, 'outlet': OUTLETS.get(outl, outl), 'pollsterEn': pollster,
