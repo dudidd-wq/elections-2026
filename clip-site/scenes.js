@@ -86,11 +86,11 @@
     '<div class="mvgrid">' + P.moves.map(function (m, i) { return '<div class="mv card"' + A(1.6 + i * .4, 'up') + '><b class="nm">' + esc(m.name) + '</b><span class="ft ltr num">' + m.from.toFixed(1) + ' → ' + m.to.toFixed(1) + '</span><span class="dl">' + sgn(m.d) + '</span></div>'; }).join('') + '</div>' +
     '<p class="foot"' + A(3.6, 'fade') + '>' + esc(P.silence) + '</p>');
 
-  var NAVIC = { matrix: IC.grid, issue: IC.search, list: IC.columns, compare: IC.columns, analysis: IC.chart, polls: IC.chart, podcasts: IC.mic, about: IC.info };
+  var NAVIC = { matrix: IC.grid, issue: IC.search, list: IC.columns, compare: IC.columns, analysis: IC.chart, polls: IC.chart, podcasts: IC.mic, coalition: IC.columns, about: IC.info };
   scene('howto', 'באתר', 2, 's-howto',
     '<p class="eyebrow"' + A(0, 'up') + '>איך משתמשים באתר</p>' +
     '<h2>' + mask('כל עמדה – בניסוח המלא ועם קישור למקור', .2) + '</h2>' +
-    '<div class="navgrid">' + D.nav.map(function (n, i) { return '<div class="navc card"' + A(1 + i * .2, 'up') + '>' + (NAVIC[n.id] || IC.info) + '<b>' + esc(n.label) + '</b></div>'; }).join('') + '</div>');
+    '<div class="navgrid"' + (D.nav.length > 8 ? ' style="grid-template-columns:repeat(5,1fr)"' : '') + '>' + D.nav.map(function (n, i) { return '<div class="navc card"' + A(1 + i * .2, 'up') + '>' + (NAVIC[n.id] || IC.info) + '<b>' + esc(n.label) + '</b></div>'; }).join('') + '</div>');
 
   scene('close', 'סיום', 2, 's-close',
     '<p class="eyebrow"' + A(0, 'up') + '>לכל הפרטים</p>' +

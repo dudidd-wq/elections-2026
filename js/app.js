@@ -103,6 +103,7 @@
     analysis: '<path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/>',
     polls: '<path d="M5 20V11M10 20V6M15 20v-7M20 20V9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
     podcasts: '<rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+    coalition: '<path d="M3 19a9 9 0 0 1 18 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 6v13" stroke="currentColor" stroke-width="1.8" stroke-dasharray="2 2.2"/><circle cx="7" cy="15" r="1.6" fill="currentColor"/><circle cx="17" cy="15" r="1.6" fill="currentColor"/>',
     about: '<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v6M12 7.5v.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
   };
   function icon(k) { return '<span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24">' + ICON[k] + '</svg></span>'; }
@@ -221,6 +222,7 @@
       card('#/compare', 'השוואה', 'בחירה של 2–3 רשימות והשוואה ביניהן זו לצד זו.', 'compare') +
       card('#/analysis', 'ניתוח רוחבי', 'קווי המחלוקת החדים, המכנה המשותף והחפיפות בין הגושים.', 'analysis') +
       card('#/polls', 'סקרים', 'ממוצע, טווח, סכומי גושים וקו 61, מגמה וטבלת כל הסקרים.', 'polls') +
+      card('#/coalition', 'בנה קואליציה', 'בחירת רשימות, הערכת מנדטים מול קו 61 והשוואה מתמטית של העמדות המוצהרות בכל סוגיה. לא תחזית ולא המלצה.', 'coalition') +
       card('#/podcasts', 'פודקאסטים וראיונות', 'מה אמרו ראשי הרשימות בפודקאסטים ובראיונות ארוכים בחודש שלפני הבחירות, עם קישורים וציטוטים מאומתים.', 'podcasts') +
       '</div>' +
       '<h2>10 הסוגיות</h2><nav class="issue-strip" aria-label="מעבר לסוגיה">' + P.issues.map(function (i) { return '<a href="#/issue/' + i.id + '"><span class="n">' + i.n + '</span>' + esc(i.short) + '</a>'; }).join('') + '</nav>' +
@@ -532,6 +534,7 @@
       '<h2>עקרונות</h2><div class="principles"><div><b>בלי המלצה</b><p>אין באתר המלצה להצבעה, אין שאלון התאמה ואין ציון לעמדות.</p></div><div><b>במסגור הרשימה</b><p>כל עמדה מוצגת במסגור של הרשימה עצמה, ככל האפשר בלשונה, עם סוג המקור וקישור.</p></div><div><b>יחס שווה</b><p>כל הרשימות מוצגות באותו מבנה ובאותו סדר בכל העמודים. ' + esc(orderNote()) + '</p></div><div><b>צבעים ניטרליים</b><p>צבעי הרשימות עמומים ונקבעים לפי סדר האלף-בית של שמות הרשימות, ולא לפי צבעי המפלגות. החלוקה לגושים מבוססת על הצהרות הרשימות.</p></div></div>' + legend(true) +
       '<h2>שיטת המסמך</h2>' + P.meta.intro.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') +
       '<p class="note"><b>בדיקת הרשימה המשותפת.</b> ' + esc(joint.verify.text) + ' ' + joint.verify.sources.map(function (u, k) { return srcLink(u, 'מקור ' + (k + 1)); }).join(' · ') + '</p>' +
+      '<h2>בונה הקואליציה</h2><p>בעמוד <a href="#/coalition">בנה קואליציה</a> יש מדד קרבה שמשווה את העמדות המוצהרות של רשימות זו לזו, לפי הקידוד של הניתוח הרוחבי. הוא לא מדרג עמדות, לא תחזית ולא המלצה, ואינו מתחשב בהצהרות על שותפויות. השיטה, הקידוד המלא והמגבלות מפורטים בעמוד עצמו.</p>' +
       '<h2>פערים ואי-ודאויות</h2><ul>' + P.gaps.map(function (g) { return '<li>' + esc(g) + '</li>'; }).join('') + '</ul>' +
       '<h2>מקורות כלליים</h2><ul class="srcs">' + P.generalSources.map(function (s) { return '<li>' + (s.url ? srcLink(s.url, s.label) : esc(s.label)) + '</li>'; }).join('') + '</ul>' +
       '<p>המקורות של כל רשימה מופיעים בעמוד הפרופיל שלה, ומקור לכל עמדה מופיע לצדה.</p>' +
@@ -598,7 +601,326 @@
   function foot() {
     document.getElementById('foot').innerHTML =
       '<p><b>אתר מידע ניטרלי.</b> אין בו המלצה להצבעה. העמדות נכונות ל-' + fmtDate(P.meta.documentAsOf) + '; הסקרים עודכנו ב-' + fmtStamp(D.meta.updatedAt) + ' (סקר אחרון: ' + fmtDate(D.meta.latestPollDate) + ', ' + D.polls.length + ' סקרים).</p>' +
-      '<p><a href="#/about">שיטה ומקורות</a> · <a href="data/platforms.json">platforms.json</a> · <a href="data/analysis.json">analysis.json</a> · <a href="data/polls.json">polls.json</a> · <a href="data/podcasts.json">podcasts.json</a> · <a href="' + REPO + '" target="_blank" rel="noopener noreferrer">קוד המקור<span class="sr"> (נפתח בחלון חדש)</span></a></p>';
+      '<p><a href="#/about">שיטה ומקורות</a> · <a href="data/platforms.json">platforms.json</a> · <a href="data/analysis.json">analysis.json</a> · <a href="data/polls.json">polls.json</a> · <a href="data/podcasts.json">podcasts.json</a> · <a href="data/coalition.json">coalition.json</a> · <a href="' + REPO + '" target="_blank" rel="noopener noreferrer">קוד המקור<span class="sr"> (נפתח בחלון חדש)</span></a></p>';
+  }
+
+  // ---------- coalition builder (#/coalition; data/coalition.json, loaded on demand)
+  // A mathematical comparison of declared positions as coded in the cross-cutting analysis. Not a forecast, not a recommendation.
+  var CO = null, COerr = '', CX = null;
+  function loadCoalition() { return getJSON('data/coalition.json').then(function (d) { CO = d; coPrep(); }).catch(function (e) { COerr = e.message || 'שגיאה'; }); }
+  function alpha(ids) { return ids.slice().sort(function (a, b) { return COLL.compare(lname(a), lname(b)); }); }
+  function coPrep() {
+    var ids = P.lists.map(function (l) { return l.id; });
+    CX = { ids: alpha(ids), d: {}, s10: {} };
+    ids.forEach(function (id) { CX.s10[id] = Math.round(avgOf(id) * 10); });
+    CO.issues.forEach(function (is) {
+      var k = is.camps.length, cons = is.consensus ? is.consensus.members : [], m = {};
+      function dc(x, y, a, b) {
+        if (x === y) return 0;
+        if (is.scale === 'ordinal') return Math.abs(x - y) / (k - 1);
+        if (is.scale === 'degree' && cons.indexOf(a) >= 0 && cons.indexOf(b) >= 0) return 0.5;
+        return 1;
+      }
+      ids.forEach(function (a) {
+        m[a] = {};
+        ids.forEach(function (b) {
+          var A1 = is.lists[a], B1 = is.lists[b];
+          if (!A1 || !B1) { m[a][b] = null; return; }
+          var s1 = 0, s2 = 0;
+          A1.camps.forEach(function (x) { s1 += Math.min.apply(null, B1.camps.map(function (y) { return dc(x, y, a, b); })); });
+          B1.camps.forEach(function (y) { s2 += Math.min.apply(null, A1.camps.map(function (x) { return dc(x, y, a, b); })); });
+          m[a][b] = (s1 / A1.camps.length + s2 / B1.camps.length) / 2;
+        });
+      });
+      CX.d[is.id] = m;
+    });
+  }
+  function coState(q) {
+    var l = (q.l || '').split(',').filter(function (x, i, a) { return LIST[x] && a.indexOf(x) === i; });
+    return {
+      l: alpha(l),
+      w: CO.issues.map(function (is, k) { var c = (q.w || '').charAt(k); return /^[0-3]$/.test(c) ? +c : 1; }),
+      sw: q.s === '0' ? 0 : q.s === '10' ? 1 : 0.5,
+      th: q.th === 'all', must: LIST[q.must] ? q.must : '', nd: q.nd === '1',
+      view: q.view === 'list' ? 'list' : 'score', sort: q.sort === 'gap' ? 'gap' : 'n', all: q.all === '1'
+    };
+  }
+  function coHash(st, over) {
+    var s = Object.assign({}, st, over || {}), q = [];
+    if (s.l.length) q.push('l=' + alpha(s.l).join(','));
+    if (s.w.some(function (x) { return x !== 1; })) q.push('w=' + s.w.join(''));
+    if (s.sw !== 0.5) q.push('s=' + (s.sw === 0 ? '0' : '10'));
+    if (s.th) q.push('th=all');
+    if (s.must) q.push('must=' + s.must);
+    if (s.nd) q.push('nd=1');
+    if (s.view === 'list') q.push('view=list');
+    if (s.sort === 'gap') q.push('sort=gap');
+    if (s.all) q.push('all=1');
+    return '#/coalition' + (q.length ? '?' + q.join('&') : '');
+  }
+  function coCf(id, iid, sw) { return P.positions[id][iid].star ? sw : 1; }
+  function coSum10(set) { return set.reduce(function (s, id) { return s + CX.s10[id]; }, 0); }
+  function coScore(set, st, sw) {
+    if (sw == null) sw = st.sw;
+    var num = 0, den = 0, cov = 0, tot = 0;
+    CO.issues.forEach(function (is, k) {
+      var wi = st.w[k], m = CX.d[is.id]; if (!wi) return;
+      for (var i = 0; i < set.length; i++) for (var j = i + 1; j < set.length; j++) {
+        tot++;
+        var d = m[set[i]][set[j]]; if (d == null) continue;
+        var w = wi * coCf(set[i], is.id, sw) * coCf(set[j], is.id, sw); if (!w) continue;
+        cov++; num += w * (1 - d); den += w;
+      }
+    });
+    return { score: den ? num / den * 100 : null, cov: tot ? cov / tot : 0 };
+  }
+  function coIssue(set, is, st) {
+    var m = CX.d[is.id], num = 0, den = 0, maxD = -1, n = 0;
+    for (var i = 0; i < set.length; i++) for (var j = i + 1; j < set.length; j++) {
+      var d = m[set[i]][set[j]]; if (d == null) continue;
+      var w = coCf(set[i], is.id, st.sw) * coCf(set[j], is.id, st.sw); if (!w) continue;
+      n++; num += w * (1 - d); den += w; if (d > maxD) maxD = d;
+    }
+    var counted = function (id) { return is.lists[id] && coCf(id, is.id, st.sw) > 0; };
+    return {
+      agree: den ? num / den * 100 : null, maxD: maxD, n: n,
+      groups: is.camps.map(function (lab, k) { return { k: k, lab: lab, ids: set.filter(function (id) { return is.lists[id] && is.lists[id].camps.indexOf(k) >= 0; }) }; }).filter(function (g) { return g.ids.length; }),
+      unc: set.filter(function (id) { return !is.lists[id]; }),
+      off: set.filter(function (id) { return is.lists[id] && !counted(id); })
+    };
+  }
+  function coRange(set, st, s) {
+    if (st.sw !== 0.5 || s == null) return null;
+    var v = [s, coScore(set, st, 0).score, coScore(set, st, 1).score].filter(function (x) { return x != null; }).map(Math.round);
+    var lo = Math.min.apply(null, v), hi = Math.max.apply(null, v);
+    return lo === hi ? null : [lo, hi];
+  }
+  function coStatus(x) {
+    if (!x.n) return 'אין השוואה';
+    if (x.maxD < 1e-9) return 'אותו מודל';
+    if (x.maxD <= 0.5 + 1e-9) return 'פער חלקי';
+    if (x.maxD < 1 - 1e-9) return 'פער גדול';
+    return 'פער מלא';
+  }
+  function coRefusals(set) {
+    var out = [];
+    set.forEach(function (a) {
+      var dcl = CO.declared[a]; if (!dcl) return;
+      dcl.refuses.forEach(function (r) { r.refuses.forEach(function (b) { if (set.indexOf(b) >= 0) out.push({ from: a, to: b, ev: r.ev }); }); });
+    });
+    return out;
+  }
+  function coPool(st) { return CX.ids.filter(function (id) { return st.th || CX.s10[id] >= 40; }); }
+  var COMW = {};
+  function coMinWin(st) {
+    var key = st.w.join('') + '|' + st.sw + '|' + st.th;
+    if (COMW[key]) return COMW[key];
+    var pool = coPool(st), n = pool.length, out = [];
+    for (var mask = 1; mask < (1 << n); mask++) {
+      var set = [], sum = 0, mn = 1e9;
+      for (var i = 0; i < n; i++) if (mask & (1 << i)) { set.push(pool[i]); var v = CX.s10[pool[i]]; sum += v; if (v < mn) mn = v; }
+      if (sum < 610 || sum - mn >= 610) continue;
+      var sc = coScore(set, st);
+      out.push({ set: set, sum: sum, score: sc.score, cov: sc.cov, rng: coRange(set, st, sc.score), ref: coRefusals(set).length, names: set.map(lname).join(', ') });
+    }
+    out.sort(coCmp);
+    COMW = {}; COMW[key] = out; return out;
+  }
+  function coCmp(a, b) {
+    var sa = a.score == null ? -1 : Math.round(a.score), sb = b.score == null ? -1 : Math.round(b.score);
+    if (sb !== sa) return sb - sa;
+    var ca = Math.round(a.cov * 100), cb = Math.round(b.cov * 100);
+    if (cb !== ca) return cb - ca;
+    if (a.set.length !== b.set.length) return a.set.length - b.set.length;
+    return COLL.compare(a.names, b.names);
+  }
+  function coAdd(st) {
+    var cur = st.l, base = coSum10(cur), res = [];
+    if (!cur.length || base >= 610) return [];
+    var cand = coPool(st).filter(function (id) { return cur.indexOf(id) < 0; });
+    (function rec(start, pick, sum) {
+      if (pick.length && sum >= 610) {
+        if (pick.every(function (p) { return sum - CX.s10[p] < 610; })) {
+          var set = alpha(cur.concat(pick)), sc = coScore(set, st);
+          res.push({ add: alpha(pick), set: set, sum: sum, score: sc.score, cov: sc.cov, rng: coRange(set, st, sc.score), ref: coRefusals(set).length, names: alpha(pick).map(lname).join(', ') });
+        }
+        return;
+      }
+      if (pick.length === 3) return;
+      for (var i = start; i < cand.length; i++) rec(i + 1, pick.concat([cand[i]]), sum + CX.s10[cand[i]]);
+    })(0, [], base);
+    res.sort(function (a, b) { return a.add.length - b.add.length || coCmp(a, b); });
+    return res;
+  }
+  function coSeatsTxt(s10) { return (s10 / 10).toFixed(1); }
+  function coScoreTxt(s) { return s == null ? '–' : String(Math.round(s)); }
+  function coNames(ids, is) {
+    return ids.map(function (id) {
+      var st = is && P.positions[id][is.id].star;
+      return '<span class="co-nm">' + esc(lname(id)) + (st ? '<span class="star" title="מבוסס על הצהרות, הודעות או הצבעות">*</span>' : '') + '</span>';
+    }).join('');
+  }
+  function coMeter(s10) {
+    var pct = Math.min(100, s10 / 12), gap = 610 - s10;
+    var txt = s10 >= 610 ? 'מעל קו 61 ב-' + coSeatsTxt(s10 - 610) : 'חסרים ' + coSeatsTxt(gap) + ' עד 61';
+    return '<div class="co-meter"><div class="co-bar" role="img" aria-label="' + esc('הערכת מנדטים לצירוף: ' + coSeatsTxt(s10) + ' מתוך 120; ' + txt) + '"><i style="width:' + pct.toFixed(2) + '%"></i><b style="inset-inline-start:' + (61 / 1.2).toFixed(2) + '%"></b></div>' +
+      '<div class="co-scale" aria-hidden="true"><span>0</span><span style="inset-inline-start:' + (61 / 1.2).toFixed(2) + '%">61</span><span class="end">120</span></div></div>';
+  }
+  function coLink(st, set, label, extra) {
+    return '<a class="btn sec co-load" data-co-load href="' + coHash(st, { l: set }) + '"' + (extra || '') + '>' + label + '</a>';
+  }
+  function coCombo(st, c, k, addMode) {
+    return '<li class="co-combo"><div class="co-combo-h">' + (k != null ? '<span class="co-rank" aria-hidden="true">' + (k + 1) + '</span>' : '') +
+      '<div class="co-combo-n">' + (addMode ? '<span class="meta">הוספה של </span>' : '') + coNames(addMode ? c.add : c.set) + '</div></div>' +
+      '<p class="co-combo-m"><span>' + coSeatsTxt(c.sum) + ' מנדטים</span><span>מדד קרבה ' + coScoreTxt(c.score) + (c.rng ? ' <span class="co-rng">(טווח ' + c.rng[0] + '–' + c.rng[1] + ')</span>' : '') + '</span><span>כיסוי ' + Math.round(c.cov * 100) + '%' + (c.cov < 0.6 ? ' – נמוך' : '') + '</span>' +
+      (c.ref ? '<span>הצהרות סירוב בתוך הצירוף: ' + c.ref + '</span>' : '') + '</p>' +
+      coLink(st, c.set, addMode ? 'הוסיפו לבונה' : 'פתחו בבונה', ' aria-label="' + esc((addMode ? 'הוסיפו לבונה: ' + c.names : 'פתחו בבונה: ' + c.names)) + '"') + '</li>';
+  }
+  function pageCoalition(q) {
+    var lead = 'בחרו רשימות וראו את הערכת המנדטים מול קו 61, ואיפה העמדות המוצהרות שלהן קרובות או רחוקות בכל אחת מ-10 הסוגיות. זו השוואה מתמטית של עמדות מוצהרות, לפי הקידוד של <a href="#/analysis">הניתוח הרוחבי</a>, ולא תחזית: היא לא אומרת מי יצטרף למי, ואין בה המלצה. <a href="#co-method">איך זה מחושב</a>';
+    var hd = head('כלי השוואה', 'בנה קואליציה', lead);
+    if (!CO) return hd + (COerr ? '<div class="empty" role="alert"><b>שגיאה בטעינת נתוני ההשוואה</b><p>' + esc(COerr) + '. נסו לרענן את הדף.</p></div>' : '<div class="skel" aria-hidden="true"><i></i><i></i><i></i></div><p class="sr" role="status">טוען…</p>');
+    var st = coState(q), set = st.l, s10 = coSum10(set), C = D.computed, h = hd;
+    // picker
+    var pick = '<div class="panel co-pick"><fieldset><legend>בחירת רשימות – נבחרו ' + set.length + ' מתוך ' + nLists() + '</legend><div class="chips co-chips">' +
+      CX.ids.map(function (id) {
+        var on = set.indexOf(id) >= 0, low = CX.s10[id] < 40;
+        return '<button type="button" class="chip" data-co="' + id + '" aria-pressed="' + on + '"><span>' + esc(lname(id)) + '</span><span class="co-seat">' + fmtN(avgOf(id)) + (low ? '<span class="sr"> – ממוצע מתחת ל-4 מנדטים</span><span aria-hidden="true">↓</span>' : '') + '</span></button>';
+      }).join('') + '</div></fieldset>' +
+      '<p class="meta co-pick-n">המספר ליד כל רשימה: הערכת מנדטים לפי ממוצע ' + C.n + ' הסקרים שבחלון ' + fmtShort(C.window[0]) + '–' + fmtShort(C.window[1]) + ' (<a href="#/polls">סקרים</a>). ↓ = ממוצע מתחת ל-4 מנדטים, הסף שמתחתיו רשימה לא עוברת את אחוז החסימה. סדר הרשימות: לפי סדר האלף-בית.</p>' +
+      (set.length ? '<p><button type="button" class="btn sec" data-co-clear>ניקוי הבחירה</button></p>' : '') + '</div>';
+    h += '<section class="co-builder" id="co-builder" aria-label="בניית צירוף">';
+    // summary
+    var sc = set.length > 1 ? coScore(set, st) : null;
+    h += '<div class="panel co-sum" aria-live="polite"><div class="co-kpis">' +
+      '<div><span class="k">הערכת מנדטים</span><b>' + coSeatsTxt(s10) + '</b><span class="meta">הערכה מהסקרים</span></div>' +
+      '<div><span class="k">קו 61</span><b>' + (set.length ? '<bdi dir="ltr">' + (s10 >= 610 ? '+' + coSeatsTxt(s10 - 610) : '−' + coSeatsTxt(610 - s10)) + '</bdi>' : '–') + '</b><span class="meta">' + (!set.length ? 'לא נבחרו רשימות' : s10 >= 610 ? 'מעל 61' : 'מתחת ל-61') + '</span></div>' +
+      '<div><span class="k">מדד קרבה</span><b>' + (sc ? coScoreTxt(sc.score) : '–') + '</b><span class="meta">' + (sc ? (sc.score == null ? 'אין השוואות שנספרו' : '0–100 · כיסוי ' + Math.round(sc.cov * 100) + '%') : 'נדרשות 2 רשימות לפחות') + '</span></div></div>' +
+      coMeter(s10) + '</div>' + pick;
+    // what it takes
+    if (set.length && s10 < 610) {
+      var adds = coAdd(st), show = adds.slice(0, 6);
+      h += '<div class="panel co-need"><h2>מה צריך כדי להגיע ל-61</h2>' +
+        (show.length ? '<p class="meta">צירופים מינימליים של עד 3 רשימות נוספות' + (st.th ? '' : ' (מתוך הרשימות שממוצען 4 מנדטים לפחות)') + ', לפי מספר הרשימות שמתווספות ואז לפי מדד הקרבה של הצירוף המלא; בשוויון – לפי הכיסוי ואז לפי סדר האלף-בית. "טווח" = המדד כשמשקל העמדות המסומנות * הוא 0 או 1.</p><ol class="co-combos">' + show.map(function (c) { return coCombo(st, c, null, true); }).join('') + '</ol>' + (adds.length > 6 ? '<p class="meta">ועוד ' + (adds.length - 6) + ' אפשרויות.</p>' : '')
+          : '<p>אין צירוף של עד 3 רשימות נוספות' + (st.th ? '' : ' מתוך הרשימות שממוצען 4 מנדטים לפחות') + ' שמביא את הבחירה ל-61 לפי ההערכה.</p>') + '</div>';
+    } else if (set.length && s10 >= 610) {
+      var extra = set.filter(function (id) { return s10 - CX.s10[id] >= 610; });
+      h += '<div class="panel co-need"><h2>הצירוף מגיע ל-61 לפי ההערכה</h2><p>' + (extra.length ? 'גם בלי אחת מהרשימות הבאות הצירוף נשאר עם 61 לפחות (בכל פעם רשימה אחת): ' + extra.map(function (id) { return esc(lname(id)); }).join(', ') + '. זו קביעה חשבונית בלבד.' : 'זה צירוף מינימלי: הוצאה של כל אחת מהרשימות מורידה אותו מתחת ל-61 לפי ההערכה.') + '</p></div>';
+    }
+    h += '</section>';
+    // weights
+    var wOn = st.w.some(function (x) { return x !== 1; }) || st.sw !== 0.5;
+    h += '<details class="panel co-w"' + (wOn ? ' open' : '') + '><summary>משקלות: חשיבות הסוגיות ועמדות המסומנות *' + (wOn ? ' – שונו' : '') + '</summary>' +
+      '<p class="meta">ברירת המחדל: כל הסוגיות באותו משקל (1). משקל 0 מוציא סוגיה מהמדד. המשקלות משנים רק את החישוב במסך זה ונשמרים בקישור.</p><div class="co-sliders">' +
+      CO.issues.map(function (is, k) {
+        return '<div class="co-sl"><label for="co-w-' + k + '">' + esc(is.short) + '</label><input type="range" id="co-w-' + k + '" data-co-w="' + k + '" min="0" max="3" step="1" value="' + st.w[k] + '" aria-valuetext="' + coWTxt(st.w[k]) + '"><output for="co-w-' + k + '" id="co-wo-' + k + '">' + coWTxt(st.w[k]) + '</output></div>';
+      }).join('') + '</div>' +
+      '<fieldset class="co-swf"><legend>משקל של עמדה המסומנת * (מבוססת על הצהרות, הודעות או הצבעות ולא על מצע כתוב)</legend><span class="seg">' +
+      [[1, '1 – כמו כל עמדה'], [0.5, '0.5 – ברירת המחדל'], [0, '0 – לא נספרת']].map(function (o) { return '<button type="button" data-co-sw="' + o[0] + '" aria-pressed="' + (st.sw === o[0]) + '">' + o[1] + '</button>'; }).join('') + '</span></fieldset>' +
+      (wOn ? '<p><button type="button" class="btn sec" data-co-reset>חזרה לברירת המחדל</button></p>' : '') + '</details>';
+    // comparison
+    if (set.length > 1) h += coCompare(st, set, sc);
+    else h += '<div class="empty co-empty"><b>' + (set.length ? 'בחרו רשימה נוספת כדי לראות את ההשוואה בין העמדות.' : 'בחרו לפחות שתי רשימות כדי לראות את ההשוואה בין העמדות.') + '</b><p>אפשר גם לפתוח אחד מהצירופים שבהמשך העמוד.</p></div>';
+    h += coSuggest(st);
+    h += coMethod(st);
+    return h;
+  }
+  function coWTxt(v) { return ['0 – לא נספרת', '1 – רגיל', '2 – כפול', '3 – משולש'][v]; }
+  function coCompare(st, set, sc) {
+    var h = '', rows = CO.issues.map(function (is, k) { return { is: is, k: k, x: coIssue(set, is, st) }; });
+    var lo = st.sw === 0.5 ? [coScore(set, st, 0).score, coScore(set, st, 1).score].filter(function (x) { return x != null; }) : [];
+    h += '<section class="co-res" aria-labelledby="co-res-h"><h2 id="co-res-h">ההשוואה בין העמדות</h2>' +
+      '<p class="lead-s">מדד הקרבה של הצירוף: <b>' + coScoreTxt(sc.score) + '</b> מתוך 100, על סמך ' + Math.round(sc.cov * 100) + '% מההשוואות האפשריות בין זוגות הרשימות בסוגיות שבמדד' + (lo.length ? '. בשינוי משקל העמדות המסומנות * ל-0 או ל-1 המדד נע בין ' + coScoreTxt(Math.min.apply(null, lo.concat([sc.score]))) + ' ל-' + coScoreTxt(Math.max.apply(null, lo.concat([sc.score]))) : '') + '. 100 = כל זוגות הרשימות באותו מודל בכל הסוגיות שנספרו; 0 = כל הזוגות במודלים הרחוקים ביותר זה מזה.' + (sc.cov < 0.6 ? ' <span class="co-warn">הכיסוי נמוך: חלק ניכר מהעמדות לא קודדו בסולם, ולכן המדד נשען על מעט השוואות.</span>' : '') + '</p>';
+    // fault lines
+    var ranked = rows.filter(function (r) { return r.x.n && st.w[r.k]; }).sort(function (a, b) { return a.x.agree - b.x.agree || a.k - b.k; });
+    var gaps = ranked.filter(function (r) { return r.x.maxD > 1e-9; }).slice(0, 3), same = rows.filter(function (r) { return r.x.n && st.w[r.k] && r.x.maxD < 1e-9; });
+    h += '<div class="panel co-fault"><h3>קווי השבר בצירוף</h3>' +
+      (gaps.length ? '<p class="meta">הסוגיות שבהן הקרבה בתוך הצירוף הנמוכה ביותר:</p><ul>' + gaps.map(function (r) {
+        return '<li><a href="#co-i-' + r.is.id + '">' + esc(r.is.short) + '</a> – ' + coStatus(r.x) + ': ' + r.x.groups.map(function (g) { return '<span class="co-fg">' + esc(g.ids.map(lname).join(', ')) + '</span>'; }).join(' <span class="co-vs">מול</span> ') + '</li>';
+      }).join('') + '</ul>' + (gaps.some(function (r) { var seen = {}; return r.x.groups.some(function (g) { return g.ids.some(function (id) { if (seen[id]) return true; seen[id] = 1; return false; }); }); }) ? '<p class="meta">רשימה שמופיעה ביותר מקבוצה אחת שויכה בניתוח ליותר ממודל אחד (רשימה משותפת או עמדה מורכבת); ראו טבלת הקידוד.</p>' : '') : '<p>בכל הסוגיות שנספרו, הרשימות שנבחרו נמצאות באותו מודל.</p>') +
+      (same.length ? '<p class="meta">אותו מודל לכל הרשימות שקודדו: ' + same.map(function (r) { return esc(r.is.short); }).join(', ') + '.</p>' : '') + '</div>';
+    // per-issue
+    var order = st.sort === 'gap' ? rows.slice().sort(function (a, b) { var A1 = a.x.n ? a.x.agree : 101, B1 = b.x.n ? b.x.agree : 101; return A1 - B1 || a.k - b.k; }) : rows;
+    h += '<div class="co-sorthead"><h3>לפי סוגיה</h3><span class="seg" role="group" aria-label="סדר הסוגיות"><button type="button" data-co-sort="n" aria-pressed="' + (st.sort === 'n') + '">לפי סדר הסוגיות</button><button type="button" data-co-sort="gap" aria-pressed="' + (st.sort === 'gap') + '">מהפער הגדול לקטן</button></span></div><div class="co-issues">' +
+      order.map(function (r) {
+        var is = r.is, x = r.x, stt = coStatus(x);
+        return '<article class="co-iss' + (st.w[r.k] ? '' : ' off') + '" id="co-i-' + is.id + '"><h4><a href="#/issue/' + is.id + '">' + esc(is.short) + '</a><span class="badge">' + stt + '</span></h4>' +
+          (x.n ? '<div class="co-agree"><span class="co-ab" aria-hidden="true"><i style="width:' + x.agree.toFixed(1) + '%"></i></span><span><b>' + coScoreTxt(x.agree) + '</b> קרבה בסוגיה · מרחק מרבי בין שתי רשימות: ' + coDistTxt(is, x.maxD) + '</span></div>' : '<p class="meta">אין זוג רשימות עם עמדות מקודדות בסוגיה זו.</p>') +
+          (st.w[r.k] ? '' : '<p class="meta">משקל 0 – הסוגיה לא נספרת במדד.</p>') +
+          '<ol class="co-groups">' + x.groups.map(function (g) { return '<li><span class="co-gl">' + esc(is.camps[g.k]) + '</span><span class="co-gn">' + coNames(g.ids, is) + '</span></li>'; }).join('') + '</ol>' +
+          (x.unc.length ? '<p class="meta co-unc">לא קודדו בסולם: ' + x.unc.map(function (id) { return esc(lname(id)) + ' (' + esc(CO.reasons[is.uncoded[id].reason]) + ')'; }).join(', ') + '.</p>' : '') +
+          (x.off.length ? '<p class="meta co-unc">לא נספרו (משקל * = 0): ' + x.off.map(function (id) { return esc(lname(id)); }).join(', ') + '.</p>' : '') +
+          '<p class="meta co-scl">' + coScaleTxt(is) + '</p></article>';
+      }).join('') + '</div>';
+    // pair matrix
+    h += '<details class="panel co-pairs"><summary>מדד הקרבה לכל זוג רשימות בצירוף</summary><div class="tbl-wrap" tabindex="0" role="region" aria-label="טבלת זוגות"><table class="tbl co-pt"><caption class="sr">מדד הקרבה (0–100) לכל זוג רשימות שנבחרו</caption><thead><tr><th scope="col"><span class="sr">רשימה</span></th>' +
+      set.map(function (b) { return '<th scope="col">' + esc(lname(b)) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+      set.map(function (a) {
+        return '<tr><th scope="row">' + esc(lname(a)) + '</th>' + set.map(function (b) {
+          if (a === b) return '<td class="co-self" aria-label="אותה רשימה">·</td>';
+          var p = coScore([a, b], st);
+          return '<td style="--a:' + (p.score == null ? 0 : (p.score / 100 * 0.32).toFixed(3)) + '">' + coScoreTxt(p.score) + '</td>';
+        }).join('') + '</tr>';
+      }).join('') + '</tbody></table></div><p class="meta">כל תא: מדד הקרבה של שתי הרשימות בלבד, באותה שיטה ובאותם משקלות. גוון התא עולה עם המספר.</p></details>';
+    // declared
+    var refs = coRefusals(set);
+    h += '<div class="panel co-decl"><h3>אילוצים מוצהרים</h3><p class="meta">לא נכללים במדד. מוצג נוסח השדה "גוש / שותפויות מוצהרות" מפרופיל הרשימה, כלשונו. רק הצהרה שנוקבת בשם של רשימה או של ראש רשימה מסומנת כנוגעת לרשימה בצירוף; הצהרות כלליות מוצגות בלי מיפוי.</p>' +
+      (refs.length ? '<ul class="co-refs">' + refs.map(function (r) { return '<li><b>' + esc(lname(r.from)) + '</b> – "' + esc(r.ev) + '" (נוגע ל' + esc(lname(r.to)) + ', שבצירוף)</li>'; }).join('') + '</ul>' : '<p>אין בצירוף הצהרה שנוקבת בשם של רשימה אחרת בצירוף או של ראש הרשימה שלה.</p>') +
+      '<ul class="co-dl">' + set.map(function (id) { var dd = CO.declared[id]; return '<li><a href="#/list/' + id + '">' + esc(lname(id)) + '</a>: ' + (dd && dd.text ? esc(dd.text) : '<span class="meta">אין הצהרה בשדה זה</span>') + '</li>'; }).join('') + '</ul></div></section>';
+    return h;
+  }
+  function coDistTxt(is, d) {
+    if (d < 1e-9) return '0 (אותו מודל)';
+    if (is.scale === 'ordinal') { var steps = d * (is.camps.length - 1); return (Math.abs(steps - Math.round(steps)) < 1e-6 ? Math.round(steps) + ' מתוך ' + (is.camps.length - 1) + ' צעדים בסולם' : steps.toFixed(1) + ' מתוך ' + (is.camps.length - 1) + ' צעדים בסולם (ממוצע, רשימה מורכבת)'); }
+    if (d <= 0.5 + 1e-9) return 'חלקי (מודלים שונים בתוך הסכמה על הכיוון)';
+    return d < 1 - 1e-9 ? fmtN(d) + ' (רשימה מורכבת)' : 'מלא (מודלים שונים)';
+  }
+  function coScaleTxt(is) {
+    return is.scale === 'ordinal' ? 'סולם מדורג: המודלים מסודרים בין שני קטבים, והמרחק נמדד במספר הצעדים ביניהם.'
+      : is.scale === 'degree' ? 'מחלוקת על מידה: ' + (is.consensus ? 'רשימות שבהסכמה החלקית שבניתוח ("' + esc(is.consensus.label) + '") ובמודלים שונים – מרחק חלקי (0.5); אחרות – מרחק מלא.' : 'מודלים שונים – מרחק מלא.')
+      : 'מחלוקת עיקרון: מודלים שונים – מרחק מלא.';
+  }
+  function coSuggest(st) {
+    var all = coMinWin(st), list = all.filter(function (c) { return (!st.must || c.set.indexOf(st.must) >= 0) && (!st.nd || !c.ref); });
+    var h = '<section class="co-sug" aria-labelledby="co-sug-h"><h2 id="co-sug-h">צירופים שמגיעים ל-61 לפי ההערכה</h2>' +
+      '<p>צירופים מינימליים: אין בהם רשימה שאפשר להוציא ועדיין להישאר עם 61 לפחות. הם מסודרים לפי מדד הקרבה (המספר המעוגל שמוצג), מהגבוה לנמוך; בשוויון – לפי הכיסוי (יותר השוואות קודם), אחר כך לפי מספר הרשימות ואז לפי סדר האלף-בית. "טווח" = המדד כשמשקל העמדות המסומנות * הוא 0 או 1. זו השוואה מתמטית של עמדות מוצהרות ושל הערכות מהסקרים, לא תחזית ולא המלצה.</p>' +
+      '<div class="toolbar panel tight co-tools"><span class="seg" role="group" aria-label="תצוגה"><button type="button" data-co-view="score" aria-pressed="' + (st.view === 'score') + '">כל הצירופים</button><button type="button" data-co-view="list" aria-pressed="' + (st.view === 'list') + '">לפי רשימה</button></span>' +
+      (st.view === 'score' ? '<label>חייב לכלול <select id="co-must"><option value="">כל רשימה</option>' + CX.ids.map(function (id) { return '<option value="' + id + '"' + (st.must === id ? ' selected' : '') + '>' + esc(lname(id)) + '</option>'; }).join('') + '</select></label>' : '') +
+      '<label class="co-ck"><input type="checkbox" id="co-th"' + (st.th ? ' checked' : '') + '> לכלול גם רשימות שממוצען מתחת ל-4 מנדטים</label>' +
+      '<label class="co-ck"><input type="checkbox" id="co-nd"' + (st.nd ? ' checked' : '') + '> להסתיר צירופים שיש בהם הצהרת סירוב בין רשימות</label></div>';
+    if (st.view === 'list') {
+      h += '<p class="meta">לכל רשימה: הצירוף המינימלי עם מדד הקרבה הגבוה ביותר שהיא חלק ממנו. סדר הרשימות: לפי סדר האלף-בית.</p><ul class="co-bylist">' + CX.ids.map(function (id) {
+        var c = list.filter(function (x) { return x.set.indexOf(id) >= 0; })[0];
+        return '<li><h3>' + esc(lname(id)) + '</h3>' + (c ? '<ol class="co-combos">' + coCombo(st, c, null, false) + '</ol>' : '<p class="meta">' + (CX.s10[id] < 40 && !st.th ? 'ממוצע מתחת ל-4 מנדטים; לא נכללת בחישוב (אפשר לשנות בתיבת הסימון למעלה).' : 'אין צירוף מינימלי שמתאים לסינון.') + '</p>') + '</li>';
+      }).join('') + '</ul>';
+    } else {
+      var n = st.all ? list.length : Math.min(10, list.length);
+      h += '<p class="meta">' + list.length + ' צירופים' + (list.length !== all.length ? ' (מתוך ' + all.length + ')' : '') + '.</p>' +
+        (list.length ? '<ol class="co-combos">' + list.slice(0, n).map(function (c, k) { return coCombo(st, c, k, false); }).join('') + '</ol>' : '<p>אין צירופים שמתאימים לסינון.</p>') +
+        (list.length > n ? '<p><button type="button" class="btn sec" data-co-all>הצגת כל ' + list.length + ' הצירופים</button></p>' : '');
+    }
+    return h + '</section>';
+  }
+  function coMethod(st) {
+    var C = D.computed, h = '<section class="co-method" id="co-method" aria-labelledby="co-m-h"><h2 id="co-m-h">איך זה מחושב</h2>' +
+      '<div class="panel"><h3>הקידוד</h3><p>לכל סוגיה נקבעה השאלה שבמחלוקת ונקבעו המודלים, כפי שהם מופיעים בניתוח הרוחבי שבאתר; כל רשימה שויכה למודל אחד (או לכמה, ברשימה מורכבת) על סמך העמדה שלה בעמוד הסוגיה. השיוך מתועד בטבלה למטה, עם הקטע מהניתוח שעליו הוא נשען. רשימה שאין לה עמדה על השאלה שבמחלוקת, או שיש לה רק עמדה כללית, לא קודדה ולא נספרת – והסיבה מוצגת.</p>' +
+      '<h3>המרחק בין שתי רשימות בסוגיה</h3><ul><li>אותו מודל: 0.</li><li>סולם מדורג (המודלים מסודרים בין שני קטבים): מספר הצעדים ביניהם חלקי מספר הצעדים בסולם. בין המודל הראשון לאחרון: 1.</li><li>מחלוקת על מידה (הניתוח מציין הסכמה על הכיוון): שתי רשימות שבהסכמה החלקית שבניתוח ובמודלים שונים – 0.5; אחרת – 1.</li><li>מחלוקת עיקרון: מודלים שונים – 1.</li><li>רשימה מורכבת ששויכה לכמה מודלים: ממוצע ההתאמה הקרובה ביותר לכל אחד מהמודלים שלה, בשני הכיוונים.</li></ul>' +
+      '<h3>המדד</h3><p>לכל זוג רשימות בצירוף ובכל סוגיה: 1 פחות המרחק. המדד הוא הממוצע המשוקלל של כל הזוגות וכל הסוגיות, כפול 100. משקל של זוג בסוגיה = משקל הסוגיה × משקל העמדה של כל אחת משתי הרשימות. עמדה המסומנת * (מבוססת על הצהרות, הודעות או הצבעות) מקבלת כברירת מחדל משקל ' + (CO.starWeight) + ', ועמדה ממצע, ממסמך או מתשובה רשמית – 1. "כיסוי" הוא שיעור ההשוואות שנספרו מתוך כל ההשוואות האפשריות בסוגיות שבמדד. "קרבה בסוגיה" מחושבת באותה דרך, לסוגיה אחת.</p>' +
+      '<h3>מנדטים</h3><p>הערכת המנדטים היא סכום הממוצעים של הרשימות ב-' + C.n + ' הסקרים שבחלון ' + fmtShort(C.window[0]) + '–' + fmtShort(C.window[1]) + ', לפי <a href="#/polls">עמוד הסקרים</a>. היא לא תוצאה ולא הקצאת מושבים: לסקרים יש טווח טעות, ורשימה שלא תעבור את אחוז החסימה תקבל 0. ' + esc(D.meta.silence) + ' כברירת מחדל, רשימות שממוצען מתחת ל-4 מנדטים לא נכללות בחיפוש הצירופים.</p>' +
+      '<h3>מגבלות</h3><ul><li>זו השוואה מתמטית של עמדות מוצהרות, לא תחזית ולא המלצה. היא לא אומרת מי יצטרף למי ולא מעריכה סיכויים.</li><li>נכללות רק 10 הסוגיות שבאתר. מה שלא נמדד כאן – יחסים אישיים, דרישות תקציביות, תפקידים, פערים בתוך אותו מודל – לא נכלל.</li><li>הקידוד למודלים מפשט: הבדלים בתוך אותו מודל לא נספרים, ובסולם מדורג המרחקים בין מודלים סמוכים נחשבים שווים.</li><li>כל הרשימות שוקלות אותו דבר במדד, בלי קשר לגודלן.</li><li>הצהרות על שותפויות או על סירוב לשבת עם רשימה אחרת אינן חלק מהמדד; הן מוצגות בנפרד, כלשונן, בפרק "אילוצים מוצהרים".</li><li>רשימה עם עמדות רבות שלא קודדו נמדדת על פחות השוואות – ראו את ה"כיסוי".</li></ul></div>' +
+      '<details class="panel co-code"><summary>טבלת הקידוד המלאה (10 סוגיות)</summary>' + CO.issues.map(function (is) {
+        var byCamp = is.camps.map(function (lab, k) { return { lab: lab, ids: CX.ids.filter(function (id) { return is.lists[id] && is.lists[id].camps.indexOf(k) >= 0; }) }; });
+        return '<div class="co-ci"><h4><a href="#/issue/' + is.id + '">' + esc(is.title) + '</a></h4><p class="meta">' + coScaleTxt(is) + '</p><p><b>השאלה שבמחלוקת:</b> ' + esc(is.scope) + '</p>' +
+          '<p class="meta">על סמך הניתוח הרוחבי: "' + esc(is.basis) + '"</p><ol class="co-groups">' +
+          byCamp.map(function (c) { return '<li><span class="co-gl">' + esc(c.lab) + '</span><span class="co-gn">' + (c.ids.length ? coNames(c.ids, is) : '<span class="meta">–</span>') + '</span></li>'; }).join('') + '</ol>' +
+          (Object.keys(is.uncoded).length ? '<p class="meta">לא קודדו: ' + alpha(Object.keys(is.uncoded)).map(function (id) { return esc(lname(id)) + ' (' + esc(CO.reasons[is.uncoded[id].reason]) + ')'; }).join(', ') + '.</p>' : '') +
+          Object.keys(is.lists).filter(function (id) { return is.lists[id].decision; }).map(function (id) { return '<p class="meta">' + esc(lname(id)) + ': ' + esc(is.lists[id].decision) + '</p>'; }).join('') + '</div>';
+      }).join('') + '<p class="meta">הנתונים: <a href="data/coalition.json">coalition.json</a>, שנבנה ב-tools/build_coalition.py מ-analysis.json ומ-platforms.json, עם בדיקה שכל ציטוט בקידוד מופיע בטקסט המקור.</p></details></section>';
+    return h;
+  }
+  function coGo(over, focusSel) {
+    var st = coState(parseHash().q); setHash(coHash(st, over));
+    if (focusSel) { var el = $main.querySelector(focusSel); if (el) el.focus(); }
   }
 
   // ---------- router
@@ -608,7 +930,7 @@
     var parts = h.split('/').filter(Boolean);
     return { page: parts[0] || 'home', arg: parts[1] ? decodeURIComponent(parts[1]) : '', q: qs };
   }
-  var TITLES = { home: 'ראשי', matrix: 'מטריצה', issue: 'לפי סוגיה', list: 'לפי רשימה', compare: 'השוואה', analysis: 'ניתוח רוחבי', polls: 'סקרים', podcasts: 'פודקאסטים וראיונות', about: 'שיטה ומקורות' };
+  var TITLES = { home: 'ראשי', matrix: 'מטריצה', issue: 'לפי סוגיה', list: 'לפי רשימה', compare: 'השוואה', analysis: 'ניתוח רוחבי', polls: 'סקרים', podcasts: 'פודקאסטים וראיונות', coalition: 'בנה קואליציה', about: 'שיטה ומקורות' };
   var lastPage = null;
   function render(keepScroll) {
     var r = parseHash(), html, sub = '';
@@ -621,6 +943,7 @@
       case 'analysis': html = pageAnalysis(r.arg, r.q); break;
       case 'polls': html = pagePolls(r.q); break;
       case 'about': html = pageAbout(); break;
+      case 'coalition': html = pageCoalition(r.q); if (!CO && !COerr) loadCoalition().then(function () { if (parseHash().page === 'coalition') render(true); }); break;
       case 'podcasts': html = pagePodcasts(r.arg, r.q); if (!PD && !PDerr) loadPodcasts().then(function () { if (parseHash().page === 'podcasts') { render(true); podScroll(); } }); break;
       default: r.page = 'home'; html = pageHome();
     }
@@ -698,7 +1021,16 @@
   window.addEventListener('scroll', hideTip, { passive: true });
 
   $main.addEventListener('click', function (e) {
+    var la = e.target.closest('a[data-co-load]');
+    if (la) { e.preventDefault(); setHash(la.getAttribute('href')); var bl = document.getElementById('co-builder'); if (bl) { bl.scrollIntoView({ block: 'start' }); var fc = bl.querySelector('.chip'); if (fc) fc.focus({ preventScroll: true }); } return; }
     var t = e.target.closest('button'); if (!t) return;
+    if (t.hasAttribute('data-co')) { var cs = coState(parseHash().q), cv = t.getAttribute('data-co'), ci = cs.l.indexOf(cv); if (ci >= 0) cs.l.splice(ci, 1); else cs.l.push(cv); coGo({ l: cs.l }, '[data-co="' + cv + '"]'); return; }
+    if (t.hasAttribute('data-co-clear')) { coGo({ l: [] }, '.co-chips .chip'); return; }
+    if (t.hasAttribute('data-co-sw')) { var sv = +t.getAttribute('data-co-sw'); coGo({ sw: sv }, '[data-co-sw="' + sv + '"]'); return; }
+    if (t.hasAttribute('data-co-reset')) { coGo({ sw: 0.5, w: CO.issues.map(function () { return 1; }) }, '#co-w-0'); return; }
+    if (t.hasAttribute('data-co-sort')) { var so = t.getAttribute('data-co-sort'); coGo({ sort: so }, '[data-co-sort="' + so + '"]'); return; }
+    if (t.hasAttribute('data-co-view')) { var vw = t.getAttribute('data-co-view'); coGo({ view: vw, all: false }, '[data-co-view="' + vw + '"]'); return; }
+    if (t.hasAttribute('data-co-all')) { coGo({ all: true }); return; }
     if (t.hasAttribute('data-cell')) { var p = t.getAttribute('data-cell').split('|'); openCell(p[0], p[1]); return; }
     if (t.hasAttribute('data-order')) { state.order = t.getAttribute('data-order'); store.set('order', state.order); render(true); foot(); var ob = $main.querySelector('[data-order="' + state.order + '"]'); if (ob) ob.focus(); return; }
     if (t.hasAttribute('data-mx')) { state.mxMode = t.getAttribute('data-mx'); store.set('mxMode', state.mxMode); render(true); var mb = $main.querySelector('[data-mx="' + state.mxMode + '"]'); if (mb) mb.focus(); return; }
@@ -729,7 +1061,15 @@
     else if (t.id === 'golist') location.hash = '#/list/' + t.value;
     else if (t.id === 'podissue') { var pr = parseHash(); setHash('#/podcasts' + (pr.arg ? '/' + pr.arg : '') + (t.value ? '?issue=' + t.value : '')); var pi = document.getElementById('podissue'); if (pi) pi.focus(); }
     else if (t.id === 'hl' || t.id === 'hlrow') { state.hl = t.value; render(true); var el = document.getElementById(t.id); if (el) el.focus(); }
+    else if (t.hasAttribute('data-co-w')) { var wk = +t.getAttribute('data-co-w'), ws = coState(parseHash().q); ws.w[wk] = +t.value; coGo({ w: ws.w }, '#co-w-' + wk); }
+    else if (t.id === 'co-th') coGo({ th: t.checked, all: false }, '#co-th');
+    else if (t.id === 'co-nd') coGo({ nd: t.checked, all: false }, '#co-nd');
+    else if (t.id === 'co-must') coGo({ must: t.value, all: false }, '#co-must');
     else if (t.id === 'outlet') { setHash('#/polls' + (t.value ? '?outlet=' + encodeURIComponent(t.value) : '')); var o = document.getElementById('outlet'); if (o) o.focus(); }
+  });
+  $main.addEventListener('input', function (e) {
+    var t = e.target; if (!t.hasAttribute || !t.hasAttribute('data-co-w')) return;
+    var o = document.getElementById('co-wo-' + t.getAttribute('data-co-w')); if (o) o.textContent = coWTxt(+t.value); t.setAttribute('aria-valuetext', coWTxt(+t.value));
   });
   window.addEventListener('hashchange', function () { if (dlg.open) dlg.close(); trendSel = ''; render(false); });
 

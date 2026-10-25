@@ -359,6 +359,10 @@ window.SITE_CLIP = {
    "label": "סקרים"
   },
   {
+   "id": "coalition",
+   "label": "בנה קואליציה"
+  },
+  {
    "id": "podcasts",
    "label": "פודקאסטים"
   },

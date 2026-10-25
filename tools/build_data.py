@@ -300,3 +300,5 @@ print('ok: lists', len(platforms['lists']), 'issues', len(issues), 'cells', sum(
 import subprocess
 r = subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'build_clip_site.py')])
 if r.returncode: print('WARNING: build_clip_site.py failed - clip-site/site-data.js NOT updated (it keeps its previous, dated data). Fix before the next commit.', file=sys.stderr)
+r = subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'build_coalition.py')])
+if r.returncode: print('WARNING: build_coalition.py failed - data/coalition.json NOT updated (it keeps its previous data; the coalition page still works). Fix before the next commit.', file=sys.stderr)
