@@ -702,11 +702,18 @@
     if (x.maxD < 1 - 1e-9) return 'פער גדול';
     return 'פער מלא';
   }
+  // declared refusals inside a set: one entry per (from, to) pair, with every source that maps it
   function coRefusals(set) {
-    var out = [];
+    var out = [], ix = {};
+    function add(a, b, src) {
+      var k = a + '>' + b;
+      if (!ix[k]) { ix[k] = { from: a, to: b, srcs: [] }; out.push(ix[k]); }
+      ix[k].srcs.push(src);
+    }
     set.forEach(function (a) {
       var dcl = CO.declared[a]; if (!dcl) return;
-      dcl.refuses.forEach(function (r) { r.refuses.forEach(function (b) { if (set.indexOf(b) >= 0) out.push({ from: a, to: b, ev: r.ev }); }); });
+      dcl.refuses.forEach(function (r) { r.refuses.forEach(function (b) { if (set.indexOf(b) >= 0) add(a, b, { ev: r.ev, via: r.via }); }); });
+      (dcl.statements || []).forEach(function (m) { m.refs.forEach(function (r) { r.refuses.forEach(function (b) { if (set.indexOf(b) >= 0) add(a, b, { ev: m.quote, via: r.via, who: m.who, date: m.date, src: m.src }); }); }); });
     });
     return out;
   }
@@ -773,7 +780,7 @@
     return '<li class="co-combo"><div class="co-combo-h">' + (k != null ? '<span class="co-rank" aria-hidden="true">' + (k + 1) + '</span>' : '') +
       '<div class="co-combo-n">' + (addMode ? '<span class="meta">הוספה של </span>' : '') + coNames(addMode ? c.add : c.set) + '</div></div>' +
       '<p class="co-combo-m"><span>' + coSeatsTxt(c.sum) + ' מנדטים</span><span>מדד קרבה ' + coScoreTxt(c.score) + (c.rng ? ' <span class="co-rng">(טווח ' + c.rng[0] + '–' + c.rng[1] + ')</span>' : '') + '</span><span>כיסוי ' + Math.round(c.cov * 100) + '%' + (c.cov < 0.6 ? ' – נמוך' : '') + '</span>' +
-      (c.ref ? '<span>הצהרות סירוב בתוך הצירוף: ' + c.ref + '</span>' : '') + '</p>' +
+      (c.ref ? '<span>הצהרות סירוב בתוך הצירוף: ' + c.ref + ' (זוגות)</span>' : '') + '</p>' +
       coLink(st, c.set, addMode ? 'הוסיפו לבונה' : 'פתחו בבונה', ' aria-label="' + esc((addMode ? 'הוסיפו לבונה: ' + c.names : 'פתחו בבונה: ' + c.names)) + '"') + '</li>';
   }
   function pageCoalition(q) {
@@ -796,7 +803,7 @@
       '<div><span class="k">הערכת מנדטים</span><b>' + coSeatsTxt(s10) + '</b><span class="meta">הערכה מהסקרים</span></div>' +
       '<div><span class="k">קו 61</span><b>' + (set.length ? '<bdi dir="ltr">' + (s10 >= 610 ? '+' + coSeatsTxt(s10 - 610) : '−' + coSeatsTxt(610 - s10)) + '</bdi>' : '–') + '</b><span class="meta">' + (!set.length ? 'לא נבחרו רשימות' : s10 >= 610 ? 'מעל 61' : 'מתחת ל-61') + '</span></div>' +
       '<div><span class="k">מדד קרבה</span><b>' + (sc ? coScoreTxt(sc.score) : '–') + '</b><span class="meta">' + (sc ? (sc.score == null ? 'אין השוואות שנספרו' : '0–100 · כיסוי ' + Math.round(sc.cov * 100) + '%') : 'נדרשות 2 רשימות לפחות') + '</span></div></div>' +
-      coMeter(s10) + '</div>' + pick;
+      coMeter(s10) + (set.some(function (id) { return CX.s10[id] < 40; }) ? '<p class="meta">הצירוף כולל רשימה שממוצעה מתחת ל-4 מנדטים (↓). רשימה שלא תעבור את אחוז החסימה לא תקבל מנדטים, והסכום יקטן בהתאם.</p>' : '') + '</div>' + pick;
     // what it takes
     if (set.length && s10 < 610) {
       var adds = coAdd(st), show = adds.slice(0, 6);
@@ -864,8 +871,17 @@
       }).join('') + '</tbody></table></div><p class="meta">כל תא: מדד הקרבה של שתי הרשימות בלבד, באותה שיטה ובאותם משקלות. גוון התא עולה עם המספר.</p></details>';
     // declared
     var refs = coRefusals(set);
-    h += '<div class="panel co-decl"><h3>אילוצים מוצהרים</h3><p class="meta">לא נכללים במדד. מוצג נוסח השדה "גוש / שותפויות מוצהרות" מפרופיל הרשימה, כלשונו. רק הצהרה שנוקבת בשם של רשימה או של ראש רשימה מסומנת כנוגעת לרשימה בצירוף; הצהרות כלליות מוצגות בלי מיפוי.</p>' +
-      (refs.length ? '<ul class="co-refs">' + refs.map(function (r) { return '<li><b>' + esc(lname(r.from)) + '</b> – "' + esc(r.ev) + '" (נוגע ל' + esc(lname(r.to)) + ', שבצירוף)</li>'; }).join('') + '</ul>' : '<p>אין בצירוף הצהרה שנוקבת בשם של רשימה אחרת בצירוף או של ראש הרשימה שלה.</p>') +
+    function viaTxt(v, to) {
+      if (!v) return 'נוגע ל' + lname(to);
+      if (v.group) return 'נוגע ל' + lname(to) + '; ' + v.note;
+      return 'נוגע ל' + lname(to) + ' דרך ראש הרשימה, ' + v.leader;
+    }
+    h += '<div class="panel co-decl"><h3>אילוצים מוצהרים</h3><p class="meta">לא נכללים במדד. שני מקורות, באותו כלל לכל הרשימות: (1) השדה "גוש / שותפויות מוצהרות" מפרופיל הרשימה, כלשונו; (2) הצהרות מפורשות ובלתי מותנות של ראש הרשימה מהקמפיין, עם תאריך וקישור למקור. הצהרה מסומנת כנוגעת לרשימה בצירוף רק כשהיא נוקבת בשם הרשימה, בשם ראש הרשימה, או ב"מפלגות ערביות" / "מפלגות חרדיות" (הרשימה המשותפת ורע"ם לפי סיווג הגושים באתר; ש"ס ויהדות התורה). הצהרות מותנות או כאלה שדורשות פרשנות מוצגות בלי מיפוי. ייתכנו הצהרות שלא נאספו כאן, ורשימה בלי הצהרה כאן לא בהכרח לא הצהירה.</p>' +
+      (refs.length ? '<ul class="co-refs">' + refs.map(function (r) {
+        return '<li><b>' + esc(lname(r.from)) + '</b>, לגבי ' + esc(lname(r.to)) + ':<ul>' + r.srcs.map(function (x) {
+          return '<li>"' + esc(x.ev) + '"' + (x.src ? ' – ' + esc(x.who) + ', <a href="' + esc(x.src.url) + '" target="_blank" rel="noopener">' + esc(x.src.title) + '</a>' : ' – מתוך פרופיל הרשימה') + ' <span class="meta">(' + esc(viaTxt(x.via, r.to)) + ')</span></li>';
+        }).join('') + '</ul></li>';
+      }).join('') + '</ul>' : '<p>אין בצירוף הצהרה (מבין אלה שנאספו) שנוקבת ברשימה אחרת בצירוף, בראש הרשימה שלה או בקבוצה שהיא שייכת אליה.</p>') +
       '<ul class="co-dl">' + set.map(function (id) { var dd = CO.declared[id]; return '<li><a href="#/list/' + id + '">' + esc(lname(id)) + '</a>: ' + (dd && dd.text ? esc(dd.text) : '<span class="meta">אין הצהרה בשדה זה</span>') + '</li>'; }).join('') + '</ul></div></section>';
     return h;
   }
@@ -887,7 +903,7 @@
       '<div class="toolbar panel tight co-tools"><span class="seg" role="group" aria-label="תצוגה"><button type="button" data-co-view="score" aria-pressed="' + (st.view === 'score') + '">כל הצירופים</button><button type="button" data-co-view="list" aria-pressed="' + (st.view === 'list') + '">לפי רשימה</button></span>' +
       (st.view === 'score' ? '<label>חייב לכלול <select id="co-must"><option value="">כל רשימה</option>' + CX.ids.map(function (id) { return '<option value="' + id + '"' + (st.must === id ? ' selected' : '') + '>' + esc(lname(id)) + '</option>'; }).join('') + '</select></label>' : '') +
       '<label class="co-ck"><input type="checkbox" id="co-th"' + (st.th ? ' checked' : '') + '> לכלול גם רשימות שממוצען מתחת ל-4 מנדטים</label>' +
-      '<label class="co-ck"><input type="checkbox" id="co-nd"' + (st.nd ? ' checked' : '') + '> להסתיר צירופים שיש בהם הצהרת סירוב בין רשימות</label></div>';
+      '<label class="co-ck"><input type="checkbox" id="co-nd"' + (st.nd ? ' checked' : '') + '> להסתיר צירופים שיש בהם הצהרת סירוב (מבין אלה שנאספו) בין רשימות</label></div>';
     if (st.view === 'list') {
       h += '<p class="meta">לכל רשימה: הצירוף המינימלי עם מדד הקרבה הגבוה ביותר שהיא חלק ממנו. סדר הרשימות: לפי סדר האלף-בית.</p><ul class="co-bylist">' + CX.ids.map(function (id) {
         var c = list.filter(function (x) { return x.set.indexOf(id) >= 0; })[0];

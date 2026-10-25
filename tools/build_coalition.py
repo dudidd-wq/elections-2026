@@ -111,11 +111,11 @@ ISSUES = [
       scope='שני מודלים. "מחלוקת על מידה" לפי הניתוח: שתי רשימות במודלים שונים ששתיהן נמנות בהסכמה על הגדלת ההיצע = מרחק חלקי.',
       camps=['המדינה כשחקן מרכזי ודיור ציבורי', 'היצע, קרקע ותכנון'],
       code={'dems': ([0], 'הדמוקרטים, ש"ס*'), 'shas': ([0], 'ש"ס* (7% מכל בנייה חדשה)'), 'miluim': ([0], 'המילואימניקים והכלכלית (חיזוק הדיור הציבורי)'),
-            'joint': ([0], 'והרשימה המשותפת* (עמדה כללית)'),
             'likud': ([1], 'הליכוד*, ישר!, ביחד'), 'yashar': ([1], 'הליכוד*, ישר!, ביחד'), 'beyachad': ([1], 'ביחד (שכירות ארוכת טווח)'),
             'yb': ([1], 'ישראל ביתנו, יהדות התורה'), 'utj': ([1], 'ישראל ביתנו, יהדות התורה'), 'rzz': ([1], 'הציונות הדתית–זהות (זהות: פירוק רמ"י)'),
             'otzma': ([1], 'עוצמה יהודית* (נגב וגליל)'), 'amcha': ([1], 'ועמך ישראל (התחדשות עירונית)')},
-      U={'raam': ('noplan', 'רע"ם*; בלי תוכנית דיור כללית.')}),
+      U={'raam': ('noplan', 'רע"ם*; בלי תוכנית דיור כללית.'),
+         'joint': ('general', 'והרשימה המשותפת* (עמדה כללית)')}),
  dict(id='religion', scale='ordinal', basis=('principleVsDegree', 'מחלוקות על מידה', 'תחבורה בשבת (מסלול ביניים של הכרעה מקומית)'),
       scope='שלושה מודלים; "הכרעה מקומית" באמצע, כי הניתוח מגדיר אותה "מסלול ביניים".',
       camps=['שינוי הסטטוס קוו (נישואים אזרחיים או תחבורה ציבורית בשבת ברמה ארצית)', 'הכרעה מקומית על שבת', 'שמירת הסטטוס קוו'],
@@ -159,11 +159,46 @@ REASONS = {'general': 'עמדה כללית בלבד', 'noplan': 'בלי תוכנ
 
 # ---- declared constraints: only explicit "will not sit with <named list / named leader>" are mapped -----------
 LEADER = {l['id']: l.get('leader', '') for l in P['lists']}
+# Declared refusals. Two sources, both shown verbatim with the list they touch:
+#  1. DECL: the "גוש / שותפויות מוצהרות" field of the list profile (platforms.json). Mapped when it names a list,
+#     a list's leader, or one of the two groups defined in GROUPS below; anything needing inference
+#     (e.g. "parties that support the draft exemption") is shown without mapping.
+#  2. DECL_SRC: explicit, unconditional campaign statements by the list's leader that name another list or its
+#     leader (or a GROUPS group), each with date + source URL. Conditional statements ("only if they accept …")
+#     are not included. Not a complete record: the UI says so.
+# Same rule for every list. Tuple: (verbatim text, refused ids, via) – via = ('list', leader) / ('group', key) / None.
+GROUPS = {'arab': (['joint', 'raam'], 'מפלגות ערביות = הרשימה המשותפת ורע"ם, לפי סיווג הגושים באתר'),
+          'haredi': (['shas', 'utj'], 'מפלגות חרדיות = ש"ס ויהדות התורה')}
 DECL = {
- 'yashar': [('איזנקוט הצהיר שלא ישב עם סמוטריץ\'', ['rzz'], ('rzz', 'בצלאל סמוטריץ\''))],
- 'yb': [('שולל קואליציה עם ש"ס ויהדות התורה', ['shas', 'utj'], None)],
- 'amcha': [('שוללת ממשלה עם איזנקוט', ['yashar'], ('yashar', 'גדי איזנקוט'))],
+ 'yashar': [('איזנקוט הצהיר שלא ישב עם סמוטריץ\'', ['rzz'], ('list', 'rzz', 'בצלאל סמוטריץ\''))],
+ 'yb': [('שולל קואליציה עם ש"ס ויהדות התורה', ['shas', 'utj'], None),
+        ('ועם מפלגות ערביות', ['joint', 'raam'], ('group', 'arab'))],
+ 'miluim': [('בלי מפלגות חרדיות', ['shas', 'utj'], ('group', 'haredi')),
+            ('או ערביות', ['joint', 'raam'], ('group', 'arab'))],
+ 'amcha': [('שוללת ממשלה עם איזנקוט', ['yashar'], ('list', 'yashar', 'גדי איזנקוט'))],
 }
+DECL_SRC = [
+ dict(by='yb', date='2026-10-15', who='אביגדור ליברמן',
+      quote='בלי רע״מ, בלי המשותפת, בלי ש״ס ובלי יהדות התורה. הליכוד בלי נתניהו יכול להיות שותף משמעותי. עם נתניהו - שיתהפך העולם לא נשב בשום מצב.',
+      refs=[(['raam', 'joint', 'shas', 'utj'], None), (['likud'], ('list', 'likud', 'בנימין נתניהו'))],
+      src=('ישראל היום, 15.10.2026 (ציוץ ליברמן)', 'https://www.israelhayom.co.il/news/politics/article/21633398')),
+ dict(by='yashar', date='2026-10-21', who='גדי איזנקוט',
+      quote='לא אשב תחת נתניהו, גם לא ברוטציה. אם זה קורה – אני אתפטר תוך שעה',
+      refs=[(['likud'], ('list', 'likud', 'בנימין נתניהו'))],
+      src=('ישראל היום, 21.10.2026 (ראיון ב-103FM)', 'https://www.israelhayom.co.il/news/politics/article/21675460')),
+ dict(by='beyachad', date='2026-10-11', who='נפתלי בנט',
+      quote='נתניהו נושא באחריות ישירה ואישית לטבח 7 באוקטובר ולכן עליו ללכת הביתה. לא נשב איתו בשום קונסטלציה.',
+      refs=[(['likud'], ('list', 'likud', 'בנימין נתניהו'))],
+      src=('ynet, 11.10.2026 (פוסט של בנט)', 'https://www.ynet.co.il/news/article/hyhofwyomx')),
+ dict(by='dems', date='2026-10-15', who='יאיר גולן',
+      quote='אנחנו לא נשב עם נתניהו, לא עם הליכוד ולא עם אף מפלגה מקואליציית החורבן',
+      refs=[(['likud'], None)],
+      src=('News1, 15.10.2026', 'https://www.news1.co.il/Archive/001-D-525182-00.html')),
+ dict(by='miluim', date='2026-10-13', who='יועז הנדל',
+      quote='אני לא אשב עם מפלגות חרדיות וגם לא אשב עם מפלגות ערביות',
+      refs=[(['shas', 'utj'], ('group', 'haredi')), (['joint', 'raam'], ('group', 'arab'))],
+      src=('ynet, 13.10.2026 (ועידת "האנשים של המדינה")', 'https://www.ynet.co.il/news/elections2026/article/sywy11bjize')),
+]
 
 def seg_text(s):
     return ((s.get('label') or '') + ' ' + (s.get('who') or '')).strip()
@@ -235,15 +270,36 @@ for spec in ISSUES:
                        'scale': spec['scale'], 'basis': bquote, 'scope': spec['scope'], 'camps': spec['camps'],
                        'consensus': cons, 'lists': lists, 'uncoded': unc})
 
+def via_obj(via, lid):
+    if not via: return None
+    if via[0] == 'list':
+        if via[2] not in LEADER.get(via[1], ''): errors.append('declared %s: leader mapping not found: %s' % (lid, via))
+        return {'list': via[1], 'leader': via[2]}
+    if via[0] == 'group':
+        if via[1] not in GROUPS: errors.append('declared %s: unknown group %s' % (lid, via[1]))
+        return {'group': via[1], 'note': GROUPS[via[1]][1]}
+    errors.append('declared %s: bad via %s' % (lid, via))
+
+ID_SET = set(l['id'] for l in P['lists'])
 decl = {}
 for l in P['lists']:
     text = l.get('declaredBloc', '') or ''
     items = []
     for ev, refuses, via in DECL.get(l['id'], []):
         if ev not in text: errors.append('declared %s: text not found: %s' % (l['id'], ev))
-        if via and via[1] not in LEADER.get(via[0], ''): errors.append('declared %s: leader mapping not found: %s' % (l['id'], via))
-        items.append({'ev': ev, 'refuses': refuses, 'via': ({'list': via[0], 'leader': via[1]} if via else None)})
-    decl[l['id']] = {'text': text, 'refuses': items}
+        if via and via[0] == 'group' and sorted(refuses) != sorted(GROUPS[via[1]][0]): errors.append('declared %s: group ids mismatch' % l['id'])
+        items.append({'ev': ev, 'refuses': refuses, 'via': via_obj(via, l['id'])})
+    decl[l['id']] = {'text': text, 'refuses': items, 'statements': []}
+for d in DECL_SRC:
+    if d['by'] not in decl: errors.append('declared statement: unknown list ' + d['by']); continue
+    if d['who'] not in LEADER.get(d['by'], ''): errors.append('declared statement %s: speaker is not the list leader: %s' % (d['by'], d['who']))
+    refs = []
+    for ids, via in d['refs']:
+        if not set(ids) <= ID_SET or d['by'] in ids: errors.append('declared statement %s: bad ids %s' % (d['by'], ids))
+        if via and via[0] == 'group' and sorted(ids) != sorted(GROUPS[via[1]][0]): errors.append('declared statement %s: group ids mismatch' % d['by'])
+        refs.append({'refuses': ids, 'via': via_obj(via, d['by'])})
+    decl[d['by']]['statements'].append({'who': d['who'], 'date': d['date'], 'quote': d['quote'], 'refs': refs,
+                                        'src': {'title': d['src'][0], 'url': d['src'][1]}})
 
 avg = POLLS.get('computed', {}).get('average', {})
 for lid in LISTS:
