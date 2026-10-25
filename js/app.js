@@ -641,7 +641,8 @@
       l: alpha(l),
       w: CO.issues.map(function (is, k) { var c = (q.w || '').charAt(k); return /^[0-3]$/.test(c) ? +c : 1; }),
       sw: q.s === '0' ? 0 : q.s === '10' ? 1 : 0.5,
-      th: q.th === 'all', must: LIST[q.must] ? q.must : '', nd: q.nd === '1',
+      th: q.th === 'all', must: LIST[q.must] ? q.must : '', nd: q.nd !== '0',
+      mp: /^(25|40|50)$/.test(q.mp || '') ? +q.mp : 40,
       view: q.view === 'list' ? 'list' : 'score', sort: q.sort === 'gap' ? 'gap' : 'n', all: q.all === '1'
     };
   }
@@ -652,7 +653,8 @@
     if (s.sw !== 0.5) q.push('s=' + (s.sw === 0 ? '0' : '10'));
     if (s.th) q.push('th=all');
     if (s.must) q.push('must=' + s.must);
-    if (s.nd) q.push('nd=1');
+    if (!s.nd) q.push('nd=0');
+    if (s.mp !== 40) q.push('mp=' + s.mp);
     if (s.view === 'list') q.push('view=list');
     if (s.sort === 'gap') q.push('sort=gap');
     if (s.all) q.push('all=1');
@@ -717,6 +719,50 @@
     });
     return out;
   }
+  // pair stats under the current weights: index, number of issues compared, issues at full distance
+  var COPS = {};
+  function coPairs(st) {
+    var key = st.w.join('') + '|' + st.sw;
+    if (COPS.key === key) return COPS.m;
+    var m = {};
+    CX.ids.forEach(function (a) { m[a] = {}; });
+    CX.ids.forEach(function (a, i) {
+      CX.ids.slice(i + 1).forEach(function (b) {
+        var sc = coScore([a, b], st), n = 0, full = 0;
+        CO.issues.forEach(function (is, k) {
+          if (!st.w[k]) return;
+          var d = CX.d[is.id][a][b]; if (d == null || !(coCf(a, is.id, st.sw) * coCf(b, is.id, st.sw))) return;
+          n++; if (d > 1 - 1e-9) full++;
+        });
+        m[a][b] = m[b][a] = { score: sc.score, n: n, full: full };
+      });
+    });
+    COPS = { key: key, m: m }; return m;
+  }
+  var CO_MINN = 5; // a pair must be compared on at least 5 counted issues for its index to be used
+  function coStats(set, st) {
+    var pm = coPairs(st), worst = null, minN = 99, full = 0;
+    for (var i = 0; i < set.length; i++) for (var j = i + 1; j < set.length; j++) {
+      var p = pm[set[i]][set[j]];
+      if (p.n < minN) minN = p.n;
+      var v = p.score == null ? -1 : p.score;
+      if (!worst || v < worst.score) worst = { score: v, a: set[i], b: set[j], full: p.full, n: p.n };
+    }
+    CO.issues.forEach(function (is, k) {
+      if (!st.w[k]) return;
+      for (var i = 0; i < set.length; i++) for (var j = i + 1; j < set.length; j++) {
+        var d = CX.d[is.id][set[i]][set[j]];
+        if (d != null && d > 1 - 1e-9 && coCf(set[i], is.id, st.sw) * coCf(set[j], is.id, st.sw)) { full++; return; }
+      }
+    });
+    return { worst: worst, minN: set.length > 1 ? minN : 0, full: full };
+  }
+  function coMk(set, st, sum, extra) {
+    var sc = coScore(set, st), x = coStats(set, st), refs = coRefusals(set);
+    return Object.assign({ set: set, sum: sum, score: sc.score, cov: sc.cov, rng: coRange(set, st, sc.score), ref: refs.length, refs: refs, worst: x.worst, minN: x.minN, full: x.full, names: set.map(lname).join(', ') }, extra || {});
+  }
+  // passes the closeness threshold: every pair compared on enough issues and at or above the threshold
+  function coPass(c, st) { return !st.mp || (c.minN >= CO_MINN && c.worst && Math.round(c.worst.score) >= st.mp); }
   function coPool(st) { return CX.ids.filter(function (id) { return st.th || CX.s10[id] >= 40; }); }
   var COMW = {};
   function coMinWin(st) {
@@ -727,15 +773,18 @@
       var set = [], sum = 0, mn = 1e9;
       for (var i = 0; i < n; i++) if (mask & (1 << i)) { set.push(pool[i]); var v = CX.s10[pool[i]]; sum += v; if (v < mn) mn = v; }
       if (sum < 610 || sum - mn >= 610) continue;
-      var sc = coScore(set, st);
-      out.push({ set: set, sum: sum, score: sc.score, cov: sc.cov, rng: coRange(set, st, sc.score), ref: coRefusals(set).length, names: set.map(lname).join(', ') });
+      out.push(coMk(set, st, sum));
     }
     out.sort(coCmp);
     COMW = {}; COMW[key] = out; return out;
   }
+  // order: the pair furthest apart first (higher is better), then the mean index, then fewer issues with a full gap
   function coCmp(a, b) {
+    var wa = a.worst ? Math.round(a.worst.score) : -1, wb = b.worst ? Math.round(b.worst.score) : -1;
+    if (wb !== wa) return wb - wa;
     var sa = a.score == null ? -1 : Math.round(a.score), sb = b.score == null ? -1 : Math.round(b.score);
     if (sb !== sa) return sb - sa;
+    if (a.full !== b.full) return a.full - b.full;
     var ca = Math.round(a.cov * 100), cb = Math.round(b.cov * 100);
     if (cb !== ca) return cb - ca;
     if (a.set.length !== b.set.length) return a.set.length - b.set.length;
@@ -748,8 +797,9 @@
     (function rec(start, pick, sum) {
       if (pick.length && sum >= 610) {
         if (pick.every(function (p) { return sum - CX.s10[p] < 610; })) {
-          var set = alpha(cur.concat(pick)), sc = coScore(set, st);
-          res.push({ add: alpha(pick), set: set, sum: sum, score: sc.score, cov: sc.cov, rng: coRange(set, st, sc.score), ref: coRefusals(set).length, names: alpha(pick).map(lname).join(', ') });
+          var set = alpha(cur.concat(pick)), c = coMk(set, st, sum, { add: alpha(pick) });
+          c.names = alpha(pick).map(lname).join(', ');
+          res.push(c);
         }
         return;
       }
@@ -779,8 +829,10 @@
   function coCombo(st, c, k, addMode) {
     return '<li class="co-combo"><div class="co-combo-h">' + (k != null ? '<span class="co-rank" aria-hidden="true">' + (k + 1) + '</span>' : '') +
       '<div class="co-combo-n">' + (addMode ? '<span class="meta">הוספה של </span>' : '') + coNames(addMode ? c.add : c.set) + '</div></div>' +
-      '<p class="co-combo-m"><span>' + coSeatsTxt(c.sum) + ' מנדטים</span><span>מדד קרבה ' + coScoreTxt(c.score) + (c.rng ? ' <span class="co-rng">(טווח ' + c.rng[0] + '–' + c.rng[1] + ')</span>' : '') + '</span><span>כיסוי ' + Math.round(c.cov * 100) + '%' + (c.cov < 0.6 ? ' – נמוך' : '') + '</span>' +
-      (c.ref ? '<span>הצהרות סירוב בתוך הצירוף: ' + c.ref + ' (זוגות)</span>' : '') + '</p>' +
+      '<p class="co-combo-m"><span>' + coSeatsTxt(c.sum) + ' מנדטים</span>' +
+      (c.worst ? '<span>הזוג הרחוק ביותר: ' + esc(lname(c.worst.a)) + ' – ' + esc(lname(c.worst.b)) + ', <b>' + coScoreTxt(c.worst.score < 0 ? null : c.worst.score) + '</b>' + (c.worst.n < CO_MINN ? ' (רק ' + c.worst.n + ' סוגיות בהשוואה)' : '') + '</span>' : '') +
+      '<span>מדד קרבה ממוצע ' + coScoreTxt(c.score) + (c.rng ? ' <span class="co-rng">(טווח ' + c.rng[0] + '–' + c.rng[1] + ')</span>' : '') + '</span><span>סוגיות עם פער מלא בין שתי רשימות: ' + c.full + '</span><span>כיסוי ' + Math.round(c.cov * 100) + '%' + (c.cov < 0.6 ? ' – נמוך' : '') + '</span>' +
+      (c.ref ? '<span>הצהרות סירוב בתוך הצירוף: ' + c.refs.map(function (r) { return esc(lname(r.from)) + ' לגבי ' + esc(lname(r.to)); }).join('; ') + '</span>' : '<span>אין בצירוף הצהרת סירוב (מבין אלה שנאספו)</span>') + '</p>' +
       coLink(st, c.set, addMode ? 'הוסיפו לבונה' : 'פתחו בבונה', ' aria-label="' + esc((addMode ? 'הוסיפו לבונה: ' + c.names : 'פתחו בבונה: ' + c.names)) + '"') + '</li>';
   }
   function pageCoalition(q) {
@@ -803,13 +855,20 @@
       '<div><span class="k">הערכת מנדטים</span><b>' + coSeatsTxt(s10) + '</b><span class="meta">הערכה מהסקרים</span></div>' +
       '<div><span class="k">קו 61</span><b>' + (set.length ? '<bdi dir="ltr">' + (s10 >= 610 ? '+' + coSeatsTxt(s10 - 610) : '−' + coSeatsTxt(610 - s10)) + '</bdi>' : '–') + '</b><span class="meta">' + (!set.length ? 'לא נבחרו רשימות' : s10 >= 610 ? 'מעל 61' : 'מתחת ל-61') + '</span></div>' +
       '<div><span class="k">מדד קרבה</span><b>' + (sc ? coScoreTxt(sc.score) : '–') + '</b><span class="meta">' + (sc ? (sc.score == null ? 'אין השוואות שנספרו' : '0–100 · כיסוי ' + Math.round(sc.cov * 100) + '%') : 'נדרשות 2 רשימות לפחות') + '</span></div></div>' +
-      coMeter(s10) + (set.some(function (id) { return CX.s10[id] < 40; }) ? '<p class="meta">הצירוף כולל רשימה שממוצעה מתחת ל-4 מנדטים (↓). רשימה שלא תעבור את אחוז החסימה לא תקבל מנדטים, והסכום יקטן בהתאם.</p>' : '') + '</div>' + pick;
+      coMeter(s10) + (set.length > 1 ? (function () {
+        var x = coStats(set, st), w = x.worst;
+        return '<p class="co-worst">הזוג הרחוק ביותר בבחירה: ' + esc(lname(w.a)) + ' – ' + esc(lname(w.b)) + ', מדד ' + coScoreTxt(w.score < 0 ? null : w.score) + ' (על סמך ' + w.n + ' סוגיות; בפער מלא ב-' + w.full + ')' +
+          (w.n < CO_MINN ? '. פחות מ-' + CO_MINN + ' סוגיות בהשוואה – המדד הזוגי לא מספיק לסף.' : Math.round(w.score) < st.mp ? '. מתחת לסף הקרבה (' + st.mp + ') שבו משתמשת רשימת הצירופים.' : '.') + '</p>';
+      })() : '') + (set.some(function (id) { return CX.s10[id] < 40; }) ? '<p class="meta">הצירוף כולל רשימה שממוצעה מתחת ל-4 מנדטים (↓). רשימה שלא תעבור את אחוז החסימה לא תקבל מנדטים, והסכום יקטן בהתאם.</p>' : '') + '</div>' + pick;
     // what it takes
     if (set.length && s10 < 610) {
-      var adds = coAdd(st), show = adds.slice(0, 6);
+      var addsAll = coAdd(st), adds = addsAll.filter(function (c) { return coPass(c, st) && (!st.nd || !c.ref); }), show = adds.slice(0, 6);
       h += '<div class="panel co-need"><h2>מה צריך כדי להגיע ל-61</h2>' +
-        (show.length ? '<p class="meta">צירופים מינימליים של עד 3 רשימות נוספות' + (st.th ? '' : ' (מתוך הרשימות שממוצען 4 מנדטים לפחות)') + ', לפי מספר הרשימות שמתווספות ואז לפי מדד הקרבה של הצירוף המלא; בשוויון – לפי הכיסוי ואז לפי סדר האלף-בית. "טווח" = המדד כשמשקל העמדות המסומנות * הוא 0 או 1.</p><ol class="co-combos">' + show.map(function (c) { return coCombo(st, c, null, true); }).join('') + '</ol>' + (adds.length > 6 ? '<p class="meta">ועוד ' + (adds.length - 6) + ' אפשרויות.</p>' : '')
-          : '<p>אין צירוף של עד 3 רשימות נוספות' + (st.th ? '' : ' מתוך הרשימות שממוצען 4 מנדטים לפחות') + ' שמביא את הבחירה ל-61 לפי ההערכה.</p>') + '</div>';
+        (show.length ? '<p class="meta">צירופים מינימליים של עד 3 רשימות נוספות' + (st.th ? '' : ' (מתוך הרשימות שממוצען 4 מנדטים לפחות)') + ', באותם מסננים כמו ברשימת הצירופים למטה (סף קרבה: ' + coMpTxt(st) + (st.nd ? '; בלי הצהרות סירוב' : '') + '). הסדר: לפי מספר הרשימות שמתווספות, ואז לפי הזוג הרחוק ביותר והמדד הממוצע. "טווח" = המדד כשמשקל העמדות המסומנות * הוא 0 או 1.</p><ol class="co-combos">' + show.map(function (c) { return coCombo(st, c, null, true); }).join('') + '</ol>' + (adds.length > 6 ? '<p class="meta">ועוד ' + (adds.length - 6) + ' אפשרויות.</p>' : '')
+          : '<p>' + (addsAll.length ? 'יש ' + addsAll.length + ' דרכים להגיע ל-61 בהוספה של עד 3 רשימות, אבל אף אחת מהן לא עוברת את המסננים (סף קרבה: ' + coMpTxt(st) + (st.nd ? '; בלי הצהרות סירוב' : '') + ').' + (function () {
+            var p2 = addsAll.filter(function (c) { return coPass(c, st); });
+            return st.nd && p2.length ? ' ' + (p2.length === 1 ? 'אחת מהן עוברת את סף הקרבה אבל כוללת' : p2.length + ' מהן עוברות את סף הקרבה אבל כוללות') + ' הצהרת סירוב:</p><ol class="co-combos">' + p2.slice(0, 6).map(function (c) { return coCombo(st, c, null, true); }).join('') + '</ol><p class="meta">אפשר לשנות את המסננים ברשימת הצירופים למטה.' : ' אפשר לשנות אותם ברשימת הצירופים למטה.';
+          })() : 'אין צירוף של עד 3 רשימות נוספות' + (st.th ? '' : ' מתוך הרשימות שממוצען 4 מנדטים לפחות') + ' שמביא את הבחירה ל-61 לפי ההערכה.') + '</p>') + '</div>';
     } else if (set.length && s10 >= 610) {
       var extra = set.filter(function (id) { return s10 - CX.s10[id] >= 610; });
       h += '<div class="panel co-need"><h2>הצירוף מגיע ל-61 לפי ההערכה</h2><p>' + (extra.length ? 'גם בלי אחת מהרשימות הבאות הצירוף נשאר עם 61 לפחות (בכל פעם רשימה אחת): ' + extra.map(function (id) { return esc(lname(id)); }).join(', ') + '. זו קביעה חשבונית בלבד.' : 'זה צירוף מינימלי: הוצאה של כל אחת מהרשימות מורידה אותו מתחת ל-61 לפי ההערכה.') + '</p></div>';
@@ -896,24 +955,28 @@
       : is.scale === 'degree' ? 'מחלוקת על מידה: ' + (is.consensus ? 'רשימות שבהסכמה החלקית שבניתוח ("' + esc(is.consensus.label) + '") ובמודלים שונים – מרחק חלקי (0.5); אחרות – מרחק מלא.' : 'מודלים שונים – מרחק מלא.')
       : 'מחלוקת עיקרון: מודלים שונים – מרחק מלא.';
   }
+  function coMpTxt(st) { return 'כל זוג רשימות בצירוף במדד ' + st.mp + ' לפחות, על סמך ' + CO_MINN + ' סוגיות לפחות'; }
   function coSuggest(st) {
-    var all = coMinWin(st), list = all.filter(function (c) { return (!st.must || c.set.indexOf(st.must) >= 0) && (!st.nd || !c.ref); });
-    var h = '<section class="co-sug" aria-labelledby="co-sug-h"><h2 id="co-sug-h">צירופים שמגיעים ל-61 לפי ההערכה</h2>' +
-      '<p>צירופים מינימליים: אין בהם רשימה שאפשר להוציא ועדיין להישאר עם 61 לפחות. הם מסודרים לפי מדד הקרבה (המספר המעוגל שמוצג), מהגבוה לנמוך; בשוויון – לפי הכיסוי (יותר השוואות קודם), אחר כך לפי מספר הרשימות ואז לפי סדר האלף-בית. "טווח" = המדד כשמשקל העמדות המסומנות * הוא 0 או 1. זו השוואה מתמטית של עמדות מוצהרות ושל הערכות מהסקרים, לא תחזית ולא המלצה.</p>' +
+    var all = coMinWin(st), byMust = all.filter(function (c) { return !st.must || c.set.indexOf(st.must) >= 0; });
+    var pass = byMust.filter(function (c) { return coPass(c, st); }), list = pass.filter(function (c) { return !st.nd || !c.ref; });
+    var h = '<section class="co-sug" aria-labelledby="co-sug-h"><h2 id="co-sug-h">הצירופים הקרובים ביותר בעמדות המוצהרות, מתוך אלה שמגיעים ל-61 לפי ההערכה</h2>' +
+      '<p>צירופים מינימליים: אין בהם רשימה שאפשר להוציא ועדיין להישאר עם 61 לפחות. שני מסננים, אותו כלל לכל זוג רשימות: (1) <b>סף קרבה</b> – כל זוג רשימות בצירוף צריך להגיע לסף במדד הקרבה הזוגי, על סמך ' + CO_MINN + ' סוגיות לפחות שבהן שתיהן קודדו (צירוף שיש בו זוג רחוק מאוד לא מוצג, גם אם הממוצע גבוה); (2) <b>הצהרות סירוב</b> – כברירת מחדל לא מוצגים צירופים שיש בהם הצהרת סירוב מפורשת בין שתי רשימות (מבין אלה שנאספו, ראו "אילוצים מוצהרים"). הסדר: לפי מדד הקרבה של הזוג הרחוק ביותר בצירוף, מהגבוה לנמוך (בדומה לגישת "הטווח המינימלי" במדע המדינה); בשוויון – לפי המדד הממוצע, מספר הסוגיות עם פער מלא, הכיסוי, מספר הרשימות וסדר האלף-בית. זו השוואה מתמטית של עמדות מוצהרות ושל הערכות מהסקרים, לא תחזית ולא המלצה.</p>' +
       '<div class="toolbar panel tight co-tools"><span class="seg" role="group" aria-label="תצוגה"><button type="button" data-co-view="score" aria-pressed="' + (st.view === 'score') + '">כל הצירופים</button><button type="button" data-co-view="list" aria-pressed="' + (st.view === 'list') + '">לפי רשימה</button></span>' +
       (st.view === 'score' ? '<label>חייב לכלול <select id="co-must"><option value="">כל רשימה</option>' + CX.ids.map(function (id) { return '<option value="' + id + '"' + (st.must === id ? ' selected' : '') + '>' + esc(lname(id)) + '</option>'; }).join('') + '</select></label>' : '') +
-      '<label class="co-ck"><input type="checkbox" id="co-th"' + (st.th ? ' checked' : '') + '> לכלול גם רשימות שממוצען מתחת ל-4 מנדטים</label>' +
-      '<label class="co-ck"><input type="checkbox" id="co-nd"' + (st.nd ? ' checked' : '') + '> להסתיר צירופים שיש בהם הצהרת סירוב (מבין אלה שנאספו) בין רשימות</label></div>';
+      '<label>סף קרבה לכל זוג <select id="co-mp">' + [[40, '40 – ברירת המחדל'], [50, '50'], [25, '25']].map(function (o) { return '<option value="' + o[0] + '"' + (st.mp === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></label>' +
+      '<label class="co-ck"><input type="checkbox" id="co-nd"' + (st.nd ? ' checked' : '') + '> להסתיר צירופים שיש בהם הצהרת סירוב (מבין אלה שנאספו) בין רשימות</label>' +
+      '<label class="co-ck"><input type="checkbox" id="co-th"' + (st.th ? ' checked' : '') + '> לכלול גם רשימות שממוצען מתחת ל-4 מנדטים</label></div>' +
+      '<p class="meta">' + byMust.length + ' צירופים מינימליים' + (st.must ? ' עם ' + esc(lname(st.must)) : '') + '; ' + (pass.length === 1 ? 'אחד עובר' : pass.length + ' עוברים') + ' את סף הקרבה (' + coMpTxt(st) + ')' + (st.nd ? '; ' + (list.length === 1 ? 'אחד מהם' : list.length + ' מהם') + ' בלי הצהרת סירוב' : '') + '.</p>';
     if (st.view === 'list') {
-      h += '<p class="meta">לכל רשימה: הצירוף המינימלי עם מדד הקרבה הגבוה ביותר שהיא חלק ממנו. סדר הרשימות: לפי סדר האלף-בית.</p><ul class="co-bylist">' + CX.ids.map(function (id) {
-        var c = list.filter(function (x) { return x.set.indexOf(id) >= 0; })[0];
-        return '<li><h3>' + esc(lname(id)) + '</h3>' + (c ? '<ol class="co-combos">' + coCombo(st, c, null, false) + '</ol>' : '<p class="meta">' + (CX.s10[id] < 40 && !st.th ? 'ממוצע מתחת ל-4 מנדטים; לא נכללת בחישוב (אפשר לשנות בתיבת הסימון למעלה).' : 'אין צירוף מינימלי שמתאים לסינון.') + '</p>') + '</li>';
+      h += '<p class="meta">לכל רשימה: הצירוף הראשון לפי הסדר שלמעלה שהיא חלק ממנו, באותם מסננים. סדר הרשימות: לפי סדר האלף-בית.</p><ul class="co-bylist">' + CX.ids.map(function (id) {
+        var c = list.filter(function (x) { return x.set.indexOf(id) >= 0; })[0], c2 = !c && st.nd ? pass.filter(function (x) { return x.set.indexOf(id) >= 0; })[0] : null;
+        return '<li><h3>' + esc(lname(id)) + '</h3>' + (c ? '<ol class="co-combos">' + coCombo(st, c, null, false) + '</ol>' : c2 ? '<p class="meta">אין צירוף בלי הצהרת סירוב; הראשון שעובר את סף הקרבה:</p><ol class="co-combos">' + coCombo(st, c2, null, false) + '</ol>' : '<p class="meta">' + (CX.s10[id] < 40 && !st.th ? 'ממוצע מתחת ל-4 מנדטים; לא נכללת בחישוב (אפשר לשנות בתיבת הסימון למעלה).' : 'אין צירוף מינימלי שעובר את סף הקרבה.') + '</p>') + '</li>';
       }).join('') + '</ul>';
     } else {
       var n = st.all ? list.length : Math.min(10, list.length);
-      h += '<p class="meta">' + list.length + ' צירופים' + (list.length !== all.length ? ' (מתוך ' + all.length + ')' : '') + '.</p>' +
-        (list.length ? '<ol class="co-combos">' + list.slice(0, n).map(function (c, k) { return coCombo(st, c, k, false); }).join('') + '</ol>' : '<p>אין צירופים שמתאימים לסינון.</p>') +
-        (list.length > n ? '<p><button type="button" class="btn sec" data-co-all>הצגת כל ' + list.length + ' הצירופים</button></p>' : '');
+      h += list.length ? '<ol class="co-combos">' + list.slice(0, n).map(function (c, k) { return coCombo(st, c, k, false); }).join('') + '</ol>' + (list.length > n ? '<p><button type="button" class="btn sec" data-co-all>הצגת כל ' + list.length + ' הצירופים</button></p>' : '')
+        : '<div class="empty"><b>אין צירוף שעובר את המסננים.</b><p>' + (pass.length && st.nd ? 'לפי הערכת הסקרים, כל ' + pass.length + ' הצירופים שעוברים את סף הקרבה כוללים לפחות הצהרת סירוב אחת בין שתי רשימות בהם (מבין ההצהרות שנאספו).' : 'אפשר להוריד את סף הקרבה' + (st.nd ? ' או לבטל את הסתרת הצירופים עם הצהרות סירוב' : '') + '.') + '</p></div>' +
+          (pass.length && st.nd ? '<h3 class="co-sub">הצירופים שעוברים את סף הקרבה, כל אחד עם הצהרות הסירוב שבו</h3><p class="meta">אותו סדר ואותו סף; ההצהרות מפורטות בכל צירוף. ' + (pass.length > 10 && !st.all ? 'מוצגים 10 הראשונים.' : '') + '</p><ol class="co-combos">' + pass.slice(0, st.all ? pass.length : 10).map(function (c, k) { return coCombo(st, c, k, false); }).join('') + '</ol>' + (pass.length > 10 && !st.all ? '<p><button type="button" class="btn sec" data-co-all>הצגת כל ' + pass.length + ' הצירופים</button></p>' : '') : '');
     }
     return h + '</section>';
   }
@@ -923,7 +986,8 @@
       '<h3>המרחק בין שתי רשימות בסוגיה</h3><ul><li>אותו מודל: 0.</li><li>סולם מדורג (המודלים מסודרים בין שני קטבים): מספר הצעדים ביניהם חלקי מספר הצעדים בסולם. בין המודל הראשון לאחרון: 1.</li><li>מחלוקת על מידה (הניתוח מציין הסכמה על הכיוון): שתי רשימות שבהסכמה החלקית שבניתוח ובמודלים שונים – 0.5; אחרת – 1.</li><li>מחלוקת עיקרון: מודלים שונים – 1.</li><li>רשימה מורכבת ששויכה לכמה מודלים: ממוצע ההתאמה הקרובה ביותר לכל אחד מהמודלים שלה, בשני הכיוונים.</li></ul>' +
       '<h3>המדד</h3><p>לכל זוג רשימות בצירוף ובכל סוגיה: 1 פחות המרחק. המדד הוא הממוצע המשוקלל של כל הזוגות וכל הסוגיות, כפול 100. משקל של זוג בסוגיה = משקל הסוגיה × משקל העמדה של כל אחת משתי הרשימות. עמדה המסומנת * (מבוססת על הצהרות, הודעות או הצבעות) מקבלת כברירת מחדל משקל ' + (CO.starWeight) + ', ועמדה ממצע, ממסמך או מתשובה רשמית – 1. "כיסוי" הוא שיעור ההשוואות שנספרו מתוך כל ההשוואות האפשריות בסוגיות שבמדד. "קרבה בסוגיה" מחושבת באותה דרך, לסוגיה אחת.</p>' +
       '<h3>מנדטים</h3><p>הערכת המנדטים היא סכום הממוצעים של הרשימות ב-' + C.n + ' הסקרים שבחלון ' + fmtShort(C.window[0]) + '–' + fmtShort(C.window[1]) + ', לפי <a href="#/polls">עמוד הסקרים</a>. היא לא תוצאה ולא הקצאת מושבים: לסקרים יש טווח טעות, ורשימה שלא תעבור את אחוז החסימה תקבל 0. ' + esc(D.meta.silence) + ' כברירת מחדל, רשימות שממוצען מתחת ל-4 מנדטים לא נכללות בחיפוש הצירופים.</p>' +
-      '<h3>מגבלות</h3><ul><li>זו השוואה מתמטית של עמדות מוצהרות, לא תחזית ולא המלצה. היא לא אומרת מי יצטרף למי ולא מעריכה סיכויים.</li><li>נכללות רק 10 הסוגיות שבאתר. מה שלא נמדד כאן – יחסים אישיים, דרישות תקציביות, תפקידים, פערים בתוך אותו מודל – לא נכלל.</li><li>הקידוד למודלים מפשט: הבדלים בתוך אותו מודל לא נספרים, ובסולם מדורג המרחקים בין מודלים סמוכים נחשבים שווים.</li><li>כל הרשימות שוקלות אותו דבר במדד, בלי קשר לגודלן.</li><li>הצהרות על שותפויות או על סירוב לשבת עם רשימה אחרת אינן חלק מהמדד; הן מוצגות בנפרד, כלשונן, בפרק "אילוצים מוצהרים".</li><li>רשימה עם עמדות רבות שלא קודדו נמדדת על פחות השוואות – ראו את ה"כיסוי".</li></ul></div>' +
+      '<h3>רשימת הצירופים</h3><p>ממוצע של כל הזוגות יכול להיות גבוה גם כשבצירוף יש שתי רשימות עם עמדות מנוגדות כמעט בכל סוגיה. לכן לכל זוג רשימות מחושב גם מדד זוגי (אותה נוסחה, על שתי הרשימות בלבד), ונספרות הסוגיות שבהן שתיהן קודדו. ברשימת הצירופים מוצגים רק צירופים שבהם כל זוג רשימות מגיע לסף (ברירת מחדל 40; אפשר לבחור 25 או 50) על סמך ' + CO_MINN + ' סוגיות לפחות, והם מסודרים לפי המדד של הזוג הרחוק ביותר בצירוף, ואחריו המדד הממוצע. הכלל זהה לכל זוג רשימות, בלי חריגים. כברירת מחדל מוסתרים גם צירופים שיש בהם הצהרת סירוב מפורשת (מבין אלה שנאספו); אם אין צירוף כזה, הצירופים שעוברים את הסף מוצגים עם ההצהרות שבהם. הסף הוא בחירה של האתר, לא קביעה מדעית.</p>' +
+      '<h3>מגבלות</h3><ul><li>זו השוואה מתמטית של עמדות מוצהרות, לא תחזית ולא המלצה. היא לא אומרת מי יצטרף למי ולא מעריכה סיכויים.</li><li>נכללות רק 10 הסוגיות שבאתר. מה שלא נמדד כאן – יחסים אישיים, דרישות תקציביות, תפקידים, פערים בתוך אותו מודל – לא נכלל.</li><li>הקידוד למודלים מפשט: הבדלים בתוך אותו מודל לא נספרים, ובסולם מדורג המרחקים בין מודלים סמוכים נחשבים שווים.</li><li>כל הרשימות שוקלות אותו דבר במדד, בלי קשר לגודלן.</li><li>הצהרות על שותפויות או על סירוב לשבת עם רשימה אחרת אינן חלק מהמדד; הן מוצגות בנפרד, כלשונן, בפרק "אילוצים מוצהרים", ומשמשות כמסנן ברשימת הצירופים (אפשר לבטל אותו). אוסף ההצהרות אינו ממצה.</li><li>ממוצע יכול להסתיר פער חד בין שתי רשימות. לכן רשימת הצירופים מסודרת לפי הזוג הרחוק ביותר, ומוצגים רק צירופים שבהם כל זוג עובר את סף הקרבה (כברירת מחדל 40), על סמך ' + CO_MINN + ' סוגיות לפחות. הכלל זהה לכל זוג רשימות.</li><li>רשימה עם עמדות רבות שלא קודדו נמדדת על פחות השוואות – ראו את ה"כיסוי".</li></ul></div>' +
       '<details class="panel co-code"><summary>טבלת הקידוד המלאה (10 סוגיות)</summary>' + CO.issues.map(function (is) {
         var byCamp = is.camps.map(function (lab, k) { return { lab: lab, ids: CX.ids.filter(function (id) { return is.lists[id] && is.lists[id].camps.indexOf(k) >= 0; }) }; });
         return '<div class="co-ci"><h4><a href="#/issue/' + is.id + '">' + esc(is.title) + '</a></h4><p class="meta">' + coScaleTxt(is) + '</p><p><b>השאלה שבמחלוקת:</b> ' + esc(is.scope) + '</p>' +
@@ -1081,6 +1145,7 @@
     else if (t.id === 'co-th') coGo({ th: t.checked, all: false }, '#co-th');
     else if (t.id === 'co-nd') coGo({ nd: t.checked, all: false }, '#co-nd');
     else if (t.id === 'co-must') coGo({ must: t.value, all: false }, '#co-must');
+    else if (t.id === 'co-mp') coGo({ mp: +t.value, all: false }, '#co-mp');
     else if (t.id === 'outlet') { setHash('#/polls' + (t.value ? '?outlet=' + encodeURIComponent(t.value) : '')); var o = document.getElementById('outlet'); if (o) o.focus(); }
   });
   $main.addEventListener('input', function (e) {

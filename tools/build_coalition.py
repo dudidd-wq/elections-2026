@@ -168,7 +168,8 @@ LEADER = {l['id']: l.get('leader', '') for l in P['lists']}
 #     are not included. Not a complete record: the UI says so.
 # Same rule for every list. Tuple: (verbatim text, refused ids, via) – via = ('list', leader) / ('group', key) / None.
 GROUPS = {'arab': (['joint', 'raam'], 'מפלגות ערביות = הרשימה המשותפת ורע"ם, לפי סיווג הגושים באתר'),
-          'haredi': (['shas', 'utj'], 'מפלגות חרדיות = ש"ס ויהדות התורה')}
+          'haredi': (['shas', 'utj'], 'מפלגות חרדיות = ש"ס ויהדות התורה'),
+          'gov37': (['likud', 'otzma', 'rzz', 'shas', 'utj'], '"קואליציית החורבן" = מפלגות הממשלה ה-37, כלומר הרשימות שמסווגות באתר כ"גוש נתניהו" (הליכוד, עוצמה יהודית, הציונות הדתית, ש"ס, יהדות התורה); כך גם בסיכום ice מ-18.10.2026: "עם אף אחת ממפלגות הקואליציה הנוכחית"')}
 DECL = {
  'yashar': [('איזנקוט הצהיר שלא ישב עם סמוטריץ\'', ['rzz'], ('list', 'rzz', 'בצלאל סמוטריץ\''))],
  'yb': [('שולל קואליציה עם ש"ס ויהדות התורה', ['shas', 'utj'], None),
@@ -192,12 +193,20 @@ DECL_SRC = [
       src=('ynet, 11.10.2026 (פוסט של בנט)', 'https://www.ynet.co.il/news/article/hyhofwyomx')),
  dict(by='dems', date='2026-10-15', who='יאיר גולן',
       quote='אנחנו לא נשב עם נתניהו, לא עם הליכוד ולא עם אף מפלגה מקואליציית החורבן',
-      refs=[(['likud'], None)],
+      refs=[(['likud'], None), (['likud', 'otzma', 'rzz', 'shas', 'utj'], ('group', 'gov37'))],
       src=('News1, 15.10.2026', 'https://www.news1.co.il/Archive/001-D-525182-00.html')),
  dict(by='miluim', date='2026-10-13', who='יועז הנדל',
       quote='אני לא אשב עם מפלגות חרדיות וגם לא אשב עם מפלגות ערביות',
       refs=[(['shas', 'utj'], ('group', 'haredi')), (['joint', 'raam'], ('group', 'arab'))],
       src=('ynet, 13.10.2026 (ועידת "האנשים של המדינה")', 'https://www.ynet.co.il/news/elections2026/article/sywy11bjize')),
+ dict(by='beyachad', date='2026-02-20', who='נפתלי בנט',
+      quote='אני רוצה להיות ברור: לאיתמר בן גביר אין מקום בממשלה שלי.',
+      refs=[(['otzma'], ('list', 'otzma', 'איתמר בן גביר'))],
+      src=('ynet, 20.02.2026 (פוסט של בנט)', 'https://www.ynet.co.il/news/article/s1110u6rd11x')),
+ dict(by='otzma', date='2026-09-10', who='איתמר בן גביר',
+      quote='אני רוצה שבשולחן הממשלה לא יישבו שם גדי איזנקוט, לא יישב בנט, לא יישב לפיד.',
+      refs=[(['yashar'], ('list', 'yashar', 'גדי איזנקוט')), (['beyachad'], ('list', 'beyachad', 'נפתלי בנט'))],
+      src=('ערוץ 14, 10.09.2026 (ריאיון לטל מאיר)', 'https://www.c14.co.il/article/1697975')),
 ]
 
 def seg_text(s):
