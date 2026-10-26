@@ -543,3 +543,18 @@ details.note.method[open] summary::after{content:""}
 @media (max-width:520px){.co-combo{grid-template-columns:1fr}.co-combo .co-load{grid-row:auto;grid-column:1}.co-sl{grid-template-columns:1fr 6.5em}.co-sl label{grid-column:1/-1}}
 @media print{.co-sum{position:static}.co-load,.co-tools,.co-w{display:none}}
 .co-rng{color:var(--ink3);font-size:.94em}
+/* exit polls page */
+.ep-fig{margin:var(--s3) 0;background:var(--surf);border:1px solid var(--line);border-radius:var(--r2);padding:var(--s3)}
+.ep-svg{display:block;width:100%;height:auto;max-width:720px;margin-inline:auto}
+.ep-grid{stroke:var(--line);stroke-width:1}.ep-grid.z{stroke:var(--ink2);stroke-width:1.5}
+.ep-ax{fill:var(--ink3);font-size:11px}.ep-lab{fill:var(--ink);font-size:13px;font-weight:600}.ep-val{fill:var(--ink);font-size:11px;font-weight:700}
+.ep-range{stroke:var(--ink2);stroke-width:2}.ep-dot{fill:var(--surf);stroke:var(--ink2);stroke-width:2}.ep-mean{fill:var(--acc)}
+.ep-bar{fill:var(--ink3)}
+.ep-t .ep-d{color:var(--ink3);font-size:.8em}.ep-t tr.ep-sum th,.ep-t tr.ep-sum td{background:var(--surf2);font-weight:600}
+.ep-t .ep-b{font-size:.7em;color:var(--ink3)}
+.ep-camp{margin:var(--s4) 0;padding-top:var(--s2);border-top:1px solid var(--line)}
+.ep-src{font-size:.85rem}.ep-src li{overflow-wrap:anywhere}
+details>summary{cursor:pointer;min-height:48px;display:flex;align-items:center;font-weight:600}
+.tbl-wrap.ep-w{content-visibility:visible;contain-intrinsic-size:none}
+.tbl-wrap.ep-w{max-height:none}.ep-t thead th{position:static}.ep-t caption.ep-cap{white-space:normal;padding:0}.ep-t caption.ep-cap span{position:sticky;right:0;display:block;box-sizing:border-box;padding:var(--s2) var(--s3);width:min(100%,calc(100vw - 2*var(--s4) - 2px))}
+.ep-t tbody th[scope=row],.ep-t thead th:first-child{position:sticky;right:0;background:var(--surf);z-index:1;box-shadow:-1px 0 0 var(--line)}.ep-t tr.ep-sum th[scope=row]{background:var(--surf2)}

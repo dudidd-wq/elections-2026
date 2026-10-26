@@ -223,6 +223,7 @@
       card('#/analysis', 'ניתוח רוחבי', 'קווי המחלוקת החדים, המכנה המשותף והחפיפות בין הגושים.', 'analysis') +
       card('#/polls', 'סקרים', 'ממוצע, טווח, סכומי גושים וקו 61, מגמה וטבלת כל הסקרים.', 'polls') +
       card('#/coalition', 'בנה קואליציה', 'בחירת רשימות, הערכת מנדטים מול קו 61 והשוואה מתמטית של העמדות המוצהרות בכל סוגיה. לא תחזית ולא המלצה.', 'coalition') +
+      card('#/exit-polls', 'מדגמים: דיוק בעבר', 'עד כמה דייקו מדגמי הטלוויזיה בערב הבחירות ב-2019–2022, מול התוצאות הרשמיות. בלי תחזית.', 'polls') +
       card('#/podcasts', 'פודקאסטים וראיונות', 'מה אמרו ראשי הרשימות בפודקאסטים ובראיונות ארוכים בחודש שלפני הבחירות, עם קישורים וציטוטים מאומתים.', 'podcasts') +
       '</div>' +
       '<h2>10 הסוגיות</h2><nav class="issue-strip" aria-label="מעבר לסוגיה">' + P.issues.map(function (i) { return '<a href="#/issue/' + i.id + '"><span class="n">' + i.n + '</span>' + esc(i.short) + '</a>'; }).join('') + '</nav>' +
@@ -535,6 +536,7 @@
       '<h2>שיטת המסמך</h2>' + P.meta.intro.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') +
       '<p class="note"><b>בדיקת הרשימה המשותפת.</b> ' + esc(joint.verify.text) + ' ' + joint.verify.sources.map(function (u, k) { return srcLink(u, 'מקור ' + (k + 1)); }).join(' · ') + '</p>' +
       '<h2>בונה הקואליציה</h2><p>בעמוד <a href="#/coalition">בנה קואליציה</a> יש מדד קרבה שמשווה את העמדות המוצהרות של רשימות זו לזו, לפי הקידוד של הניתוח הרוחבי. הוא לא מדרג עמדות, לא תחזית ולא המלצה, ואינו מתחשב בהצהרות על שותפויות. השיטה, הקידוד המלא והמגבלות מפורטים בעמוד עצמו.</p>' +
+      '<h2>דיוק המדגמים בעבר</h2><p>בעמוד <a href="#/exit-polls">מדגמים: דיוק בעבר</a> מושווים מדגמי הטלוויזיה של ערב הבחירות ב-2019–2022 לתוצאות הרשמיות של ועדת הבחירות המרכזית, עם מקור לכל מדגם, הנוסחאות והמגבלות. העמוד לא מנבא את תוצאות 2026.</p>' +
       '<h2>פערים ואי-ודאויות</h2><ul>' + P.gaps.map(function (g) { return '<li>' + esc(g) + '</li>'; }).join('') + '</ul>' +
       '<h2>מקורות כלליים</h2><ul class="srcs">' + P.generalSources.map(function (s) { return '<li>' + (s.url ? srcLink(s.url, s.label) : esc(s.label)) + '</li>'; }).join('') + '</ul>' +
       '<p>המקורות של כל רשימה מופיעים בעמוד הפרופיל שלה, ומקור לכל עמדה מופיע לצדה.</p>' +
@@ -601,7 +603,7 @@
   function foot() {
     document.getElementById('foot').innerHTML =
       '<p><b>אתר מידע ניטרלי.</b> אין בו המלצה להצבעה. העמדות נכונות ל-' + fmtDate(P.meta.documentAsOf) + '; הסקרים עודכנו ב-' + fmtStamp(D.meta.updatedAt) + ' (סקר אחרון: ' + fmtDate(D.meta.latestPollDate) + ', ' + D.polls.length + ' סקרים).</p>' +
-      '<p><a href="#/about">שיטה ומקורות</a> · <a href="data/platforms.json">platforms.json</a> · <a href="data/analysis.json">analysis.json</a> · <a href="data/polls.json">polls.json</a> · <a href="data/podcasts.json">podcasts.json</a> · <a href="data/coalition.json">coalition.json</a> · <a href="' + REPO + '" target="_blank" rel="noopener noreferrer">קוד המקור<span class="sr"> (נפתח בחלון חדש)</span></a></p>';
+      '<p><a href="#/about">שיטה ומקורות</a> · <a href="data/platforms.json">platforms.json</a> · <a href="data/analysis.json">analysis.json</a> · <a href="data/polls.json">polls.json</a> · <a href="data/podcasts.json">podcasts.json</a> · <a href="data/coalition.json">coalition.json</a> · <a href="data/exitpolls.json">exitpolls.json</a> · <a href="' + REPO + '" target="_blank" rel="noopener noreferrer">קוד המקור<span class="sr"> (נפתח בחלון חדש)</span></a></p>';
   }
 
   // ---------- coalition builder (#/coalition; data/coalition.json, loaded on demand)
@@ -1003,6 +1005,175 @@
     if (focusSel) { var el = $main.querySelector(focusSel); if (el) el.focus(); }
   }
 
+  // ---------- exit polls accuracy (#/exit-polls; data/exitpolls.json, loaded on demand)
+  var EP = null, EPerr = '';
+  function loadExitPolls() { return getJSON('data/exitpolls.json').then(function (d) { EP = d; }).catch(function (e) { EPerr = e.message || 'שגיאה'; }); }
+  // same formulas as tools/build_exitpolls.py (checked by test/exitpolls.test.mjs)
+  function epMetrics(lists, seats, blocIds, largeMin) {
+    var diff = {}, sabs = 0, w1 = 0, ex = 0, big = [], small = [], thr = [], pb = 0, ab = 0;
+    lists.forEach(function (l) {
+      var p = seats[l.id] || 0, d = p - l.seats; diff[l.id] = d; sabs += Math.abs(d);
+      if (Math.abs(d) <= 1) w1++; if (d === 0) ex++;
+      (l.seats >= largeMin ? big : small).push(Math.abs(d));
+      if ((p > 0) !== (l.seats > 0)) thr.push(l.id);
+      if (blocIds.indexOf(l.id) >= 0) { pb += p; ab += l.seats; }
+    });
+    function avg(a) { return a.length ? Math.round(a.reduce(function (s, x) { return s + x; }, 0) / a.length * 1000) / 1000 : null; }
+    return { diff: diff, sumAbs: sabs, misallocated: sabs / 2, within1: w1, n: lists.length, exact: ex, maeLarge: avg(big), maeSmall: avg(small), bloc: pb, blocActual: ab, blocErr: pb - ab, thresholdMisses: thr };
+  }
+  function epCh(id) { return (EP.meta.channels[id] || id); }
+  function epChOrder() { return Object.keys(EP.meta.channels).sort(function (a, b) { return COLL.compare(epCh(a), epCh(b)); }); }
+  function epSign(n) { return n > 0 ? '+' + n : n < 0 ? '−' + Math.abs(n) : '0'; }
+  function epNum(x) { return String(Math.round(x * 100) / 100).replace('.', '.'); }
+  function epInit() { var a = []; EP.campaigns.forEach(function (c) { c.polls.forEach(function (p) { if (p.kind === 'initial') a.push({ c: c, p: p }); }); }); return a; }
+  function epSrcs(ss) { return ss.map(function (s, k) { return srcLink(s.url, 'מקור ' + (k + 1)) + (s.note ? ' <span class="meta">(' + esc(s.note) + ')</span>' : ''); }).join(' · ') + ' <span class="meta">· נשלף ' + fmtDate(ss[0].retrieved) + '</span>'; }
+  function epShort(c) { return c.label.replace(/ \(.*\)$/, ''); }
+
+  // chart 1: mis-allocated seats per initial poll, per channel (dots) with min–max range and mean
+  function epChart1() {
+    var chs = epChOrder(), W = 400, rowH = 64, L = 84, R = 24, T = 34, H = T + chs.length * rowH + 30, max = 10;
+    function x(v) { return L + (W - L - R) * v / max; }
+    var g = '';
+    for (var t = 0; t <= max; t += 2) g += '<line x1="' + x(t) + '" x2="' + x(t) + '" y1="' + (T - 8) + '" y2="' + (H - 26) + '" class="ep-grid"/><text x="' + x(t) + '" y="' + (H - 8) + '" class="ep-ax" text-anchor="middle">' + t + '</text>';
+    chs.forEach(function (ch, i) {
+      var y = T + i * rowH + rowH / 2, s = EP.summary.byChannel[ch];
+      var ps = epInit().filter(function (o) { return o.p.channel === ch; });
+      g += '<text x="' + (L - 12) + '" y="' + (y + 5) + '" class="ep-lab" text-anchor="end">' + esc(epCh(ch)) + '</text>';
+      if (s.n > 1) g += '<line x1="' + x(s.min) + '" x2="' + x(s.max) + '" y1="' + y + '" y2="' + y + '" class="ep-range"/><line x1="' + x(s.min) + '" x2="' + x(s.min) + '" y1="' + (y - 8) + '" y2="' + (y + 8) + '" class="ep-range"/><line x1="' + x(s.max) + '" x2="' + x(s.max) + '" y1="' + (y - 8) + '" y2="' + (y + 8) + '" class="ep-range"/>';
+      var seen = {};
+      ps.forEach(function (o) { var v = o.p.metrics.misallocated, k = seen[v] = (seen[v] || 0) + 1; g += '<circle cx="' + x(v) + '" cy="' + (y - 14 - (k - 1) * 7) + '" r="4" class="ep-dot"><title>' + esc(epShort(o.c) + ': ' + v) + '</title></circle>'; });
+      g += '<rect x="' + (x(s.mean) - 2) + '" y="' + (y - 11) + '" width="4" height="22" class="ep-mean"/><text x="' + x(s.mean) + '" y="' + (y + 26) + '" class="ep-val" text-anchor="middle">' + epNum(s.mean) + (s.n === 1 ? ' (1)' : '') + '</text>';
+    });
+    g += '<text x="' + ((L + W - R) / 2) + '" y="14" class="ep-ax" text-anchor="middle">מושבים שהוקצו לא נכון במדגם הראשוני (22:00)</text>';
+    return '<figure class="ep-fig"><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-labelledby="ep1t" class="ep-svg" direction="ltr"><title id="ep1t">מושבים שהוקצו לא נכון לפי ערוץ: נקודה לכל מערכת בחירות, קו לטווח, פס לממוצע. הנתונים המלאים בטבלה שמתחת.</title>' + g + '</svg>' +
+      '<figcaption class="meta">נקודה = מדגם ראשוני אחד (מערכת בחירות אחת). קו אופקי = הטווח מהנמוך לגבוה. פס אנכי ומספר = הממוצע. ציר: 0 עד 10 מושבים.</figcaption></figure>';
+  }
+  // chart 2: signed bloc error per campaign and channel
+  function order0(c) { return c.polls.filter(function (p) { return p.kind === 'initial'; }).length; }
+  function epChart2() {
+    var camps = EP.campaigns, chs = epChOrder(), W = 400, H = 280, T = 24, B = 56, L = 28, R = 4, lo = -6, hi = 4;
+    var gw = (W - L - R) / camps.length, bw = Math.min(22, (gw - 10) / chs.length);
+    function y(v) { return T + (H - T - B) * (hi - v) / (hi - lo); }
+    var g = '';
+    for (var t = lo; t <= hi; t += 2) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(t) + '" y2="' + y(t) + '" class="ep-grid' + (t === 0 ? ' z' : '') + '"/><text x="' + (L - 6) + '" y="' + (y(t) + 4) + '" class="ep-ax" text-anchor="end">' + epSign(t) + '</text>';
+    camps.forEach(function (c, i) {
+      var x0 = L + i * gw + (gw - order0(c) * (bw + 2)) / 2, ps = c.polls.filter(function (p) { return p.kind === 'initial'; });
+      var order = chs.filter(function (ch) { return ps.some(function (p) { return p.channel === ch; }); });
+      order.forEach(function (ch, j) {
+        var p = ps.filter(function (q) { return q.channel === ch; })[0], e = p.metrics.blocErr, xx = x0 + j * (bw + 2);
+        var y1 = Math.min(y(0), y(e)), h = Math.max(2, Math.abs(y(e) - y(0)));
+        g += '<rect x="' + xx + '" y="' + y1 + '" width="' + bw + '" height="' + h + '" class="ep-bar"><title>' + esc(epShort(c) + ', ' + epCh(ch) + ': ' + epSign(e)) + '</title></rect>' +
+          '<text x="' + (xx + bw / 2) + '" y="' + (e < 0 ? y(e) + 14 : y(e) - 4) + '" class="ep-val" text-anchor="middle">' + epSign(e) + '</text>';
+      });
+      g += '<text x="' + (L + i * gw + gw / 2) + '" y="' + (H - B + 22) + '" class="ep-ax" text-anchor="middle">' + esc(epShort(c)) + '</text><text x="' + (L + i * gw + gw / 2) + '" y="' + (H - B + 40) + '" class="ep-ax" text-anchor="middle">' + order.length + ' מדגמים</text>';
+    });
+    return '<figure class="ep-fig"><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-labelledby="ep2t" class="ep-svg" direction="ltr"><title id="ep2t">ההפרש בין סכום הגוש במדגם הראשוני לבין התוצאה, לכל מערכת בחירות ולכל ערוץ. הנתונים המלאים בטבלה שמתחת.</title>' + g + '</svg>' +
+      '<figcaption class="meta">כל עמודה = מדגם ראשוני אחד. מעל הקו: המדגם נתן לגוש יותר מושבים מהתוצאה; מתחת לקו: פחות. בתוך כל מערכת, העמודות מסודרות לפי סדר האלף-בית של שמות הערוצים (' + chs.map(epCh).map(esc).join(', ') + ').</figcaption></figure>';
+  }
+  function epCampTable(c) {
+    var lists = c.lists.slice().sort(function (a, b) { return COLL.compare(a.name, b.name); });
+    var ps = c.polls.filter(function (p) { return p.kind === 'initial'; }).sort(function (a, b) { return COLL.compare(epCh(a.channel), epCh(b.channel)); });
+    function cell(p, l) { var v = p.seats[l.id], d = p.metrics.diff[l.id]; return '<td class="n">' + v + (d ? ' <span class="ep-d">(' + epSign(d) + ')</span>' : '') + '</td>'; }
+    var body = lists.map(function (l) {
+      return '<tr><th scope="row">' + esc(l.name) + (l.inBloc ? ' <span class="ep-b" title="בגוש לפי הכלל">●</span><span class="sr"> (בגוש)</span>' : '') + (l.pct != null ? ' <span class="meta">' + l.pct.toFixed(2) + '%</span>' : '') + '</th><td class="n"><b>' + l.seats + '</b></td>' + ps.map(function (p) { return cell(p, l); }).join('') + '</tr>';
+    }).join('');
+    var foot = [['סכום הגוש', function (p) { return p.metrics.bloc + ' (' + epSign(p.metrics.blocErr) + ')'; }, c.bloc.seats],
+      ['מושבים שהוקצו לא נכון', function (p) { return epNum(p.metrics.misallocated); }, '–'],
+      ['תחזיות בטווח ±1', function (p) { return p.metrics.within1 + ' מתוך ' + p.metrics.n; }, '–'],
+      ['טעויות בחסימה', function (p) { return p.metrics.thresholdMisses.length ? p.metrics.thresholdMisses.map(function (id) { return lname2(c, id); }).join(', ') : 'אין'; }, '–']]
+      .map(function (r) { return '<tr class="ep-sum"><th scope="row">' + r[0] + '</th><td class="n">' + r[2] + '</td>' + ps.map(function (p) { return '<td class="n">' + esc(r[1](p)) + '</td>'; }).join('') + '</tr>'; }).join('');
+    return '<div class="tbl-wrap ep-w" tabindex="0" role="region" aria-label="' + esc('מדגמים מול תוצאות, ' + c.label + ', אפשר לגלול אופקית') + '"><table class="tbl ep-t"><caption class="ep-cap"><span>' + esc(c.label) + ': מושבים במדגם הראשוני (בסוגריים: ההפרש מהתוצאה). ● = רשימה בגוש לפי הכלל. אחוז = שיעור הקולות של רשימה ליד אחוז החסימה (3.25%).</span></caption><thead><tr><th scope="col">רשימה</th><th scope="col" class="n">תוצאה רשמית</th>' +
+      ps.map(function (p) { return '<th scope="col" class="n">' + esc(epCh(p.channel)) + '<br><span class="meta">' + esc(p.pollster) + '</span></th>'; }).join('') + '</tr></thead><tbody>' + body + foot + '</tbody></table></div>';
+  }
+  function lname2(c, id) { var l = c.lists.filter(function (x) { return x.id === id; })[0]; return l ? l.name : id; }
+  function epUpdates(c) {
+    var us = c.polls.filter(function (p) { return p.kind === 'update'; });
+    if (!us.length && !c.partial.length) return '<p class="meta">לא נמצאו עדכונים מלאים מהלילה.</p>';
+    var lists = c.lists.slice().sort(function (a, b) { return COLL.compare(a.name, b.name); });
+    var t = us.length ? '<div class="tbl-wrap ep-w" tabindex="0" role="region" aria-label="' + esc('עדכוני הלילה, ' + c.label) + '"><table class="tbl ep-t"><caption class="ep-cap"><span>עדכונים שפורסמו אחרי 22:00 (לא נכללים במדדים הראשיים)</span></caption><thead><tr><th scope="col">רשימה</th><th scope="col" class="n">תוצאה</th>' +
+      us.map(function (p) { return '<th scope="col" class="n">' + esc(epCh(p.channel)) + '<br><span class="meta">' + esc(p.time) + '</span></th>'; }).join('') + '</tr></thead><tbody>' +
+      lists.map(function (l) { return '<tr><th scope="row">' + esc(l.name) + '</th><td class="n"><b>' + l.seats + '</b></td>' + us.map(function (p) { return '<td class="n">' + p.seats[l.id] + '</td>'; }).join('') + '</tr>'; }).join('') +
+      '<tr class="ep-sum"><th scope="row">סכום הגוש</th><td class="n">' + c.bloc.seats + '</td>' + us.map(function (p) { return '<td class="n">' + p.metrics.bloc + ' (' + epSign(p.metrics.blocErr) + ')</td>'; }).join('') + '</tr>' +
+      '<tr class="ep-sum"><th scope="row">מושבים שהוקצו לא נכון</th><td class="n">–</td>' + us.map(function (p) { return '<td class="n">' + epNum(p.metrics.misallocated) + '</td>'; }).join('') + '</tr>' +
+      '<tr class="ep-sum"><th scope="row">מקורות</th><td class="n">–</td>' + us.map(function (p) { return '<td class="n">' + p.sources.length + (p.status === 'single-source' ? ' <span class="badge">מקור יחיד</span>' : '') + '</td>'; }).join('') + '</tr></tbody></table></div>' : '';
+    var src = us.length ? '<ul class="srcs ep-src">' + us.map(function (p) { return '<li>' + esc(epCh(p.channel) + ', ' + p.time) + ': ' + epSrcs(p.sources) + '</li>'; }).join('') + '</ul>' : '';
+    var part = c.partial.map(function (x) { return '<p class="note">' + esc(x.text) + ' ' + epSrcs(x.sources) + '</p>'; }).join('');
+    return t + src + part;
+  }
+  function epLS() { // abs error per list prediction, large vs small, across the initial polls
+    var a = { L: [0, 0, 0], S: [0, 0, 0] };
+    epInit().forEach(function (o) { o.c.lists.forEach(function (l) { var k = l.seats >= EP.meta.largeMin ? 'L' : 'S', e = Math.abs(o.p.metrics.diff[l.id]); a[k][0] += e; a[k][1]++; if (l.seats > 0) a[k][2] += l.seats; }); });
+    var sIn = 0; epInit().forEach(function (o) { o.c.lists.forEach(function (l) { if (l.seats > 0 && l.seats < EP.meta.largeMin) sIn += Math.abs(o.p.metrics.diff[l.id]); }); });
+    return { L: a.L[0] / a.L[1], S: a.S[0] / a.S[1], nL: a.L[1], nS: a.S[1], shareL: a.L[0] / (a.L[0] + a.S[0]), relL: a.L[0] / a.L[2], relS: sIn / a.S[2] };
+  }
+  function ep2026() {
+    var y = EP.y2026; if (!y) return '';
+    var h = '<h2 id="ep-2026">2026: מדגמי הערב</h2>';
+    if (!y.polls.length) return h + '<p class="note">' + esc(y.note) + '</p>';
+    var lists = y.lists.slice().sort(function (a, b) { return COLL.compare(a.name, b.name); }), res = y.results;
+    h += '<p>' + esc(y.note) + '</p><div class="tbl-wrap ep-w" tabindex="0" role="region" aria-label="מדגמי 2026"><table class="tbl ep-t"><caption class="ep-cap"><span>מדגמי 27.10.2026 כפי שפורסמו' + (res ? '; ' + esc(res.label) : '') + '</span></caption><thead><tr><th scope="col">רשימה</th>' + (res ? '<th scope="col" class="n">' + esc(res.short || 'תוצאה') + '</th>' : '') +
+      y.polls.map(function (p) { return '<th scope="col" class="n">' + esc(epCh(p.channel)) + '<br><span class="meta">' + esc(p.time) + '</span></th>'; }).join('') + '</tr></thead><tbody>' +
+      lists.map(function (l) { return '<tr><th scope="row">' + esc(l.name) + '</th>' + (res ? '<td class="n"><b>' + (res.seats[l.id] || 0) + '</b></td>' : '') + y.polls.map(function (p) { return '<td class="n">' + (p.seats[l.id] || 0) + '</td>'; }).join('') + '</tr>'; }).join('');
+    if (res) {
+      var rl = lists.map(function (l) { return { id: l.id, seats: res.seats[l.id] || 0 }; });
+      var ms = y.polls.map(function (p) { return epMetrics(rl, p.seats, res.blocLists || [], EP.meta.largeMin); });
+      h += '<tr class="ep-sum"><th scope="row">מושבים שהוקצו לא נכון</th><td class="n">–</td>' + ms.map(function (m) { return '<td class="n">' + epNum(m.misallocated) + '</td>'; }).join('') + '</tr>' +
+        '<tr class="ep-sum"><th scope="row">תחזיות בטווח ±1</th><td class="n">–</td>' + ms.map(function (m) { return '<td class="n">' + m.within1 + ' מתוך ' + m.n + '</td>'; }).join('') + '</tr>';
+    }
+    h += '</tbody></table></div><ul class="srcs ep-src">' + y.polls.map(function (p) { return '<li>' + esc(epCh(p.channel) + ', ' + p.time) + ': ' + epSrcs(p.sources) + '</li>'; }).join('') + '</ul>';
+    if (res) h += '<p class="meta">' + esc(res.note || '') + ' ' + (res.source ? epSrcs([res.source]) : '') + '</p>';
+    return h;
+  }
+  function pageExitPolls() {
+    var hd = head('מדגמים', 'עד כמה דייקו מדגמי ערב הבחירות?', 'השוואה של מדגמי הטלוויזיה שפורסמו ב-22:00 בחמש מערכות הבחירות האחרונות (2019–2022) מול התוצאות הרשמיות של ועדת הבחירות המרכזית. בלי תחזית ובלי שיפוט: רק מה שפורסם, מה שנספר, והפער ביניהם. <a href="#ep-method">איך זה מחושב</a>');
+    if (!EP) return hd + (EPerr ? '<div class="empty" role="alert"><b>שגיאה בטעינת נתוני המדגמים</b><p>' + esc(EPerr) + '. נסו לרענן את הדף.</p></div>' : '<div class="skel" aria-hidden="true"><i></i><i></i><i></i></div><p class="sr" role="status">טוען…</p>');
+    var S = EP.summary, ini = epInit(), mis = ini.map(function (o) { return o.p.metrics.misallocated; });
+    var thrPolls = ini.filter(function (o) { return o.p.metrics.thresholdMisses.length; }).length;
+    var be = ini.map(function (o) { return o.p.metrics.blocErr; }), ls = epLS();
+    var chs = epChOrder();
+    var kpis = '<div class="kpis"><div class="kpi big"><b>' + S.nInitial + '</b><span>מדגמים ראשוניים (22:00) ב-5 מערכות בחירות</span></div>' +
+      '<div class="kpi"><b>' + fmtN(S.meanMisallocated) + '</b><span>מושבים שהוקצו לא נכון, בממוצע למדגם (טווח ' + Math.min.apply(null, mis) + '–' + Math.max.apply(null, mis) + ')</span></div>' +
+      '<div class="kpi"><b>' + (Math.round((1 - S.meanMisallocated / 120) * 1000) / 10) + '%</b><span>מ-120 המושבים הוקצו לרשימה הנכונה, בממוצע</span></div>' +
+      '<div class="kpi"><b>' + Math.round(S.within1Share * 1000) / 10 + '%</b><span>מהתחזיות לרשימות בודדות סטו לכל היותר במושב אחד</span></div>' +
+      '<div class="kpi"><b>' + thrPolls + ' מתוך ' + S.nInitial + '</b><span>מדגמים טעו לפחות ברשימה אחת: עוברת או לא עוברת את אחוז החסימה</span></div></div>';
+    var t1 = '<details><summary>הנתונים כטבלה</summary><div class="tbl-wrap ep-w" tabindex="0" role="region" aria-label="מושבים שהוקצו לא נכון לפי ערוץ ומערכת"><table class="tbl ep-t"><caption class="ep-cap"><span>מושבים שהוקצו לא נכון במדגם הראשוני</span></caption><thead><tr><th scope="col">ערוץ</th>' + EP.campaigns.map(function (c) { return '<th scope="col" class="n">' + esc(epShort(c)) + '</th>'; }).join('') + '<th scope="col" class="n">ממוצע</th></tr></thead><tbody>' +
+      chs.map(function (ch) { return '<tr><th scope="row">' + esc(epCh(ch)) + '</th>' + EP.campaigns.map(function (c) { var p = c.polls.filter(function (q) { return q.kind === 'initial' && q.channel === ch; })[0]; return '<td class="n">' + (p ? epNum(p.metrics.misallocated) : '<span class="meta">לא פורסם</span>') + '</td>'; }).join('') + '<td class="n"><b>' + epNum(S.byChannel[ch].mean) + '</b></td></tr>'; }).join('') + '</tbody></table></div></details>';
+    var t2 = '<details><summary>הנתונים כטבלה</summary><div class="tbl-wrap ep-w" tabindex="0" role="region" aria-label="סכום הגוש במדגם מול התוצאה"><table class="tbl ep-t"><caption class="ep-cap"><span>סכום הגוש במדגם הראשוני (בסוגריים: ההפרש מהתוצאה)</span></caption><thead><tr><th scope="col">מערכת</th><th scope="col" class="n">תוצאה</th>' + chs.map(function (ch) { return '<th scope="col" class="n">' + esc(epCh(ch)) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+      EP.campaigns.map(function (c) { return '<tr><th scope="row">' + esc(epShort(c)) + '</th><td class="n"><b>' + c.bloc.seats + '</b></td>' + chs.map(function (ch) { var p = c.polls.filter(function (q) { return q.kind === 'initial' && q.channel === ch; })[0]; return '<td class="n">' + (p ? p.metrics.bloc + ' (' + epSign(p.metrics.blocErr) + ')' : '<span class="meta">–</span>') + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div><ul class="ep-src">' + EP.campaigns.map(function (c) { return '<li><b>' + esc(epShort(c)) + ':</b> ' + c.bloc.lists.map(function (id) { return lname2(c, id); }).sort(COLL.compare).map(esc).join(', ') + ' · ' + srcLink(c.bloc.source.url, 'מקור') + '</li>'; }).join('') + '</ul></details>';
+    var thrList = '<ul>' + ini.filter(function (o) { return o.p.metrics.thresholdMisses.length; }).map(function (o) {
+      return '<li><b>' + esc(epShort(o.c)) + ', ' + esc(epCh(o.p.channel)) + ':</b> ' + o.p.metrics.thresholdMisses.map(function (id) { var l = o.c.lists.filter(function (x) { return x.id === id; })[0]; return esc(l.name) + ' (במדגם ' + o.p.seats[id] + ', בתוצאה ' + l.seats + (l.pct != null ? ', ' + l.pct.toFixed(2) + '% מהקולות' : '') + ')'; }).join('; ') + '</li>';
+    }).join('') + '</ul>';
+    var camps = EP.campaigns.map(function (c) {
+      var ps = c.polls.filter(function (p) { return p.kind === 'initial'; });
+      var conf = ps.filter(function (p) { return p.conflicts; }).map(function (p) { return p.conflicts.map(function (x) { return '<p class="note warn"><b>מקורות סותרים, ' + esc(epCh(p.channel)) + ':</b> ' + esc(x.note) + ' ' + epSrcs(x.sources) + '</p>'; }).join(''); }).join('');
+      return '<section class="ep-camp" id="ep-' + c.id + '"><h3>' + esc(c.label) + '</h3><p class="meta">תוצאה רשמית: ' + srcLink(c.cec.url, 'ועדת הבחירות המרכזית') + ' (נשלף ' + fmtDate(c.cec.retrieved) + ') · כלל הגוש: ' + srcLink(c.bloc.source.url, 'ההמלצות לנשיא') + ' (' + esc(c.bloc.source.note) + ')</p>' + epCampTable(c) + conf +
+        '<ul class="srcs ep-src">' + ps.slice().sort(function (a, b) { return COLL.compare(epCh(a.channel), epCh(b.channel)); }).map(function (p) { return '<li>' + esc(epCh(p.channel)) + ': ' + epSrcs(p.sources) + '</li>'; }).join('') + '</ul>' +
+        '<details><summary>עדכוני הלילה (' + c.polls.filter(function (p) { return p.kind === 'update'; }).length + ')</summary>' + epUpdates(c) + '</details></section>';
+    }).join('');
+    var R = EP.meta.rules;
+    return hd + kpis +
+      '<h2>הטעות בכל ערוץ</h2><p>"מושבים שהוקצו לא נכון" הוא מספר המושבים שהמדגם שם אצל רשימה אחרת מזו שקיבלה אותם בפועל. 0 = מדגם זהה לתוצאה. ממוצע לכל ערוץ: ' + chs.map(function (ch) { return esc(epCh(ch)) + ' ' + epNum(S.byChannel[ch].mean) + ' (' + S.byChannel[ch].n + (S.byChannel[ch].n === 1 ? ' מדגם' : ' מדגמים') + ')'; }).join(' · ') + '.</p>' + epChart1() + t1 +
+      '<p class="note">ההבדלים בין הערוצים קטנים ממושב אחד בממוצע, על בסיס 5 מדגמים לכל ערוץ (ומדגם אחד בלבד בערוץ 14), ולכן אין בהם בסיס לדירוג. בכל ערוץ הטווח בין מערכות הבחירות רחב יותר מההבדל בין הערוצים.</p>' +
+      '<h2>הטעות בסכום הגוש</h2><p>כאן נבדק סכום המושבים של הרשימות שהמליצו לנשיא על בנימין נתניהו אחרי כל מערכת. אותו הרכב רשימות מוחל על המדגם ועל התוצאה. הטעות נעה בין ' + epSign(Math.min.apply(null, be)) + ' ל-' + epSign(Math.max.apply(null, be)) + ' מושבים. כיוון הטעות היה אחיד בתוך רוב המערכות: באפריל 2019 ובנובמבר 2022 כל המדגמים נתנו לגוש פחות מהתוצאה; במרץ 2020 ובמרץ 2021 כל המדגמים נתנו יותר; בספטמבר 2019 הכיוון היה מעורב.</p>' + epChart2() + t2 +
+      '<h2>רשימות גדולות ורשימות קטנות</h2><p>' + esc(R.large) + ' הטעות הממוצעת בתחזית לרשימה גדולה: ' + epNum(ls.L) + ' מושבים (' + ls.nL + ' תחזיות). לרשימה קטנה: ' + epNum(ls.S) + ' מושבים (' + ls.nS + ' תחזיות). כלומר במושבים, הטעות הממוצעת לרשימה דומה בשתי הקבוצות. יש הרבה יותר רשימות קטנות, ולכן ' + Math.round((1 - ls.shareL) * 100) + '% מסך הסטיות הן ברשימות קטנות. יחסית לגודל: ברשימות הגדולות הסטיות הן ' + Math.round(ls.relL * 1000) / 10 + '% מהמושבים שקיבלו, וברשימות הקטנות שנכנסו לכנסת ' + Math.round(ls.relS * 1000) / 10 + '%.</p>' +
+      '<h2>אחוז החסימה</h2><p>הטעויות הגדולות ביותר ברשימה בודדת קרו כשרשימה עברה את אחוז החסימה (3.25%) במדגם ולא בתוצאה, או להפך. טעות כזו מזיזה 4 מושבים או יותר בבת אחת. ב-' + thrPolls + ' מתוך ' + S.nInitial + ' המדגמים הראשוניים הייתה טעות כזו:</p>' + thrList +
+      '<p>בכל המקרים האלה הרשימה קיבלה בתוצאה בין 3.16% ל-3.79% מהקולות, כלומר קרוב מאוד לסף. במרץ 2021 שלושת המדגמים, וגם כל עדכוני הלילה שנמצאו, נתנו לרע"מ 0 מושבים; בתוצאה היא קיבלה 4. בנובמבר 2022 ארבעת המדגמים נתנו למרצ 4–5 מושבים; בתוצאה היא לא עברה את אחוז החסימה.</p>' +
+      '<h2 id="ep-tonight">איך לקרוא מדגם בערב הבחירות</h2><div class="note"><ul>' +
+      '<li>מדגם הוא הערכה, לא תוצאה. במערכות 2019–2022 מדגם ראשוני הקצה לא נכון ' + Math.min.apply(null, mis) + ' עד ' + Math.max.apply(null, mis) + ' מושבים, ובממוצע ' + epNum(S.meanMisallocated) + '.</li>' +
+      '<li>סכום הגוש במדגם הראשוני היה רחוק מהתוצאה ב-' + Math.min.apply(null, be.map(Math.abs)) + ' עד ' + Math.max.apply(null, be.map(Math.abs)) + ' מושבים, ואף פעם לא היה זהה לה. הפרש של מושבים בודדים סביב 61 לא הכריע מראש בשום מערכת.</li>' +
+      '<li>רשימה שקרובה לאחוז החסימה במדגם (4–5 מושבים) היא המקור העיקרי לאי-ודאות: אם היא לא עוברת, 4 מושבים ומעלה עוברים לרשימות אחרות.</li>' +
+      '<li>המדגמים מתעדכנים במהלך הלילה. בחלק מהמערכות העדכונים התקרבו לתוצאה ובחלק לא (למשל רע"מ ב-2021, מרצ ב-2022).</li>' +
+      '<li>התוצאה המחייבת היא של ועדת הבחירות המרכזית, אחרי ספירת כל הקולות, כולל המעטפות הכפולות.</li></ul></div>' +
+      ep2026() +
+      '<h2>הנתונים לפי מערכת בחירות</h2><p class="meta">סדר הרשימות והערוצים: לפי סדר האלף-בית.</p>' + camps +
+      '<h2 id="ep-method">שיטה</h2><ul>' + ['scope', 'absent', 'lists', 'misallocated', 'within1', 'bloc', 'large'].map(function (k) { return '<li>' + esc(R[k]) + '</li>'; }).join('') +
+      '<li>לכל מדגם נרשמו לפחות שני מקורות שפרסמו את המספרים בזמן אמת, חוץ מעדכונים שמסומנים "מקור יחיד". ויקיפדיה שימשה רק כמוביל ולא נספרת כמקור מאמת. כל המקורות נשלפו ב-' + fmtDate(EP.meta.retrieved) + '.</li>' +
+      '<li>"' + (Math.round((1 - S.meanMisallocated / 120) * 1000) / 10) + '% מהמושבים הוקצו נכון" = 1 פחות (ממוצע המושבים שהוקצו לא נכון ÷ 120). זה לא שיעור התחזיות "הנכונות" לרשימות: רק ' + Math.round(S.within1Share * 1000) / 10 + '% מהתחזיות לרשימות בודדות היו בטווח של מושב אחד, ו-' + Math.round(ini.reduce(function (s, o) { return s + o.p.metrics.exact; }, 0) / ini.reduce(function (s, o) { return s + o.p.metrics.n; }, 0) * 1000) / 10 + '% היו מדויקות.</li>' +
+      '<li>הנתונים והחישובים: <a href="data/exitpolls.json">exitpolls.json</a>, נבנה בסקריפט tools/build_exitpolls.py ונבדק בבדיקה אוטומטית שמחשבת מחדש כל מדד.</li></ul>' +
+      '<h2>מגבלות</h2><ul><li>16 מדגמים בחמש מערכות הם מדגם קטן. אין כאן בסיס סטטיסטי להשוואה בין ערוצים או לניבוי הטעות במערכת הבאה.</li><li>כלל הגוש מכני ונקבע לפי ההמלצות לנשיא אחרי הבחירות. הוא לא בהכרח תואם את הגושים שהערוצים עצמם הציגו בערב הבחירות.</li><li>הכלל "גדולה = 10 מושבים ומעלה" נבחר מראש ונקבע לפי התוצאה. כלל אחר ייתן מספרים אחרים.</li><li>חלק מעדכוני הלילה נמצאו במקור אחד בלבד, ולחלקם לא צוינה שעה.</li></ul>' +
+      '<h2>מה לא הצלחנו לאמת</h2><ul><li>אפריל 2019, חדשות 12: ארבעה מקורות מוסרים לחד"ש-תע"ל ולרע"מ-בל"ד 6 ו-6, ומעריב ואתר עוזית מוסרים 7 ו-5. בחרנו ב-6 ו-6. אין לכך השפעה על המדדים.</li><li>אפריל 2019: לא נמצא פירוט מלא של עדכוני הלילה, רק מספרים חלקיים.</li><li>ספטמבר 2019, עדכון חדשות 12 של 02:10: לפי אתר עוזית הגוש 55, ולפי Times of Israel ‏54. ייתכן שמדובר בעדכונים שונים.</li><li>נובמבר 2022: לעדכוני הלילה של כאן 11 ושל חדשות 13 לא נמצאה שעה מדויקת, ולערוץ 14 לא נמצאו עדכונים.</li><li>לא נמצא בארכיון פרסום רשמי של הערוצים עצמם לכל המדגמים, ולכן המקורות הם כתבות שפורסמו באותו לילה ואתר מעקב.</li><li>בטבלאות של ויקיפדיה נמצאו טעויות: שורות שסכומן 121, עדכונים מאוחרים שמוצגים כמדגם הראשוני, ופיצול שגוי של מושבים. לכן לא הסתמכנו עליהן.</li><li>מדגמים שלא שודרו בטלוויזיה (למשל מדגם באתר ynet באפריל 2019) לא נכללו.</li></ul>';
+  }
+
   // ---------- router
   function parseHash() {
     var h = location.hash.replace(/^#\/?/, ''), qs = {}, qi = h.indexOf('?');
@@ -1010,7 +1181,7 @@
     var parts = h.split('/').filter(Boolean);
     return { page: parts[0] || 'home', arg: parts[1] ? decodeURIComponent(parts[1]) : '', q: qs };
   }
-  var TITLES = { home: 'ראשי', matrix: 'מטריצה', issue: 'לפי סוגיה', list: 'לפי רשימה', compare: 'השוואה', analysis: 'ניתוח רוחבי', polls: 'סקרים', podcasts: 'פודקאסטים וראיונות', coalition: 'בנה קואליציה', about: 'שיטה ומקורות' };
+  var TITLES = { home: 'ראשי', matrix: 'מטריצה', issue: 'לפי סוגיה', list: 'לפי רשימה', compare: 'השוואה', analysis: 'ניתוח רוחבי', polls: 'סקרים', podcasts: 'פודקאסטים וראיונות', coalition: 'בנה קואליציה', 'exit-polls': 'מדגמים: דיוק בעבר', about: 'שיטה ומקורות' };
   var lastPage = null;
   function render(keepScroll) {
     var r = parseHash(), html, sub = '';
@@ -1024,6 +1195,7 @@
       case 'polls': html = pagePolls(r.q); break;
       case 'about': html = pageAbout(); break;
       case 'coalition': html = pageCoalition(r.q); if (!CO && !COerr) loadCoalition().then(function () { if (parseHash().page === 'coalition') render(true); }); break;
+      case 'exit-polls': html = pageExitPolls(); if (!EP && !EPerr) loadExitPolls().then(function () { if (parseHash().page === 'exit-polls') render(true); }); break;
       case 'podcasts': html = pagePodcasts(r.arg, r.q); if (!PD && !PDerr) loadPodcasts().then(function () { if (parseHash().page === 'podcasts') { render(true); podScroll(); } }); break;
       default: r.page = 'home'; html = pageHome();
     }
