@@ -150,7 +150,7 @@ CAMPAIGNS = [
     'sources': [S(UZIT.format('polls2021'))], 'single': True},
    {'channel': 'kan', 'pollster': 'קנטאר', 'time': '01:15', 'kind': 'update',
     'seats': {'likud': 30, 'ya': 18, 'shas': 9, 'kl': 8, 'yamina': 7, 'utj': 7, 'yb': 7, 'labor': 7, 'joint': 8, 'meretz': 6, 'rz': 7, 'nh': 6, 'raam': 0},
-    'sources': [S(UZIT.format('polls2021')), S(WIKI.format('2021'), LEAD + '; מופיע שם כמדגם כאן')]},
+    'sources': [S(UZIT.format('polls2021')), S(WIKI.format('2021'), LEAD + '; מופיע שם כמדגם כאן')], 'single': True},
   ]},
  {
   'id': '2022', 'knesset': 25, 'date': '2022-11-01', 'label': 'נובמבר 2022 (הכנסת ה-25)',
