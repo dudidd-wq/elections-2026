@@ -224,6 +224,7 @@
       card('#/polls', 'סקרים', 'ממוצע, טווח, סכומי גושים וקו 61, מגמה וטבלת כל הסקרים.', 'polls') +
       card('#/coalition', 'בנה קואליציה', 'בחירת רשימות, הערכת מנדטים מול קו 61 והשוואה מתמטית של העמדות המוצהרות בכל סוגיה. לא תחזית ולא המלצה.', 'coalition') +
       card('#/exit-polls', 'מדגמים: דיוק בעבר', 'עד כמה דייקו מדגמי הטלוויזיה בערב הבחירות ב-2019–2022, מול התוצאות הרשמיות. בלי תחזית.', 'polls') +
+      card('#/geo', 'תוצאות לפי יישוב וקלפי', 'אחוז ההצבעה ולמי הצביעו בכל יישוב ובכל קלפי, בחמש המערכות של 2019–2022. התוצאות הרשמיות של ועדת הבחירות.', 'analysis') +
       card('#/podcasts', 'פודקאסטים וראיונות', 'מה אמרו ראשי הרשימות בפודקאסטים ובראיונות ארוכים בחודש שלפני הבחירות, עם קישורים וציטוטים מאומתים.', 'podcasts') +
       '</div>' +
       '<h2>10 הסוגיות</h2><nav class="issue-strip" aria-label="מעבר לסוגיה">' + P.issues.map(function (i) { return '<a href="#/issue/' + i.id + '"><span class="n">' + i.n + '</span>' + esc(i.short) + '</a>'; }).join('') + '</nav>' +
@@ -537,6 +538,7 @@
       '<p class="note"><b>בדיקת הרשימה המשותפת.</b> ' + esc(joint.verify.text) + ' ' + joint.verify.sources.map(function (u, k) { return srcLink(u, 'מקור ' + (k + 1)); }).join(' · ') + '</p>' +
       '<h2>בונה הקואליציה</h2><p>בעמוד <a href="#/coalition">בנה קואליציה</a> יש מדד קרבה שמשווה את העמדות המוצהרות של רשימות זו לזו, לפי הקידוד של הניתוח הרוחבי. הוא לא מדרג עמדות, לא תחזית ולא המלצה, ואינו מתחשב בהצהרות על שותפויות. השיטה, הקידוד המלא והמגבלות מפורטים בעמוד עצמו.</p>' +
       '<h2>דיוק המדגמים בעבר</h2><p>בעמוד <a href="#/exit-polls">מדגמים: דיוק בעבר</a> מושווים מדגמי הטלוויזיה של ערב הבחירות ב-2019–2022 לתוצאות הרשמיות של ועדת הבחירות המרכזית, עם מקור לכל מדגם, הנוסחאות והמגבלות. העמוד לא מנבא את תוצאות 2026.</p>' +
+      '<h2>תוצאות לפי יישוב וקלפי</h2><p>בעמוד <a href="#/geo">תוצאות לפי יישוב וקלפי</a> מוצגים אחוז ההצבעה ושיעור הקולות של כל רשימה בכל יישוב ובכל קלפי, בחמש מערכות הבחירות של 2019–2022. הנתונים הם קובצי תוצאות האמת של ועדת הבחירות המרכזית (data.gov.il), והסכומים נבדקו מול התוצאות הארציות הרשמיות.</p>' +
       '<h2>פערים ואי-ודאויות</h2><ul>' + P.gaps.map(function (g) { return '<li>' + esc(g) + '</li>'; }).join('') + '</ul>' +
       '<h2>מקורות כלליים</h2><ul class="srcs">' + P.generalSources.map(function (s) { return '<li>' + (s.url ? srcLink(s.url, s.label) : esc(s.label)) + '</li>'; }).join('') + '</ul>' +
       '<p>המקורות של כל רשימה מופיעים בעמוד הפרופיל שלה, ומקור לכל עמדה מופיע לצדה.</p>' +
@@ -603,7 +605,7 @@
   function foot() {
     document.getElementById('foot').innerHTML =
       '<p><b>אתר מידע ניטרלי.</b> אין בו המלצה להצבעה. העמדות נכונות ל-' + fmtDate(P.meta.documentAsOf) + '; הסקרים עודכנו ב-' + fmtStamp(D.meta.updatedAt) + ' (סקר אחרון: ' + fmtDate(D.meta.latestPollDate) + ', ' + D.polls.length + ' סקרים).</p>' +
-      '<p><a href="#/about">שיטה ומקורות</a> · <a href="data/platforms.json">platforms.json</a> · <a href="data/analysis.json">analysis.json</a> · <a href="data/polls.json">polls.json</a> · <a href="data/podcasts.json">podcasts.json</a> · <a href="data/coalition.json">coalition.json</a> · <a href="data/exitpolls.json">exitpolls.json</a> · <a href="' + REPO + '" target="_blank" rel="noopener noreferrer">קוד המקור<span class="sr"> (נפתח בחלון חדש)</span></a></p>';
+      '<p><a href="#/about">שיטה ומקורות</a> · <a href="data/platforms.json">platforms.json</a> · <a href="data/analysis.json">analysis.json</a> · <a href="data/polls.json">polls.json</a> · <a href="data/podcasts.json">podcasts.json</a> · <a href="data/coalition.json">coalition.json</a> · <a href="data/exitpolls.json">exitpolls.json</a> · <a href="data/geo/index.json">geo/index.json</a> · <a href="' + REPO + '" target="_blank" rel="noopener noreferrer">קוד המקור<span class="sr"> (נפתח בחלון חדש)</span></a></p>';
   }
 
   // ---------- coalition builder (#/coalition; data/coalition.json, loaded on demand)
@@ -1182,7 +1184,7 @@
     var parts = h.split('/').filter(Boolean);
     return { page: parts[0] || 'home', arg: parts[1] ? decodeURIComponent(parts[1]) : '', q: qs };
   }
-  var TITLES = { home: 'ראשי', matrix: 'מטריצה', issue: 'לפי סוגיה', list: 'לפי רשימה', compare: 'השוואה', analysis: 'ניתוח רוחבי', polls: 'סקרים', podcasts: 'פודקאסטים וראיונות', coalition: 'בנה קואליציה', 'exit-polls': 'מדגמים: דיוק בעבר', about: 'שיטה ומקורות' };
+  var TITLES = { home: 'ראשי', matrix: 'מטריצה', issue: 'לפי סוגיה', list: 'לפי רשימה', compare: 'השוואה', analysis: 'ניתוח רוחבי', polls: 'סקרים', podcasts: 'פודקאסטים וראיונות', coalition: 'בנה קואליציה', 'exit-polls': 'מדגמים: דיוק בעבר', geo: 'תוצאות לפי יישוב וקלפי', about: 'שיטה ומקורות' };
   var lastPage = null;
   function render(keepScroll) {
     var r = parseHash(), html, sub = '';
@@ -1197,6 +1199,7 @@
       case 'about': html = pageAbout(); break;
       case 'coalition': html = pageCoalition(r.q); if (!CO && !COerr) loadCoalition().then(function () { if (parseHash().page === 'coalition') render(true); }); break;
       case 'exit-polls': html = pageExitPolls(); if (!EP && !EPerr) loadExitPolls().then(function () { if (parseHash().page === 'exit-polls') render(true); }); break;
+      case 'geo': if (window.EL26GEO) { html = window.EL26GEO.page(r); sub = window.EL26GEO.title(r); } else { html = '<div class="skel" aria-hidden="true"><i></i><i></i><i></i></div><p class="sr" role="status">טוען…</p>'; loadGeo(); } break;
       case 'podcasts': html = pagePodcasts(r.arg, r.q); if (!PD && !PDerr) loadPodcasts().then(function () { if (parseHash().page === 'podcasts') { render(true); podScroll(); } }); break;
       default: r.page = 'home'; html = pageHome();
     }
@@ -1211,7 +1214,18 @@
     if (!keepScroll && lastPage !== null && key !== lastPage) { window.scrollTo(0, 0); $main.focus({ preventScroll: true }); }
     lastPage = key;
     if (r.page === 'podcasts' && PD) podScroll();
+    if (r.page === 'geo' && window.EL26GEO) window.EL26GEO.after();
   }
+  var geoLoading = false;
+  function loadGeo() {
+    if (geoLoading) return; geoLoading = true;
+    window.EL26 = { esc: esc, COLL: COLL, head: head, srcLink: srcLink, fmtDate: fmtDate, parseHash: parseHash, setHash: setHash, render: render, getJSON: getJSON, main: $main };
+    var s = document.createElement('script'); s.src = 'js/geo.js?v=' + GEO_V; s.async = true;
+    s.onload = function () { if (parseHash().page === 'geo') render(true); };
+    s.onerror = function () { geoLoading = false; if (parseHash().page === 'geo') $main.innerHTML = '<div class="empty" role="alert"><b>שגיאה בטעינת העמוד</b><p>נסו לרענן.</p></div>'; };
+    document.head.appendChild(s);
+  }
+  var GEO_V = '1';
   function podScroll() { var r = parseHash(); if (r.page !== 'podcasts' || !r.arg) return; var el = document.getElementById('pl-' + r.arg); if (el) el.scrollIntoView({ block: 'start' }); }
   function setHash(h) { if (location.hash === h) render(true); else { history.replaceState(null, '', h); render(true); } }
   function curQ() { return parseHash(); }

@@ -88,7 +88,7 @@ def main():
         for c in agg:
             shards[c][str(k)] = {'t': agg[c], 'b': bal[c]}
         index['elections'].append({'k': k, 'id': eid, 'date': date, 'label': label, 'lists': lists,
-            'otherLists': len(others), 'otherVotes': sum(tot[l] for l in others), 'national': nat,
+            'otherLists': len(others), 'envelopes': agg.get(ENVELOPES, [0, 0, 0, 0])[:4], 'otherVotes': sum(tot[l] for l in others), 'national': nat,
             'localities': len(agg), 'ballots': len(recs),
             'src': {'ballots': {'resource': rb, 'url': f'{DS}/resource/{rb}', 'sha256': bsha, 'bytes': bsize, 'retrieved': bd.get('retrieved')},
                     'localities': {'resource': rc, 'url': f'{DS}/resource/{rc}', 'sha256': csha, 'bytes': csize, 'retrieved': cd.get('retrieved')}}})
