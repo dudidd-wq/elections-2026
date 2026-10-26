@@ -540,6 +540,11 @@
        "note": ""
       },
       {
+       "url": "https://www.globes.co.il/news/article.aspx?did=1001301101",
+       "retrieved": "2026-10-27",
+       "note": "גלובס 18.09.2019: כל המדגמים הראשוניים והמעודכנים"
+      },
+      {
        "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2019_2&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
        "retrieved": "2026-10-27",
        "note": ""
@@ -600,6 +605,11 @@
        "url": "https://www.timesofisrael.com/election-liveblog-september-17-2019/",
        "retrieved": "2026-10-27",
        "note": ""
+      },
+      {
+       "url": "https://www.globes.co.il/news/article.aspx?did=1001301101",
+       "retrieved": "2026-10-27",
+       "note": "גלובס 18.09.2019: כל המדגמים הראשוניים והמעודכנים"
       },
       {
        "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2019_2&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
@@ -664,6 +674,11 @@
        "note": ""
       },
       {
+       "url": "https://www.globes.co.il/news/article.aspx?did=1001301101",
+       "retrieved": "2026-10-27",
+       "note": "גלובס 18.09.2019: כל המדגמים הראשוניים והמעודכנים"
+      },
+      {
        "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2019_2&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
        "retrieved": "2026-10-27",
        "note": ""
@@ -724,10 +739,15 @@
        "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2019_2&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
        "retrieved": "2026-10-27",
        "note": ""
+      },
+      {
+       "url": "https://www.globes.co.il/news/article.aspx?did=1001301101",
+       "retrieved": "2026-10-27",
+       "note": "גלובס 18.09.2019: כל המדגמים הראשוניים והמעודכנים"
       }
      ],
      "id": "2019b-c13-u3",
-     "status": "single-source",
+     "status": "verified",
      "metrics": {
       "diff": {
        "kl": -1,
@@ -781,6 +801,11 @@
        "url": "https://www.timesofisrael.com/election-liveblog-september-17-2019/",
        "retrieved": "2026-10-27",
        "note": ""
+      },
+      {
+       "url": "https://www.globes.co.il/news/article.aspx?did=1001301101",
+       "retrieved": "2026-10-27",
+       "note": "גלובס 18.09.2019: כל המדגמים הראשוניים והמעודכנים"
       }
      ],
      "id": "2019b-kan-u4",
@@ -838,10 +863,15 @@
        "url": "https://www.timesofisrael.com/updated-exit-polls-boost-center-left-joint-list-putting-likud-in-deeper-hole/",
        "retrieved": "2026-10-27",
        "note": "הכתבה מוסרת גוש של 54 ולא 55; ייתכן שמדובר בעדכון אחר"
+      },
+      {
+       "url": "https://www.globes.co.il/news/article.aspx?did=1001301101",
+       "retrieved": "2026-10-27",
+       "note": "גלובס 18.09.2019: אותם מספרים כמו uzit (גוש 55); לפי גלובס העדכון שודר כשעה וחצי אחרי 01:00"
       }
      ],
      "id": "2019b-c12-u5",
-     "status": "single-source",
+     "status": "verified",
      "metrics": {
       "diff": {
        "kl": -1,
