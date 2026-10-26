@@ -1118,10 +1118,11 @@
       var rl = lists.map(function (l) { return { id: l.id, seats: res.seats[l.id] || 0 }; });
       var ms = y.polls.map(function (p) { return epMetrics(rl, p.seats, res.blocLists || [], EP.meta.largeMin); });
       h += '<tr class="ep-sum"><th scope="row">מושבים שהוקצו לא נכון</th><td class="n">–</td>' + ms.map(function (m) { return '<td class="n">' + epNum(m.misallocated) + '</td>'; }).join('') + '</tr>' +
-        '<tr class="ep-sum"><th scope="row">תחזיות בטווח ±1</th><td class="n">–</td>' + ms.map(function (m) { return '<td class="n">' + m.within1 + ' מתוך ' + m.n + '</td>'; }).join('') + '</tr>';
+        '<tr class="ep-sum"><th scope="row">תחזיות בטווח ±1</th><td class="n">–</td>' + ms.map(function (m) { return '<td class="n">' + m.within1 + ' מתוך ' + m.n + '</td>'; }).join('') + '</tr>' +
+        ((res.blocLists || []).length ? '<tr class="ep-sum"><th scope="row">סכום הגוש</th><td class="n">' + ms[0].blocActual + '</td>' + ms.map(function (m) { return '<td class="n">' + m.bloc + ' (' + epSign(m.blocErr) + ')</td>'; }).join('') + '</tr>' : '');
     }
     h += '</tbody></table></div><ul class="srcs ep-src">' + y.polls.map(function (p) { return '<li>' + esc(epCh(p.channel) + ', ' + p.time) + ': ' + epSrcs(p.sources) + '</li>'; }).join('') + '</ul>';
-    if (res) h += '<p class="meta">' + esc(res.note || '') + ' ' + (res.source ? epSrcs([res.source]) : '') + '</p>';
+    if (res) h += '<p class="meta">' + esc(res.note || '') + ' ' + (res.source ? epSrcs([res.source]) : '') + (y.status === 'frozen' ? ' הנתונים של 2026 הוקפאו ב-' + fmtDate(y.frozenAt) + ' ולא ישתנו.' : '') + '</p>';
     return h;
   }
   function pageExitPolls() {

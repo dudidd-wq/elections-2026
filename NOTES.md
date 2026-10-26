@@ -78,7 +78,10 @@ Source: /workspace/elections-2026/platforms.md (canonical). Repo: dudidd-wq/elec
 - [x] 23.10 19:05 routine: nothing new (poll ban from 23.10; IIE re-offered the removed duplicate Israel Hayom 22.10 row "israelhayomb" – ignored). Ahi (Abargel) withdrew 23.10 – not one of the 13 lists, no site change. No push.
 - [x] 24.10 09:00 routine: nothing new (poll ban; no list changes). ynet 23.10 reported leaked Yashar! draft plans (not an official platform document) – no site change. No push.
 - [x] 24.10 19:07 routine: nothing new (poll ban; no new withdrawals/mergers beyond Ahi 23.10; Winter/Leitner still running). No push.
+- [x] 25.10 19:05 routine: nothing new (poll ban until 27.10 22:00; CEC formally removed Ahi list 25.10 (c14 1753794) – not one of the 13 lists, already noted 23.10). No push.
 - [x] 25.10 09:05 routine: nothing new (poll ban until 27.10 22:00; no new withdrawals/mergers; Winter/Leitner still running). No push.
+- [x] 26.10 09:10 routine: nothing new (poll ban until 27.10 22:00; CEC lists page updated 25.10 shows only Blue&White + Ahi withdrawn, both already handled; no mergers). No push.
+- [x] 26.10 19:07 routine: nothing new (poll ban until 27.10 22:00; 36 lists on ballot, only Blue&White + Ahi withdrawn, both handled; Winter/Leitner still running – Winter 26.10 said he'll recommend Netanyahu (campaign remark, not a platform doc) – no site change). No push. Next run 27.10 09:00; exit polls from 22:00 → 28.10 09:00 run.
 - [x] 25.10 coalition builder #/coalition ("בנה קואליציה"). SW v21-2026-10-25b.
 
 ## Coalition builder (#/coalition, data/coalition.json)
@@ -89,3 +92,15 @@ Source: /workspace/elections-2026/platforms.md (canonical). Repo: dudidd-wq/elec
 - Refusals added 25.10 round 2: Bennett→Otzma (ynet 20.2), Ben Gvir→Yashar+Beyachad (Ch14 10.9), Golan→gov37 group (= site "גוש נתניהו" lists).
 - Hash: l=ids, w=10 digits, s=0|10, th=all, must=id, nd=0 (show combos with refusals), mp=25|50 (default 40), view=list, sort=gap, all=1.
 - Rules: alphabetical defaults, no party-specific notes, no colors, no recommendation/forecast wording; "not a forecast" text in lead, suggestions and method. Tests: /workspace/elections-2026-audit/coal.mjs (+ noraamnotes routes).
+
+## Exit polls (#/exit-polls) — how to add the 27.10.2026 exit polls
+Page: `#/exit-polls` ("מדגמים: דיוק בעבר"). Data: `data/exitpolls.json`. 2019–2022 rows are built by `tools/build_exitpolls.py` (source of truth; every figure has a source URL + retrieval date; rebuild keeps `y2026` untouched). Test: `node test/exitpolls.test.mjs`.
+
+2026 rows live only in `y2026` and are added with `tools/add_exitpoll_2026.py` (append-only; no delete/edit command exists — by design):
+1. After 22:00 on 27.10.2026, for each channel's 22:00 poll (channel ids: `kan`, `c12`, `c13`, `c14`; list ids = `data/polls.json` parties, e.g. likud, yashar, beyachad, dems, joint, otzma, shas, yb, utj, rzz, raam, miluim, amcha):
+   `python3 tools/add_exitpoll_2026.py add-poll --channel c12 --pollster "<pollster>" --time 22:00 --kind initial --seats likud=..,yashar=..,... --source <URL1> --source <URL2>`
+   Seats must sum to 120; lists not given are 0 (below threshold in that poll). Record the numbers exactly as published, at least 2 sources if possible. Later updates: `--kind update --time 01:30`.
+2. When the CEC publishes results: `python3 tools/add_exitpoll_2026.py set-results --label "ספירה חלקית (…% מהקלפיות)" --seats ... --source <CEC URL>`; call again for the final certified results (the previous one is kept in `resultsHistory`). Leave `--bloc` empty until the post-election recommendations to the President are public (same mechanical rule as 2019–2022), then call set-results again with `--bloc id1,id2,... --bloc-source <URL>`.
+3. After the final certified results: `python3 tools/add_exitpoll_2026.py freeze`. Frozen data is never changed or deleted.
+4. Bump `VERSION` in sw.js, run `node test/exitpolls.test.mjs`, commit, push.
+The page renders `y2026` automatically (table of polls; error metrics once results exist) with the same formulas as 2019–2022. No forecast text: the page never says who "will" win.
