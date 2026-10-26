@@ -1,0 +1,2764 @@
+{
+ "meta": {
+  "title": "מדגמי ערב הבחירות מול התוצאות הרשמיות, 2019–2022",
+  "retrieved": "2026-10-27",
+  "generated": "2026-10-27",
+  "channels": {
+   "kan": "כאן 11",
+   "c12": "חדשות 12",
+   "c13": "חדשות 13",
+   "c14": "ערוץ 14"
+  },
+  "largeMin": 10,
+  "rules": {
+   "scope": "מדגמי הטלוויזיה שפורסמו בשעה 22:00 בערב הבחירות לכנסות ה-21 עד ה-25 (כאן 11, חדשות 12, חדשות 13, ובנובמבר 2022 גם ערוץ 14). העדכונים שפורסמו במהלך הלילה מוצגים בנפרד ואינם נכללים במדדים הראשיים.",
+   "absent": "רשימה שלא הופיעה בפרסום של מדגם שסכומו 120 נרשמה כ-0 (לא עברה את אחוז החסימה לפי המדגם).",
+   "lists": "בטבלה מופיעות כל הרשימות שנכנסו לכנסת, וכן רשימות שלא נכנסו וקיבלו לפחות 1% מהקולות הכשרים.",
+   "bloc": "גוש = הרשימות שחבריהן המליצו לנשיא על בנימין נתניהו בסבב ההתייעצויות שאחרי אותן בחירות (כלל מכני, עם מקור לכל מערכת). אותו הרכב רשימות מוחל על המדגם ועל התוצאה.",
+   "misallocated": "מושבים שהוקצו לא נכון = חצי מסכום הסטיות המוחלטות בין המדגם לתוצאה (כל מושב שעודף לרשימה אחת חסר לאחרת, ולכן נספר פעמיים בסכום).",
+   "large": "רשימה \"גדולה\" = 10 מושבים או יותר בתוצאה הרשמית; אחרת \"קטנה\" (כולל רשימות שלא נכנסו).",
+   "within1": "שיעור התחזיות לרשימות בודדות שסטו לכל היותר במושב אחד מהתוצאה."
+  }
+ },
+ "campaigns": [
+  {
+   "id": "2019a",
+   "knesset": 21,
+   "date": "2019-04-09",
+   "label": "אפריל 2019 (הכנסת ה-21)",
+   "threshold": 3.25,
+   "cec": {
+    "url": "https://votes21.bechirot.gov.il/nationalresults",
+    "retrieved": "2026-10-27",
+    "note": "תוצאות רשמיות של ועדת הבחירות המרכזית"
+   },
+   "lists": [
+    {
+     "id": "likud",
+     "name": "הליכוד",
+     "seats": 35,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "kl",
+     "name": "כחול לבן",
+     "seats": 35,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "shas",
+     "name": "ש\"ס",
+     "seats": 8,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "utj",
+     "name": "יהדות התורה",
+     "seats": 8,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "ht",
+     "name": "חד\"ש-תע\"ל",
+     "seats": 6,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "labor",
+     "name": "העבודה",
+     "seats": 6,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "yb",
+     "name": "ישראל ביתנו",
+     "seats": 5,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "urwp",
+     "name": "איחוד מפלגות הימין",
+     "seats": 5,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "meretz",
+     "name": "מרצ",
+     "seats": 4,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "kulanu",
+     "name": "כולנו",
+     "seats": 4,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "rb",
+     "name": "רע\"מ-בל\"ד",
+     "seats": 4,
+     "pct": 3.33,
+     "inBloc": false
+    },
+    {
+     "id": "nr",
+     "name": "הימין החדש",
+     "seats": 0,
+     "pct": 3.22,
+     "inBloc": false
+    },
+    {
+     "id": "zehut",
+     "name": "זהות",
+     "seats": 0,
+     "pct": 2.74,
+     "inBloc": false
+    },
+    {
+     "id": "gesher",
+     "name": "גשר",
+     "seats": 0,
+     "pct": 1.73,
+     "inBloc": false
+    }
+   ],
+   "bloc": {
+    "lists": [
+     "likud",
+     "shas",
+     "utj",
+     "urwp",
+     "yb",
+     "kulanu"
+    ],
+    "source": {
+     "url": "https://www.timesofisrael.com/president-officially-taps-netanyahu-to-form-next-government/",
+     "retrieved": "2026-10-27",
+     "note": "נתניהו קיבל המלצות של רשימות בנות 65 מושבים"
+    },
+    "seats": 65
+   },
+   "polls": [
+    {
+     "channel": "kan",
+     "pollster": "קנטאר",
+     "time": "22:00",
+     "kind": "initial",
+     "seats": {
+      "likud": 36,
+      "kl": 37,
+      "shas": 7,
+      "utj": 7,
+      "ht": 6,
+      "labor": 8,
+      "yb": 4,
+      "urwp": 5,
+      "meretz": 5,
+      "kulanu": 5,
+      "rb": 0,
+      "nr": 0,
+      "zehut": 0,
+      "gesher": 0
+     },
+     "sources": [
+      {
+       "url": "https://news360.co.il/local/3999",
+       "retrieved": "2026-10-27",
+       "note": "פורסם 22:09"
+      },
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2019&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_April_2019_Israeli_legislative_election",
+       "retrieved": "2026-10-27",
+       "note": "משמש כמוביל בלבד (ויקיפדיה), לא כמקור מאמת"
+      }
+     ],
+     "id": "2019a-kan-init",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "likud": 1,
+       "kl": 2,
+       "shas": -1,
+       "utj": -1,
+       "ht": 0,
+       "labor": 2,
+       "yb": -1,
+       "urwp": 0,
+       "meretz": 1,
+       "kulanu": 1,
+       "rb": -4,
+       "nr": 0,
+       "zehut": 0,
+       "gesher": 0
+      },
+      "sumAbs": 14,
+      "misallocated": 7.0,
+      "within1": 11,
+      "n": 14,
+      "exact": 5,
+      "maeLarge": 1.5,
+      "maeSmall": 0.917,
+      "bloc": 64,
+      "blocActual": 65,
+      "blocErr": -1,
+      "thresholdMisses": [
+       "rb"
+      ]
+     }
+    },
+    {
+     "channel": "c12",
+     "pollster": "מדגם (מינה צמח ומנו גבע)",
+     "time": "22:00",
+     "kind": "initial",
+     "seats": {
+      "likud": 33,
+      "kl": 37,
+      "shas": 6,
+      "utj": 7,
+      "ht": 6,
+      "labor": 6,
+      "yb": 5,
+      "urwp": 5,
+      "meretz": 5,
+      "kulanu": 4,
+      "rb": 6,
+      "nr": 0,
+      "zehut": 0,
+      "gesher": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.inn.co.il/news/398948",
+       "retrieved": "2026-10-27",
+       "note": "22:01"
+      },
+      {
+       "url": "https://www.c14.co.il/article/223724",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://news360.co.il/local/3999",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_April_2019_Israeli_legislative_election",
+       "retrieved": "2026-10-27",
+       "note": "משמש כמוביל בלבד (ויקיפדיה), לא כמקור מאמת"
+      }
+     ],
+     "conflicts": [
+      {
+       "lists": [
+        "ht",
+        "rb"
+       ],
+       "alt": {
+        "ht": 7,
+        "rb": 5
+       },
+       "sources": [
+        {
+         "url": "https://www.maariv.co.il/elections2019/news/article-693573",
+         "retrieved": "2026-10-27",
+         "note": "מעריב 22:04: חד\"ש-תע\"ל 7, רע\"מ-בל\"ד 5"
+        },
+        {
+         "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2019&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+         "retrieved": "2026-10-27",
+         "note": ""
+        }
+       ],
+       "note": "ארבעה מקורות מוסרים 6 ו-6; מעריב ואתר עוזית מוסרים 7 ו-5. אין השפעה על מדדי הטעות: סכום הסטיות המוחלטות זהה (2) בשתי הגרסאות, וגם סכומי הגושים זהים."
+      }
+     ],
+     "id": "2019a-c12-init",
+     "status": "conflict",
+     "metrics": {
+      "diff": {
+       "likud": -2,
+       "kl": 2,
+       "shas": -2,
+       "utj": -1,
+       "ht": 0,
+       "labor": 0,
+       "yb": 0,
+       "urwp": 0,
+       "meretz": 1,
+       "kulanu": 0,
+       "rb": 2,
+       "nr": 0,
+       "zehut": 0,
+       "gesher": 0
+      },
+      "sumAbs": 10,
+      "misallocated": 5.0,
+      "within1": 10,
+      "n": 14,
+      "exact": 8,
+      "maeLarge": 2.0,
+      "maeSmall": 0.5,
+      "bloc": 60,
+      "blocActual": 65,
+      "blocErr": -5,
+      "thresholdMisses": []
+     }
+    },
+    {
+     "channel": "c13",
+     "pollster": "קמיל פוקס",
+     "time": "22:00",
+     "kind": "initial",
+     "seats": {
+      "likud": 36,
+      "kl": 36,
+      "shas": 7,
+      "utj": 7,
+      "ht": 7,
+      "labor": 7,
+      "yb": 4,
+      "urwp": 4,
+      "meretz": 4,
+      "kulanu": 4,
+      "rb": 0,
+      "nr": 4,
+      "zehut": 0,
+      "gesher": 0
+     },
+     "sources": [
+      {
+       "url": "https://news360.co.il/local/3999",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.maariv.co.il/elections2019/news/article-693573",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2019&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_April_2019_Israeli_legislative_election",
+       "retrieved": "2026-10-27",
+       "note": "משמש כמוביל בלבד (ויקיפדיה), לא כמקור מאמת"
+      }
+     ],
+     "id": "2019a-c13-init",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "likud": 1,
+       "kl": 1,
+       "shas": -1,
+       "utj": -1,
+       "ht": 1,
+       "labor": 1,
+       "yb": -1,
+       "urwp": -1,
+       "meretz": 0,
+       "kulanu": 0,
+       "rb": -4,
+       "nr": 4,
+       "zehut": 0,
+       "gesher": 0
+      },
+      "sumAbs": 16,
+      "misallocated": 8.0,
+      "within1": 12,
+      "n": 14,
+      "exact": 4,
+      "maeLarge": 1.0,
+      "maeSmall": 1.167,
+      "bloc": 62,
+      "blocActual": 65,
+      "blocErr": -3,
+      "thresholdMisses": [
+       "rb",
+       "nr"
+      ]
+     }
+    }
+   ],
+   "partial": [
+    {
+     "channels": [
+      "c12",
+      "c13"
+     ],
+     "time": "אחרי חצות",
+     "text": "עדכוני ערוץ 12 וערוץ 13: הליכוד 35, כחול לבן 34, ש\"ס 8, יהדות התורה 7; הימין החדש, זהות וגשר מתחת לאחוז החסימה. לפי אותו דיווח, גוש הימין 63 בערוץ 12 ו-65 בערוץ 13. פירוט מלא לכל רשימה לא נמצא.",
+     "sources": [
+      {
+       "url": "https://web.archive.org/web/20190413210901/https://www.timesofisrael.com/liveblog_entry/channel-12-exit-poll-has-gantz-leading-netanyahu-37-33/",
+       "retrieved": "2026-10-27",
+       "note": "Times of Israel, ארכיון"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2019b",
+   "knesset": 22,
+   "date": "2019-09-17",
+   "label": "ספטמבר 2019 (הכנסת ה-22)",
+   "threshold": 3.25,
+   "cec": {
+    "url": "https://votes22.bechirot.gov.il/nationalresults",
+    "retrieved": "2026-10-27",
+    "note": "תוצאות רשמיות של ועדת הבחירות המרכזית"
+   },
+   "lists": [
+    {
+     "id": "kl",
+     "name": "כחול לבן",
+     "seats": 33,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "likud",
+     "name": "הליכוד",
+     "seats": 32,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "joint",
+     "name": "הרשימה המשותפת",
+     "seats": 13,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "shas",
+     "name": "ש\"ס",
+     "seats": 9,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "yb",
+     "name": "ישראל ביתנו",
+     "seats": 8,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "utj",
+     "name": "יהדות התורה",
+     "seats": 7,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "yamina",
+     "name": "ימינה",
+     "seats": 7,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "lg",
+     "name": "העבודה-גשר",
+     "seats": 6,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "du",
+     "name": "המחנה הדמוקרטי",
+     "seats": 5,
+     "pct": 4.34,
+     "inBloc": false
+    },
+    {
+     "id": "otzma",
+     "name": "עוצמה יהודית",
+     "seats": 0,
+     "pct": 1.88,
+     "inBloc": false
+    }
+   ],
+   "bloc": {
+    "lists": [
+     "likud",
+     "shas",
+     "utj",
+     "yamina"
+    ],
+    "source": {
+     "url": "https://www.jpost.com/Israel-News/Gantz-on-verge-of-getting-more-recommendations-602441",
+     "retrieved": "2026-10-27",
+     "note": "נתניהו 55 המלצות (הליכוד, ש\"ס, יהדות התורה, ימינה)"
+    },
+    "seats": 55
+   },
+   "polls": [
+    {
+     "channel": "kan",
+     "pollster": "קנטאר",
+     "time": "22:00",
+     "kind": "initial",
+     "seats": {
+      "kl": 32,
+      "likud": 32,
+      "joint": 12,
+      "shas": 9,
+      "yb": 10,
+      "utj": 8,
+      "yamina": 7,
+      "lg": 5,
+      "du": 5,
+      "otzma": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.timesofisrael.com/election-liveblog-september-17-2019/",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2019_2&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_September_2019_Israeli_legislative_election",
+       "retrieved": "2026-10-27",
+       "note": "משמש כמוביל בלבד (ויקיפדיה), לא כמקור מאמת"
+      }
+     ],
+     "id": "2019b-kan-init",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "kl": -1,
+       "likud": 0,
+       "joint": -1,
+       "shas": 0,
+       "yb": 2,
+       "utj": 1,
+       "yamina": 0,
+       "lg": -1,
+       "du": 0,
+       "otzma": 0
+      },
+      "sumAbs": 6,
+      "misallocated": 3.0,
+      "within1": 9,
+      "n": 10,
+      "exact": 5,
+      "maeLarge": 0.667,
+      "maeSmall": 0.571,
+      "bloc": 56,
+      "blocActual": 55,
+      "blocErr": 1,
+      "thresholdMisses": []
+     }
+    },
+    {
+     "channel": "c12",
+     "pollster": "מדגם",
+     "time": "22:00",
+     "kind": "initial",
+     "seats": {
+      "kl": 34,
+      "likud": 33,
+      "joint": 11,
+      "shas": 8,
+      "yb": 8,
+      "utj": 8,
+      "yamina": 8,
+      "lg": 5,
+      "du": 5,
+      "otzma": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.timesofisrael.com/election-liveblog-september-17-2019/",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2019_2&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_September_2019_Israeli_legislative_election",
+       "retrieved": "2026-10-27",
+       "note": "משמש כמוביל בלבד (ויקיפדיה), לא כמקור מאמת"
+      }
+     ],
+     "id": "2019b-c12-init",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "kl": 1,
+       "likud": 1,
+       "joint": -2,
+       "shas": -1,
+       "yb": 0,
+       "utj": 1,
+       "yamina": 1,
+       "lg": -1,
+       "du": 0,
+       "otzma": 0
+      },
+      "sumAbs": 8,
+      "misallocated": 4.0,
+      "within1": 9,
+      "n": 10,
+      "exact": 3,
+      "maeLarge": 1.333,
+      "maeSmall": 0.571,
+      "bloc": 57,
+      "blocActual": 55,
+      "blocErr": 2,
+      "thresholdMisses": []
+     }
+    },
+    {
+     "channel": "c13",
+     "pollster": "קמיל פוקס",
+     "time": "22:00",
+     "kind": "initial",
+     "seats": {
+      "kl": 33,
+      "likud": 31,
+      "joint": 13,
+      "shas": 9,
+      "yb": 8,
+      "utj": 8,
+      "yamina": 6,
+      "lg": 6,
+      "du": 6,
+      "otzma": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.timesofisrael.com/election-liveblog-september-17-2019/",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2019_2&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_September_2019_Israeli_legislative_election",
+       "retrieved": "2026-10-27",
+       "note": "משמש כמוביל בלבד (ויקיפדיה), לא כמקור מאמת"
+      }
+     ],
+     "id": "2019b-c13-init",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "kl": 0,
+       "likud": -1,
+       "joint": 0,
+       "shas": 0,
+       "yb": 0,
+       "utj": 1,
+       "yamina": -1,
+       "lg": 0,
+       "du": 1,
+       "otzma": 0
+      },
+      "sumAbs": 4,
+      "misallocated": 2.0,
+      "within1": 10,
+      "n": 10,
+      "exact": 6,
+      "maeLarge": 0.333,
+      "maeSmall": 0.429,
+      "bloc": 54,
+      "blocActual": 55,
+      "blocErr": -1,
+      "thresholdMisses": []
+     }
+    },
+    {
+     "channel": "c13",
+     "pollster": "קמיל פוקס",
+     "time": "00:50",
+     "kind": "update",
+     "seats": {
+      "kl": 32,
+      "likud": 30,
+      "joint": 15,
+      "shas": 9,
+      "yb": 8,
+      "utj": 8,
+      "yamina": 6,
+      "lg": 6,
+      "du": 6,
+      "otzma": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2019_2&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      }
+     ],
+     "id": "2019b-c13-u3",
+     "status": "single-source",
+     "metrics": {
+      "diff": {
+       "kl": -1,
+       "likud": -2,
+       "joint": 2,
+       "shas": 0,
+       "yb": 0,
+       "utj": 1,
+       "yamina": -1,
+       "lg": 0,
+       "du": 1,
+       "otzma": 0
+      },
+      "sumAbs": 8,
+      "misallocated": 4.0,
+      "within1": 8,
+      "n": 10,
+      "exact": 4,
+      "maeLarge": 1.667,
+      "maeSmall": 0.429,
+      "bloc": 53,
+      "blocActual": 55,
+      "blocErr": -2,
+      "thresholdMisses": []
+     }
+    },
+    {
+     "channel": "kan",
+     "pollster": "קנטאר",
+     "time": "01:30",
+     "kind": "update",
+     "seats": {
+      "kl": 32,
+      "likud": 31,
+      "joint": 13,
+      "shas": 9,
+      "yb": 9,
+      "utj": 8,
+      "yamina": 7,
+      "lg": 6,
+      "du": 5,
+      "otzma": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2019_2&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.timesofisrael.com/election-liveblog-september-17-2019/",
+       "retrieved": "2026-10-27",
+       "note": ""
+      }
+     ],
+     "id": "2019b-kan-u4",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "kl": -1,
+       "likud": -1,
+       "joint": 0,
+       "shas": 0,
+       "yb": 1,
+       "utj": 1,
+       "yamina": 0,
+       "lg": 0,
+       "du": 0,
+       "otzma": 0
+      },
+      "sumAbs": 4,
+      "misallocated": 2.0,
+      "within1": 10,
+      "n": 10,
+      "exact": 6,
+      "maeLarge": 0.667,
+      "maeSmall": 0.286,
+      "bloc": 55,
+      "blocActual": 55,
+      "blocErr": 0,
+      "thresholdMisses": []
+     }
+    },
+    {
+     "channel": "c12",
+     "pollster": "מדגם",
+     "time": "02:10",
+     "kind": "update",
+     "seats": {
+      "kl": 32,
+      "likud": 32,
+      "joint": 13,
+      "shas": 9,
+      "yb": 9,
+      "utj": 7,
+      "yamina": 7,
+      "lg": 6,
+      "du": 5,
+      "otzma": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2019_2&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.timesofisrael.com/updated-exit-polls-boost-center-left-joint-list-putting-likud-in-deeper-hole/",
+       "retrieved": "2026-10-27",
+       "note": "הכתבה מוסרת גוש של 54 ולא 55; ייתכן שמדובר בעדכון אחר"
+      }
+     ],
+     "id": "2019b-c12-u5",
+     "status": "single-source",
+     "metrics": {
+      "diff": {
+       "kl": -1,
+       "likud": 0,
+       "joint": 0,
+       "shas": 0,
+       "yb": 1,
+       "utj": 0,
+       "yamina": 0,
+       "lg": 0,
+       "du": 0,
+       "otzma": 0
+      },
+      "sumAbs": 2,
+      "misallocated": 1.0,
+      "within1": 10,
+      "n": 10,
+      "exact": 8,
+      "maeLarge": 0.333,
+      "maeSmall": 0.143,
+      "bloc": 55,
+      "blocActual": 55,
+      "blocErr": 0,
+      "thresholdMisses": []
+     }
+    }
+   ],
+   "partial": []
+  },
+  {
+   "id": "2020",
+   "knesset": 23,
+   "date": "2020-03-02",
+   "label": "מרץ 2020 (הכנסת ה-23)",
+   "threshold": 3.25,
+   "cec": {
+    "url": "https://votes23.bechirot.gov.il/nationalresults",
+    "retrieved": "2026-10-27",
+    "note": "תוצאות רשמיות של ועדת הבחירות המרכזית"
+   },
+   "lists": [
+    {
+     "id": "likud",
+     "name": "הליכוד",
+     "seats": 36,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "kl",
+     "name": "כחול לבן",
+     "seats": 33,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "joint",
+     "name": "הרשימה המשותפת",
+     "seats": 15,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "shas",
+     "name": "ש\"ס",
+     "seats": 9,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "utj",
+     "name": "יהדות התורה",
+     "seats": 7,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "lgm",
+     "name": "העבודה-גשר-מרצ",
+     "seats": 7,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "yb",
+     "name": "ישראל ביתנו",
+     "seats": 7,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "yamina",
+     "name": "ימינה",
+     "seats": 6,
+     "pct": 5.24,
+     "inBloc": true
+    }
+   ],
+   "bloc": {
+    "lists": [
+     "likud",
+     "shas",
+     "utj",
+     "yamina"
+    ],
+    "source": {
+     "url": "https://www.timesofisrael.com/with-libermans-nod-gantz-gets-61-backers-to-form-coalition-topping-netanyahu/",
+     "retrieved": "2026-10-27",
+     "note": "נתניהו 58 המלצות"
+    },
+    "seats": 58
+   },
+   "polls": [
+    {
+     "channel": "kan",
+     "pollster": "קנטאר",
+     "time": "22:00",
+     "kind": "initial",
+     "seats": {
+      "likud": 36,
+      "kl": 33,
+      "joint": 15,
+      "shas": 9,
+      "utj": 8,
+      "lgm": 6,
+      "yb": 6,
+      "yamina": 7
+     },
+     "sources": [
+      {
+       "url": "https://www.emess.co.il/radio/595394",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2020&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2020_Israeli_legislative_election",
+       "retrieved": "2026-10-27",
+       "note": "משמש כמוביל בלבד (ויקיפדיה), לא כמקור מאמת"
+      }
+     ],
+     "id": "2020-kan-init",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "likud": 0,
+       "kl": 0,
+       "joint": 0,
+       "shas": 0,
+       "utj": 1,
+       "lgm": -1,
+       "yb": -1,
+       "yamina": 1
+      },
+      "sumAbs": 4,
+      "misallocated": 2.0,
+      "within1": 8,
+      "n": 8,
+      "exact": 4,
+      "maeLarge": 0.0,
+      "maeSmall": 0.8,
+      "bloc": 60,
+      "blocActual": 58,
+      "blocErr": 2,
+      "thresholdMisses": []
+     }
+    },
+    {
+     "channel": "c12",
+     "pollster": "מדגם",
+     "time": "22:00",
+     "kind": "initial",
+     "seats": {
+      "likud": 37,
+      "kl": 33,
+      "joint": 14,
+      "shas": 9,
+      "utj": 7,
+      "lgm": 7,
+      "yb": 6,
+      "yamina": 7
+     },
+     "sources": [
+      {
+       "url": "https://www.ynetnews.com/article/HkKqL1jVU",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2020&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2020_Israeli_legislative_election",
+       "retrieved": "2026-10-27",
+       "note": "משמש כמוביל בלבד (ויקיפדיה), לא כמקור מאמת"
+      }
+     ],
+     "id": "2020-c12-init",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "likud": 1,
+       "kl": 0,
+       "joint": -1,
+       "shas": 0,
+       "utj": 0,
+       "lgm": 0,
+       "yb": -1,
+       "yamina": 1
+      },
+      "sumAbs": 4,
+      "misallocated": 2.0,
+      "within1": 8,
+      "n": 8,
+      "exact": 4,
+      "maeLarge": 0.667,
+      "maeSmall": 0.4,
+      "bloc": 60,
+      "blocActual": 58,
+      "blocErr": 2,
+      "thresholdMisses": []
+     }
+    },
+    {
+     "channel": "c13",
+     "pollster": "קמיל פוקס",
+     "time": "22:00",
+     "kind": "initial",
+     "seats": {
+      "likud": 37,
+      "kl": 32,
+      "joint": 14,
+      "shas": 9,
+      "utj": 8,
+      "lgm": 6,
+      "yb": 8,
+      "yamina": 6
+     },
+     "sources": [
+      {
+       "url": "https://13tv.co.il/item/news/politics/politics/voting-sample-1018501/",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2020_Israeli_legislative_election",
+       "retrieved": "2026-10-27",
+       "note": "משמש כמוביל בלבד (ויקיפדיה), לא כמקור מאמת"
+      }
+     ],
+     "conflicts": [
+      {
+       "lists": [
+        "joint"
+       ],
+       "alt": {
+        "joint": 15
+       },
+       "sources": [
+        {
+         "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2020&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+         "retrieved": "2026-10-27",
+         "note": ""
+        }
+       ],
+       "note": "באתר עוזית מופיע 15 לרשימה המשותפת, אבל אז סכום העמודה 121. אתר חדשות 13 מוסר 14 (סכום 120)."
+      }
+     ],
+     "id": "2020-c13-init",
+     "status": "conflict",
+     "metrics": {
+      "diff": {
+       "likud": 1,
+       "kl": -1,
+       "joint": -1,
+       "shas": 0,
+       "utj": 1,
+       "lgm": -1,
+       "yb": 1,
+       "yamina": 0
+      },
+      "sumAbs": 6,
+      "misallocated": 3.0,
+      "within1": 8,
+      "n": 8,
+      "exact": 2,
+      "maeLarge": 1.0,
+      "maeSmall": 0.6,
+      "bloc": 60,
+      "blocActual": 58,
+      "blocErr": 2,
+      "thresholdMisses": []
+     }
+    },
+    {
+     "channel": "c13",
+     "pollster": "קמיל פוקס",
+     "time": "00:50",
+     "kind": "update",
+     "seats": {
+      "likud": 37,
+      "kl": 34,
+      "joint": 14,
+      "shas": 9,
+      "utj": 7,
+      "lgm": 7,
+      "yb": 6,
+      "yamina": 6
+     },
+     "sources": [
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2020&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://13tv.co.il/item/news/politics/politics/updated-sample-results-1018892/",
+       "retrieved": "2026-10-27",
+       "note": "כחול לבן 34, גוש 59"
+      }
+     ],
+     "id": "2020-c13-u3",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "likud": 1,
+       "kl": 1,
+       "joint": -1,
+       "shas": 0,
+       "utj": 0,
+       "lgm": 0,
+       "yb": -1,
+       "yamina": 0
+      },
+      "sumAbs": 4,
+      "misallocated": 2.0,
+      "within1": 8,
+      "n": 8,
+      "exact": 4,
+      "maeLarge": 1.0,
+      "maeSmall": 0.2,
+      "bloc": 59,
+      "blocActual": 58,
+      "blocErr": 1,
+      "thresholdMisses": []
+     }
+    },
+    {
+     "channel": "c12",
+     "pollster": "מדגם",
+     "time": "01:10",
+     "kind": "update",
+     "seats": {
+      "likud": 37,
+      "kl": 32,
+      "joint": 15,
+      "shas": 9,
+      "utj": 7,
+      "lgm": 7,
+      "yb": 7,
+      "yamina": 6
+     },
+     "sources": [
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2020&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      }
+     ],
+     "id": "2020-c12-u4",
+     "status": "single-source",
+     "metrics": {
+      "diff": {
+       "likud": 1,
+       "kl": -1,
+       "joint": 0,
+       "shas": 0,
+       "utj": 0,
+       "lgm": 0,
+       "yb": 0,
+       "yamina": 0
+      },
+      "sumAbs": 2,
+      "misallocated": 1.0,
+      "within1": 8,
+      "n": 8,
+      "exact": 6,
+      "maeLarge": 0.667,
+      "maeSmall": 0.0,
+      "bloc": 59,
+      "blocActual": 58,
+      "blocErr": 1,
+      "thresholdMisses": []
+     }
+    },
+    {
+     "channel": "kan",
+     "pollster": "קנטאר",
+     "time": "01:50",
+     "kind": "update",
+     "seats": {
+      "likud": 36,
+      "kl": 33,
+      "joint": 15,
+      "shas": 9,
+      "utj": 8,
+      "lgm": 6,
+      "yb": 7,
+      "yamina": 6
+     },
+     "sources": [
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2020&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      }
+     ],
+     "id": "2020-kan-u5",
+     "status": "single-source",
+     "metrics": {
+      "diff": {
+       "likud": 0,
+       "kl": 0,
+       "joint": 0,
+       "shas": 0,
+       "utj": 1,
+       "lgm": -1,
+       "yb": 0,
+       "yamina": 0
+      },
+      "sumAbs": 2,
+      "misallocated": 1.0,
+      "within1": 8,
+      "n": 8,
+      "exact": 6,
+      "maeLarge": 0.0,
+      "maeSmall": 0.4,
+      "bloc": 59,
+      "blocActual": 58,
+      "blocErr": 1,
+      "thresholdMisses": []
+     }
+    }
+   ],
+   "partial": []
+  },
+  {
+   "id": "2021",
+   "knesset": 24,
+   "date": "2021-03-23",
+   "label": "מרץ 2021 (הכנסת ה-24)",
+   "threshold": 3.25,
+   "cec": {
+    "url": "https://votes24.bechirot.gov.il/nationalresults",
+    "retrieved": "2026-10-27",
+    "note": "תוצאות רשמיות של ועדת הבחירות המרכזית"
+   },
+   "lists": [
+    {
+     "id": "likud",
+     "name": "הליכוד",
+     "seats": 30,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "ya",
+     "name": "יש עתיד",
+     "seats": 17,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "shas",
+     "name": "ש\"ס",
+     "seats": 9,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "kl",
+     "name": "כחול לבן",
+     "seats": 8,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "yamina",
+     "name": "ימינה",
+     "seats": 7,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "labor",
+     "name": "העבודה",
+     "seats": 7,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "utj",
+     "name": "יהדות התורה",
+     "seats": 7,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "yb",
+     "name": "ישראל ביתנו",
+     "seats": 7,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "rz",
+     "name": "הציונות הדתית",
+     "seats": 6,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "joint",
+     "name": "הרשימה המשותפת",
+     "seats": 6,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "nh",
+     "name": "תקווה חדשה",
+     "seats": 6,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "meretz",
+     "name": "מרצ",
+     "seats": 6,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "raam",
+     "name": "רע\"מ",
+     "seats": 4,
+     "pct": 3.79,
+     "inBloc": false
+    }
+   ],
+   "bloc": {
+    "lists": [
+     "likud",
+     "shas",
+     "utj",
+     "rz"
+    ],
+    "source": {
+     "url": "https://www.timesofisrael.com/rivlin-reluctantly-taps-netanyahu-to-form-government-not-an-easy-moral-choice/",
+     "retrieved": "2026-10-27",
+     "note": "נתניהו 52 המלצות; ימינה (7) המליצה על בנט"
+    },
+    "seats": 52
+   },
+   "polls": [
+    {
+     "channel": "kan",
+     "pollster": "קנטאר",
+     "time": "22:00",
+     "kind": "initial",
+     "seats": {
+      "likud": 31,
+      "ya": 18,
+      "shas": 9,
+      "kl": 7,
+      "yamina": 7,
+      "labor": 7,
+      "utj": 7,
+      "yb": 7,
+      "rz": 7,
+      "joint": 8,
+      "nh": 6,
+      "meretz": 6,
+      "raam": 0
+     },
+     "sources": [
+      {
+       "url": "https://en.globes.co.il/en/article-exit-polls-give-netanyahu-block-majority-1001365137",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2021&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_Israeli_legislative_election",
+       "retrieved": "2026-10-27",
+       "note": "משמש כמוביל בלבד (ויקיפדיה), לא כמקור מאמת"
+      }
+     ],
+     "id": "2021-kan-init",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "likud": 1,
+       "ya": 1,
+       "shas": 0,
+       "kl": -1,
+       "yamina": 0,
+       "labor": 0,
+       "utj": 0,
+       "yb": 0,
+       "rz": 1,
+       "joint": 2,
+       "nh": 0,
+       "meretz": 0,
+       "raam": -4
+      },
+      "sumAbs": 10,
+      "misallocated": 5.0,
+      "within1": 11,
+      "n": 13,
+      "exact": 7,
+      "maeLarge": 1.0,
+      "maeSmall": 0.727,
+      "bloc": 54,
+      "blocActual": 52,
+      "blocErr": 2,
+      "thresholdMisses": [
+       "raam"
+      ]
+     }
+    },
+    {
+     "channel": "c12",
+     "pollster": "מדגם",
+     "time": "22:00",
+     "kind": "initial",
+     "seats": {
+      "likud": 31,
+      "ya": 18,
+      "shas": 9,
+      "kl": 7,
+      "yamina": 8,
+      "labor": 7,
+      "utj": 6,
+      "yb": 6,
+      "rz": 7,
+      "joint": 9,
+      "nh": 6,
+      "meretz": 6,
+      "raam": 0
+     },
+     "sources": [
+      {
+       "url": "https://en.globes.co.il/en/article-exit-polls-give-netanyahu-block-majority-1001365137",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2021&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_Israeli_legislative_election",
+       "retrieved": "2026-10-27",
+       "note": "משמש כמוביל בלבד (ויקיפדיה), לא כמקור מאמת"
+      }
+     ],
+     "id": "2021-c12-init",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "likud": 1,
+       "ya": 1,
+       "shas": 0,
+       "kl": -1,
+       "yamina": 1,
+       "labor": 0,
+       "utj": -1,
+       "yb": -1,
+       "rz": 1,
+       "joint": 3,
+       "nh": 0,
+       "meretz": 0,
+       "raam": -4
+      },
+      "sumAbs": 14,
+      "misallocated": 7.0,
+      "within1": 11,
+      "n": 13,
+      "exact": 4,
+      "maeLarge": 1.0,
+      "maeSmall": 1.091,
+      "bloc": 53,
+      "blocActual": 52,
+      "blocErr": 1,
+      "thresholdMisses": [
+       "raam"
+      ]
+     }
+    },
+    {
+     "channel": "c13",
+     "pollster": "קמיל פוקס",
+     "time": "22:00",
+     "kind": "initial",
+     "seats": {
+      "likud": 33,
+      "ya": 16,
+      "shas": 8,
+      "kl": 8,
+      "yamina": 7,
+      "labor": 7,
+      "utj": 7,
+      "yb": 8,
+      "rz": 6,
+      "joint": 8,
+      "nh": 5,
+      "meretz": 7,
+      "raam": 0
+     },
+     "sources": [
+      {
+       "url": "https://en.globes.co.il/en/article-exit-polls-give-netanyahu-block-majority-1001365137",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2021&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_Israeli_legislative_election",
+       "retrieved": "2026-10-27",
+       "note": "משמש כמוביל בלבד (ויקיפדיה), לא כמקור מאמת"
+      }
+     ],
+     "id": "2021-c13-init",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "likud": 3,
+       "ya": -1,
+       "shas": -1,
+       "kl": 0,
+       "yamina": 0,
+       "labor": 0,
+       "utj": 0,
+       "yb": 1,
+       "rz": 0,
+       "joint": 2,
+       "nh": -1,
+       "meretz": 1,
+       "raam": -4
+      },
+      "sumAbs": 14,
+      "misallocated": 7.0,
+      "within1": 10,
+      "n": 13,
+      "exact": 5,
+      "maeLarge": 2.0,
+      "maeSmall": 0.909,
+      "bloc": 54,
+      "blocActual": 52,
+      "blocErr": 2,
+      "thresholdMisses": [
+       "raam"
+      ]
+     }
+    },
+    {
+     "channel": "c13",
+     "pollster": "קמיל פוקס",
+     "time": "23:00",
+     "kind": "update",
+     "seats": {
+      "likud": 32,
+      "ya": 16,
+      "shas": 8,
+      "kl": 8,
+      "yamina": 7,
+      "labor": 7,
+      "utj": 7,
+      "yb": 8,
+      "rz": 7,
+      "joint": 8,
+      "nh": 5,
+      "meretz": 7,
+      "raam": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2021&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      }
+     ],
+     "id": "2021-c13-u3",
+     "status": "single-source",
+     "metrics": {
+      "diff": {
+       "likud": 2,
+       "ya": -1,
+       "shas": -1,
+       "kl": 0,
+       "yamina": 0,
+       "labor": 0,
+       "utj": 0,
+       "yb": 1,
+       "rz": 1,
+       "joint": 2,
+       "nh": -1,
+       "meretz": 1,
+       "raam": -4
+      },
+      "sumAbs": 14,
+      "misallocated": 7.0,
+      "within1": 10,
+      "n": 13,
+      "exact": 4,
+      "maeLarge": 1.5,
+      "maeSmall": 1.0,
+      "bloc": 54,
+      "blocActual": 52,
+      "blocErr": 2,
+      "thresholdMisses": [
+       "raam"
+      ]
+     }
+    },
+    {
+     "channel": "c12",
+     "pollster": "מדגם",
+     "time": "24:00",
+     "kind": "update",
+     "seats": {
+      "likud": 31,
+      "ya": 18,
+      "shas": 8,
+      "kl": 8,
+      "yamina": 8,
+      "labor": 7,
+      "utj": 6,
+      "yb": 5,
+      "rz": 7,
+      "joint": 9,
+      "nh": 6,
+      "meretz": 7,
+      "raam": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2021&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      }
+     ],
+     "id": "2021-c12-u4",
+     "status": "single-source",
+     "metrics": {
+      "diff": {
+       "likud": 1,
+       "ya": 1,
+       "shas": -1,
+       "kl": 0,
+       "yamina": 1,
+       "labor": 0,
+       "utj": -1,
+       "yb": -2,
+       "rz": 1,
+       "joint": 3,
+       "nh": 0,
+       "meretz": 1,
+       "raam": -4
+      },
+      "sumAbs": 16,
+      "misallocated": 8.0,
+      "within1": 10,
+      "n": 13,
+      "exact": 3,
+      "maeLarge": 1.0,
+      "maeSmall": 1.273,
+      "bloc": 52,
+      "blocActual": 52,
+      "blocErr": 0,
+      "thresholdMisses": [
+       "raam"
+      ]
+     }
+    },
+    {
+     "channel": "c12",
+     "pollster": "מדגם",
+     "time": "00:45",
+     "kind": "update",
+     "seats": {
+      "likud": 30,
+      "ya": 18,
+      "shas": 9,
+      "kl": 7,
+      "yamina": 7,
+      "labor": 7,
+      "utj": 6,
+      "yb": 6,
+      "rz": 7,
+      "joint": 10,
+      "nh": 6,
+      "meretz": 7,
+      "raam": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2021&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      }
+     ],
+     "id": "2021-c12-u5",
+     "status": "single-source",
+     "metrics": {
+      "diff": {
+       "likud": 0,
+       "ya": 1,
+       "shas": 0,
+       "kl": -1,
+       "yamina": 0,
+       "labor": 0,
+       "utj": -1,
+       "yb": -1,
+       "rz": 1,
+       "joint": 4,
+       "nh": 0,
+       "meretz": 1,
+       "raam": -4
+      },
+      "sumAbs": 14,
+      "misallocated": 7.0,
+      "within1": 11,
+      "n": 13,
+      "exact": 5,
+      "maeLarge": 0.5,
+      "maeSmall": 1.182,
+      "bloc": 52,
+      "blocActual": 52,
+      "blocErr": 0,
+      "thresholdMisses": [
+       "raam"
+      ]
+     }
+    },
+    {
+     "channel": "c13",
+     "pollster": "קמיל פוקס",
+     "time": "01:00",
+     "kind": "update",
+     "seats": {
+      "likud": 31,
+      "ya": 17,
+      "shas": 9,
+      "kl": 8,
+      "yamina": 7,
+      "labor": 7,
+      "utj": 7,
+      "yb": 7,
+      "rz": 6,
+      "joint": 8,
+      "nh": 6,
+      "meretz": 7,
+      "raam": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2021&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      }
+     ],
+     "id": "2021-c13-u6",
+     "status": "single-source",
+     "metrics": {
+      "diff": {
+       "likud": 1,
+       "ya": 0,
+       "shas": 0,
+       "kl": 0,
+       "yamina": 0,
+       "labor": 0,
+       "utj": 0,
+       "yb": 0,
+       "rz": 0,
+       "joint": 2,
+       "nh": 0,
+       "meretz": 1,
+       "raam": -4
+      },
+      "sumAbs": 8,
+      "misallocated": 4.0,
+      "within1": 11,
+      "n": 13,
+      "exact": 9,
+      "maeLarge": 0.5,
+      "maeSmall": 0.636,
+      "bloc": 53,
+      "blocActual": 52,
+      "blocErr": 1,
+      "thresholdMisses": [
+       "raam"
+      ]
+     }
+    },
+    {
+     "channel": "c12",
+     "pollster": "מדגם",
+     "time": "01:15",
+     "kind": "update",
+     "seats": {
+      "likud": 30,
+      "ya": 18,
+      "shas": 9,
+      "kl": 7,
+      "yamina": 7,
+      "labor": 8,
+      "utj": 6,
+      "yb": 7,
+      "rz": 7,
+      "joint": 9,
+      "nh": 6,
+      "meretz": 6,
+      "raam": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2021&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      }
+     ],
+     "id": "2021-c12-u7",
+     "status": "single-source",
+     "metrics": {
+      "diff": {
+       "likud": 0,
+       "ya": 1,
+       "shas": 0,
+       "kl": -1,
+       "yamina": 0,
+       "labor": 1,
+       "utj": -1,
+       "yb": 0,
+       "rz": 1,
+       "joint": 3,
+       "nh": 0,
+       "meretz": 0,
+       "raam": -4
+      },
+      "sumAbs": 12,
+      "misallocated": 6.0,
+      "within1": 11,
+      "n": 13,
+      "exact": 6,
+      "maeLarge": 0.5,
+      "maeSmall": 1.0,
+      "bloc": 52,
+      "blocActual": 52,
+      "blocErr": 0,
+      "thresholdMisses": [
+       "raam"
+      ]
+     }
+    },
+    {
+     "channel": "kan",
+     "pollster": "קנטאר",
+     "time": "01:15",
+     "kind": "update",
+     "seats": {
+      "likud": 30,
+      "ya": 18,
+      "shas": 9,
+      "kl": 8,
+      "yamina": 7,
+      "labor": 7,
+      "utj": 7,
+      "yb": 7,
+      "rz": 7,
+      "joint": 8,
+      "nh": 6,
+      "meretz": 6,
+      "raam": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2021&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_Israeli_legislative_election",
+       "retrieved": "2026-10-27",
+       "note": "משמש כמוביל בלבד (ויקיפדיה), לא כמקור מאמת; מופיע שם כמדגם כאן"
+      }
+     ],
+     "id": "2021-kan-u8",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "likud": 0,
+       "ya": 1,
+       "shas": 0,
+       "kl": 0,
+       "yamina": 0,
+       "labor": 0,
+       "utj": 0,
+       "yb": 0,
+       "rz": 1,
+       "joint": 2,
+       "nh": 0,
+       "meretz": 0,
+       "raam": -4
+      },
+      "sumAbs": 8,
+      "misallocated": 4.0,
+      "within1": 11,
+      "n": 13,
+      "exact": 9,
+      "maeLarge": 0.5,
+      "maeSmall": 0.636,
+      "bloc": 53,
+      "blocActual": 52,
+      "blocErr": 1,
+      "thresholdMisses": [
+       "raam"
+      ]
+     }
+    }
+   ],
+   "partial": []
+  },
+  {
+   "id": "2022",
+   "knesset": 25,
+   "date": "2022-11-01",
+   "label": "נובמבר 2022 (הכנסת ה-25)",
+   "threshold": 3.25,
+   "cec": {
+    "url": "https://votes25.bechirot.gov.il/nationalresults",
+    "retrieved": "2026-10-27",
+    "note": "תוצאות רשמיות של ועדת הבחירות המרכזית"
+   },
+   "lists": [
+    {
+     "id": "likud",
+     "name": "הליכוד",
+     "seats": 32,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "ya",
+     "name": "יש עתיד",
+     "seats": 24,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "rz",
+     "name": "הציונות הדתית",
+     "seats": 14,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "nu",
+     "name": "המחנה הממלכתי",
+     "seats": 12,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "shas",
+     "name": "ש\"ס",
+     "seats": 11,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "utj",
+     "name": "יהדות התורה",
+     "seats": 7,
+     "pct": null,
+     "inBloc": true
+    },
+    {
+     "id": "yb",
+     "name": "ישראל ביתנו",
+     "seats": 6,
+     "pct": null,
+     "inBloc": false
+    },
+    {
+     "id": "raam",
+     "name": "רע\"מ",
+     "seats": 5,
+     "pct": 4.07,
+     "inBloc": false
+    },
+    {
+     "id": "ht",
+     "name": "חד\"ש-תע\"ל",
+     "seats": 5,
+     "pct": 3.75,
+     "inBloc": false
+    },
+    {
+     "id": "labor",
+     "name": "העבודה",
+     "seats": 4,
+     "pct": 3.69,
+     "inBloc": false
+    },
+    {
+     "id": "meretz",
+     "name": "מרצ",
+     "seats": 0,
+     "pct": 3.16,
+     "inBloc": false
+    },
+    {
+     "id": "balad",
+     "name": "בל\"ד",
+     "seats": 0,
+     "pct": 2.91,
+     "inBloc": false
+    },
+    {
+     "id": "jh",
+     "name": "הבית היהודי",
+     "seats": 0,
+     "pct": 1.19,
+     "inBloc": false
+    }
+   ],
+   "bloc": {
+    "lists": [
+     "likud",
+     "rz",
+     "shas",
+     "utj"
+    ],
+    "source": {
+     "url": "https://www.aljazeera.com/news/2022/11/11/netanyahu-mandated-to-form-new-israeli-government",
+     "retrieved": "2026-10-27",
+     "note": "נתניהו 64 המלצות"
+    },
+    "seats": 64
+   },
+   "polls": [
+    {
+     "channel": "kan",
+     "pollster": "קנטאר",
+     "time": "22:00",
+     "kind": "initial",
+     "seats": {
+      "likud": 30,
+      "ya": 22,
+      "rz": 15,
+      "nu": 13,
+      "shas": 10,
+      "utj": 7,
+      "yb": 5,
+      "raam": 5,
+      "ht": 4,
+      "labor": 5,
+      "meretz": 4,
+      "balad": 0,
+      "jh": 0
+     },
+     "sources": [
+      {
+       "url": "https://elections.walla.co.il/item/3538090",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.jdn.co.il/news/politics/1850443/",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://hm-news.co.il/news-flash/320586/",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2022&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      }
+     ],
+     "id": "2022-kan-init",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "likud": -2,
+       "ya": -2,
+       "rz": 1,
+       "nu": 1,
+       "shas": -1,
+       "utj": 0,
+       "yb": -1,
+       "raam": 0,
+       "ht": -1,
+       "labor": 1,
+       "meretz": 4,
+       "balad": 0,
+       "jh": 0
+      },
+      "sumAbs": 14,
+      "misallocated": 7.0,
+      "within1": 10,
+      "n": 13,
+      "exact": 4,
+      "maeLarge": 1.4,
+      "maeSmall": 0.875,
+      "bloc": 62,
+      "blocActual": 64,
+      "blocErr": -2,
+      "thresholdMisses": [
+       "meretz"
+      ]
+     }
+    },
+    {
+     "channel": "c12",
+     "pollster": "מדגם",
+     "time": "22:00",
+     "kind": "initial",
+     "seats": {
+      "likud": 30,
+      "ya": 24,
+      "rz": 14,
+      "nu": 11,
+      "shas": 10,
+      "utj": 7,
+      "yb": 4,
+      "raam": 5,
+      "ht": 4,
+      "labor": 6,
+      "meretz": 5,
+      "balad": 0,
+      "jh": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2022&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.jdn.co.il/news/politics/1850443/",
+       "retrieved": "2026-10-27",
+       "note": "הגרסה הראשונית משוחזרת מתיאור השינויים בכתבה (ישראל ביתנו +1 על חשבון מרצ; חד\"ש +1 על חשבון העבודה)"
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2022_Israeli_legislative_election",
+       "retrieved": "2026-10-27",
+       "note": "משמש כמוביל בלבד (ויקיפדיה), לא כמקור מאמת"
+      }
+     ],
+     "id": "2022-c12-init",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "likud": -2,
+       "ya": 0,
+       "rz": 0,
+       "nu": -1,
+       "shas": -1,
+       "utj": 0,
+       "yb": -2,
+       "raam": 0,
+       "ht": -1,
+       "labor": 2,
+       "meretz": 5,
+       "balad": 0,
+       "jh": 0
+      },
+      "sumAbs": 14,
+      "misallocated": 7.0,
+      "within1": 9,
+      "n": 13,
+      "exact": 6,
+      "maeLarge": 0.8,
+      "maeSmall": 1.25,
+      "bloc": 61,
+      "blocActual": 64,
+      "blocErr": -3,
+      "thresholdMisses": [
+       "meretz"
+      ]
+     }
+    },
+    {
+     "channel": "c13",
+     "pollster": "קמיל פוקס",
+     "time": "22:00",
+     "kind": "initial",
+     "seats": {
+      "likud": 31,
+      "ya": 24,
+      "rz": 14,
+      "nu": 12,
+      "shas": 10,
+      "utj": 7,
+      "yb": 4,
+      "raam": 5,
+      "ht": 4,
+      "labor": 5,
+      "meretz": 4,
+      "balad": 0,
+      "jh": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2022&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.jdn.co.il/news/politics/1850443/",
+       "retrieved": "2026-10-27",
+       "note": "הגרסה הראשונית משוחזרת מתיאור השינויים בכתבה (בתחילת הערב יש עתיד 24, ישראל ביתנו 4)"
+      },
+      {
+       "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2022_Israeli_legislative_election",
+       "retrieved": "2026-10-27",
+       "note": "משמש כמוביל בלבד (ויקיפדיה), לא כמקור מאמת"
+      }
+     ],
+     "id": "2022-c13-init",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "likud": -1,
+       "ya": 0,
+       "rz": 0,
+       "nu": 0,
+       "shas": -1,
+       "utj": 0,
+       "yb": -2,
+       "raam": 0,
+       "ht": -1,
+       "labor": 1,
+       "meretz": 4,
+       "balad": 0,
+       "jh": 0
+      },
+      "sumAbs": 10,
+      "misallocated": 5.0,
+      "within1": 11,
+      "n": 13,
+      "exact": 7,
+      "maeLarge": 0.4,
+      "maeSmall": 1.0,
+      "bloc": 62,
+      "blocActual": 64,
+      "blocErr": -2,
+      "thresholdMisses": [
+       "meretz"
+      ]
+     }
+    },
+    {
+     "channel": "c14",
+     "pollster": "דיירקט פולס",
+     "time": "22:00",
+     "kind": "initial",
+     "seats": {
+      "likud": 31,
+      "ya": 23,
+      "rz": 12,
+      "nu": 11,
+      "shas": 10,
+      "utj": 8,
+      "yb": 6,
+      "raam": 4,
+      "ht": 4,
+      "labor": 6,
+      "meretz": 5,
+      "balad": 0,
+      "jh": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.c14.co.il/article/709063",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://elections.walla.co.il/item/3538090",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.israelnationalnews.com/news/362084",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.uzit.co.il/inside_page_base.asp?categoryName=polls2022&hebCategoryName=%D7%A1%D7%A7%D7%A8%D7%99%D7%9D",
+       "retrieved": "2026-10-27",
+       "note": ""
+      }
+     ],
+     "id": "2022-c14-init",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "likud": -1,
+       "ya": -1,
+       "rz": -2,
+       "nu": -1,
+       "shas": -1,
+       "utj": 1,
+       "yb": 0,
+       "raam": -1,
+       "ht": -1,
+       "labor": 2,
+       "meretz": 5,
+       "balad": 0,
+       "jh": 0
+      },
+      "sumAbs": 16,
+      "misallocated": 8.0,
+      "within1": 10,
+      "n": 13,
+      "exact": 3,
+      "maeLarge": 1.2,
+      "maeSmall": 1.25,
+      "bloc": 61,
+      "blocActual": 64,
+      "blocErr": -3,
+      "thresholdMisses": [
+       "meretz"
+      ]
+     }
+    },
+    {
+     "channel": "c12",
+     "pollster": "מדגם",
+     "time": "עדכון ראשון (שעה לא צוינה)",
+     "kind": "update",
+     "seats": {
+      "likud": 30,
+      "ya": 24,
+      "rz": 14,
+      "nu": 11,
+      "shas": 10,
+      "utj": 7,
+      "yb": 5,
+      "raam": 5,
+      "ht": 5,
+      "labor": 5,
+      "meretz": 4,
+      "balad": 0,
+      "jh": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.jdn.co.il/news/politics/1850443/",
+       "retrieved": "2026-10-27",
+       "note": ""
+      }
+     ],
+     "id": "2022-c12-u4",
+     "status": "single-source",
+     "metrics": {
+      "diff": {
+       "likud": -2,
+       "ya": 0,
+       "rz": 0,
+       "nu": -1,
+       "shas": -1,
+       "utj": 0,
+       "yb": -1,
+       "raam": 0,
+       "ht": 0,
+       "labor": 1,
+       "meretz": 4,
+       "balad": 0,
+       "jh": 0
+      },
+      "sumAbs": 10,
+      "misallocated": 5.0,
+      "within1": 11,
+      "n": 13,
+      "exact": 7,
+      "maeLarge": 0.8,
+      "maeSmall": 0.75,
+      "bloc": 61,
+      "blocActual": 64,
+      "blocErr": -3,
+      "thresholdMisses": [
+       "meretz"
+      ]
+     }
+    },
+    {
+     "channel": "c12",
+     "pollster": "מדגם",
+     "time": "כ-02:00",
+     "kind": "update",
+     "seats": {
+      "likud": 31,
+      "ya": 23,
+      "rz": 14,
+      "nu": 11,
+      "shas": 10,
+      "utj": 7,
+      "yb": 5,
+      "raam": 5,
+      "ht": 5,
+      "labor": 5,
+      "meretz": 4,
+      "balad": 0,
+      "jh": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.jdn.co.il/news/politics/1850443/",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.israelnationalnews.com/news/362084",
+       "retrieved": "2026-10-27",
+       "note": "הכתבה עודכנה ב-05:06"
+      }
+     ],
+     "id": "2022-c12-u5",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "likud": -1,
+       "ya": -1,
+       "rz": 0,
+       "nu": -1,
+       "shas": -1,
+       "utj": 0,
+       "yb": -1,
+       "raam": 0,
+       "ht": 0,
+       "labor": 1,
+       "meretz": 4,
+       "balad": 0,
+       "jh": 0
+      },
+      "sumAbs": 10,
+      "misallocated": 5.0,
+      "within1": 12,
+      "n": 13,
+      "exact": 6,
+      "maeLarge": 0.8,
+      "maeSmall": 0.75,
+      "bloc": 62,
+      "blocActual": 64,
+      "blocErr": -2,
+      "thresholdMisses": [
+       "meretz"
+      ]
+     }
+    },
+    {
+     "channel": "c13",
+     "pollster": "קמיל פוקס",
+     "time": "עדכון ראשון (שעה לא צוינה)",
+     "kind": "update",
+     "seats": {
+      "likud": 31,
+      "ya": 23,
+      "rz": 14,
+      "nu": 12,
+      "shas": 10,
+      "utj": 7,
+      "yb": 5,
+      "raam": 5,
+      "ht": 4,
+      "labor": 5,
+      "meretz": 4,
+      "balad": 0,
+      "jh": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.jdn.co.il/news/politics/1850443/",
+       "retrieved": "2026-10-27",
+       "note": ""
+      }
+     ],
+     "id": "2022-c13-u6",
+     "status": "single-source",
+     "metrics": {
+      "diff": {
+       "likud": -1,
+       "ya": -1,
+       "rz": 0,
+       "nu": 0,
+       "shas": -1,
+       "utj": 0,
+       "yb": -1,
+       "raam": 0,
+       "ht": -1,
+       "labor": 1,
+       "meretz": 4,
+       "balad": 0,
+       "jh": 0
+      },
+      "sumAbs": 10,
+      "misallocated": 5.0,
+      "within1": 12,
+      "n": 13,
+      "exact": 6,
+      "maeLarge": 0.6,
+      "maeSmall": 0.875,
+      "bloc": 62,
+      "blocActual": 64,
+      "blocErr": -2,
+      "thresholdMisses": [
+       "meretz"
+      ]
+     }
+    },
+    {
+     "channel": "c13",
+     "pollster": "קמיל פוקס",
+     "time": "01:00",
+     "kind": "update",
+     "seats": {
+      "likud": 32,
+      "ya": 23,
+      "rz": 13,
+      "nu": 11,
+      "shas": 10,
+      "utj": 7,
+      "yb": 6,
+      "raam": 4,
+      "ht": 5,
+      "labor": 5,
+      "meretz": 4,
+      "balad": 0,
+      "jh": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.jdn.co.il/news/politics/1850443/",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://www.israelnationalnews.com/news/362084",
+       "retrieved": "2026-10-27",
+       "note": ""
+      },
+      {
+       "url": "https://elections.walla.co.il/item/3538090",
+       "retrieved": "2026-10-27",
+       "note": "מספר המושבים של ישראל ביתנו חסר בטקסט"
+      }
+     ],
+     "id": "2022-c13-u7",
+     "status": "verified",
+     "metrics": {
+      "diff": {
+       "likud": 0,
+       "ya": -1,
+       "rz": -1,
+       "nu": -1,
+       "shas": -1,
+       "utj": 0,
+       "yb": 0,
+       "raam": -1,
+       "ht": 0,
+       "labor": 1,
+       "meretz": 4,
+       "balad": 0,
+       "jh": 0
+      },
+      "sumAbs": 10,
+      "misallocated": 5.0,
+      "within1": 12,
+      "n": 13,
+      "exact": 6,
+      "maeLarge": 0.8,
+      "maeSmall": 0.75,
+      "bloc": 62,
+      "blocActual": 64,
+      "blocErr": -2,
+      "thresholdMisses": [
+       "meretz"
+      ]
+     }
+    },
+    {
+     "channel": "kan",
+     "pollster": "קנטאר",
+     "time": "עדכון (שעה לא צוינה)",
+     "kind": "update",
+     "seats": {
+      "likud": 30,
+      "ya": 23,
+      "rz": 15,
+      "nu": 12,
+      "shas": 10,
+      "utj": 7,
+      "yb": 5,
+      "raam": 5,
+      "ht": 4,
+      "labor": 5,
+      "meretz": 4,
+      "balad": 0,
+      "jh": 0
+     },
+     "sources": [
+      {
+       "url": "https://www.israelnationalnews.com/news/362084",
+       "retrieved": "2026-10-27",
+       "note": "הכתבה עודכנה ב-05:06"
+      }
+     ],
+     "id": "2022-kan-u8",
+     "status": "single-source",
+     "metrics": {
+      "diff": {
+       "likud": -2,
+       "ya": -1,
+       "rz": 1,
+       "nu": 0,
+       "shas": -1,
+       "utj": 0,
+       "yb": -1,
+       "raam": 0,
+       "ht": -1,
+       "labor": 1,
+       "meretz": 4,
+       "balad": 0,
+       "jh": 0
+      },
+      "sumAbs": 12,
+      "misallocated": 6.0,
+      "within1": 11,
+      "n": 13,
+      "exact": 5,
+      "maeLarge": 1.0,
+      "maeSmall": 0.875,
+      "bloc": 62,
+      "blocActual": 64,
+      "blocErr": -2,
+      "thresholdMisses": [
+       "meretz"
+      ]
+     }
+    }
+   ],
+   "partial": []
+  }
+ ],
+ "y2026": {
+  "date": "2026-10-27",
+  "knesset": 26,
+  "label": "אוקטובר 2026 (הכנסת ה-26)",
+  "threshold": 3.25,
+  "status": "awaiting",
+  "note": "המדגמים יפורסמו לא לפני 22:00 ב-27.10.2026. השורות יתווספו כאן אחרי הפרסום, ולצדן התוצאות כשיפורסמו.",
+  "lists": [],
+  "polls": [],
+  "results": null
+ },
+ "summary": {
+  "nInitial": 16,
+  "meanMisallocated": 5.125,
+  "within1Share": 0.8396,
+  "byChannel": {
+   "kan": {
+    "n": 5,
+    "mean": 4.8,
+    "min": 2.0,
+    "max": 7.0
+   },
+   "c12": {
+    "n": 5,
+    "mean": 5.0,
+    "min": 2.0,
+    "max": 7.0
+   },
+   "c13": {
+    "n": 5,
+    "mean": 5.0,
+    "min": 2.0,
+    "max": 8.0
+   },
+   "c14": {
+    "n": 1,
+    "mean": 8.0,
+    "min": 8.0,
+    "max": 8.0
+   }
+  }
+ }
+}
