@@ -83,6 +83,7 @@ Source: /workspace/elections-2026/platforms.md (canonical). Repo: dudidd-wq/elec
 - [x] 26.10 09:10 routine: nothing new (poll ban until 27.10 22:00; CEC lists page updated 25.10 shows only Blue&White + Ahi withdrawn, both already handled; no mergers). No push.
 - [x] 26.10 19:07 routine: nothing new (poll ban until 27.10 22:00; 36 lists on ballot, only Blue&White + Ahi withdrawn, both handled; Winter/Leitner still running – Winter 26.10 said he'll recommend Netanyahu (campaign remark, not a platform doc) – no site change). No push. Next run 27.10 09:00; exit polls from 22:00 → 28.10 09:00 run.
 - [x] 27.10 09:05 routine (election day): nothing new (poll ban until 22:00; HaKahal (רץ) announced withdrawal 26.10 – not one of the 13 lists; Winter denied withdrawal rumours, Amcha still running). No site change, no push. Next: 27.10 19:00 run (before exit polls) → exit polls go in at the 28.10 09:00 run (or later tonight).
+- [x] 27.10 19:10 routine (election day): nothing new (poll ban until 22:00; no list changes; CEC turnout 66.7% at 18:00 – record, partial, not added). No site change. Exit polls 22:00 → next run 28.10 09:00 (add via tools/add_exitpoll_2026.py + polls/results).
 - [x] 25.10 coalition builder #/coalition ("בנה קואליציה"). SW v21-2026-10-25b.
 
 ## Coalition builder (#/coalition, data/coalition.json)
