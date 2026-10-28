@@ -9,14 +9,21 @@ List ids/names come from data/polls.json (parties), so the 2026 table uses the s
   set-results --seats likud=..,... --source URL --label "תוצאות רשמיות (סופיות)" \
              [--short "תוצאה"] [--bloc likud,shas,...] [--bloc-source URL] [--note "..."]
              (may be called again until freeze, e.g. partial -> final count; the old one is kept in resultsHistory)
+  set-count  --label "..." --as-of "2026-10-28 07:57" --pct likud=20.68,yashar=16.71,... --source URL [--source URL2]
+             [--ballots 6881] [--valid 2937354] [--turnout 77.7] [--voters N] [--eligible N] [--note "..."]
+             partial CEC vote count WITHOUT a seat allocation (vote shares only; no error metrics are computed from it).
+             May be called again; the previous count is kept in countHistory.
   freeze     marks y2026 frozen (do this once CEC publishes the final certified results)
   show       prints y2026 summary + metrics vs results
+Channels: meta.channels (kan, c12, c13, c14) plus the 2026-only channels in EXTRA_2026 (i24, c16), which are
+recorded in y2026.channels and are NOT part of the 2019–2022 comparison.
 Lists not named in --seats are recorded as 0 (did not pass the threshold in that poll). Seats must sum to 120.
 """
 import argparse, datetime, json, os, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 P = os.path.join(ROOT, 'data', 'exitpolls.json')
 TODAY = datetime.date.today().isoformat()
+EXTRA_2026 = {'i24': 'i24NEWS', 'c16': 'ערוץ 16'}  # 2026-only channels (no 2019–2022 history)
 
 def load():
     with open(P, encoding='utf-8') as f: return json.load(f)
@@ -44,8 +51,8 @@ def metrics(lists, actual, seats, bloc):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('cmd', choices=['add-poll', 'set-results', 'freeze', 'show'])
-    for a in ['--channel', '--pollster', '--time', '--kind', '--seats', '--note', '--label', '--short', '--bloc', '--bloc-source']: ap.add_argument(a)
+    ap.add_argument('cmd', choices=['add-poll', 'set-results', 'set-count', 'freeze', 'show'])
+    for a in ['--channel', '--pollster', '--time', '--kind', '--seats', '--note', '--label', '--short', '--bloc', '--bloc-source', '--as-of', '--pct', '--ballots', '--valid', '--turnout', '--voters', '--eligible']: ap.add_argument(a)
     ap.add_argument('--source', action='append', default=[])
     a = ap.parse_args()
     d = load(); y = d['y2026']
@@ -60,7 +67,8 @@ def main():
         y['lists'] = [{'id': p['id'], 'name': p['name']} for p in parties()]
     ids = [l['id'] for l in y['lists']]
     if a.cmd == 'add-poll':
-        if a.channel not in d['meta']['channels']: sys.exit('unknown channel %r (add it to meta.channels in tools/build_exitpolls.py)' % a.channel)
+        if a.channel in EXTRA_2026: y.setdefault('channels', {})[a.channel] = EXTRA_2026[a.channel]
+        elif a.channel not in d['meta']['channels']: sys.exit('unknown channel %r (known: %s)' % (a.channel, ','.join(list(d['meta']['channels']) + list(EXTRA_2026))))
         if a.kind not in ('initial', 'update') or not a.time or not a.pollster: sys.exit('--kind initial|update, --time and --pollster are required')
         if a.kind == 'initial' and any(p['channel'] == a.channel and p['kind'] == 'initial' for p in y['polls']): sys.exit('initial poll for this channel already recorded (rows are never replaced)')
         n = sum(p['channel'] == a.channel for p in y['polls'])
@@ -81,10 +89,26 @@ def main():
         y['results'] = r; y['status'] = 'results'
         y['note'] = 'המדגמים של 27.10.2026 מול ' + a.label + '. המדדים מחושבים באותן נוסחאות כמו ב-2019–2022.'
         print('results set')
+    elif a.cmd == 'set-count':
+        if not a.label or not a.as_of or not a.pct: sys.exit('--label, --as-of and --pct are required')
+        pct = {}
+        for kv in a.pct.split(','):
+            k, v = kv.split('='); k = k.strip()
+            if k not in ids: sys.exit('unknown list id %r' % k)
+            pct[k] = float(v)
+        if sum(pct.values()) > 100.0001: sys.exit('vote shares sum to more than 100')
+        c = {'label': a.label, 'asOf': a.as_of, 'pct': pct, 'threshold': y.get('threshold', 3.25), 'sources': srcs(a.source), 'note': a.note or ''}
+        for k, v in (('ballots', a.ballots), ('validVotes', a.valid), ('voters', a.voters), ('eligible', a.eligible)):
+            if v: c[k] = int(v)
+        if a.turnout: c['turnout'] = float(a.turnout)
+        if y.get('count'): y.setdefault('countHistory', []).append(y['count'])
+        y['count'] = c
+        print('count set')
     elif a.cmd == 'freeze':
         if not y.get('results'): sys.exit('no results yet; freeze only after the final certified results')
         y['status'] = 'frozen'; y['frozenAt'] = datetime.datetime.now().isoformat(timespec='minutes')
         print('frozen')
+    y['updatedAt'] = datetime.datetime.now().astimezone().isoformat(timespec='minutes')
     save(d)
 
 if __name__ == '__main__': main()
