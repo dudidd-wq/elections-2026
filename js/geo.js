@@ -157,7 +157,7 @@
     if (!needSh(c)) return loading();
     var S = SH[c], ks = IX.elections.map(function (e) { return e.k; }).filter(function (k) { return S.e[k]; });
     var k = ks.indexOf(+q.k) >= 0 ? +q.k : ks[ks.length - 1], e = elOf(k), X = S.e[k], env = isEnv(c);
-    var h = '<p><a href="' + hashFor('', { k: k }) + '">→ כל היישובים</a></p>';
+    var h = '<p><a href="' + hashFor('', { k: k }) + '">→ כל היישובים</a>' + (env ? '' : ' · <a href="#/cities/' + c + '" data-geo-k26>' + esc(S.n) + ' כולל 2026 (חלקי, לא סופי ולא רשמי)</a> · <a href="#/cities/vs?a=' + c + '&amp;b=nat">השוואה לתוצאה הארצית, 2019–2026</a>') + '</p>';
     if (env) h += '<p class="note"><b>זה לא יישוב.</b> "מעטפות חיצוניות" היא השורה שבה ועדת הבחירות מרכזת את הקולות במעטפות כפולות: חיילים, סגל דיפלומטי, אסירים, מאושפזים, אנשי צוות הקלפיות, ובוחרים בקלפיות נגישות או מיוחדות. אין לה בעלי זכות בחירה משלה, ולכן אין לה אחוז הצבעה. באפריל 2019 היא פורסמה בסמל 99999, ובשאר המערכות בסמל 9999.</p>';
     if (ks.length < IX.elections.length) h += '<p class="note">היישוב מופיע בנתונים רק ב-' + ks.length + ' מתוך ' + IX.elections.length + ' מערכות: ' + ks.map(function (kk) { return esc(lbl(elOf(kk))); }).join(', ') + '. יישוב יכול להיעדר כשהוא חדש, כשהוא אוחד עם יישוב אחר, או כשהקלפיות שלו נרשמו תחת יישוב אחר.</p>';
     // turnout over time

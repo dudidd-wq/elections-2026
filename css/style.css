@@ -778,3 +778,10 @@ html.ux-lock{overflow:hidden}
 @media (max-width:759px){.pbar-a{width:100%;flex-wrap:nowrap}.pbar-a>*{flex:1 1 0;min-width:0}.pbar-a .ibtn{width:100%}.dl-m ul{inset-inline-end:0;inset-inline-start:auto}}
 .pbar-a{align-items:center}.pbar-a>.dl-m{margin:0;padding:0;border:0;background:none}
 @media (max-width:359px){.brand{gap:7px}.brand-mark{width:24px;height:24px}.brand-t{font-size:.9rem}.top .ibtn{min-width:44px;padding:0 8px}}
+/* #/cities compare (v35): grouped rows per list (city A, city B, difference) */
+.ct-vs-all tr.ct-dr th,.ct-vs-all tr.ct-dr td{border-bottom:1px solid var(--line2,var(--line));color:var(--ink2)}
+.ct-vs-all td:nth-child(2){white-space:nowrap}
+.ct-ncl{margin:4px 0 0;padding-inline-start:1.2em}
+.ct-vs-all th.ct-rep{font-size:0}
+.ct-vs-all tbody th{white-space:normal;min-width:6.5rem;max-width:10rem}
+.ct-vs-all tr[data-ct-s="a"] th,.ct-vs-all tr[data-ct-s="a"] td{border-top:1px solid var(--line2)}

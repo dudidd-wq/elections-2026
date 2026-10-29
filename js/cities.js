@@ -111,13 +111,13 @@
   }
 
   // ---------- simple SVG trend chart (neutral ink; city solid, national dashed)
-  function spark(title, pts, natPts, fmt) { // pts: [{k, v|null}]
+  function spark(title, pts, natPts, fmt, bName) { // pts: [{k, v|null}]; natPts: dashed comparison line (national by default)
     var W = 300, H = 120, L = 34, R = 10, T = 12, B = 22, all = pts.concat(natPts).filter(function (p) { return p.v != null; });
     if (!all.length) return '';
     var mx = Math.max.apply(null, all.map(function (p) { return p.v; })), top = mx <= 0 ? 0.1 : Math.ceil(mx * 10 / 0.95) / 10; if (top > 1) top = 1;
     var x = function (i) { return L + i * (W - L - R) / (KS.length - 1); }, y = function (v) { return T + (H - T - B) * (1 - v / top); };
     function path(ps) { var d = '', on = false; ps.forEach(function (p) { var i = KS.indexOf(p.k); if (p.v == null) { on = false; return; } d += (on ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(p.v).toFixed(1); on = true; }); return d; }
-    var desc = pts.map(function (p) { return 'הכנסת ה-' + p.k + ': ' + (p.v == null ? 'אין' : fmt(p.v)); }).join('; ') + '. ארצי: ' + natPts.map(function (p) { return p.k + ' ' + (p.v == null ? 'אין' : fmt(p.v)); }).join('; ');
+    var desc = pts.map(function (p) { return 'הכנסת ה-' + p.k + ': ' + (p.v == null ? 'אין' : fmt(p.v)); }).join('; ') + '. ' + (bName || 'ארצי') + ': ' + natPts.map(function (p) { return p.k + ' ' + (p.v == null ? 'אין' : fmt(p.v)); }).join('; ');
     var g = '<line class="ct-ax" x1="' + L + '" x2="' + (W - R) + '" y1="' + y(0) + '" y2="' + y(0) + '"/><line class="ct-gr" x1="' + L + '" x2="' + (W - R) + '" y1="' + y(top) + '" y2="' + y(top) + '"/>' +
       '<text class="ct-tx" x="' + (L - 4) + '" y="' + (y(top) + 4) + '" text-anchor="end">' + Math.round(top * 100) + '%</text><text class="ct-tx" x="' + (L - 4) + '" y="' + (y(0) + 4) + '" text-anchor="end">0</text>' +
       KS.map(function (k, i) { return '<text class="ct-tx" x="' + x(i).toFixed(1) + '" y="' + (H - 6) + '" text-anchor="middle">' + k + '</text>'; }).join('') +
@@ -143,7 +143,7 @@
     if (!needSh(c)) return loading();
     var k = curK(q), row = cityRow(k, c), pk = prevK(k);
     var hdr = '<h2 class="ct-h">' + esc(nm(c)) + ' <span class="meta">(סמל יישוב ' + c + ')</span></h2>' +
-      '<p><a href="' + hashFor('vs', { a: c, b: 'nat', k: k }) + '">השוואה לתוצאה הארצית</a> · <a href="' + hashFor('vs', { a: c, k: k }) + '">השוואה ליישוב אחר</a> · <a href="#/geo/' + c + '">פירוט לפי קלפי (2019–2022)</a></p>';
+      '<p><a href="' + hashFor('vs', { a: c, b: 'nat' }) + '">השוואה לתוצאה הארצית</a> · <a href="' + hashFor('vs', { a: c }) + '">השוואה ליישוב אחר</a> · <a href="#/geo/' + c + '">פירוט לפי קלפי (2019–2022)</a></p>';
     // turnout over time
     var trow = KS.map(function (x) { var r = cityRow(x, c); return '<tr' + (x === 26 ? ' data-ct-k26' : '') + '><th scope="row">' + esc(elName(x)) + '</th>' + (r ? '<td class="n">' + n(r[0]) + '</td><td class="n">' + n(r[1]) + '</td><td class="n" data-ct-turnout>' + (r[0] ? p1(r[1] / r[0]) : '–') + '</td><td class="n" data-ct-valid>' + n(r[3]) + '</td><td class="n">' + n(r[2]) + '</td>' : '<td colspan="5">אין נתונים ליישוב במערכת הזו</td>') + '</tr>'; }).join('');
     var tt = tbl('השתתפות ב' + nm(c), 'בעלי זכות בחירה, מצביעים וקולות לפי מערכת. בלי מעטפות כפולות (חיילים, נציגויות, בתי חולים ובתי סוהר), שלא משויכות ליישוב.',
@@ -223,16 +223,55 @@
     var form = '<div class="ct-form"><p>' + elSelect(k, 'ct-k') + '</p><p>' + citySel('ct-a', a, false) + '</p><p>' + citySel('ct-b', b, true) + '</p></div>';
     if (!a || !b) return form + '<p class="note">בחרו שני יישובים, או יישוב ו"התוצאה הארצית".</p>';
     if ((!needSh(a)) | (b !== 'nat' && !needSh(b))) return form + loading();
-    var ra = cityRow(k, a), rb = b === 'nat' ? nat(k).concat(lists(k).map(function (x) { return x.v; })) : cityRow(k, b);
-    var nb = b === 'nat' ? 'ארצי' : nm(b);
-    if (!ra || !rb) return form + partialNote(k) + '<p class="note">אין נתונים ל' + esc(!ra ? nm(a) : nb) + ' במערכת הזו.</p>';
-    var head = th('רשימה') + th(esc(nm(a)), 1) + th(esc(nb), 1) + th('הפרש (נק׳ אחוז)', 1);
-    var kp = '<tr><th scope="row">אחוז הצבעה</th><td class="n">' + p1(ra[1] / ra[0]) + '</td><td class="n">' + (rb[0] ? p1(rb[1] / rb[0]) : '–') + '</td><td class="n">' + (rb[0] ? pp(ra[1] / ra[0] - rb[1] / rb[0]) : '–') + '</td></tr>' +
-      '<tr><th scope="row">קולות כשרים</th><td class="n">' + n(ra[3]) + '</td><td class="n">' + n(rb[3]) + '</td><td class="n">–</td></tr>';
-    var body = alpha(lists(k)).map(function (l) { var sa = share(ra, k, l.l), sb = b === 'nat' ? natShare(k, l.l) : share(rb, k, l.l);
-      return '<tr data-ct-l="' + esc(l.l) + '"><th scope="row">' + esc(l.n) + '</th><td class="n">' + p2(sa) + '</td><td class="n">' + p2(sb) + '</td><td class="n">' + pp(sa - sb) + '</td></tr>'; }).join('');
-    return form + partialNote(k) + tbl('השוואה: ' + nm(a) + ' מול ' + nb, esc(nm(a)) + ' מול ' + esc(nb) + ', ' + esc(elName(k)) + '. אחוז מהקולות הכשרים; רשימות לפי סדר האלף־בית.' + (b === 'nat' ? ' הארצי כולל מעטפות כפולות; היישוב לא.' : ''), head, kp + body) +
-      '<p><a href="' + hashFor(String(a), { k: k }) + '">לעמוד של ' + esc(nm(a)) + '</a>' + (b !== 'nat' ? ' · <a href="' + hashFor(String(b), { k: k }) + '">לעמוד של ' + esc(nm(b)) + '</a>' : '') + '</p>';
+    // rowOf(x, side): [eligible, voters, invalid, valid, ...lists, other] for election x; national = CEC national incl. double envelopes
+    function rowOf(x, side) { return side === 'nat' ? nat(x).concat(lists(x).map(function (y) { return y.v; })) : cityRow(x, side); }
+    function shareOf(x, side, l) { return side === 'nat' ? natShare(x, l) : share(rowOf(x, side), x, l); }
+    var na = nm(a), nb = b === 'nat' ? 'ארצי' : nm(b), ra = rowOf(k, a), rb = rowOf(k, b), pk = prevK(k);
+    // 1. turnout + valid votes, every election K21–K26
+    var tr = KS.map(function (x) {
+      var A = rowOf(x, a), B = rowOf(x, b), ta = A && A[0] ? A[1] / A[0] : null, tb = B && B[0] ? B[1] / B[0] : null;
+      return '<tr data-ct-k="' + x + '"' + (x === 26 ? ' data-ct-k26' : '') + '><th scope="row">' + esc(elName(x)) + '</th><td class="n">' + (ta == null ? '–' : p1(ta)) + '</td><td class="n">' + (tb == null ? '–' : p1(tb)) + '</td><td class="n">' + (ta == null || tb == null ? '–' : pp(ta - tb)) + '</td><td class="n">' + (A ? n(A[3]) : '–') + '</td><td class="n">' + (B ? n(B[3]) : '–') + '</td></tr>';
+    }).join('');
+    var tt = tbl('אחוז הצבעה וקולות כשרים: ' + na + ' מול ' + nb, 'אחוז הצבעה וקולות כשרים בכל מערכת, 2019–2026 (2026 חלקי). "–": אין נתונים ליישוב במערכת הזו.' + (b === 'nat' ? ' הארצי כולל מעטפות כפולות; היישוב לא.' : ''),
+      th('מערכת') + th('אחוז הצבעה, ' + esc(na), 1) + th('אחוז הצבעה, ' + esc(nb), 1) + th('הפרש (נק׳ אחוז)', 1) + th('קולות כשרים, ' + esc(na), 1) + th('קולות כשרים, ' + esc(nb), 1), tr, 'ct-vs-t');
+    // 2. lists of the selected election, with change vs the previous election on both sides
+    var nc = [], sel;
+    if (!ra || !rb) sel = '<p class="note">אין נתונים ל' + esc(!ra ? na : nb) + ' ב' + esc(elName(k)) + '.</p>';
+    else {
+      var pA = null, pB = null;
+      var body = alpha(lists(k)).map(function (l) {
+        var sa = share(ra, k, l.l), sb = b === 'nat' ? natShare(k, l.l) : share(rb, k, l.l), pv = prevOf(k, l.l), ca, cb;
+        if (pv) {
+          var qa = rowOf(pv.k, a), qb = rowOf(pv.k, b);
+          ca = qa ? pp(sa - share(qa, pv.k, pv.l)) : 'אין נתונים ב-' + pv.k; cb = qb ? pp(sb - shareOf(pv.k, b, pv.l)) : 'אין נתונים ב-' + pv.k;
+        } else { ca = cb = pk ? 'אין רשימה מקבילה' : 'אין מערכת קודמת'; if (pk) nc.push('<li>' + esc(l.n) + ': ' + esc(noComp(k, l.l).replace(/^אין רשימה מקבילה:?\s*/, '') || 'אין רשימה מקבילה') + '</li>'); }
+        return '<tr data-ct-l="' + esc(l.l) + '"><th scope="row"><a href="' + hashFor('list', { k: k, l: l.l }) + '">' + esc(l.n) + '</a></th><td class="n" data-ct-sa>' + p2(sa) + '</td><td class="n" data-ct-sb>' + p2(sb) + '</td><td class="n">' + pp(sa - sb) + '</td><td class="n" data-ct-cha>' + ca + '</td><td class="n" data-ct-chb>' + cb + '</td></tr>';
+      }).join('');
+      sel = tbl('השוואה: ' + na + ' מול ' + nb + ', ' + elName(k), esc(na) + ' מול ' + esc(nb) + ', ' + esc(elName(k)) + '. אחוז מהקולות הכשרים; רשימות לפי סדר האלף־בית. הפרש ושינוי בנקודות אחוז; השינוי מחושב מול ' + (pk ? 'הכנסת ה-' + pk : '—') + ' רק כשיש רשימה מקבילה.' + (b === 'nat' ? ' הארצי כולל מעטפות כפולות; היישוב לא.' : ''),
+        th('רשימה') + th(esc(na), 1) + th(esc(nb), 1) + th('הפרש', 1) + th('שינוי, ' + esc(na), 1) + th('שינוי, ' + esc(nb), 1), body, 'ct-vs-l') +
+        (nc.length ? '<div class="note"><b>אין רשימה מקבילה ב-' + pk + ':</b><ul class="ct-ncl">' + nc.join('') + '</ul></div>' : '');
+    }
+    // 3. every list over all elections: lineage series (same list over time) + lists of the latest election without a series
+    var items = alpha(LIN.series).map(function (s) { return { n: s.n, m: s.m }; });
+    lists(26).forEach(function (l) { if (!seriesOf(26, l.l)) items.push({ n: l.n, m: { 26: l.l } }); });
+    items = alpha(items);
+    var ht = '', charts = [spark('אחוז הצבעה (קו מלא: ' + na + (b === 'nat' ? ')' : '; מקווקו: ' + nb + ')'), KS.map(function (x) { var r = rowOf(x, a); return { k: x, v: r && r[0] ? r[1] / r[0] : null }; }),
+      KS.map(function (x) { var r = b === 'nat' ? null : rowOf(x, b); return { k: x, v: r && r[0] ? r[1] / r[0] : null }; }), p1, nb)];
+    items.forEach(function (it) {
+      var va = KS.map(function (x) { return it.m[x] && rowOf(x, a) ? shareOf(x, a, it.m[x]) : null; }), vb = KS.map(function (x) { return it.m[x] && rowOf(x, b) ? shareOf(x, b, it.m[x]) : null; });
+      function cells(arr) { return arr.map(function (v, i) { return '<td class="n"' + (KS[i] === 26 ? ' data-ct-k26' : '') + '>' + (v == null ? '–' : p2(v)) + '</td>'; }).join(''); }
+      var dv = va.map(function (v, i) { return v == null || vb[i] == null ? null : v - vb[i]; });
+      ht += '<tr data-ct-s="a"><th scope="row">' + esc(it.n) + '</th><td>' + esc(na) + '</td>' + cells(va) + '</tr><tr data-ct-s="b"><th scope="row" class="ct-rep">' + esc(it.n) + '</th><td>' + esc(nb) + '</td>' + cells(vb) + '</tr>' +
+        '<tr data-ct-s="d" class="ct-dr"><th scope="row" class="ct-rep">' + esc(it.n) + '</th><td>הפרש (נק׳ אחוז)</td>' + dv.map(function (v) { return '<td class="n">' + (v == null ? '–' : pp(v)) + '</td>'; }).join('') + '</tr>';
+      if (Object.keys(it.m).length > 1) charts.push(spark(it.n, KS.map(function (x, i) { return { k: x, v: va[i] }; }), KS.map(function (x, i) { return { k: x, v: vb[i] }; }), p1, nb));
+    });
+    var at = tbl('כל הרשימות לאורך המערכות: ' + na + ' מול ' + nb, 'אחוז מהקולות הכשרים בכל מערכת, 2019–2026 (2026 חלקי). שורה לכל רשימה עם רצף מוגדר (ראו "שיטה") ולכל רשימה של 2026. "–": הרשימה לא רצה באותה מערכת באותו הרכב, או שאין נתונים ליישוב.',
+      th('רשימה') + th('יישוב') + KS.map(function (x) { return th(esc(elOf(x).label) + ' (' + x + (x === 26 ? ', חלקי' : '') + ')', 1); }).join(''), ht, 'ct-vs-all').replace('<table ', '<table data-nosort ');
+    return form + partialNote(26) + '<h2 class="h3">אחוז הצבעה וקולות כשרים, 2019–2026</h2>' + tt +
+      '<h2 class="h3">רשימות: ' + esc(elName(k)) + '</h2><p class="meta">בחרו מערכת בתפריט "מערכת בחירות" למעלה כדי לראות את הרשימות של מערכת אחרת.</p>' + sel +
+      '<h2 class="h3">כל הרשימות לאורך המערכות, 2019–2026</h2>' + at +
+      '<h3>מגמות</h3><p class="meta">קו מלא: ' + esc(na) + '. קו מקווקו: ' + esc(nb) + (b === 'nat' ? ' (באחוז ההצבעה אין קו ארצי, כי הארצי כולל מעטפות כפולות)' : '') + '. ציר אופקי: מספר הכנסת (21 = אפריל 2019, 26 = 2026, חלקי). נקודה חסרה: אין רשימה מקבילה באותה מערכת.</p><div class="ct-grid">' + charts.join('') + '</div>' +
+      '<p><a href="' + hashFor(String(a), { k: k }) + '">לעמוד של ' + esc(na) + '</a>' + (b !== 'nat' ? ' · <a href="' + hashFor(String(b), { k: k }) + '">לעמוד של ' + esc(nb) + '</a>' : '') + '</p>';
   }
 
   // ---------- method

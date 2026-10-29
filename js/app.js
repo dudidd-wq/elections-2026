@@ -1447,9 +1447,9 @@
     s.onerror = function () { geoLoading = false; if (parseHash().page === 'geo') $main.innerHTML = '<div class="empty" role="alert"><b>שגיאה בטעינת העמוד</b><p>נסו לרענן.</p></div>'; };
     document.head.appendChild(s);
   }
-  var GEO_V = '2';
+  var GEO_V = '3';
   function shareU() { window.EL26 = { esc: esc, COLL: COLL, head: head, srcLink: srcLink, fmtDate: fmtDate, fmtStamp: fmtStamp, parseHash: parseHash, setHash: setHash, render: render, getJSON: getJSON, main: $main }; }
-  var citiesLoading = false, CITIES_V = '2';
+  var citiesLoading = false, CITIES_V = '3';
   function loadCities() { // #/cities: js/cities.js is loaded only when the page is opened
     if (citiesLoading) return; citiesLoading = true; shareU();
     var s = document.createElement('script'); s.src = 'js/cities.js?v=' + CITIES_V; s.async = true;

@@ -73,6 +73,10 @@
     if (LOC || LOCp) return LOCp;
     LOCp = fetch('data/geo/index.json').then(function (r) { return r.json(); }).then(function (ix) {
       var env = ix.envelopesCode; LOC = ix.localities.filter(function (l) { return l[0] !== env; }).map(function (l) { return { code: l[0], name: l[1], k: norm(l[1]) }; });
+      return fetch('data/cities/k26.json').then(function (r) { return r.json(); }).then(function (k26) { // localities that exist only in 2026
+        Object.keys(k26.names || {}).forEach(function (c) { if (!LOC.some(function (l) { return l.code === +c; })) LOC.push({ code: +c, name: k26.names[c], k: norm(k26.names[c]) }); });
+      }, function () {});
+    }).then(function () {
       LOC.sort(function (a, b) { return COLL.compare(a.name, b.name); });
       if (pal && !pal.hidden) palRender();
     }).catch(function () { LOCp = null; });
@@ -108,12 +112,17 @@
     var q = norm(pal.querySelector('#kp-q').value), x = X(), out = [];
     var has = function (s) { return !q || norm(s).indexOf(q) >= 0; };
     pagesIdx().forEach(function (p) { if (has(p.t)) out.push(p); });
+    [{ t: 'השוואת יישובים (2019–2026)', href: '#/cities/vs' }, { t: 'ניתוח לפי רשימה ויישוב (2019–2026)', href: '#/cities/list' }].forEach(function (p) { if (has(p.t)) out.push({ g: 'עמודים', t: p.t, href: p.href }); });
     if (x) {
       x.lists().forEach(function (l) { if (has(l.name)) out.push({ g: 'רשימות', t: l.name, href: '#/list/' + l.id }); });
       x.issues().forEach(function (i) { if (has(i.name) || (q && has(i.title))) out.push({ g: 'סוגיות', t: i.name, href: '#/issue/' + i.id, hint: String(i.n) }); });
     }
     if (q) {
-      if (LOC) { var n = 0; LOC.forEach(function (l) { if (n < 12 && l.k.indexOf(q) >= 0) { n++; out.push({ g: 'יישובים', t: l.name, href: '#/cities/' + l.code, hint: 'יישוב' }); } }); }
+      if (LOC) {
+        var n = 0, hit = [];
+        LOC.forEach(function (l) { if (n < 12 && l.k.indexOf(q) >= 0) { n++; hit.push(l); out.push({ g: 'יישובים', t: l.name, href: '#/cities/' + l.code, hint: 'יישוב' }); } });
+        hit.slice(0, 3).forEach(function (l) { out.push({ g: 'השוואת יישובים', t: l.name + ' מול התוצאה הארצית, 2019–2026', href: '#/cities/vs?a=' + l.code + '&b=nat', hint: 'השוואה' }); });
+      }
       else out.push({ g: 'יישובים', t: 'טוען רשימת יישובים…', off: 1 });
     }
     var acts = [{ g: 'פעולות', t: 'החלפת מצב כהה/בהיר', act: 'theme', hint: 'T' }, { g: 'פעולות', t: 'העתקת קישור לעמוד הזה', act: 'copy' }, { g: 'פעולות', t: 'קיצורי מקלדת', act: 'help', hint: '?' }];
@@ -215,6 +224,7 @@
       if (!thead || !body || tb.tBodies.length > 1 || thead.rows.length !== 1 || tb.classList.contains('mx')) return;
       if (tb.querySelector('[rowspan],[colspan],.geo-sort,[aria-sort],button,input,select')) return;
       var rows = Array.prototype.slice.call(body.rows); if (rows.length < 4) return;
+      if (tb.hasAttribute('data-nosort')) { csvBar(tb, rows.length, 'שורות'); return; } // grouped rows: CSV only, no re-ordering
       var ncol = thead.rows[0].cells.length; if (rows.some(function (r) { return r.cells.length !== ncol; })) return;
       if (rows.length > 18) tb.classList.add('tall');
       rows.forEach(function (r, i) { r._o = i; });
@@ -223,11 +233,14 @@
         th.innerHTML = '<button type="button" class="th-s">' + lab + '<span class="si" aria-hidden="true"></span></button>';
         th.firstChild.addEventListener('click', function () { sortBy(tb, ci, th); });
       });
-      var wrap = tb.closest('.tbl-wrap') || tb, tl = d.createElement('div'); tl.className = 'tbar';
-      tl.innerHTML = '<span class="meta mono">' + rows.length + ' שורות · מיון בלחיצה על כותרת</span><button type="button" class="ibtn sm" data-csv><span class="mono">CSV</span> הורדה</button>';
-      tl.querySelector('[data-csv]').addEventListener('click', function () { csv(tb); });
-      wrap.insertAdjacentElement('afterend', tl);
+      csvBar(tb, rows.length, 'שורות · מיון בלחיצה על כותרת');
     });
+  }
+  function csvBar(tb, nr, txt) {
+    var wrap = tb.closest('.tbl-wrap') || tb, tl = d.createElement('div'); tl.className = 'tbar';
+    tl.innerHTML = '<span class="meta mono">' + nr + ' ' + txt + '</span><button type="button" class="ibtn sm" data-csv><span class="mono">CSV</span> הורדה</button>';
+    tl.querySelector('[data-csv]').addEventListener('click', function () { csv(tb); });
+    wrap.insertAdjacentElement('afterend', tl);
   }
   function sortBy(tb, ci, th) {
     var body = tb.tBodies[0], rows = Array.prototype.slice.call(body.rows);

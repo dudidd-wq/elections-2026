@@ -76,6 +76,16 @@ ok(!/color|colour|fill="#|stroke="#/i.test(JS.replace(/\/\*[\s\S]*?\*\//g, '').r
 ok(/COLL\.compare/.test(JS), 'cities.js sorts with the Hebrew collator');
 const sorted = K26.lists.map(l => l.n).sort(COLL.compare);
 ok(sorted.length === 13, 'k26 names');
+// 6. regression [pt100u] "בהשוואת יישובים אין את נתוני הבחירות האחרונות": every view covers K21–K25 + 2026
+//    (rendered check: audit vscheck.mjs). Here: the data each view reads has all six elections, and the compare code iterates all of them.
+ok(JSON.stringify(IX.elections.map(e => e.k).concat([K26.k])) === '[21,22,23,24,25,26]', 'elections K21–K25 + K26');
+ok(/KS = d\.elections\.map\(function \(e\) \{ return e\.k; \}\)\.concat\(\[26\]\)/.test(JS), 'cities.js KS includes 26');
+const VS = JS.slice(JS.indexOf('function pageVs'), JS.indexOf('function', JS.indexOf('function pageVs') + 20 + JS.slice(JS.indexOf('function pageVs') + 20).search(/\n  function page|\n  \/\/ -/)));
+ok(/ct-vs-t/.test(VS) && /KS\.map/.test(VS) && /data-ct-k26/.test(VS), 'compare has a per-election turnout/valid table over KS incl. 2026');
+ok(/ct-vs-all/.test(VS) && /partialNote\(26\)/.test(VS) && /אין רשימה מקבילה/.test(VS), 'compare has the all-elections lists table, the 2026 partial note and "אין רשימה מקבילה"');
+const UI = fs.readFileSync(path.join(ROOT, 'js/ui.js'), 'utf8');
+ok(/data\/cities\/k26\.json/.test(UI), 'palette loads the 2026-only localities');
+ok(K26.names && Object.keys(K26.names).length > 0, 'k26 has names for localities new in 2026');
 // 5. byte budget of lazy files
 ok(fs.statSync(path.join(ROOT, 'data/cities/k26.json')).size < 150000, 'k26.json < 150 KB');
 ok(fs.statSync(path.join(ROOT, 'js/cities.js')).size < 80000, 'cities.js < 80 KB');
