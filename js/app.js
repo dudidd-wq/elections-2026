@@ -30,15 +30,17 @@
   });
   syncTheme();
 
-  // ---------- colours: muted palette, assigned by alphabetical order of list names (not party colours)
-  var PALETTE = ['#4a75a5', '#9f643c', '#487f4f', '#995c99', '#887030', '#3a7b82', '#b45750', '#7867ad', '#657b37', '#a35c80', '#3a7898', '#886f49', '#447e6b'];
+  // ---------- series styling: NEUTRAL. No per-list colours at all (v2 redesign). Every list gets the same neutral grey;
+  // where several series share one chart they are told apart by label, position and a dash pattern (SER[id] -> .sN),
+  // assigned by the alphabetical order of the list names.
+  var SER = {};
   function assignColors() {
     var ids = D.parties.filter(function (p) { return !p.withdrawn; }).map(function (p) { return p.id; });
     ids.sort(function (a, b) { return COLL.compare(lname(a), lname(b)); });
-    ids.forEach(function (id, k) { COLOR[id] = PALETTE[k % PALETTE.length]; });
-    D.parties.forEach(function (p) { if (!COLOR[p.id]) COLOR[p.id] = '#737373'; });
+    ids.forEach(function (id, k) { SER[id] = k; });
+    D.parties.forEach(function (p) { COLOR[p.id] = 'var(--g2)'; if (SER[p.id] == null) SER[p.id] = 0; });
   }
-  function dot(id) { return '<span class="dot" style="--c:' + COLOR[id] + '" aria-hidden="true"></span>'; }
+  function dot() { return ''; }
 
   function avgOf(id) { return (D.computed.average[id] || 0); }
   var SORTC = {};
@@ -150,7 +152,7 @@
       '<p class="pager"><a class="btn sec" href="#/issue/' + iid + '">כל הרשימות בסוגיה זו</a> <a class="btn sec" href="#/list/' + lid + '">פרופיל הרשימה</a></p>' +
       '<p class="meta">נכון ל-' + fmtDate(P.meta.documentAsOf) + '.</p>';
     document.getElementById('dlg-body').innerHTML = h;
-    dlg.querySelector('.dlg-in').style.setProperty('--c', COLOR[lid]);
+    dlg.querySelector('.dlg-in').style.setProperty('--c', 'var(--acc)');
     if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
   }
   function extraSrc(p) {
@@ -179,10 +181,10 @@
     radii.forEach(function (r, k) { for (var j = 0; j < cnt[k]; j++) { var a = cnt[k] === 1 ? Math.PI / 2 : j / (cnt[k] - 1) * Math.PI; pts.push({ a: a, r: r }); } });
     pts.sort(function (p1, p2) { return p1.a - p2.a || p2.r - p1.r; }); // start at the right edge (reading direction)
     var k = 0, circles = '', seatR = 8.6;
-    ids.forEach(function (id) {
+    ids.forEach(function (id, gi) {
       for (var s = 0; s < seats[id]; s++) {
         var p = pts[k++]; var x = cx + p.r * Math.cos(p.a), y = cy - p.r * Math.sin(p.a);
-        circles += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + seatR + '" fill="' + COLOR[id] + '" data-l="' + id + '"/>';
+        circles += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + seatR + '" class="t' + (gi % 2) + '" data-l="' + id + '"/>';
       }
     });
     var label = 'הקצאה מעוגלת של ממוצע הסקרים ל-120 מושבים: ' + ids.map(function (id) { return lname(id) + ' ' + seats[id]; }).join(', ');
@@ -201,6 +203,10 @@
     var when = dd > 1 ? 'בעוד ' + dd + ' ימים' : dd === 1 ? 'מחר' : dd === 0 ? 'היום' : 'הבחירות התקיימו';
     var c = D.computed, seats = allocSeats(), ids = sortIds(Object.keys(seats).filter(function (id) { return seats[id] > 0; }));
     var kpiDays = dd >= 0 ? '<div class="kpi big"><b>' + (dd > 1 ? dd : dd === 1 ? 'מחר' : 'היום') + '</b><span>' + (dd > 1 ? 'ימים עד יום הבחירות' : 'יום הבחירות') + ' · 27.10</span></div>' : '<div class="kpi big"><b>27.10</b><span>הבחירות התקיימו</span></div>';
+    var arcCard = '<div class="arc-card"><div class="arc-head"><h2>ממוצע הסקרים, כמושבים</h2><span class="meta">' + c.n + ' סקרים, ' + fmtShort(c.window[0]) + '–' + fmtShort(c.window[1]) + '</span></div>' +
+      '<div class="arc" id="arc">' + arcSvg(seats) + '</div>' +
+      '<ul class="arc-legend" aria-label="מושבים לפי רשימה">' + ids.map(function (id) { return '<li><button type="button" data-arc="' + id + '" aria-label="' + esc(lname(id) + ': ' + seats[id] + ' מושבים (ממוצע ' + fmtN(avgOf(id)) + '), לפרופיל הרשימה') + '">' + dot(id) + '<span>' + esc(lname(id)) + '</span><b>' + seats[id] + '</b></button></li>'; }).join('') + '</ul>' +
+      '<p class="meta">המחשה: הממוצע מעוגל ל-120 מושבים בשיטת השארית הגדולה. זו אינה תחזית, ולא הופעל אחוז החסימה על הממוצע. ' + esc(orderNote()) + ' <a href="#/polls">לכל נתוני הסקרים</a></p></div>';
     return '<section class="hero" aria-labelledby="h1">' +
       '<div><p class="eyebrow">בחירות לכנסת ה-26 · יום שלישי, 27 באוקטובר 2026</p>' +
       '<h1 id="h1">מה הרשימות אומרות, <em>סוגיה אחר סוגיה</em></h1>' +
@@ -210,12 +216,13 @@
       '<div class="kpi"><b>' + D.polls.length + '</b><span>סקרים · אחרון ' + fmtShort(c.asOf) + '</span></div></div>' +
       '<div class="controls"><a class="btn" href="#/matrix">למטריצת העמדות</a><a class="btn sec" href="#/compare">השוואה בין רשימות</a></div>' +
       '<p class="pod-clip hero-clip"><a href="clip-site/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>סרטון קצר: מה מצאנו באתר (כדקה וחצי)</a></p>' + asOfLine() + '</div>' +
-      '<div class="arc-card"><div class="arc-head"><h2>ממוצע הסקרים, כמושבים</h2><span class="meta">' + c.n + ' סקרים, ' + fmtShort(c.window[0]) + '–' + fmtShort(c.window[1]) + '</span></div>' +
-      '<div class="arc" id="arc">' + arcSvg(seats) + '</div>' +
-      '<ul class="arc-legend" aria-label="מושבים לפי רשימה">' + ids.map(function (id) { return '<li><button type="button" data-arc="' + id + '" aria-label="' + esc(lname(id) + ': ' + seats[id] + ' מושבים (ממוצע ' + fmtN(avgOf(id)) + '), לפרופיל הרשימה') + '">' + dot(id) + '<span>' + esc(lname(id)) + '</span><b>' + seats[id] + '</b></button></li>'; }).join('') + '</ul>' +
-      '<p class="meta">המחשה: הממוצע מעוגל ל-120 מושבים בשיטת השארית הגדולה. זו אינה תחזית, ולא הופעל אחוז החסימה על הממוצע. ' + esc(orderNote()) + ' <a href="#/polls">לכל נתוני הסקרים</a></p></div>' +
+      homeCount() +
       '</section>' +
       '<h2>לאן ממשיכים</h2><div class="cards">' +
+      card('#/exit-polls', 'מדגמים: דיוק בעבר', 'עד כמה דייקו מדגמי הטלוויזיה בערב הבחירות ב-2019–2022, מול התוצאות הרשמיות. בלי תחזית.', 'polls') +
+      card('#/outlook', 'תחזית בדיעבד', 'ההערכות שפורסמו בזמן ספירת המעטפות הכפולות מול הספירה שהושלמה (לא סופית ולא רשמית), והשוואה ל-2019–2022.', 'polls') +
+      card('#/cities', 'ניתוח לפי יישוב', 'כל יישוב לאורך 2019–2026: אחוז ההצבעה, אחוז הקולות לכל רשימה, שינוי מול מערכות קודמות, החזקות והחלשות של כל רשימה, והשוואה בין יישובים. נתוני 2026 חלקיים.', 'polls') +
+      card('#/geo', 'תוצאות לפי יישוב וקלפי', 'אחוז ההצבעה ולמי הצביעו בכל יישוב ובכל קלפי, בחמש המערכות של 2019–2022. התוצאות הרשמיות של ועדת הבחירות.', 'analysis') +
       card('#/matrix', 'מטריצה', nLists() + ' רשימות × 10 סוגיות במפת חום לפי סוג המקור. לחיצה על תא מציגה את העמדה המלאה ואת המקור.', 'matrix') +
       card('#/issue', 'לפי סוגיה', 'כל הרשימות בסוגיה אחת, בניסוח מלא, ולצדן המחנות בסוגיה.', 'issue') +
       card('#/list', 'לפי רשימה', 'פרופיל של כל רשימה: הרכב, מעמד המצע, גוש מוצהר, סקרים ועמדות.', 'list') +
@@ -223,12 +230,9 @@
       card('#/analysis', 'ניתוח רוחבי', 'קווי המחלוקת החדים, המכנה המשותף והחפיפות בין הגושים.', 'analysis') +
       card('#/polls', 'סקרים', 'ממוצע, טווח, סכומי גושים וקו 61, מגמה וטבלת כל הסקרים.', 'polls') +
       card('#/coalition', 'בנה קואליציה', 'בחירת רשימות, הערכת מנדטים מול קו 61 והשוואה מתמטית של העמדות המוצהרות בכל סוגיה. לא תחזית ולא המלצה.', 'coalition') +
-      card('#/exit-polls', 'מדגמים: דיוק בעבר', 'עד כמה דייקו מדגמי הטלוויזיה בערב הבחירות ב-2019–2022, מול התוצאות הרשמיות. בלי תחזית.', 'polls') +
-      card('#/outlook', 'תחזית בדיעבד', 'ההערכות שפורסמו בזמן ספירת המעטפות הכפולות מול הספירה שהושלמה (לא סופית ולא רשמית), והשוואה ל-2019–2022.', 'polls') +
-      card('#/cities', 'ניתוח לפי יישוב', 'כל יישוב לאורך 2019–2026: אחוז ההצבעה, אחוז הקולות לכל רשימה, שינוי מול מערכות קודמות, החזקות והחלשות של כל רשימה, והשוואה בין יישובים. נתוני 2026 חלקיים.', 'polls') +
-      card('#/geo', 'תוצאות לפי יישוב וקלפי', 'אחוז ההצבעה ולמי הצביעו בכל יישוב ובכל קלפי, בחמש המערכות של 2019–2022. התוצאות הרשמיות של ועדת הבחירות.', 'analysis') +
       card('#/podcasts', 'פודקאסטים וראיונות', 'מה אמרו ראשי הרשימות בפודקאסטים ובראיונות ארוכים בחודש שלפני הבחירות, עם קישורים וציטוטים מאומתים.', 'podcasts') +
       '</div>' +
+      '<h2>סקרים לפני הבחירות</h2>' + arcCard +
       '<h2>10 הסוגיות</h2><nav class="issue-strip" aria-label="מעבר לסוגיה">' + P.issues.map(function (i) { return '<a href="#/issue/' + i.id + '"><span class="n">' + i.n + '</span>' + esc(i.short) + '</a>'; }).join('') + '</nav>' +
       '<h2>איך לקרוא את האתר</h2><div class="principles">' +
       '<div><b>ניטרלי</b><p>בלי המלצה ובלי ציון. כל הרשימות מוצגות באותו מבנה ובאותו סדר.</p></div>' +
@@ -236,6 +240,29 @@
       '<div><b>עקבי</b><p>' + esc(orderNote()) + '</p></div>' +
       '<div><b>מתוארך</b><p>העמדות נכונות ל-' + fmtDate(P.meta.documentAsOf) + '; הסקרים עודכנו ב-' + fmtStamp(D.meta.updatedAt) + '.</p></div></div>' +
       legend(false);
+  }
+  // home dashboard: the latest 2026 count (data/exitpolls.json y2026.count) + the site's own unofficial seat calculation
+  // (data/outlook.json retro.actual.seats). Alphabetical; labels copied from the data; nothing here is final or official.
+  var homeLoad = 0;
+  // secondary data (home count card) is fetched after the page has loaded and painted, so it never competes with first content
+  function afterPaint(f) { var go = function () { setTimeout(function () { (window.requestIdleCallback || setTimeout)(f, { timeout: 600 }); }, 300); }; if (document.readyState === 'complete') go(); else window.addEventListener('load', go, { once: true }); }
+  function homeCount() {
+    if ((!EP && !EPerr) || (!OL && !OLerr)) {
+      if (!homeLoad) { homeLoad = 1; afterPaint(function () { Promise.all([EP ? 0 : loadExitPolls(), OL ? 0 : loadOutlook()]).then(function () { if (parseHash().page !== 'home') return; var dc = document.querySelector('#main section.dash-card'); if (!dc) { render(true); return; } var t = document.createElement('div'); t.innerHTML = homeCount(); dc.replaceWith(t.firstChild); }); }); }
+      return '<section class="dash-card" aria-labelledby="dash-h" aria-busy="true"><h2 id="dash-h">ספירת הקולות, 2026</h2><div class="skel" aria-hidden="true"><i></i><i></i><i></i><i></i></div><p class="sr" role="status">טוען…</p></section>';
+    }
+    var y = EP && EP.y2026, cnt = y && y.count;
+    if (!cnt) return '<section class="dash-card" aria-labelledby="dash-h"><h2 id="dash-h">ספירת הקולות, 2026</h2><p class="note">' + esc(EPerr || 'אין עדיין נתוני ספירה.') + ' <a href="#/exit-polls">לעמוד המדגמים והספירה</a></p></section>';
+    var done = /הושלמה/.test(cnt.label), act = OL && OL.retro && OL.retro.actual, st = act && act.seats;
+    var ls = y.lists.filter(function (l) { return cnt.pct[l.id] != null; }).sort(function (a, b) { return COLL.compare(a.name, b.name); });
+    var mx = Math.max.apply(null, ls.map(function (l) { return cnt.pct[l.id]; }));
+    return '<section class="dash-card" aria-labelledby="dash-h"><div class="dash-top"><h2 id="dash-h">ספירת הקולות, 2026</h2><span class="chip warn">' + (done ? 'הושלמה · לא סופית ולא רשמית' : 'חלקית · לא סופית ולא רשמית') + '</span></div>' +
+      '<p class="meta">' + esc(cnt.label) + ' · נכון ל-<span class="n">' + esc(fmtStamp(cnt.asOf)) + '</span></p>' +
+      '<div class="tbl-wrap dash-w" tabindex="0" role="region" aria-label="ספירת הקולות 2026 לפי רשימה"><table class="tbl dash-t" data-sort="1"><caption class="sr">ספירת הקולות 2026 לפי רשימה, בסדר אלפביתי</caption><thead><tr><th scope="col">רשימה</th><th scope="col" class="n">% מהקולות</th>' + (st ? '<th scope="col" class="n">מושבים*</th>' : '') + '</tr></thead><tbody>' +
+      ls.map(function (l) { var v = cnt.pct[l.id]; return '<tr><th scope="row">' + esc(l.name) + '</th><td class="n ib" style="--w:' + (100 * v / mx).toFixed(1) + '%">' + v.toFixed(2) + '%</td>' + (st ? '<td class="n">' + (st[l.id] != null ? st[l.id] : '–') + '</td>' : '') + '</tr>'; }).join('') +
+      '</tbody></table></div>' +
+      (st ? '<p class="meta">* ' + esc(act.status) + '</p>' : '') +
+      '<p class="dash-links"><a href="#/exit-polls">מדגמים וספירה</a><a href="#/outlook">תחזית בדיעבד</a><a href="#/cities">לפי יישוב</a></p></section>';
   }
   function card(href, t, d, ic) { return '<a class="card" href="' + href + '">' + (ic ? icon(ic) : '') + GO + '<h3>' + esc(t) + '</h3><p>' + esc(d) + '</p></a>'; }
 
@@ -410,7 +437,7 @@
   }
 
   // ---------- polls
-  var BLOC_COL = { coalition: '#5b6475', opposition: '#6f6396', arab: '#3d7d7a', other: '#8a6f45' };
+  var BLOC_COL = { coalition: 'var(--g2)', opposition: 'var(--g2)', arab: 'var(--g2)', other: 'var(--g2)' };
   function pollParties() { return D.parties.filter(function (p) { return !p.withdrawn; }).map(function (p) { return p.id; }); }
   function blocSum(avg, bid) { var b = D.blocs.filter(function (x) { return x.id === bid; })[0]; return b.members.reduce(function (s, m) { return s + (avg[m] || 0); }, 0); }
   function blocName(bid) { return D.blocs.filter(function (x) { return x.id === bid; })[0].name; }
@@ -455,9 +482,9 @@
     var lim = H - pad.b + 6; for (var q = ends.length - 1; q >= 0; q--) { if (ends[q].y > lim) ends[q].y = lim; lim = ends[q].y - GAP; }
     var lines = ids.map(function (id) {
       var pts = tr.map(function (t) { return x(t.date).toFixed(1) + ',' + y(t.avg[id] || 0).toFixed(1); }).join(' ');
-      return '<polyline class="ln" data-l="' + id + '" stroke="' + COLOR[id] + '" points="' + pts + '"/>';
+      return '<polyline class="ln s' + (SER[id] % 4) + '" data-l="' + id + '" points="' + pts + '"/>';
     }).join('');
-    var labels = ends.map(function (e) { return '<path d="M' + (W - pad.r + 2) + ',' + y(e.v).toFixed(1) + ' L' + (W - pad.r + 10) + ',' + e.y.toFixed(1) + '" stroke="' + COLOR[e.id] + '" stroke-width="1.5" fill="none"/><circle cx="' + (W - pad.r + 15) + '" cy="' + e.y.toFixed(1) + '" r="4.5" fill="' + COLOR[e.id] + '"/><text class="ln-l" data-l="' + e.id + '" x="' + (W - pad.r + 24) + '" y="' + (e.y + 4.5) + '" fill="var(--ink)" style="font-weight:600;font-size:13px">' + esc(lname(e.id).replace(/ \(.*\)$/, '')) + ' ' + fmtN(e.v) + '</text>'; }).join('');
+    var labels = ends.map(function (e) { return '<path d="M' + (W - pad.r + 2) + ',' + y(e.v).toFixed(1) + ' L' + (W - pad.r + 10) + ',' + e.y.toFixed(1) + '" stroke="var(--g3)" stroke-width="1" fill="none"/><line class="ln-k s' + (SER[e.id] % 4) + '" data-l="' + e.id + '" x1="' + (W - pad.r + 10) + '" x2="' + (W - pad.r + 21) + '" y1="' + e.y.toFixed(1) + '" y2="' + e.y.toFixed(1) + '"/><text class="ln-l" data-l="' + e.id + '" x="' + (W - pad.r + 24) + '" y="' + (e.y + 4.5) + '" fill="var(--ink)" style="font-weight:600;font-size:13px">' + esc(lname(e.id).replace(/ \(.*\)$/, '')) + ' ' + fmtN(e.v) + '</text>'; }).join('');
     TR = { W: W, H: H, pad: pad, x: x, y: y, ids: ids };
     return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" tabindex="0" aria-label="' + esc('מגמת ממוצע הסקרים לכל רשימה מ-' + fmtDate(tr[0].date) + ' עד ' + fmtDate(tr[tr.length - 1].date) + '. מקשי החצים מציגים את הערכים בכל תאריך. הנתונים המלאים בטבלה למטה.') + '">' +
       '<g class="axis">' + grid + xt + '</g>' + lines + labels +
@@ -1400,7 +1427,7 @@
     var hc = document.getElementById('hlcount');
     if (hc && state.hl) { var nOn = $main.querySelectorAll('mark.m.on').length; hc.textContent = nOn === 1 ? 'אזכור אחד מודגש בעמוד זה' : nOn ? nOn + ' אזכורים מודגשים בעמוד זה' : 'אין אזכורים של הרשימה בעמוד זה'; }
     document.title = (sub ? sub + ' – ' : '') + TITLES[r.page] + ' | השוואת מצעים – בחירות 2026';
-    document.querySelectorAll('[data-nav]').forEach(function (a) { if (a.getAttribute('data-nav') === r.page) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+    document.querySelectorAll('[data-nav],[data-bnav]').forEach(function (a) { if ((a.getAttribute('data-nav') || a.getAttribute('data-bnav')) === r.page) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     var cur = document.querySelector('[data-nav][aria-current]'), nv = cur && cur.closest('.nav');
     if (cur && nv) requestAnimationFrame(function () { setTimeout(function () { if (nv.scrollWidth > nv.clientWidth) { var nr = nv.getBoundingClientRect(), cr = cur.getBoundingClientRect(); nv.scrollLeft += (cr.left + cr.width / 2) - (nr.left + nr.width / 2); } }, 0); });
     var key = r.page + '/' + r.arg;
@@ -1409,6 +1436,7 @@
     if (r.page === 'podcasts' && PD) podScroll();
     if (r.page === 'geo' && window.EL26GEO) window.EL26GEO.after();
     if (r.page === 'cities' && window.EL26CITIES) window.EL26CITIES.after();
+    try { document.dispatchEvent(new CustomEvent('el26:render', { detail: { page: r.page, arg: r.arg } })); } catch (e) {}
   }
   var geoLoading = false;
   function loadGeo() {
@@ -1421,7 +1449,7 @@
   }
   var GEO_V = '2';
   function shareU() { window.EL26 = { esc: esc, COLL: COLL, head: head, srcLink: srcLink, fmtDate: fmtDate, fmtStamp: fmtStamp, parseHash: parseHash, setHash: setHash, render: render, getJSON: getJSON, main: $main }; }
-  var citiesLoading = false, CITIES_V = '1';
+  var citiesLoading = false, CITIES_V = '2';
   function loadCities() { // #/cities: js/cities.js is loaded only when the page is opened
     if (citiesLoading) return; citiesLoading = true; shareU();
     var s = document.createElement('script'); s.src = 'js/cities.js?v=' + CITIES_V; s.async = true;
@@ -1543,6 +1571,34 @@
     var o = document.getElementById('co-wo-' + t.getAttribute('data-co-w')); if (o) o.textContent = coWTxt(+t.value); t.setAttribute('aria-valuetext', coWTxt(+t.value));
   });
   window.addEventListener('hashchange', function () { if (dlg.open) dlg.close(); trendSel = ''; render(false); });
+
+  // ---------- read-only bridge for js/ui.js (command palette + page status chips). Presentation only.
+  function pageMeta(r) {
+    var m = { chips: [], json: [] }, c;
+    if (!P) return m;
+    var pos = function () { m.chips.push({ k: 'עמדות נכונות ל', v: fmtDate(P.meta.documentAsOf) }); m.json.push('data/platforms.json'); };
+    switch (r.page) {
+      case 'matrix': case 'issue': case 'list': case 'compare': pos(); break;
+      case 'analysis': pos(); m.json.push('data/analysis.json'); break;
+      case 'polls': m.chips.push({ k: 'עודכן', v: fmtStamp(D.meta.updatedAt) }, { k: 'סקרים', v: String(D.polls.length) }, { k: 'מקור', v: 'israelielections.com' }); m.json.push('data/polls.json'); break;
+      case 'coalition': m.chips.push({ k: 'סטטוס', v: 'לא תחזית ולא המלצה', w: 1 }); m.json.push('data/coalition.json', 'data/polls.json'); break;
+      case 'podcasts': if (PD && PD.meta && PD.meta.updatedAt) m.chips.push({ k: 'עודכן', v: fmtDate(PD.meta.updatedAt) }); m.json.push('data/podcasts.json'); break;
+      case 'exit-polls': if (EP && EP.y2026 && (c = EP.y2026.count)) m.chips.push({ k: 'ספירה', v: /הושלמה/.test(c.label) ? 'הושלמה, לא סופית ולא רשמית' : 'חלקית, לא סופית ולא רשמית', w: 1 }, { k: 'נכון ל', v: fmtStamp(c.asOf) }, { k: 'מקור', v: 'ועדת הבחירות (דרך המכריע ואחרים)' }); m.json.push('data/exitpolls.json'); break;
+      case 'outlook': if (OL) { m.chips.push({ k: 'סטטוס', v: OL.disclaimer, w: 1 }); if (OL.retro && OL.retro.actual) m.chips.push({ k: 'ספירה', v: 'הושלמה, לא סופית ולא רשמית', w: 1 }, { k: 'נכון ל', v: fmtStamp(OL.retro.actual.asOf) }); } m.json.push('data/outlook.json', 'data/outlook_published.json'); break;
+      case 'cities': var cm = window.EL26CITIES && window.EL26CITIES.meta && window.EL26CITIES.meta();
+        if (cm) m.chips.push({ k: '2026', v: cm.status, w: 1 }, { k: 'נכון ל', v: fmtStamp(cm.asOf) }, { k: '2019–2022', v: 'ועדת הבחירות המרכזית' });
+        m.json.push('data/cities/k26.json', 'data/cities/lineage.json', 'data/geo/index.json'); break;
+      case 'geo': m.chips.push({ k: 'מערכות', v: '2019–2022 (כנסות 21–25)' }, { k: 'מקור', v: 'ועדת הבחירות המרכזית (data.gov.il)' }); m.json.push('data/geo/index.json'); break;
+    }
+    return m;
+  }
+  window.EL26X = {
+    meta: function () { return pageMeta(parseHash()); },
+    titles: function () { return TITLES; },
+    lists: function () { return P ? P.lists.map(function (l) { return { id: l.id, name: l.tableName }; }).sort(function (a, b) { return COLL.compare(a.name, b.name); }) : []; },
+    issues: function () { return P ? P.issues.map(function (i) { return { id: i.id, name: i.short, title: i.title, n: i.n }; }) : []; },
+    getJSON: function (u) { return getJSON(u); }, esc: esc, COLL: COLL
+  };
 
   function getJSON(u) { return fetch(u, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(u + ' ' + r.status); return r.json(); }); }
   Promise.all([getJSON('data/platforms.json'), getJSON('data/analysis.json'), getJSON('data/polls.json')]).then(function (res) {

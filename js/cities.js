@@ -288,5 +288,6 @@
       go({ p: b.getAttribute('data-cpage') }); var an = document.getElementById('ct-all'); if (an) an.scrollIntoView({ block: 'start' });
     }
   });
-  window.EL26CITIES = { page: page, title: title, after: fillSearch };
+  // meta(): read-only status for the page chips in js/ui.js (label text copied from k26.json, cut at the first colon)
+  window.EL26CITIES = { page: page, title: title, after: fillSearch, meta: function () { var d = EL[26]; return d ? { status: String(d.statusLabel).split(':')[0], asOf: d.basis.asOf } : null; } };
 })();
