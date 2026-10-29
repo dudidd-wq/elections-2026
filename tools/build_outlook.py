@@ -28,6 +28,10 @@ COUNT26 = {
             'valid': 5409377, 'invalid': 24285, 'envBoxes': 314,
             'votes': dict(likud=1113916, yashar=871828, beyachad=496469, joint=487472, dems=349488, raam=325192, yb=321049, otzma=304809, utj=301487, shas=285598, rzz=265109, miluim=144766, amcha=88718),
             'sources': [{'url': 'https://machria.com/elections-2026', 'note': 'עדכון 12:44'}]},
+  'c1804': {'asOf': '2026-10-29T18:04+02:00', 'label': 'כל 12,018 הקלפיות הרגילות + 826 קלפיות מעטפות כפולות',
+            'valid': 5653178, 'invalid': 25633, 'envBoxes': 826,
+            'votes': dict(likud=1159791, yashar=907566, beyachad=527064, joint=498763, dems=364053, raam=335391, yb=335185, otzma=323800, utj=311473, shas=297889, rzz=286934, miluim=153674, amcha=94655),
+            'sources': [{'url': 'https://machria.com/elections-2026', 'note': 'עדכון 18:04'}, {'url': 'https://www.ynet.co.il/news/article/s1bla0xame', 'note': 'ועדת הבחירות, 16:50: ספירת המעטפות הכפולות הסתיימה'}]},
 }
 VOTERS_2200 = 5695682   # CEC figure at 22:00 (77.7% of 7,331,981)
 ELIGIBLE = 7331981
@@ -181,7 +185,7 @@ for h in hist[1:]:
                      'matched': sum(1 for L in h['_reg'] if L != 'other' and hist_ratio(prev_letters[L], h['k'])[1] > 0), 'nLists': len(err)})
 
 # ---------------- 2026: envelopes counted so far, remaining, projection ----------------
-c1, c2 = COUNT26['c1116'], COUNT26['c1244']
+c1, c2 = COUNT26['c1116'], COUNT26['c1804']
 for c in (c1, c2): c['votes']['other'] = c['valid'] - sum(c['votes'].values())
 ALL = IDS + ['other']
 def env_pct(b):
@@ -190,7 +194,7 @@ env_valid_1116 = round(ENV26[-1]['n'] * (1 - ENV_INVALID_RATE))
 env_votes_1116 = {k: env_pct(ENV26[-1])[k] / 100 * env_valid_1116 for k in ALL}
 reg26 = {k: c1['votes'][k] - env_votes_1116[k] for k in ALL}       # regular-only subtotal
 reg26_valid = sum(reg26.values())
-inc = {k: c2['votes'][k] - c1['votes'][k] for k in ALL}            # 11:16 -> 12:44, all envelopes (regular boxes were complete)
+inc = {k: c2['votes'][k] - c1['votes'][k] for k in ALL}            # 11:16 -> 18:04, all envelopes (regular boxes were complete)
 inc_valid = sum(inc.values())
 env_now = {k: env_votes_1116[k] + inc[k] for k in ALL}
 env_now_valid = sum(env_now.values())
@@ -198,7 +202,7 @@ regular_ballots = c1['valid'] + c1['invalid'] - ENV26[-1]['n']
 env_ballots_now = c2['valid'] + c2['invalid'] - regular_ballots
 env_total_hi = VOTERS_2200 - regular_ballots                       # if the 22:00 figure equals the final total
 env_total_mid = round(VOTERS_2200 * TOTAL_FACTOR_2022) - regular_ballots
-env_total_lo = ENV_TOTAL_MIN
+env_total_lo = max(ENV_TOTAL_MIN, env_ballots_now)   # CEC 29.10 16:50: envelope count finished; at least what is already counted
 rem_lo = (env_total_lo - env_ballots_now) * (1 - ENV_INVALID_RATE)
 rem_hi = (env_total_hi - env_ballots_now) * (1 - ENV_INVALID_RATE)
 # batches (non-cumulative) for heterogeneity
@@ -207,7 +211,7 @@ prev_n, prev = 0, {k: 0.0 for k in ALL}
 for b in ENV26:
     p = env_pct(b); cum = {k: p[k] / 100 * b['n'] for k in ALL}; n = b['n'] - prev_n
     batches.append({'n': n, 'pct': {k: 100 * (cum[k] - prev[k]) / n for k in ALL}, 'src': b['src']}); prev_n, prev = b['n'], cum
-batches.append({'n': inc_valid, 'pct': {k: 100 * inc[k] / inc_valid for k in ALL}, 'src': 'machria 11:16→12:44'})
+batches.append({'n': inc_valid, 'pct': {k: 100 * inc[k] / inc_valid for k in ALL}, 'src': 'machria 11:16→18:04'})
 last2 = batches[-2:]
 mu = {k: sum(b['pct'][k] * b['n'] for b in last2) / sum(b['n'] for b in last2) for k in ALL}
 envcum = {k: 100 * env_now[k] / env_now_valid for k in ALL}
@@ -294,7 +298,9 @@ for key in ('c1116',):
     c = COUNT26[key]; snaps.append({'asOf': c['asOf'], 'label': c['label'], 'valid': c['valid'], 'seats': bader_ofer(c['votes'], AGREEMENTS), 'approxFromPct': False})
 snaps.sort(key=lambda s: s['asOf'])
 # validation of the seat function against published unofficial calcs
-check_machria_1244 = bader_ofer(c2['votes'], AGREEMENTS)
+COUNT26['c1244']['votes'].setdefault('other', COUNT26['c1244']['valid'] - sum(COUNT26['c1244']['votes'].values()))
+check_machria_1244 = bader_ofer(COUNT26['c1244']['votes'], AGREEMENTS)
+check_machria_1804 = bader_ofer(c2['votes'], AGREEMENTS)
 check_iie_1132_noagr = bader_ofer(c1['votes'])
 
 # ---- history summary + "unusual"
@@ -342,7 +348,7 @@ out = {
               'polls': polls_cmp, 'counts': snaps},
   'methodB': {'ratio': ratio26, 'envPred': liveCheckB, 'mae': liveCheckB_mae},
   'pseudoBacktestA': pseudoA,
-  'checks': {'machria1244': check_machria_1244, 'iie1132NoAgreements': check_iie_1132_noagr},
+  'checks': {'machria1244': check_machria_1244, 'machria1804': check_machria_1804, 'iie1132NoAgreements': check_iie_1132_noagr},
   'history': [{k: v for k, v in h.items() if not k.startswith('_')} for h in hist],
   'y26': y26, 'backtest': backtest,
   'backtestSummary': {'mae': r(st.mean(b['mae'] for b in backtest), 3), 'maxErr': max(b['maxErr'] for b in backtest),

@@ -1,19 +1,23 @@
 {
  "title": "תחזית והקשר היסטורי",
  "disclaimer": "הערכה סטטיסטית, לא תוצאה רשמית",
- "generated": "2026-10-29T12:44+02:00",
+ "generated": "2026-10-29T18:04+02:00",
  "seed": 2026,
  "nSim": 20000,
  "threshold": 3.25,
  "count": {
-  "asOf": "2026-10-29T12:44+02:00",
-  "label": "כל 12,018 הקלפיות הרגילות + 314 קלפיות מעטפות כפולות",
-  "valid": 5409377,
-  "invalid": 24285,
+  "asOf": "2026-10-29T18:04+02:00",
+  "label": "כל 12,018 הקלפיות הרגילות + 826 קלפיות מעטפות כפולות",
+  "valid": 5653178,
+  "invalid": 25633,
   "sources": [
    {
     "url": "https://machria.com/elections-2026",
-    "note": "עדכון 12:44"
+    "note": "עדכון 18:04"
+   },
+   {
+    "url": "https://www.ynet.co.il/news/article/s1bla0xame",
+    "note": "ועדת הבחירות, 16:50: ספירת המעטפות הכפולות הסתיימה"
    }
   ],
   "prev": {
@@ -36,17 +40,17 @@
   }
  },
  "envelopes": {
-  "countedNow": 207717,
-  "countedValidNow": 206063,
+  "countedNow": 452866,
+  "countedValidNow": 449864,
   "regularBallots": 5225945,
   "totalRange": [
-   400000,
+   452866,
    469737
   ],
   "totalMid2022Factor": 412780,
   "remainingValidRange": [
-   190582,
-   259703
+   0,
+   16722
   ],
   "voters2200": 5695682,
   "eligible": 7331981,
@@ -112,23 +116,23 @@
     }
    },
    {
-    "n": 53962,
-    "src": "machria 11:16→12:44",
+    "n": 297763,
+    "src": "machria 11:16→18:04",
     "pct": {
-     "likud": 18.27,
-     "yashar": 13.91,
-     "beyachad": 12.0,
-     "joint": 6.28,
-     "dems": 5.29,
-     "raam": 4.48,
-     "yb": 6.08,
-     "otzma": 7.66,
-     "utj": 4.51,
-     "shas": 5.12,
-     "rzz": 8.98,
-     "miluim": 3.7,
-     "amcha": 2.37,
-     "other": 1.35
+     "likud": 18.72,
+     "yashar": 14.52,
+     "beyachad": 12.45,
+     "joint": 4.93,
+     "dems": 5.85,
+     "raam": 4.24,
+     "yb": 5.85,
+     "otzma": 7.77,
+     "utj": 4.17,
+     "shas": 5.06,
+     "rzz": 8.96,
+     "miluim": 3.66,
+     "amcha": 2.42,
+     "other": 1.41
     }
    }
   ],
@@ -188,33 +192,32 @@
   {
    "id": "likud",
    "name": "הליכוד",
-   "counted": 20.59,
-   "votes": 1113916,
-   "envSoFar": 18.47,
-   "envRemainingMu": 18.32,
-   "envRemainingSd": 2.75,
+   "counted": 20.52,
+   "votes": 1159791,
+   "envSoFar": 18.66,
+   "envRemainingMu": 18.63,
+   "envRemainingSd": 2.8,
    "regOnly": 20.68,
    "histRatio": 1.008,
    "histRatioN": 2,
    "pct": {
-    "p10": 20.38,
-    "p50": 20.5,
-    "p90": 20.62
+    "p10": 20.51,
+    "p50": 20.51,
+    "p90": 20.52
    },
    "seats": {
-    "p10": 26,
+    "p10": 27,
     "p50": 27,
     "p90": 27,
-    "mean": 26.85
+    "mean": 27
    },
    "seatsNoAgr": {
     "p50": 27,
-    "mean": 27.0
+    "mean": 27
    },
-   "agreementEffect": -0.15,
+   "agreementEffect": 0.0,
    "pSeats": {
-    "26": 14.8,
-    "27": 85.2
+    "27": 100.0
    },
    "pPass": 100.0,
    "modal": 27
@@ -222,33 +225,32 @@
   {
    "id": "yashar",
    "name": "ישר! (איזנקוט)",
-   "counted": 16.12,
-   "votes": 871828,
-   "envSoFar": 14.98,
-   "envRemainingMu": 14.84,
-   "envRemainingSd": 2.23,
+   "counted": 16.05,
+   "votes": 907566,
+   "envSoFar": 14.81,
+   "envRemainingMu": 14.73,
+   "envRemainingSd": 2.21,
    "regOnly": 16.16,
    "histRatio": 1.074,
    "histRatioN": 2,
    "pct": {
-    "p10": 15.96,
-    "p50": 16.07,
-    "p90": 16.17
+    "p10": 16.05,
+    "p50": 16.05,
+    "p90": 16.06
    },
    "seats": {
     "p10": 21,
     "p50": 21,
     "p90": 21,
-    "mean": 20.91
+    "mean": 21
    },
    "seatsNoAgr": {
     "p50": 21,
-    "mean": 21.0
+    "mean": 21
    },
-   "agreementEffect": -0.09,
+   "agreementEffect": 0.0,
    "pSeats": {
-    "20": 8.8,
-    "21": 91.2
+    "21": 100.0
    },
    "pPass": 100.0,
    "modal": 21
@@ -256,24 +258,24 @@
   {
    "id": "beyachad",
    "name": "ביחד (בנט–לפיד)",
-   "counted": 9.18,
-   "votes": 496469,
-   "envSoFar": 13.63,
-   "envRemainingMu": 13.16,
-   "envRemainingSd": 1.97,
+   "counted": 9.32,
+   "votes": 527064,
+   "envSoFar": 13.04,
+   "envRemainingMu": 12.77,
+   "envRemainingSd": 1.92,
    "regOnly": 9.0,
    "histRatio": 0.967,
    "histRatioN": 2,
    "pct": {
-    "p10": 9.24,
+    "p10": 9.32,
     "p50": 9.33,
-    "p90": 9.43
+    "p90": 9.33
    },
    "seats": {
     "p10": 12,
     "p50": 12,
     "p90": 12,
-    "mean": 12.0
+    "mean": 12
    },
    "seatsNoAgr": {
     "p50": 12,
@@ -281,8 +283,7 @@
    },
    "agreementEffect": 0.0,
    "pSeats": {
-    "12": 100.0,
-    "13": 0.1
+    "12": 100.0
    },
    "pPass": 100.0,
    "modal": 12
@@ -290,33 +291,32 @@
   {
    "id": "joint",
    "name": "הרשימה המשותפת",
-   "counted": 9.01,
-   "votes": 487472,
-   "envSoFar": 3.58,
-   "envRemainingMu": 4.19,
-   "envRemainingSd": 1.5,
+   "counted": 8.82,
+   "votes": 498763,
+   "envSoFar": 4.15,
+   "envRemainingMu": 4.47,
+   "envRemainingSd": 0.87,
    "regOnly": 9.23,
    "histRatio": 0.498,
    "histRatioN": 2,
    "pct": {
-    "p10": 8.74,
+    "p10": 8.81,
     "p50": 8.82,
-    "p90": 8.89
+    "p90": 8.82
    },
    "seats": {
     "p10": 11,
     "p50": 11,
-    "p90": 12,
-    "mean": 11.32
+    "p90": 11,
+    "mean": 11
    },
    "seatsNoAgr": {
     "p50": 11,
-    "mean": 11.0
+    "mean": 11
    },
-   "agreementEffect": 0.32,
+   "agreementEffect": 0.0,
    "pSeats": {
-    "11": 67.8,
-    "12": 32.2
+    "11": 100.0
    },
    "pPass": 100.0,
    "modal": 11
@@ -324,18 +324,18 @@
   {
    "id": "dems",
    "name": "הדמוקרטים",
-   "counted": 6.46,
-   "votes": 349488,
-   "envSoFar": 5.78,
-   "envRemainingMu": 5.9,
+   "counted": 6.44,
+   "votes": 364053,
+   "envSoFar": 5.88,
+   "envRemainingMu": 5.95,
    "envRemainingSd": 0.89,
    "regOnly": 6.49,
    "histRatio": 1.236,
    "histRatioN": 2,
    "pct": {
-    "p10": 6.39,
+    "p10": 6.44,
     "p50": 6.44,
-    "p90": 6.48
+    "p90": 6.44
    },
    "seats": {
     "p10": 8,
@@ -357,33 +357,32 @@
   {
    "id": "raam",
    "name": "רע\"ם",
-   "counted": 6.01,
-   "votes": 325192,
-   "envSoFar": 2.64,
-   "envRemainingMu": 3.06,
-   "envRemainingSd": 1.04,
+   "counted": 5.93,
+   "votes": 335391,
+   "envSoFar": 3.48,
+   "envRemainingMu": 3.77,
+   "envRemainingSd": 0.92,
    "regOnly": 6.15,
    "histRatio": 0.398,
    "histRatioN": 2,
    "pct": {
-    "p10": 5.84,
-    "p50": 5.89,
-    "p90": 5.95
+    "p10": 5.93,
+    "p50": 5.93,
+    "p90": 5.93
    },
    "seats": {
-    "p10": 7,
-    "p50": 7,
+    "p10": 8,
+    "p50": 8,
     "p90": 8,
-    "mean": 7.44
+    "mean": 8
    },
    "seatsNoAgr": {
     "p50": 7,
-    "mean": 7.01
+    "mean": 7
    },
-   "agreementEffect": 0.43,
+   "agreementEffect": 1.0,
    "pSeats": {
-    "7": 56.1,
-    "8": 43.9
+    "8": 100.0
    },
    "pPass": 100.0,
    "modal": 8
@@ -391,33 +390,32 @@
   {
    "id": "yb",
    "name": "ישראל ביתנו",
-   "counted": 5.94,
-   "votes": 321049,
-   "envSoFar": 6.03,
-   "envRemainingMu": 6.01,
-   "envRemainingSd": 0.9,
+   "counted": 5.93,
+   "votes": 335185,
+   "envSoFar": 5.91,
+   "envRemainingMu": 5.87,
+   "envRemainingSd": 0.88,
    "regOnly": 5.93,
    "histRatio": 1.243,
    "histRatioN": 2,
    "pct": {
-    "p10": 5.89,
-    "p50": 5.94,
-    "p90": 5.98
+    "p10": 5.93,
+    "p50": 5.93,
+    "p90": 5.93
    },
    "seats": {
     "p10": 7,
     "p50": 7,
     "p90": 7,
-    "mean": 7.03
+    "mean": 7
    },
    "seatsNoAgr": {
     "p50": 7,
-    "mean": 7.05
+    "mean": 7
    },
-   "agreementEffect": -0.01,
+   "agreementEffect": 0.0,
    "pSeats": {
-    "7": 96.6,
-    "8": 3.4
+    "7": 100.0
    },
    "pPass": 100.0,
    "modal": 7
@@ -425,18 +423,18 @@
   {
    "id": "otzma",
    "name": "עוצמה יהודית",
-   "counted": 5.63,
-   "votes": 304809,
-   "envSoFar": 7.92,
-   "envRemainingMu": 7.7,
+   "counted": 5.73,
+   "votes": 323800,
+   "envSoFar": 7.85,
+   "envRemainingMu": 7.76,
    "envRemainingSd": 1.16,
    "regOnly": 5.54,
    "histRatio": 1.393,
    "histRatioN": 2,
    "pct": {
-    "p10": 5.66,
-    "p50": 5.72,
-    "p90": 5.78
+    "p10": 5.73,
+    "p50": 5.73,
+    "p90": 5.73
    },
    "seats": {
     "p10": 7,
@@ -458,18 +456,18 @@
   {
    "id": "utj",
    "name": "יהדות התורה",
-   "counted": 5.57,
-   "votes": 301487,
-   "envSoFar": 4.17,
-   "envRemainingMu": 4.56,
-   "envRemainingSd": 0.68,
+   "counted": 5.51,
+   "votes": 311473,
+   "envSoFar": 4.13,
+   "envRemainingMu": 4.27,
+   "envRemainingSd": 0.64,
    "regOnly": 5.63,
    "histRatio": 0.583,
    "histRatioN": 2,
    "pct": {
-    "p10": 5.5,
-    "p50": 5.53,
-    "p90": 5.57
+    "p10": 5.51,
+    "p50": 5.51,
+    "p90": 5.51
    },
    "seats": {
     "p10": 7,
@@ -491,33 +489,32 @@
   {
    "id": "shas",
    "name": "ש\"ס",
-   "counted": 5.28,
-   "votes": 285598,
-   "envSoFar": 4.65,
-   "envRemainingMu": 5.03,
-   "envRemainingSd": 0.75,
+   "counted": 5.27,
+   "votes": 297889,
+   "envSoFar": 4.86,
+   "envRemainingMu": 5.04,
+   "envRemainingSd": 0.76,
    "regOnly": 5.3,
    "histRatio": 0.795,
    "histRatioN": 2,
    "pct": {
-    "p10": 5.23,
+    "p10": 5.27,
     "p50": 5.27,
-    "p90": 5.31
+    "p90": 5.27
    },
    "seats": {
     "p10": 6,
     "p50": 6,
-    "p90": 7,
-    "mean": 6.44
+    "p90": 6,
+    "mean": 6
    },
    "seatsNoAgr": {
     "p50": 7,
-    "mean": 6.94
+    "mean": 7
    },
-   "agreementEffect": -0.5,
+   "agreementEffect": -1.0,
    "pSeats": {
-    "6": 56.0,
-    "7": 44.0
+    "6": 100.0
    },
    "pPass": 100.0,
    "modal": 6
@@ -525,33 +522,32 @@
   {
    "id": "rzz",
    "name": "הציונות הדתית–זהות",
-   "counted": 4.9,
-   "votes": 265109,
-   "envSoFar": 10.15,
-   "envRemainingMu": 9.51,
-   "envRemainingSd": 1.43,
+   "counted": 5.08,
+   "votes": 286934,
+   "envSoFar": 9.5,
+   "envRemainingMu": 9.16,
+   "envRemainingSd": 1.37,
    "regOnly": 4.69,
    "histRatio": 1.393,
    "histRatioN": 2,
    "pct": {
-    "p10": 5.01,
+    "p10": 5.08,
     "p50": 5.08,
-    "p90": 5.16
+    "p90": 5.09
    },
    "seats": {
     "p10": 6,
     "p50": 6,
     "p90": 6,
-    "mean": 6.0
+    "mean": 6
    },
    "seatsNoAgr": {
     "p50": 6,
-    "mean": 6.0
+    "mean": 6
    },
-   "agreementEffect": -0.0,
+   "agreementEffect": 0.0,
    "pSeats": {
-    "6": 99.9,
-    "7": 0.1
+    "6": 100.0
    },
    "pPass": 100.0,
    "modal": 6
@@ -559,18 +555,18 @@
   {
    "id": "miluim",
    "name": "המילואימניקים והכלכלית",
-   "counted": 2.68,
-   "votes": 144766,
-   "envSoFar": 3.9,
-   "envRemainingMu": 3.81,
-   "envRemainingSd": 0.57,
+   "counted": 2.72,
+   "votes": 153674,
+   "envSoFar": 3.77,
+   "envRemainingMu": 3.71,
+   "envRemainingSd": 0.56,
    "regOnly": 2.63,
    "histRatio": 1.0,
    "histRatioN": 0,
    "pct": {
-    "p10": 2.69,
+    "p10": 2.72,
     "p50": 2.72,
-    "p90": 2.75
+    "p90": 2.72
    },
    "seats": {
     "p10": 0,
@@ -592,18 +588,18 @@
   {
    "id": "amcha",
    "name": "עמך ישראל",
-   "counted": 1.64,
-   "votes": 88718,
-   "envSoFar": 2.64,
-   "envRemainingMu": 2.52,
-   "envRemainingSd": 0.38,
+   "counted": 1.67,
+   "votes": 94655,
+   "envSoFar": 2.53,
+   "envRemainingMu": 2.47,
+   "envRemainingSd": 0.37,
    "regOnly": 1.6,
    "histRatio": 1.0,
    "histRatioN": 0,
    "pct": {
-    "p10": 1.66,
+    "p10": 1.67,
     "p50": 1.68,
-    "p90": 1.7
+    "p90": 1.68
    },
    "seats": {
     "p10": 0,
@@ -638,7 +634,7 @@
   "miluim": 0,
   "amcha": 0
  },
- "modalShare": 31.0,
+ "modalShare": 100.0,
  "blocs": [
   {
    "id": "coalition",
@@ -652,11 +648,9 @@
    ],
    "p10": 53,
    "p50": 53,
-   "p90": 54,
+   "p90": 53,
    "dist": {
-    "52": 0.7,
-    "53": 69.4,
-    "54": 29.9
+    "53": 100.0
    }
   },
   {
@@ -672,9 +666,7 @@
    "p50": 48,
    "p90": 48,
    "dist": {
-    "47": 7.9,
-    "48": 89.6,
-    "49": 2.5
+    "48": 100.0
    }
   },
   {
@@ -684,12 +676,11 @@
     "joint",
     "raam"
    ],
-   "p10": 18,
+   "p10": 19,
    "p50": 19,
    "p90": 19,
    "dist": {
-    "18": 23.9,
-    "19": 76.1
+    "19": 100.0
    }
   },
   {
@@ -726,48 +717,48 @@
   },
   "margins": {
    "likud": {
-    "gain": 41759,
-    "lose": 6954
+    "gain": 43841,
+    "lose": 10862
    },
    "yashar": {
-    "gain": 40900,
-    "lose": 7197
+    "gain": 43971,
+    "lose": 9486
    },
    "beyachad": {
-    "gain": 17589,
-    "lose": 24234
+    "gain": 17342,
+    "lose": 24619
    },
    "joint": {
-    "gain": 1216,
-    "lose": 40295
+    "gain": 4422,
+    "lose": 37542
    },
    "dems": {
-    "gain": 25179,
-    "lose": 17929
+    "gain": 24935,
+    "lose": 18342
    },
    "raam": {
-    "gain": 44766,
-    "lose": 811
+    "gain": 43328,
+    "lose": 2948
    },
    "yb": {
-    "gain": 11955,
-    "lose": 34602
+    "gain": 14363,
+    "lose": 35761
    },
    "otzma": {
-    "gain": 26895,
-    "lose": 17815
+    "gain": 26820,
+    "lose": 19379
    },
    "utj": {
-    "gain": 27576,
-    "lose": 14841
+    "gain": 29096,
+    "lose": 13520
    },
    "shas": {
-    "gain": 2156,
-    "lose": 49246
+    "gain": 4580,
+    "lose": 48665
    },
    "rzz": {
-    "gain": 12975,
-    "lose": 29810
+    "gain": 13391,
+    "lose": 29623
    }
   }
  },
@@ -841,7 +832,7 @@
      "miluim": 0,
      "amcha": 0
     },
-    "misallocated": 4.5
+    "misallocated": 5.0
    },
    {
     "id": "2026-c12-init",
@@ -864,7 +855,7 @@
      "miluim": 0,
      "amcha": 0
     },
-    "misallocated": 5.5
+    "misallocated": 6.0
    },
    {
     "id": "2026-c13-init",
@@ -887,7 +878,7 @@
      "miluim": 0,
      "amcha": 0
     },
-    "misallocated": 4.5
+    "misallocated": 5.0
    },
    {
     "id": "2026-c14-init",
@@ -910,7 +901,7 @@
      "miluim": 0,
      "amcha": 0
     },
-    "misallocated": 7.5
+    "misallocated": 8.0
    },
    {
     "id": "2026-i24-init",
@@ -933,7 +924,7 @@
      "miluim": 0,
      "amcha": 0
     },
-    "misallocated": 5.5
+    "misallocated": 6.0
    },
    {
     "id": "2026-c16-init",
@@ -956,7 +947,7 @@
      "miluim": 0,
      "amcha": 0
     },
-    "misallocated": 5.5
+    "misallocated": 6.0
    },
    {
     "id": "2026-kan-u1",
@@ -979,7 +970,7 @@
      "miluim": 0,
      "amcha": 0
     },
-    "misallocated": 3.5
+    "misallocated": 4.0
    },
    {
     "id": "2026-c13-u1",
@@ -1002,7 +993,7 @@
      "miluim": 0,
      "amcha": 0
     },
-    "misallocated": 3.5
+    "misallocated": 4.0
    },
    {
     "id": "2026-c12-u1",
@@ -1025,7 +1016,7 @@
      "miluim": 0,
      "amcha": 0
     },
-    "misallocated": 5.5
+    "misallocated": 6.0
    },
    {
     "id": "2026-c14-u1",
@@ -1048,7 +1039,7 @@
      "miluim": 0,
      "amcha": 0
     },
-    "misallocated": 9.5
+    "misallocated": 10.0
    },
    {
     "id": "2026-c13-u2",
@@ -1071,7 +1062,7 @@
      "miluim": 0,
      "amcha": 0
     },
-    "misallocated": 2.5
+    "misallocated": 3.0
    },
    {
     "id": "2026-kan-u2",
@@ -1094,7 +1085,7 @@
      "miluim": 0,
      "amcha": 0
     },
-    "misallocated": 2.5
+    "misallocated": 3.0
    },
    {
     "id": "2026-c12-u2",
@@ -1117,7 +1108,7 @@
      "miluim": 0,
      "amcha": 0
     },
-    "misallocated": 2.5
+    "misallocated": 3.0
    }
   ],
   "counts": [
@@ -1220,6 +1211,27 @@
      "otzma": 7,
      "utj": 7,
      "shas": 7,
+     "rzz": 6,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "approxFromPct": true
+   },
+   {
+    "asOf": "2026-10-29T18:04+02:00",
+    "label": "ספירה חלקית (כל 12,018 הקלפיות הרגילות ועוד 826 קלפיות של מעטפות כפולות; ספירת המעטפות הסתיימה, קליטת התוצאות נמשכת)",
+    "valid": 5653178,
+    "seats": {
+     "likud": 27,
+     "yashar": 21,
+     "beyachad": 12,
+     "joint": 11,
+     "dems": 8,
+     "raam": 8,
+     "yb": 7,
+     "otzma": 7,
+     "utj": 7,
+     "shas": 6,
      "rzz": 6,
      "miluim": 0,
      "amcha": 0
@@ -1331,63 +1343,63 @@
   "envPred": {
    "likud": {
     "predEnv": 21.55,
-    "obsEnv": 18.47
+    "obsEnv": 18.66
    },
    "yashar": {
     "predEnv": 17.94,
-    "obsEnv": 14.98
+    "obsEnv": 14.81
    },
    "beyachad": {
     "predEnv": 9.0,
-    "obsEnv": 13.63
+    "obsEnv": 13.04
    },
    "joint": {
     "predEnv": 4.75,
-    "obsEnv": 3.58
+    "obsEnv": 4.15
    },
    "dems": {
     "predEnv": 8.29,
-    "obsEnv": 5.78
+    "obsEnv": 5.88
    },
    "raam": {
     "predEnv": 2.53,
-    "obsEnv": 2.64
+    "obsEnv": 3.48
    },
    "yb": {
     "predEnv": 7.62,
-    "obsEnv": 6.03
+    "obsEnv": 5.91
    },
    "otzma": {
     "predEnv": 7.98,
-    "obsEnv": 7.92
+    "obsEnv": 7.85
    },
    "utj": {
     "predEnv": 3.39,
-    "obsEnv": 4.17
+    "obsEnv": 4.13
    },
    "shas": {
     "predEnv": 4.36,
-    "obsEnv": 4.65
+    "obsEnv": 4.86
    },
    "rzz": {
     "predEnv": 6.76,
-    "obsEnv": 10.15
+    "obsEnv": 9.5
    },
    "miluim": {
     "predEnv": 2.72,
-    "obsEnv": 3.9
+    "obsEnv": 3.77
    },
    "amcha": {
     "predEnv": 1.65,
-    "obsEnv": 2.64
+    "obsEnv": 2.53
    }
   },
-  "mae": 1.75
+  "mae": 1.68
  },
  "pseudoBacktestA": {
-  "mae": 0.009,
-  "max": 0.033,
-  "seatErr": 0
+  "mae": 0.037,
+  "max": 0.107,
+  "seatErr": 1
  },
  "checks": {
   "machria1244": {
@@ -1401,6 +1413,21 @@
    "otzma": 7,
    "utj": 7,
    "shas": 7,
+   "rzz": 6,
+   "miluim": 0,
+   "amcha": 0
+  },
+  "machria1804": {
+   "likud": 27,
+   "yashar": 21,
+   "beyachad": 12,
+   "joint": 11,
+   "dems": 8,
+   "raam": 8,
+   "yb": 7,
+   "otzma": 7,
+   "utj": 7,
+   "shas": 6,
    "rzz": 6,
    "miluim": 0,
    "amcha": 0
@@ -2333,21 +2360,21 @@
  ],
  "y26": {
   "turnout2200": 77.7,
-  "turnoutFinalEst": 77.2,
+  "turnoutFinalEst": 77.6,
   "turnoutFinalRange": [
-   76.7,
+   77.5,
    77.7
   ],
   "envShareEst": [
-   7.1,
+   8.0,
    8.2
   ],
   "wastedPct": 5.4,
   "enpVotes": 9.24,
   "enpSeats": 8.08,
   "arabEnvVsAll": {
-   "env": 6.22,
-   "all": 15.02,
+   "env": 7.63,
+   "all": 14.76,
    "k25env": 5.05,
    "k25all": 10.73
   }
@@ -2416,7 +2443,7 @@
  "unusual": [
   {
    "id": "turnout",
-   "text": "שיעור ההצבעה: לפי ההערכה כאן 77.2% (טווח 76.7%–77.7%; הנתון של הוועדה ל-22:00 הוא 77.7%). זה גבוה ב-5.2 נקודות לפחות מהשיעור הסופי הגבוה ביותר בחמש המערכות הקודמות (71.5%, מרץ 2020)."
+   "text": "שיעור ההצבעה: לפי ההערכה כאן 77.6% (טווח 77.5%–77.7%; הנתון של הוועדה ל-22:00 הוא 77.7%). זה גבוה ב-6.0 נקודות לפחות מהשיעור הסופי הגבוה ביותר בחמש המערכות הקודמות (71.5%, מרץ 2020)."
   },
   {
    "id": "lists",
@@ -2424,11 +2451,11 @@
   },
   {
    "id": "arabEnv",
-   "text": "במעטפות הכפולות שנספרו עד כה הרשימה המשותפת ורע\"ם קיבלו יחד 6.2%, לעומת 15.0% בספירה הכוללת (יחס 0.41). ב-2022 היחס המקביל (חד\"ש-תע\"ל, בל\"ד ורע\"ם) היה 5.0% מול 10.7% (יחס 0.47)."
+   "text": "במעטפות הכפולות שנספרו עד כה הרשימה המשותפת ורע\"ם קיבלו יחד 7.6%, לעומת 14.8% בספירה הכוללת (יחס 0.52). ב-2022 היחס המקביל (חד\"ש-תע\"ל, בל\"ד ורע\"ם) היה 5.0% מול 10.7% (יחס 0.47)."
   },
   {
    "id": "envShare",
-   "text": "משקל המעטפות הכפולות: לפי ההערכה 7.1%–8.2% מהמצביעים, פחות מ-2021 ו-2022 (9.6%, 9.7%), ובערך כמו ב-2020 (7.2%) או מעט יותר."
+   "text": "משקל המעטפות הכפולות: לפי ההערכה 8.0%–8.2% מהמצביעים, פחות מ-2021 ו-2022 (9.6%, 9.7%), ובערך כמו ב-2020 (7.2%) או מעט יותר."
   },
   {
    "id": "wasted",
@@ -2436,7 +2463,7 @@
   },
   {
    "id": "envMix",
-   "text": "הרכב המעטפות משתנה מאוד בין מנות הספירה: הציונות הדתית–זהות קיבלה 13.4% במנה הראשונה שדווחה ו-9.0% במנה האחרונה, והרשימה המשותפת 0.9% ו-6.3%. לכן טווחי ההערכה רחבים יותר מטעות דגימה רגילה."
+   "text": "הרכב המעטפות משתנה מאוד בין מנות הספירה: הציונות הדתית–זהות קיבלה 13.4% במנה הראשונה שדווחה ו-9.0% במנה האחרונה, והרשימה המשותפת 0.9% ו-4.9%. לכן טווחי ההערכה רחבים יותר מטעות דגימה רגילה."
   }
  ]
 }

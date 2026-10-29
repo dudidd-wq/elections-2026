@@ -26,6 +26,8 @@ const AG = O.agreements;
 const c1244 = { likud: 26, yashar: 21, beyachad: 12, joint: 11, dems: 8, raam: 8, yb: 7, otzma: 7, utj: 7, shas: 7, rzz: 6, miluim: 0, amcha: 0 };
 const c1132 = Object.assign({}, c1244, { likud: 27, raam: 7 });
 ok(eq(O.checks.machria1244, c1244), 'python BO = machria 12:44');
+const c1804 = Object.assign({}, c1244, { likud: 27, shas: 6 });
+ok(eq(O.checks.machria1804, c1804), 'python BO = machria 18:04');
 ok(eq(O.checks.iie1132NoAgreements, c1132), 'python BO = IIE 11:32 (no agreements)');
 const v1244 = { likud: 1113916, yashar: 871828, beyachad: 496469, joint: 487472, dems: 349488, raam: 325192, yb: 321049, otzma: 304809, utj: 301487, shas: 285598, rzz: 265109, miluim: 144766, amcha: 88718 }; v1244.other = 5409377 - sum(v1244);
 const v1116 = { likud: 1104055, yashar: 864323, beyachad: 489995, joint: 484083, dems: 346632, raam: 322775, yb: 317770, otzma: 300676, utj: 299052, shas: 282835, rzz: 260264, miluim: 142768, amcha: 87440 }; v1116.other = 5355415 - sum(v1116);
