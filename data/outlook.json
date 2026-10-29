@@ -1,0 +1,2442 @@
+{
+ "title": "תחזית והקשר היסטורי",
+ "disclaimer": "הערכה סטטיסטית, לא תוצאה רשמית",
+ "generated": "2026-10-29T12:44+02:00",
+ "seed": 2026,
+ "nSim": 20000,
+ "threshold": 3.25,
+ "count": {
+  "asOf": "2026-10-29T12:44+02:00",
+  "label": "כל 12,018 הקלפיות הרגילות + 314 קלפיות מעטפות כפולות",
+  "valid": 5409377,
+  "invalid": 24285,
+  "sources": [
+   {
+    "url": "https://machria.com/elections-2026",
+    "note": "עדכון 12:44"
+   }
+  ],
+  "prev": {
+   "asOf": "2026-10-29T11:16+02:00",
+   "valid": 5355415,
+   "sources": [
+    {
+     "url": "https://machria.com/elections-2026",
+     "note": "עדכון 11:16"
+    },
+    {
+     "url": "https://israelielections.com/2026/results/",
+     "note": "עדכון 11:32, אותם מספרים"
+    },
+    {
+     "url": "https://www.kipa.co.il/%D7%97%D7%93%D7%A9%D7%95%D7%AA/1235019-0/",
+     "note": "אותם מספרים, 11:16"
+    }
+   ]
+  }
+ },
+ "envelopes": {
+  "countedNow": 207717,
+  "countedValidNow": 206063,
+  "regularBallots": 5225945,
+  "totalRange": [
+   400000,
+   469737
+  ],
+  "totalMid2022Factor": 412780,
+  "remainingValidRange": [
+   190582,
+   259703
+  ],
+  "voters2200": 5695682,
+  "eligible": 7331981,
+  "batches": [
+   {
+    "n": 29253,
+    "src": "https://www.ynet.co.il/news/article/hk3f7wxafx",
+    "pct": {
+     "likud": 18.5,
+     "yashar": 14.8,
+     "beyachad": 15.6,
+     "joint": 0.9,
+     "dems": 5.2,
+     "raam": 0.9,
+     "yb": 6.3,
+     "otzma": 9.4,
+     "utj": 2.9,
+     "shas": 3.1,
+     "rzz": 13.4,
+     "miluim": 4.4,
+     "amcha": 3.24,
+     "other": 1.36
+    }
+   },
+   {
+    "n": 35051,
+    "src": "https://www.hidabroot.org/article/1229030",
+    "pct": {
+     "likud": 19.05,
+     "yashar": 15.72,
+     "beyachad": 13.95,
+     "joint": 3.28,
+     "dems": 5.75,
+     "raam": 2.37,
+     "yb": 5.93,
+     "otzma": 7.57,
+     "utj": 3.63,
+     "shas": 4.38,
+     "rzz": 10.1,
+     "miluim": 3.85,
+     "amcha": 2.62,
+     "other": 1.8
+    }
+   },
+   {
+    "n": 89154,
+    "src": "https://www.ynet.co.il/news/article/r1dwsce6zx",
+    "pct": {
+     "likud": 18.35,
+     "yashar": 15.4,
+     "beyachad": 13.86,
+     "joint": 2.92,
+     "dems": 6.27,
+     "raam": 2.2,
+     "yb": 5.96,
+     "otzma": 7.73,
+     "utj": 4.59,
+     "shas": 4.97,
+     "rzz": 9.83,
+     "miluim": 3.88,
+     "amcha": 2.61,
+     "other": 1.43
+    }
+   },
+   {
+    "n": 53962,
+    "src": "machria 11:16→12:44",
+    "pct": {
+     "likud": 18.27,
+     "yashar": 13.91,
+     "beyachad": 12.0,
+     "joint": 6.28,
+     "dems": 5.29,
+     "raam": 4.48,
+     "yb": 6.08,
+     "otzma": 7.66,
+     "utj": 4.51,
+     "shas": 5.12,
+     "rzz": 8.98,
+     "miluim": 3.7,
+     "amcha": 2.37,
+     "other": 1.35
+    }
+   }
+  ],
+  "sources": [
+   {
+    "url": "https://www.ynet.co.il/news/article/hk3f7wxafx"
+   },
+   {
+    "url": "https://www.hidabroot.org/article/1229030"
+   },
+   {
+    "url": "https://www.ynet.co.il/news/article/r1dwsce6zx"
+   },
+   {
+    "url": "https://www.jns.org/israel-news/israel-votes-2022-turnout-as-of-10-a-m-highest-since-1981",
+    "note": "2022: 4,843,023 בנתון של 22:00"
+   },
+   {
+    "url": "https://www.c14.co.il/article/1763324",
+    "note": "12,018 קלפיות רגילות"
+   }
+  ]
+ },
+ "agreements": [
+  [
+   "yashar",
+   "dems"
+  ],
+  [
+   "likud",
+   "rzz"
+  ],
+  [
+   "beyachad",
+   "yb"
+  ],
+  [
+   "shas",
+   "utj"
+  ],
+  [
+   "raam",
+   "joint"
+  ]
+ ],
+ "agreementSources": [
+  {
+   "url": "https://hakol-bo.co.il/elections-2026",
+   "note": "רשימת הסכמי העודפים כפי שפורסמה (ועדת הבחירות, ילקוט הפרסומים 15045, עמ׳ 1098, 19.10.2026)"
+  },
+  {
+   "url": "https://machria.com/elections-2026",
+   "note": "אותם חמישה הסכמים בין רשימות שעוברות את אחוז החסימה; עוצמה יהודית, המילואימניקים ועמך ישראל בלי הסכם"
+  }
+ ],
+ "projection": [
+  {
+   "id": "likud",
+   "name": "הליכוד",
+   "counted": 20.59,
+   "votes": 1113916,
+   "envSoFar": 18.47,
+   "envRemainingMu": 18.32,
+   "envRemainingSd": 2.75,
+   "regOnly": 20.68,
+   "histRatio": 1.008,
+   "histRatioN": 2,
+   "pct": {
+    "p10": 20.38,
+    "p50": 20.5,
+    "p90": 20.62
+   },
+   "seats": {
+    "p10": 26,
+    "p50": 27,
+    "p90": 27,
+    "mean": 26.85
+   },
+   "seatsNoAgr": {
+    "p50": 27,
+    "mean": 27.0
+   },
+   "agreementEffect": -0.15,
+   "pSeats": {
+    "26": 14.8,
+    "27": 85.2
+   },
+   "pPass": 100.0,
+   "modal": 27
+  },
+  {
+   "id": "yashar",
+   "name": "ישר! (איזנקוט)",
+   "counted": 16.12,
+   "votes": 871828,
+   "envSoFar": 14.98,
+   "envRemainingMu": 14.84,
+   "envRemainingSd": 2.23,
+   "regOnly": 16.16,
+   "histRatio": 1.074,
+   "histRatioN": 2,
+   "pct": {
+    "p10": 15.96,
+    "p50": 16.07,
+    "p90": 16.17
+   },
+   "seats": {
+    "p10": 21,
+    "p50": 21,
+    "p90": 21,
+    "mean": 20.91
+   },
+   "seatsNoAgr": {
+    "p50": 21,
+    "mean": 21.0
+   },
+   "agreementEffect": -0.09,
+   "pSeats": {
+    "20": 8.8,
+    "21": 91.2
+   },
+   "pPass": 100.0,
+   "modal": 21
+  },
+  {
+   "id": "beyachad",
+   "name": "ביחד (בנט–לפיד)",
+   "counted": 9.18,
+   "votes": 496469,
+   "envSoFar": 13.63,
+   "envRemainingMu": 13.16,
+   "envRemainingSd": 1.97,
+   "regOnly": 9.0,
+   "histRatio": 0.967,
+   "histRatioN": 2,
+   "pct": {
+    "p10": 9.24,
+    "p50": 9.33,
+    "p90": 9.43
+   },
+   "seats": {
+    "p10": 12,
+    "p50": 12,
+    "p90": 12,
+    "mean": 12.0
+   },
+   "seatsNoAgr": {
+    "p50": 12,
+    "mean": 12
+   },
+   "agreementEffect": 0.0,
+   "pSeats": {
+    "12": 100.0,
+    "13": 0.1
+   },
+   "pPass": 100.0,
+   "modal": 12
+  },
+  {
+   "id": "joint",
+   "name": "הרשימה המשותפת",
+   "counted": 9.01,
+   "votes": 487472,
+   "envSoFar": 3.58,
+   "envRemainingMu": 4.19,
+   "envRemainingSd": 1.5,
+   "regOnly": 9.23,
+   "histRatio": 0.498,
+   "histRatioN": 2,
+   "pct": {
+    "p10": 8.74,
+    "p50": 8.82,
+    "p90": 8.89
+   },
+   "seats": {
+    "p10": 11,
+    "p50": 11,
+    "p90": 12,
+    "mean": 11.32
+   },
+   "seatsNoAgr": {
+    "p50": 11,
+    "mean": 11.0
+   },
+   "agreementEffect": 0.32,
+   "pSeats": {
+    "11": 67.8,
+    "12": 32.2
+   },
+   "pPass": 100.0,
+   "modal": 11
+  },
+  {
+   "id": "dems",
+   "name": "הדמוקרטים",
+   "counted": 6.46,
+   "votes": 349488,
+   "envSoFar": 5.78,
+   "envRemainingMu": 5.9,
+   "envRemainingSd": 0.89,
+   "regOnly": 6.49,
+   "histRatio": 1.236,
+   "histRatioN": 2,
+   "pct": {
+    "p10": 6.39,
+    "p50": 6.44,
+    "p90": 6.48
+   },
+   "seats": {
+    "p10": 8,
+    "p50": 8,
+    "p90": 8,
+    "mean": 8
+   },
+   "seatsNoAgr": {
+    "p50": 8,
+    "mean": 8
+   },
+   "agreementEffect": 0.0,
+   "pSeats": {
+    "8": 100.0
+   },
+   "pPass": 100.0,
+   "modal": 8
+  },
+  {
+   "id": "raam",
+   "name": "רע\"ם",
+   "counted": 6.01,
+   "votes": 325192,
+   "envSoFar": 2.64,
+   "envRemainingMu": 3.06,
+   "envRemainingSd": 1.04,
+   "regOnly": 6.15,
+   "histRatio": 0.398,
+   "histRatioN": 2,
+   "pct": {
+    "p10": 5.84,
+    "p50": 5.89,
+    "p90": 5.95
+   },
+   "seats": {
+    "p10": 7,
+    "p50": 7,
+    "p90": 8,
+    "mean": 7.44
+   },
+   "seatsNoAgr": {
+    "p50": 7,
+    "mean": 7.01
+   },
+   "agreementEffect": 0.43,
+   "pSeats": {
+    "7": 56.1,
+    "8": 43.9
+   },
+   "pPass": 100.0,
+   "modal": 8
+  },
+  {
+   "id": "yb",
+   "name": "ישראל ביתנו",
+   "counted": 5.94,
+   "votes": 321049,
+   "envSoFar": 6.03,
+   "envRemainingMu": 6.01,
+   "envRemainingSd": 0.9,
+   "regOnly": 5.93,
+   "histRatio": 1.243,
+   "histRatioN": 2,
+   "pct": {
+    "p10": 5.89,
+    "p50": 5.94,
+    "p90": 5.98
+   },
+   "seats": {
+    "p10": 7,
+    "p50": 7,
+    "p90": 7,
+    "mean": 7.03
+   },
+   "seatsNoAgr": {
+    "p50": 7,
+    "mean": 7.05
+   },
+   "agreementEffect": -0.01,
+   "pSeats": {
+    "7": 96.6,
+    "8": 3.4
+   },
+   "pPass": 100.0,
+   "modal": 7
+  },
+  {
+   "id": "otzma",
+   "name": "עוצמה יהודית",
+   "counted": 5.63,
+   "votes": 304809,
+   "envSoFar": 7.92,
+   "envRemainingMu": 7.7,
+   "envRemainingSd": 1.16,
+   "regOnly": 5.54,
+   "histRatio": 1.393,
+   "histRatioN": 2,
+   "pct": {
+    "p10": 5.66,
+    "p50": 5.72,
+    "p90": 5.78
+   },
+   "seats": {
+    "p10": 7,
+    "p50": 7,
+    "p90": 7,
+    "mean": 7
+   },
+   "seatsNoAgr": {
+    "p50": 7,
+    "mean": 7
+   },
+   "agreementEffect": 0.0,
+   "pSeats": {
+    "7": 100.0
+   },
+   "pPass": 100.0,
+   "modal": 7
+  },
+  {
+   "id": "utj",
+   "name": "יהדות התורה",
+   "counted": 5.57,
+   "votes": 301487,
+   "envSoFar": 4.17,
+   "envRemainingMu": 4.56,
+   "envRemainingSd": 0.68,
+   "regOnly": 5.63,
+   "histRatio": 0.583,
+   "histRatioN": 2,
+   "pct": {
+    "p10": 5.5,
+    "p50": 5.53,
+    "p90": 5.57
+   },
+   "seats": {
+    "p10": 7,
+    "p50": 7,
+    "p90": 7,
+    "mean": 7
+   },
+   "seatsNoAgr": {
+    "p50": 7,
+    "mean": 7
+   },
+   "agreementEffect": 0.0,
+   "pSeats": {
+    "7": 100.0
+   },
+   "pPass": 100.0,
+   "modal": 7
+  },
+  {
+   "id": "shas",
+   "name": "ש\"ס",
+   "counted": 5.28,
+   "votes": 285598,
+   "envSoFar": 4.65,
+   "envRemainingMu": 5.03,
+   "envRemainingSd": 0.75,
+   "regOnly": 5.3,
+   "histRatio": 0.795,
+   "histRatioN": 2,
+   "pct": {
+    "p10": 5.23,
+    "p50": 5.27,
+    "p90": 5.31
+   },
+   "seats": {
+    "p10": 6,
+    "p50": 6,
+    "p90": 7,
+    "mean": 6.44
+   },
+   "seatsNoAgr": {
+    "p50": 7,
+    "mean": 6.94
+   },
+   "agreementEffect": -0.5,
+   "pSeats": {
+    "6": 56.0,
+    "7": 44.0
+   },
+   "pPass": 100.0,
+   "modal": 6
+  },
+  {
+   "id": "rzz",
+   "name": "הציונות הדתית–זהות",
+   "counted": 4.9,
+   "votes": 265109,
+   "envSoFar": 10.15,
+   "envRemainingMu": 9.51,
+   "envRemainingSd": 1.43,
+   "regOnly": 4.69,
+   "histRatio": 1.393,
+   "histRatioN": 2,
+   "pct": {
+    "p10": 5.01,
+    "p50": 5.08,
+    "p90": 5.16
+   },
+   "seats": {
+    "p10": 6,
+    "p50": 6,
+    "p90": 6,
+    "mean": 6.0
+   },
+   "seatsNoAgr": {
+    "p50": 6,
+    "mean": 6.0
+   },
+   "agreementEffect": -0.0,
+   "pSeats": {
+    "6": 99.9,
+    "7": 0.1
+   },
+   "pPass": 100.0,
+   "modal": 6
+  },
+  {
+   "id": "miluim",
+   "name": "המילואימניקים והכלכלית",
+   "counted": 2.68,
+   "votes": 144766,
+   "envSoFar": 3.9,
+   "envRemainingMu": 3.81,
+   "envRemainingSd": 0.57,
+   "regOnly": 2.63,
+   "histRatio": 1.0,
+   "histRatioN": 0,
+   "pct": {
+    "p10": 2.69,
+    "p50": 2.72,
+    "p90": 2.75
+   },
+   "seats": {
+    "p10": 0,
+    "p50": 0,
+    "p90": 0,
+    "mean": 0
+   },
+   "seatsNoAgr": {
+    "p50": 0,
+    "mean": 0
+   },
+   "agreementEffect": 0.0,
+   "pSeats": {
+    "0": 100.0
+   },
+   "pPass": 0.0,
+   "modal": 0
+  },
+  {
+   "id": "amcha",
+   "name": "עמך ישראל",
+   "counted": 1.64,
+   "votes": 88718,
+   "envSoFar": 2.64,
+   "envRemainingMu": 2.52,
+   "envRemainingSd": 0.38,
+   "regOnly": 1.6,
+   "histRatio": 1.0,
+   "histRatioN": 0,
+   "pct": {
+    "p10": 1.66,
+    "p50": 1.68,
+    "p90": 1.7
+   },
+   "seats": {
+    "p10": 0,
+    "p50": 0,
+    "p90": 0,
+    "mean": 0
+   },
+   "seatsNoAgr": {
+    "p50": 0,
+    "mean": 0
+   },
+   "agreementEffect": 0.0,
+   "pSeats": {
+    "0": 100.0
+   },
+   "pPass": 0.0,
+   "modal": 0
+  }
+ ],
+ "modal": {
+  "likud": 27,
+  "yashar": 21,
+  "beyachad": 12,
+  "joint": 11,
+  "dems": 8,
+  "raam": 8,
+  "yb": 7,
+  "otzma": 7,
+  "utj": 7,
+  "shas": 6,
+  "rzz": 6,
+  "miluim": 0,
+  "amcha": 0
+ },
+ "modalShare": 31.0,
+ "blocs": [
+  {
+   "id": "coalition",
+   "name": "גוש הקואליציה היוצאת (מפלגות הממשלה ה-37: הליכוד, עוצמה יהודית, ש\"ס, יהדות התורה, הציונות הדתית–זהות)",
+   "members": [
+    "likud",
+    "otzma",
+    "shas",
+    "utj",
+    "rzz"
+   ],
+   "p10": 53,
+   "p50": 53,
+   "p90": 54,
+   "dist": {
+    "52": 0.7,
+    "53": 69.4,
+    "54": 29.9
+   }
+  },
+  {
+   "id": "opposition",
+   "name": "גוש האופוזיציה (ישר!, ביחד, הדמוקרטים, ישראל ביתנו)",
+   "members": [
+    "yashar",
+    "beyachad",
+    "dems",
+    "yb"
+   ],
+   "p10": 48,
+   "p50": 48,
+   "p90": 48,
+   "dist": {
+    "47": 7.9,
+    "48": 89.6,
+    "49": 2.5
+   }
+  },
+  {
+   "id": "arab",
+   "name": "רשימות ערביות (הרשימה המשותפת, רע\"ם) – מחוץ לשני הגושים",
+   "members": [
+    "joint",
+    "raam"
+   ],
+   "p10": 18,
+   "p50": 19,
+   "p90": 19,
+   "dist": {
+    "18": 23.9,
+    "19": 76.1
+   }
+  },
+  {
+   "id": "other",
+   "name": "רשימות אחרות (המילואימניקים והכלכלית, עמך ישראל)",
+   "members": [
+    "miluim",
+    "amcha"
+   ],
+   "p10": 0,
+   "p50": 0,
+   "p90": 0,
+   "dist": {
+    "0": 100.0
+   }
+  }
+ ],
+ "blocNote": "החלוקה לגושים לקוחה מההצהרות של הרשימות כפי שהן מופיעות במסמך המקור (שם נקראים הגושים \"גוש נתניהו\" ו\"גוש האופוזיציה\"), ולא מהערכה שלנו. המילואימניקים והכלכלית מגדירה את עצמה מחוץ לגושים; עמך ישראל הודיעה שתמליץ רק על נתניהו; הרשימה המשותפת ורע\"ם אינן חלק משני הגושים. סכום גוש הוא חיבור פשוט של המנדטים ואינו תחזית להרכב קואליציה.",
+ "midScenario": {
+  "seats": {
+   "likud": 27,
+   "yashar": 21,
+   "beyachad": 12,
+   "joint": 11,
+   "dems": 8,
+   "raam": 8,
+   "yb": 7,
+   "otzma": 7,
+   "utj": 7,
+   "shas": 6,
+   "rzz": 6,
+   "miluim": 0,
+   "amcha": 0
+  },
+  "margins": {
+   "likud": {
+    "gain": 41759,
+    "lose": 6954
+   },
+   "yashar": {
+    "gain": 40900,
+    "lose": 7197
+   },
+   "beyachad": {
+    "gain": 17589,
+    "lose": 24234
+   },
+   "joint": {
+    "gain": 1216,
+    "lose": 40295
+   },
+   "dems": {
+    "gain": 25179,
+    "lose": 17929
+   },
+   "raam": {
+    "gain": 44766,
+    "lose": 811
+   },
+   "yb": {
+    "gain": 11955,
+    "lose": 34602
+   },
+   "otzma": {
+    "gain": 26895,
+    "lose": 17815
+   },
+   "utj": {
+    "gain": 27576,
+    "lose": 14841
+   },
+   "shas": {
+    "gain": 2156,
+    "lose": 49246
+   },
+   "rzz": {
+    "gain": 12975,
+    "lose": 29810
+   }
+  }
+ },
+ "compare": {
+  "initialAvg": {
+   "likud": 26,
+   "yashar": 21.17,
+   "beyachad": 13.17,
+   "joint": 10.17,
+   "dems": 9.33,
+   "raam": 6.67,
+   "yb": 6.5,
+   "otzma": 6.67,
+   "utj": 6.67,
+   "shas": 7.33,
+   "rzz": 6.33,
+   "miluim": 0,
+   "amcha": 0
+  },
+  "allAvg": {
+   "likud": 26.31,
+   "yashar": 21.31,
+   "beyachad": 12.77,
+   "joint": 10.69,
+   "dems": 9.31,
+   "raam": 6.85,
+   "yb": 6.46,
+   "otzma": 6.46,
+   "utj": 6.46,
+   "shas": 7.15,
+   "rzz": 6.23,
+   "miluim": 0,
+   "amcha": 0
+  },
+  "pollAverage": {
+   "likud": 21.2,
+   "yashar": 21.6,
+   "beyachad": 13.2,
+   "joint": 8.6,
+   "dems": 8.9,
+   "raam": 5.4,
+   "yb": 7.5,
+   "otzma": 7.9,
+   "utj": 7.5,
+   "shas": 7.9,
+   "rzz": 6.7,
+   "miluim": 2.8,
+   "amcha": 0.8
+  },
+  "pollAverageAsOf": "2026-10-22",
+  "pollAverageN": 10,
+  "polls": [
+   {
+    "id": "2026-kan-init",
+    "channel": "kan",
+    "pollster": "דודי חסיד",
+    "time": "22:00",
+    "kind": "initial",
+    "seats": {
+     "likud": 25,
+     "yashar": 21,
+     "beyachad": 14,
+     "joint": 10,
+     "dems": 10,
+     "raam": 7,
+     "yb": 8,
+     "otzma": 7,
+     "utj": 6,
+     "shas": 6,
+     "rzz": 6,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "misallocated": 4.5
+   },
+   {
+    "id": "2026-c12-init",
+    "channel": "c12",
+    "pollster": "מדגם (מנו גבע)",
+    "time": "22:00",
+    "kind": "initial",
+    "seats": {
+     "likud": 24,
+     "yashar": 22,
+     "beyachad": 12,
+     "joint": 11,
+     "dems": 9,
+     "raam": 7,
+     "yb": 9,
+     "otzma": 6,
+     "utj": 6,
+     "shas": 8,
+     "rzz": 6,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "misallocated": 5.5
+   },
+   {
+    "id": "2026-c13-init",
+    "channel": "c13",
+    "pollster": "המדד (שמואל רוזנר)",
+    "time": "22:00",
+    "kind": "initial",
+    "seats": {
+     "likud": 25,
+     "yashar": 23,
+     "beyachad": 14,
+     "joint": 10,
+     "dems": 9,
+     "raam": 7,
+     "yb": 7,
+     "otzma": 6,
+     "utj": 7,
+     "shas": 6,
+     "rzz": 6,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "misallocated": 4.5
+   },
+   {
+    "id": "2026-c14-init",
+    "channel": "c14",
+    "pollster": "שלמה פילבר",
+    "time": "22:00",
+    "kind": "initial",
+    "seats": {
+     "likud": 30,
+     "yashar": 19,
+     "beyachad": 11,
+     "joint": 10,
+     "dems": 9,
+     "raam": 7,
+     "yb": 4,
+     "otzma": 7,
+     "utj": 7,
+     "shas": 9,
+     "rzz": 7,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "misallocated": 7.5
+   },
+   {
+    "id": "2026-i24-init",
+    "channel": "i24",
+    "pollster": "דיירקט פולס (צוריאל שרון)",
+    "time": "22:00",
+    "kind": "initial",
+    "seats": {
+     "likud": 27,
+     "yashar": 20,
+     "beyachad": 15,
+     "joint": 9,
+     "dems": 9,
+     "raam": 7,
+     "yb": 5,
+     "otzma": 7,
+     "utj": 7,
+     "shas": 8,
+     "rzz": 6,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "misallocated": 5.5
+   },
+   {
+    "id": "2026-c16-init",
+    "channel": "c16",
+    "pollster": "לא צוין בפרסומים",
+    "time": "22:00",
+    "kind": "initial",
+    "seats": {
+     "likud": 25,
+     "yashar": 22,
+     "beyachad": 13,
+     "joint": 11,
+     "dems": 10,
+     "raam": 5,
+     "yb": 6,
+     "otzma": 7,
+     "utj": 7,
+     "shas": 7,
+     "rzz": 7,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "misallocated": 5.5
+   },
+   {
+    "id": "2026-kan-u1",
+    "channel": "kan",
+    "pollster": "דודי חסיד",
+    "time": "22:40 (בערך)",
+    "kind": "update",
+    "seats": {
+     "likud": 25,
+     "yashar": 21,
+     "beyachad": 13,
+     "joint": 11,
+     "dems": 10,
+     "raam": 7,
+     "yb": 8,
+     "otzma": 7,
+     "utj": 6,
+     "shas": 6,
+     "rzz": 6,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "misallocated": 3.5
+   },
+   {
+    "id": "2026-c13-u1",
+    "channel": "c13",
+    "pollster": "המדד (שמואל רוזנר)",
+    "time": "22:40",
+    "kind": "update",
+    "seats": {
+     "likud": 25,
+     "yashar": 23,
+     "beyachad": 13,
+     "joint": 11,
+     "dems": 9,
+     "raam": 7,
+     "yb": 7,
+     "otzma": 6,
+     "utj": 7,
+     "shas": 6,
+     "rzz": 6,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "misallocated": 3.5
+   },
+   {
+    "id": "2026-c12-u1",
+    "channel": "c12",
+    "pollster": "מדגם (מנו גבע)",
+    "time": "22:43",
+    "kind": "update",
+    "seats": {
+     "likud": 24,
+     "yashar": 22,
+     "beyachad": 12,
+     "joint": 11,
+     "dems": 10,
+     "raam": 7,
+     "yb": 8,
+     "otzma": 6,
+     "utj": 6,
+     "shas": 8,
+     "rzz": 6,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "misallocated": 5.5
+   },
+   {
+    "id": "2026-c14-u1",
+    "channel": "c14",
+    "pollster": "שלמה פילבר",
+    "time": "00:37",
+    "kind": "update",
+    "seats": {
+     "likud": 31,
+     "yashar": 20,
+     "beyachad": 11,
+     "joint": 11,
+     "dems": 9,
+     "raam": 7,
+     "yb": 0,
+     "otzma": 7,
+     "utj": 7,
+     "shas": 10,
+     "rzz": 7,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "misallocated": 9.5
+   },
+   {
+    "id": "2026-c13-u2",
+    "channel": "c13",
+    "pollster": "המדד (שמואל רוזנר)",
+    "time": "01:03",
+    "kind": "update",
+    "seats": {
+     "likud": 27,
+     "yashar": 22,
+     "beyachad": 13,
+     "joint": 11,
+     "dems": 9,
+     "raam": 7,
+     "yb": 7,
+     "otzma": 6,
+     "utj": 6,
+     "shas": 6,
+     "rzz": 6,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "misallocated": 2.5
+   },
+   {
+    "id": "2026-kan-u2",
+    "channel": "kan",
+    "pollster": "דודי חסיד",
+    "time": "01:41",
+    "kind": "update",
+    "seats": {
+     "likud": 27,
+     "yashar": 21,
+     "beyachad": 13,
+     "joint": 11,
+     "dems": 9,
+     "raam": 7,
+     "yb": 8,
+     "otzma": 6,
+     "utj": 6,
+     "shas": 6,
+     "rzz": 6,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "misallocated": 2.5
+   },
+   {
+    "id": "2026-c12-u2",
+    "channel": "c12",
+    "pollster": "מדגם (מנו גבע)",
+    "time": "02:15",
+    "kind": "update",
+    "seats": {
+     "likud": 27,
+     "yashar": 21,
+     "beyachad": 12,
+     "joint": 12,
+     "dems": 9,
+     "raam": 7,
+     "yb": 7,
+     "otzma": 6,
+     "utj": 6,
+     "shas": 7,
+     "rzz": 6,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "misallocated": 2.5
+   }
+  ],
+  "counts": [
+   {
+    "asOf": "2026-10-28T07:57+02:00",
+    "label": "ספירה חלקית (6,881 קלפיות מתוך כ-12,000, כ-57% מהקלפיות / ללא מעטפות כפולות)",
+    "valid": 2937354,
+    "seats": {
+     "likud": 27,
+     "yashar": 21,
+     "beyachad": 11,
+     "joint": 12,
+     "dems": 9,
+     "raam": 4,
+     "yb": 8,
+     "otzma": 6,
+     "utj": 9,
+     "shas": 7,
+     "rzz": 6,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "approxFromPct": true
+   },
+   {
+    "asOf": "2026-10-28T14:32+02:00",
+    "label": "ספירה חלקית (כל 11,168 הקלפיות הרגילות / לפני ספירת המעטפות הכפולות)",
+    "valid": 4854102,
+    "seats": {
+     "likud": 26,
+     "yashar": 21,
+     "beyachad": 12,
+     "joint": 12,
+     "dems": 8,
+     "raam": 7,
+     "yb": 7,
+     "otzma": 7,
+     "utj": 7,
+     "shas": 7,
+     "rzz": 6,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "approxFromPct": true
+   },
+   {
+    "asOf": "2026-10-29T07:51+02:00",
+    "label": "ספירה חלקית (11,920 מתוך כ-12,018 קלפיות, 99% / כולל לראשונה חלק מהמעטפות הכפולות)",
+    "valid": 5201559,
+    "seats": {
+     "likud": 26,
+     "yashar": 21,
+     "beyachad": 12,
+     "joint": 11,
+     "dems": 8,
+     "raam": 8,
+     "yb": 7,
+     "otzma": 7,
+     "utj": 7,
+     "shas": 7,
+     "rzz": 6,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "approxFromPct": true
+   },
+   {
+    "asOf": "2026-10-29T11:16+02:00",
+    "label": "כל 12,018 הקלפיות הרגילות + 208 קלפיות מעטפות כפולות",
+    "valid": 5355415,
+    "seats": {
+     "likud": 26,
+     "yashar": 21,
+     "beyachad": 12,
+     "joint": 11,
+     "dems": 8,
+     "raam": 8,
+     "yb": 7,
+     "otzma": 7,
+     "utj": 7,
+     "shas": 7,
+     "rzz": 6,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "approxFromPct": false
+   },
+   {
+    "asOf": "2026-10-29T12:44+02:00",
+    "label": "ספירה חלקית (כל 12,018 הקלפיות הרגילות ועוד 314 קלפיות של מעטפות כפולות; ספירת המעטפות נמשכת)",
+    "valid": 5409377,
+    "seats": {
+     "likud": 26,
+     "yashar": 21,
+     "beyachad": 12,
+     "joint": 11,
+     "dems": 8,
+     "raam": 8,
+     "yb": 7,
+     "otzma": 7,
+     "utj": 7,
+     "shas": 7,
+     "rzz": 6,
+     "miluim": 0,
+     "amcha": 0
+    },
+    "approxFromPct": true
+   }
+  ]
+ },
+ "methodB": {
+  "ratio": {
+   "likud": {
+    "ratio": 1.008,
+    "n": 2,
+    "letters": [
+     "מחל"
+    ]
+   },
+   "yashar": {
+    "ratio": 1.074,
+    "n": 2,
+    "letters": [
+     "כן"
+    ]
+   },
+   "beyachad": {
+    "ratio": 0.967,
+    "n": 2,
+    "letters": [
+     "פה"
+    ]
+   },
+   "joint": {
+    "ratio": 0.498,
+    "n": 2,
+    "letters": [
+     "ום",
+     "ד",
+     "ודעם"
+    ]
+   },
+   "dems": {
+    "ratio": 1.236,
+    "n": 2,
+    "letters": [
+     "אמת",
+     "מרצ"
+    ]
+   },
+   "raam": {
+    "ratio": 0.398,
+    "n": 2,
+    "letters": [
+     "עם"
+    ]
+   },
+   "yb": {
+    "ratio": 1.243,
+    "n": 2,
+    "letters": [
+     "ל"
+    ]
+   },
+   "otzma": {
+    "ratio": 1.393,
+    "n": 2,
+    "letters": [
+     "ט"
+    ]
+   },
+   "utj": {
+    "ratio": 0.583,
+    "n": 2,
+    "letters": [
+     "ג"
+    ]
+   },
+   "shas": {
+    "ratio": 0.795,
+    "n": 2,
+    "letters": [
+     "שס"
+    ]
+   },
+   "rzz": {
+    "ratio": 1.393,
+    "n": 2,
+    "letters": [
+     "ט"
+    ]
+   },
+   "miluim": {
+    "ratio": 1.0,
+    "n": 0,
+    "letters": []
+   },
+   "amcha": {
+    "ratio": 1.0,
+    "n": 0,
+    "letters": []
+   },
+   "other": {
+    "ratio": 1.451,
+    "n": 2,
+    "letters": [
+     "other"
+    ]
+   }
+  },
+  "envPred": {
+   "likud": {
+    "predEnv": 21.55,
+    "obsEnv": 18.47
+   },
+   "yashar": {
+    "predEnv": 17.94,
+    "obsEnv": 14.98
+   },
+   "beyachad": {
+    "predEnv": 9.0,
+    "obsEnv": 13.63
+   },
+   "joint": {
+    "predEnv": 4.75,
+    "obsEnv": 3.58
+   },
+   "dems": {
+    "predEnv": 8.29,
+    "obsEnv": 5.78
+   },
+   "raam": {
+    "predEnv": 2.53,
+    "obsEnv": 2.64
+   },
+   "yb": {
+    "predEnv": 7.62,
+    "obsEnv": 6.03
+   },
+   "otzma": {
+    "predEnv": 7.98,
+    "obsEnv": 7.92
+   },
+   "utj": {
+    "predEnv": 3.39,
+    "obsEnv": 4.17
+   },
+   "shas": {
+    "predEnv": 4.36,
+    "obsEnv": 4.65
+   },
+   "rzz": {
+    "predEnv": 6.76,
+    "obsEnv": 10.15
+   },
+   "miluim": {
+    "predEnv": 2.72,
+    "obsEnv": 3.9
+   },
+   "amcha": {
+    "predEnv": 1.65,
+    "obsEnv": 2.64
+   }
+  },
+  "mae": 1.75
+ },
+ "pseudoBacktestA": {
+  "mae": 0.009,
+  "max": 0.033,
+  "seatErr": 0
+ },
+ "checks": {
+  "machria1244": {
+   "likud": 26,
+   "yashar": 21,
+   "beyachad": 12,
+   "joint": 11,
+   "dems": 8,
+   "raam": 8,
+   "yb": 7,
+   "otzma": 7,
+   "utj": 7,
+   "shas": 7,
+   "rzz": 6,
+   "miluim": 0,
+   "amcha": 0
+  },
+  "iie1132NoAgreements": {
+   "likud": 27,
+   "yashar": 21,
+   "beyachad": 12,
+   "joint": 11,
+   "dems": 8,
+   "raam": 7,
+   "yb": 7,
+   "otzma": 7,
+   "utj": 7,
+   "shas": 7,
+   "rzz": 6,
+   "miluim": 0,
+   "amcha": 0
+  }
+ },
+ "history": [
+  {
+   "k": 21,
+   "date": "2019-04-09",
+   "label": "אפריל 2019 (הכנסת ה-21)",
+   "eligible": 6339729,
+   "voters": 4340253,
+   "valid": 4309270,
+   "turnout": 68.46,
+   "envVoters": 240783,
+   "envShare": 5.55,
+   "enpVotes": 6.33,
+   "enpSeats": 5.24,
+   "wastedPct": 8.49,
+   "wastedVotes": 366016,
+   "blocSeats": 65,
+   "blocLists": [
+    "הליכוד",
+    "ש\"ס",
+    "יהדות התורה",
+    "ישראל ביתנו",
+    "איחוד מפלגות הימין",
+    "כולנו"
+   ],
+   "blocSource": "https://www.timesofisrael.com/president-officially-taps-netanyahu-to-form-next-government/",
+   "lists": [
+    {
+     "l": "מחל",
+     "n": "הליכוד",
+     "v": 1140370,
+     "env": 70073,
+     "pct": 26.46,
+     "regPct": 26.29,
+     "envPct": 29.34,
+     "ratio": 1.116,
+     "drift": 0.169
+    },
+    {
+     "l": "פה",
+     "n": "כחול לבן",
+     "v": 1125881,
+     "env": 68702,
+     "pct": 26.13,
+     "regPct": 25.97,
+     "envPct": 28.77,
+     "ratio": 1.108,
+     "drift": 0.155
+    },
+    {
+     "l": "שס",
+     "n": "ש\"ס",
+     "v": 258275,
+     "env": 10064,
+     "pct": 5.99,
+     "regPct": 6.1,
+     "envPct": 4.21,
+     "ratio": 0.691,
+     "drift": -0.104
+    },
+    {
+     "l": "ג",
+     "n": "יהדות התורה",
+     "v": 249049,
+     "env": 8070,
+     "pct": 5.78,
+     "regPct": 5.92,
+     "envPct": 3.38,
+     "ratio": 0.571,
+     "drift": -0.141
+    },
+    {
+     "l": "ום",
+     "n": "חד\"ש-תע\"ל",
+     "v": 193442,
+     "env": 4197,
+     "pct": 4.49,
+     "regPct": 4.65,
+     "envPct": 1.76,
+     "ratio": 0.378,
+     "drift": -0.16
+    },
+    {
+     "l": "אמת",
+     "n": "העבודה",
+     "v": 190870,
+     "env": 11111,
+     "pct": 4.43,
+     "regPct": 4.42,
+     "envPct": 4.65,
+     "ratio": 1.053,
+     "drift": 0.013
+    },
+    {
+     "l": "ל",
+     "n": "ישראל ביתנו",
+     "v": 173004,
+     "env": 4637,
+     "pct": 4.01,
+     "regPct": 4.14,
+     "envPct": 1.94,
+     "ratio": 0.469,
+     "drift": -0.122
+    },
+    {
+     "l": "טב",
+     "n": "איחוד מפלגות הימין",
+     "v": 159468,
+     "env": 10822,
+     "pct": 3.7,
+     "regPct": 3.65,
+     "envPct": 4.53,
+     "ratio": 1.241,
+     "drift": 0.049
+    },
+    {
+     "l": "מרצ",
+     "n": "מרצ",
+     "v": 156473,
+     "env": 8155,
+     "pct": 3.63,
+     "regPct": 3.64,
+     "envPct": 3.41,
+     "ratio": 0.937,
+     "drift": -0.013
+    },
+    {
+     "l": "כ",
+     "n": "כולנו",
+     "v": 152756,
+     "env": 7956,
+     "pct": 3.54,
+     "regPct": 3.56,
+     "envPct": 3.33,
+     "ratio": 0.936,
+     "drift": -0.013
+    },
+    {
+     "l": "דעם",
+     "n": "רע\"מ-בל\"ד",
+     "v": 143666,
+     "env": 2791,
+     "pct": 3.33,
+     "regPct": 3.46,
+     "envPct": 1.17,
+     "ratio": 0.338,
+     "drift": -0.127
+    },
+    {
+     "l": "נ",
+     "n": "הימין החדש",
+     "v": 138598,
+     "env": 10645,
+     "pct": 3.22,
+     "regPct": 3.14,
+     "envPct": 4.46,
+     "ratio": 1.418,
+     "drift": 0.073
+    },
+    {
+     "l": "ז",
+     "n": "זהות",
+     "v": 118031,
+     "env": 15766,
+     "pct": 2.74,
+     "regPct": 2.51,
+     "envPct": 6.6,
+     "ratio": 2.628,
+     "drift": 0.227
+    },
+    {
+     "l": "נר",
+     "n": "גשר",
+     "v": 74701,
+     "env": 3584,
+     "pct": 1.73,
+     "regPct": 1.75,
+     "envPct": 1.5,
+     "ratio": 0.859,
+     "drift": -0.014
+    }
+   ],
+   "maxDrift": 0.227,
+   "seatsMovedByEnvelopes": 1,
+   "seatsMovedDetail": {
+    "יהדות התורה": -1,
+    "איחוד מפלגות הימין": 1
+   },
+   "source": "https://votes21.bechirot.gov.il/nationalresults"
+  },
+  {
+   "k": 22,
+   "date": "2019-09-17",
+   "label": "ספטמבר 2019 (הכנסת ה-22)",
+   "eligible": 6391218,
+   "voters": 4465168,
+   "valid": 4436806,
+   "turnout": 69.86,
+   "envVoters": 282442,
+   "envShare": 6.33,
+   "enpVotes": 6.11,
+   "enpSeats": 5.57,
+   "wastedPct": 2.86,
+   "wastedVotes": 126704,
+   "blocSeats": 55,
+   "blocLists": [
+    "הליכוד",
+    "ש\"ס",
+    "יהדות התורה",
+    "ימינה"
+   ],
+   "blocSource": "https://www.jpost.com/Israel-News/Gantz-on-verge-of-getting-more-recommendations-602441",
+   "lists": [
+    {
+     "l": "פה",
+     "n": "כחול לבן",
+     "v": 1151214,
+     "env": 84654,
+     "pct": 25.95,
+     "regPct": 25.66,
+     "envPct": 30.21,
+     "ratio": 1.177,
+     "drift": 0.287
+    },
+    {
+     "l": "מחל",
+     "n": "הליכוד",
+     "v": 1113617,
+     "env": 77953,
+     "pct": 25.1,
+     "regPct": 24.92,
+     "envPct": 27.82,
+     "ratio": 1.116,
+     "drift": 0.183
+    },
+    {
+     "l": "ודעם",
+     "n": "הרשימה המשותפת",
+     "v": 470211,
+     "env": 11974,
+     "pct": 10.6,
+     "regPct": 11.02,
+     "envPct": 4.27,
+     "ratio": 0.388,
+     "drift": -0.426
+    },
+    {
+     "l": "שס",
+     "n": "ש\"ס",
+     "v": 330199,
+     "env": 17598,
+     "pct": 7.44,
+     "regPct": 7.52,
+     "envPct": 6.28,
+     "ratio": 0.835,
+     "drift": -0.078
+    },
+    {
+     "l": "ל",
+     "n": "ישראל ביתנו",
+     "v": 310154,
+     "env": 14019,
+     "pct": 6.99,
+     "regPct": 7.12,
+     "envPct": 5.0,
+     "ratio": 0.702,
+     "drift": -0.134
+    },
+    {
+     "l": "ג",
+     "n": "יהדות התורה",
+     "v": 268775,
+     "env": 11649,
+     "pct": 6.06,
+     "regPct": 6.19,
+     "envPct": 4.16,
+     "ratio": 0.672,
+     "drift": -0.128
+    },
+    {
+     "l": "טב",
+     "n": "ימינה",
+     "v": 260655,
+     "env": 24810,
+     "pct": 5.87,
+     "regPct": 5.67,
+     "envPct": 8.85,
+     "ratio": 1.56,
+     "drift": 0.201
+    },
+    {
+     "l": "אמת",
+     "n": "העבודה-גשר",
+     "v": 212782,
+     "env": 13211,
+     "pct": 4.8,
+     "regPct": 4.8,
+     "envPct": 4.71,
+     "ratio": 0.982,
+     "drift": -0.005
+    },
+    {
+     "l": "מרצ",
+     "n": "המחנה הדמוקרטי",
+     "v": 192495,
+     "env": 13861,
+     "pct": 4.34,
+     "regPct": 4.3,
+     "envPct": 4.95,
+     "ratio": 1.151,
+     "drift": 0.041
+    },
+    {
+     "l": "כף",
+     "n": "עוצמה יהודית",
+     "v": 83609,
+     "env": 6583,
+     "pct": 1.88,
+     "regPct": 1.85,
+     "envPct": 2.35,
+     "ratio": 1.268,
+     "drift": 0.031
+    }
+   ],
+   "maxDrift": 0.426,
+   "seatsMovedByEnvelopes": 2,
+   "seatsMovedDetail": {
+    "כחול לבן": 1,
+    "הליכוד": 1,
+    "הרשימה המשותפת": -1,
+    "ישראל ביתנו": -1
+   },
+   "source": "https://votes22.bechirot.gov.il/nationalresults",
+   "pedersen": 20.5,
+   "topSwings": [
+    {
+     "l": "ל",
+     "n": "ישראל ביתנו",
+     "from": 4.01,
+     "to": 6.99,
+     "pp": 2.98
+    },
+    {
+     "l": "טב",
+     "n": "ימינה",
+     "from": 3.7,
+     "to": 5.87,
+     "pp": 2.17
+    },
+    {
+     "l": "שס",
+     "n": "ש\"ס",
+     "from": 5.99,
+     "to": 7.44,
+     "pp": 1.45
+    }
+   ],
+   "turnoutChange": 1.4,
+   "blocChange": -10
+  },
+  {
+   "k": 23,
+   "date": "2020-03-02",
+   "label": "מרץ 2020 (הכנסת ה-23)",
+   "eligible": 6453255,
+   "voters": 4615135,
+   "valid": 4590062,
+   "turnout": 71.52,
+   "envVoters": 330209,
+   "envShare": 7.15,
+   "enpVotes": 5.2,
+   "enpSeats": 5.01,
+   "wastedPct": 0.8,
+   "wastedVotes": 36901,
+   "blocSeats": 58,
+   "blocLists": [
+    "הליכוד",
+    "ש\"ס",
+    "יהדות התורה",
+    "ימינה"
+   ],
+   "blocSource": "https://www.timesofisrael.com/with-libermans-nod-gantz-gets-61-backers-to-form-coalition-topping-netanyahu/",
+   "lists": [
+    {
+     "l": "מחל",
+     "n": "הליכוד",
+     "v": 1352449,
+     "env": 107049,
+     "pct": 29.46,
+     "regPct": 29.22,
+     "envPct": 32.67,
+     "ratio": 1.118,
+     "drift": 0.246
+    },
+    {
+     "l": "פה",
+     "n": "כחול לבן",
+     "v": 1220381,
+     "env": 97828,
+     "pct": 26.59,
+     "regPct": 26.34,
+     "envPct": 29.85,
+     "ratio": 1.134,
+     "drift": 0.251
+    },
+    {
+     "l": "ודעם",
+     "n": "הרשימה המשותפת",
+     "v": 581507,
+     "env": 18077,
+     "pct": 12.67,
+     "regPct": 13.22,
+     "envPct": 5.52,
+     "ratio": 0.417,
+     "drift": -0.55
+    },
+    {
+     "l": "שס",
+     "n": "ש\"ס",
+     "v": 352853,
+     "env": 23264,
+     "pct": 7.69,
+     "regPct": 7.73,
+     "envPct": 7.1,
+     "ratio": 0.918,
+     "drift": -0.045
+    },
+    {
+     "l": "ג",
+     "n": "יהדות התורה",
+     "v": 274437,
+     "env": 13387,
+     "pct": 5.98,
+     "regPct": 6.12,
+     "envPct": 4.09,
+     "ratio": 0.667,
+     "drift": -0.146
+    },
+    {
+     "l": "אמת",
+     "n": "העבודה-גשר-מרצ",
+     "v": 267480,
+     "env": 24137,
+     "pct": 5.83,
+     "regPct": 5.71,
+     "envPct": 7.37,
+     "ratio": 1.29,
+     "drift": 0.118
+    },
+    {
+     "l": "ל",
+     "n": "ישראל ביתנו",
+     "v": 263365,
+     "env": 12815,
+     "pct": 5.74,
+     "regPct": 5.88,
+     "envPct": 3.91,
+     "ratio": 0.665,
+     "drift": -0.14
+    },
+    {
+     "l": "טב",
+     "n": "ימינה",
+     "v": 240689,
+     "env": 27357,
+     "pct": 5.24,
+     "regPct": 5.01,
+     "envPct": 8.35,
+     "ratio": 1.668,
+     "drift": 0.239
+    }
+   ],
+   "maxDrift": 0.55,
+   "seatsMovedByEnvelopes": 1,
+   "seatsMovedDetail": {
+    "כחול לבן": 1,
+    "הרשימה המשותפת": -1
+   },
+   "source": "https://votes23.bechirot.gov.il/nationalresults",
+   "pedersen": 8.3,
+   "topSwings": [
+    {
+     "l": "מחל",
+     "n": "הליכוד",
+     "from": 25.1,
+     "to": 29.46,
+     "pp": 4.36
+    },
+    {
+     "l": "ודעם",
+     "n": "הרשימה המשותפת",
+     "from": 10.6,
+     "to": 12.67,
+     "pp": 2.07
+    },
+    {
+     "l": "ל",
+     "n": "ישראל ביתנו",
+     "from": 6.99,
+     "to": 5.74,
+     "pp": -1.25
+    }
+   ],
+   "turnoutChange": 1.66,
+   "blocChange": 3
+  },
+  {
+   "k": 24,
+   "date": "2021-03-23",
+   "label": "מרץ 2021 (הכנסת ה-24)",
+   "eligible": 6578084,
+   "voters": 4436365,
+   "valid": 4410052,
+   "turnout": 67.44,
+   "envVoters": 425512,
+   "envShare": 9.59,
+   "enpVotes": 8.92,
+   "enpSeats": 8.52,
+   "wastedPct": 1.47,
+   "wastedVotes": 64752,
+   "blocSeats": 52,
+   "blocLists": [
+    "הליכוד",
+    "ש\"ס",
+    "יהדות התורה",
+    "הציונות הדתית"
+   ],
+   "blocSource": "https://www.timesofisrael.com/rivlin-reluctantly-taps-netanyahu-to-form-government-not-an-easy-moral-choice/",
+   "lists": [
+    {
+     "l": "מחל",
+     "n": "הליכוד",
+     "v": 1066892,
+     "env": 103036,
+     "pct": 24.19,
+     "regPct": 24.17,
+     "envPct": 24.44,
+     "ratio": 1.011,
+     "drift": 0.026
+    },
+    {
+     "l": "פה",
+     "n": "יש עתיד",
+     "v": 614112,
+     "env": 58002,
+     "pct": 13.93,
+     "regPct": 13.94,
+     "envPct": 13.76,
+     "ratio": 0.987,
+     "drift": -0.018
+    },
+    {
+     "l": "שס",
+     "n": "ש\"ס",
+     "v": 316008,
+     "env": 23964,
+     "pct": 7.17,
+     "regPct": 7.32,
+     "envPct": 5.68,
+     "ratio": 0.776,
+     "drift": -0.157
+    },
+    {
+     "l": "כן",
+     "n": "כחול לבן",
+     "v": 292257,
+     "env": 26736,
+     "pct": 6.63,
+     "regPct": 6.66,
+     "envPct": 6.34,
+     "ratio": 0.953,
+     "drift": -0.03
+    },
+    {
+     "l": "ב",
+     "n": "ימינה",
+     "v": 273836,
+     "env": 39693,
+     "pct": 6.21,
+     "regPct": 5.87,
+     "envPct": 9.41,
+     "ratio": 1.604,
+     "drift": 0.339
+    },
+    {
+     "l": "אמת",
+     "n": "העבודה",
+     "v": 268767,
+     "env": 34269,
+     "pct": 6.09,
+     "regPct": 5.88,
+     "envPct": 8.13,
+     "ratio": 1.382,
+     "drift": 0.215
+    },
+    {
+     "l": "ג",
+     "n": "יהדות התורה",
+     "v": 248391,
+     "env": 13767,
+     "pct": 5.63,
+     "regPct": 5.88,
+     "envPct": 3.27,
+     "ratio": 0.555,
+     "drift": -0.25
+    },
+    {
+     "l": "ל",
+     "n": "ישראל ביתנו",
+     "v": 248370,
+     "env": 27483,
+     "pct": 5.63,
+     "regPct": 5.54,
+     "envPct": 6.52,
+     "ratio": 1.177,
+     "drift": 0.094
+    },
+    {
+     "l": "ט",
+     "n": "הציונות הדתית",
+     "v": 225641,
+     "env": 27130,
+     "pct": 5.12,
+     "regPct": 4.98,
+     "envPct": 6.43,
+     "ratio": 1.293,
+     "drift": 0.139
+    },
+    {
+     "l": "ודעם",
+     "n": "הרשימה המשותפת",
+     "v": 212583,
+     "env": 11186,
+     "pct": 4.82,
+     "regPct": 5.05,
+     "envPct": 2.65,
+     "ratio": 0.525,
+     "drift": -0.229
+    },
+    {
+     "l": "ת",
+     "n": "תקווה חדשה",
+     "v": 209161,
+     "env": 22077,
+     "pct": 4.74,
+     "regPct": 4.69,
+     "envPct": 5.24,
+     "ratio": 1.116,
+     "drift": 0.052
+    },
+    {
+     "l": "מרצ",
+     "n": "מרצ",
+     "v": 202218,
+     "env": 20403,
+     "pct": 4.59,
+     "regPct": 4.56,
+     "envPct": 4.84,
+     "ratio": 1.062,
+     "drift": 0.027
+    },
+    {
+     "l": "עם",
+     "n": "רע\"מ",
+     "v": 167064,
+     "env": 6627,
+     "pct": 3.79,
+     "regPct": 4.02,
+     "envPct": 1.57,
+     "ratio": 0.391,
+     "drift": -0.234
+    }
+   ],
+   "maxDrift": 0.339,
+   "seatsMovedByEnvelopes": 1,
+   "seatsMovedDetail": {
+    "הליכוד": 1,
+    "רע\"מ": -1
+   },
+   "source": "https://votes24.bechirot.gov.il/nationalresults",
+   "pedersen": 31.7,
+   "topSwings": [
+    {
+     "l": "פה",
+     "n": "יש עתיד",
+     "from": 26.59,
+     "to": 13.93,
+     "pp": -12.66
+    },
+    {
+     "l": "ודעם",
+     "n": "הרשימה המשותפת",
+     "from": 12.67,
+     "to": 4.82,
+     "pp": -7.85
+    },
+    {
+     "l": "מחל",
+     "n": "הליכוד",
+     "from": 29.46,
+     "to": 24.19,
+     "pp": -5.27
+    }
+   ],
+   "turnoutChange": -4.08,
+   "blocChange": -6
+  },
+  {
+   "k": 25,
+   "date": "2022-11-01",
+   "label": "נובמבר 2022 (הכנסת ה-25)",
+   "eligible": 6788804,
+   "voters": 4794593,
+   "valid": 4764742,
+   "turnout": 70.63,
+   "envVoters": 462807,
+   "envShare": 9.65,
+   "enpVotes": 7.99,
+   "enpSeats": 6.51,
+   "wastedPct": 8.76,
+   "wastedVotes": 417400,
+   "blocSeats": 64,
+   "blocLists": [
+    "הליכוד",
+    "הציונות הדתית",
+    "ש\"ס",
+    "יהדות התורה"
+   ],
+   "blocSource": "https://www.aljazeera.com/news/2022/11/11/netanyahu-mandated-to-form-new-israeli-government",
+   "lists": [
+    {
+     "l": "מחל",
+     "n": "הליכוד",
+     "v": 1115336,
+     "env": 107885,
+     "pct": 23.41,
+     "regPct": 23.4,
+     "envPct": 23.52,
+     "ratio": 1.005,
+     "drift": 0.012
+    },
+    {
+     "l": "פה",
+     "n": "יש עתיד",
+     "v": 847435,
+     "env": 77681,
+     "pct": 17.79,
+     "regPct": 17.88,
+     "envPct": 16.93,
+     "ratio": 0.947,
+     "drift": -0.091
+    },
+    {
+     "l": "ט",
+     "n": "הציונות הדתית",
+     "v": 516470,
+     "env": 70887,
+     "pct": 10.84,
+     "regPct": 10.35,
+     "envPct": 15.45,
+     "ratio": 1.493,
+     "drift": 0.492
+    },
+    {
+     "l": "כן",
+     "n": "המחנה הממלכתי",
+     "v": 432482,
+     "env": 48847,
+     "pct": 9.08,
+     "regPct": 8.91,
+     "envPct": 10.65,
+     "ratio": 1.195,
+     "drift": 0.167
+    },
+    {
+     "l": "שס",
+     "n": "ש\"ס",
+     "v": 392964,
+     "env": 31378,
+     "pct": 8.25,
+     "regPct": 8.4,
+     "envPct": 6.84,
+     "ratio": 0.815,
+     "drift": -0.15
+    },
+    {
+     "l": "ג",
+     "n": "יהדות התורה",
+     "v": 280194,
+     "env": 17144,
+     "pct": 5.88,
+     "regPct": 6.11,
+     "envPct": 3.74,
+     "ratio": 0.612,
+     "drift": -0.228
+    },
+    {
+     "l": "ל",
+     "n": "ישראל ביתנו",
+     "v": 213687,
+     "env": 26156,
+     "pct": 4.48,
+     "regPct": 4.36,
+     "envPct": 5.7,
+     "ratio": 1.309,
+     "drift": 0.13
+    },
+    {
+     "l": "עם",
+     "n": "רע\"מ",
+     "v": 194047,
+     "env": 8015,
+     "pct": 4.07,
+     "regPct": 4.32,
+     "envPct": 1.75,
+     "ratio": 0.404,
+     "drift": -0.248
+    },
+    {
+     "l": "ום",
+     "n": "חד\"ש-תע\"ל",
+     "v": 178735,
+     "env": 7830,
+     "pct": 3.75,
+     "regPct": 3.97,
+     "envPct": 1.71,
+     "ratio": 0.43,
+     "drift": -0.218
+    },
+    {
+     "l": "אמת",
+     "n": "העבודה",
+     "v": 175992,
+     "env": 23488,
+     "pct": 3.69,
+     "regPct": 3.54,
+     "envPct": 5.12,
+     "ratio": 1.446,
+     "drift": 0.152
+    },
+    {
+     "l": "מרצ",
+     "n": "מרצ",
+     "v": 150793,
+     "env": 14349,
+     "pct": 3.16,
+     "regPct": 3.17,
+     "envPct": 3.13,
+     "ratio": 0.987,
+     "drift": -0.004
+    },
+    {
+     "l": "ד",
+     "n": "בל\"ד",
+     "v": 138617,
+     "env": 7311,
+     "pct": 2.91,
+     "regPct": 3.05,
+     "envPct": 1.59,
+     "ratio": 0.523,
+     "drift": -0.14
+    },
+    {
+     "l": "ב",
+     "n": "הבית היהודי",
+     "v": 56775,
+     "env": 6771,
+     "pct": 1.19,
+     "regPct": 1.16,
+     "envPct": 1.48,
+     "ratio": 1.271,
+     "drift": 0.03
+    }
+   ],
+   "maxDrift": 0.492,
+   "seatsMovedByEnvelopes": 2,
+   "seatsMovedDetail": {
+    "הליכוד": -1,
+    "יהדות התורה": -1,
+    "ישראל ביתנו": 1,
+    "העבודה": 1
+   },
+   "source": "https://votes25.bechirot.gov.il/nationalresults",
+   "pedersen": 20.3,
+   "topSwings": [
+    {
+     "l": "ט",
+     "n": "הציונות הדתית",
+     "from": 5.12,
+     "to": 10.84,
+     "pp": 5.72
+    },
+    {
+     "l": "ב",
+     "n": "הבית היהודי",
+     "from": 6.21,
+     "to": 1.19,
+     "pp": -5.02
+    },
+    {
+     "l": "פה",
+     "n": "יש עתיד",
+     "from": 13.93,
+     "to": 17.79,
+     "pp": 3.86
+    }
+   ],
+   "turnoutChange": 3.19,
+   "blocChange": 12
+  }
+ ],
+ "y26": {
+  "turnout2200": 77.7,
+  "turnoutFinalEst": 77.2,
+  "turnoutFinalRange": [
+   76.7,
+   77.7
+  ],
+  "envShareEst": [
+   7.1,
+   8.2
+  ],
+  "wastedPct": 5.4,
+  "enpVotes": 9.24,
+  "enpSeats": 8.08,
+  "arabEnvVsAll": {
+   "env": 6.22,
+   "all": 15.02,
+   "k25env": 5.05,
+   "k25all": 10.73
+  }
+ },
+ "backtest": [
+  {
+   "k": 22,
+   "label": "ספטמבר 2019 (הכנסת ה-22)",
+   "mae": 0.055,
+   "maxErr": 0.165,
+   "maxErrList": "הליכוד",
+   "naiveMae": 0.152,
+   "naiveMax": 0.426,
+   "seatErr": 0,
+   "naiveSeatErr": 2,
+   "matched": 9,
+   "nLists": 10
+  },
+  {
+   "k": 23,
+   "label": "מרץ 2020 (הכנסת ה-23)",
+   "mae": 0.066,
+   "maxErr": 0.138,
+   "maxErrList": "כחול לבן",
+   "naiveMae": 0.217,
+   "naiveMax": 0.55,
+   "seatErr": 0,
+   "naiveSeatErr": 1,
+   "matched": 8,
+   "nLists": 8
+  },
+  {
+   "k": 24,
+   "label": "מרץ 2021 (הכנסת ה-24)",
+   "mae": 0.147,
+   "maxErr": 0.336,
+   "maxErrList": "ימינה",
+   "naiveMae": 0.139,
+   "naiveMax": 0.339,
+   "seatErr": 2,
+   "naiveSeatErr": 1,
+   "matched": 8,
+   "nLists": 13
+  },
+  {
+   "k": 25,
+   "label": "נובמבר 2022 (הכנסת ה-25)",
+   "mae": 0.104,
+   "maxErr": 0.217,
+   "maxErrList": "המחנה הממלכתי",
+   "naiveMae": 0.159,
+   "naiveMax": 0.492,
+   "seatErr": 2,
+   "naiveSeatErr": 2,
+   "matched": 11,
+   "nLists": 13
+  }
+ ],
+ "backtestSummary": {
+  "mae": 0.093,
+  "maxErr": 0.336,
+  "naiveMae": 0.167,
+  "seatErrMax": 2,
+  "naiveSeatErrMax": 2
+ },
+ "unusual": [
+  {
+   "id": "turnout",
+   "text": "שיעור ההצבעה: לפי ההערכה כאן 77.2% (טווח 76.7%–77.7%; הנתון של הוועדה ל-22:00 הוא 77.7%). זה גבוה ב-5.2 נקודות לפחות מהשיעור הסופי הגבוה ביותר בחמש המערכות הקודמות (71.5%, מרץ 2020)."
+  },
+  {
+   "id": "lists",
+   "text": "לפי ההערכה ייכנסו 11 רשימות (בחמש המערכות הקודמות: 11 (אפריל 2019), 9 (ספטמבר 2019), 8 (מרץ 2020), 13 (מרץ 2021), 10 (נובמבר 2022)). שבע מ-13 הרשימות שבאתר לא התמודדו בהרכב הזה ב-2022 (ישר!, ביחד, הדמוקרטים, הציונות הדתית–זהות, עוצמה יהודית, המילואימניקים והכלכלית, עמך ישראל), ולכן אין להן היסטוריה ישירה של הצבעה במעטפות הכפולות."
+  },
+  {
+   "id": "arabEnv",
+   "text": "במעטפות הכפולות שנספרו עד כה הרשימה המשותפת ורע\"ם קיבלו יחד 6.2%, לעומת 15.0% בספירה הכוללת (יחס 0.41). ב-2022 היחס המקביל (חד\"ש-תע\"ל, בל\"ד ורע\"ם) היה 5.0% מול 10.7% (יחס 0.47)."
+  },
+  {
+   "id": "envShare",
+   "text": "משקל המעטפות הכפולות: לפי ההערכה 7.1%–8.2% מהמצביעים, פחות מ-2021 ו-2022 (9.6%, 9.7%), ובערך כמו ב-2020 (7.2%) או מעט יותר."
+  },
+  {
+   "id": "wasted",
+   "text": "קולות לרשימות מתחת לאחוז החסימה: כ-5.4% לפי ההערכה. בחמש המערכות הקודמות: 8.5% (אפריל 2019), 2.9% (ספטמבר 2019), 0.8% (מרץ 2020), 1.5% (מרץ 2021), 8.8% (נובמבר 2022)."
+  },
+  {
+   "id": "envMix",
+   "text": "הרכב המעטפות משתנה מאוד בין מנות הספירה: הציונות הדתית–זהות קיבלה 13.4% במנה הראשונה שדווחה ו-9.0% במנה האחרונה, והרשימה המשותפת 0.9% ו-6.3%. לכן טווחי ההערכה רחבים יותר מטעות דגימה רגילה."
+  }
+ ]
+}
