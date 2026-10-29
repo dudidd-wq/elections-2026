@@ -19,24 +19,24 @@ for (const e of IX.elections) {
   ok(tot.slice(5).reduce((a, b) => a + b, 0) === e.national[3], `K${e.k} list columns sum to valid`);
 }
 
-// 2. K26 (partial): status wording, source, and reconciliation with machria 18:04 (exact national count)
+// 2. K26 (partial): status wording, source, and reconciliation with machria 19:58 (exact national count; all 12,018 regular + 881 envelope boxes)
 ok(K26.k === 26 && K26.status === 'partial', 'k26 status partial');
 ok(/חלקית/.test(K26.statusLabel) && /לא סופית/.test(K26.statusLabel) && /לא רשמית/.test(K26.statusLabel), 'k26 label partial / not final / not official');
 const claims = JSON.stringify(K26).replace(/(לא|ואינם|ואינן|אינם|אינן|ולא)\s+(סופי|רשמי)\S*/g, '');
-ok(!/(סופי|רשמי)/.test(claims.replace(/תוצאות האמת|הקבצים הרשמיים/g, '')), 'k26: no final/official claim except negations');
+ok(!/(סופי|רשמי)/.test(claims.replace(/תוצאות האמת|הקבצים הרשמיים|התוצאות הרשמיות צפויות/g, '')), 'k26: no final/official claim except negations');
 ok(/^https:\/\//.test(K26.src.url) && K26.src.retrieved && K26.src.sourceUpdatedAt && /^[0-9a-f]{64}$/.test(K26.src.sha256), 'k26 source recorded');
-const MACHRIA_1804 = { valid: 5653178, invalid: 25633, votes: { likud: 1159791, yashar: 907566, beyachad: 527064, joint: 498763, dems: 364053, raam: 335391, yb: 335185, otzma: 323800, utj: 311473, shas: 297889, rzz: 286934, miluim: 153674, amcha: 94655 } };
+const MACHRIA_1958 = { valid: 5678352, invalid: 25789, votes: { likud: 1164494, yashar: 911796, beyachad: 530253, joint: 499878, dems: 365733, raam: 336275, yb: 336838, otzma: 325650, utj: 312241, shas: 298881, rzz: 289181, miluim: 154585, amcha: 95288 } };
 const t26 = new Array(K26.cols.length).fill(0);
 for (const r of K26.rows) r.forEach((x, i) => { if (i) t26[i] += x; });
-ok(K26.national[3] === MACHRIA_1804.valid && K26.national[2] === MACHRIA_1804.invalid, 'k26 national = machria 18:04');
+ok(K26.national[3] === MACHRIA_1958.valid && K26.national[2] === MACHRIA_1958.invalid, 'k26 national = machria 19:58');
 [1, 2, 3, 4].forEach(i => ok(t26[i] === K26.national[i - 1], `k26 rows sum col ${K26.cols[i]}`));
 K26.lists.forEach(L => {
   const j = K26.cols.indexOf(L.l);
   ok(j > 4 && t26[j] === L.v, `k26 list column ${L.l}`);
-  ok(MACHRIA_1804.votes[L.id] === L.v, `k26 ${L.id} ${L.v} = machria ${MACHRIA_1804.votes[L.id]}`);
+  ok(MACHRIA_1958.votes[L.id] === L.v, `k26 ${L.id} ${L.v} = machria ${MACHRIA_1958.votes[L.id]}`);
   ok(!('c' in L) && !('color' in L), `k26 ${L.id} has no colour`);
 });
-ok(Object.keys(MACHRIA_1804.votes).length === K26.lists.length, 'k26: all 13 lists');
+ok(Object.keys(MACHRIA_1958.votes).length === K26.lists.length, 'k26: all 13 lists');
 const env = K26.rows.find(r => r[0] === IX.envelopesCode);
 ok(env && env.slice(1, 5).join() === K26.envelopes.join(), 'k26 envelopes row');
 ok(K26.rows.filter(r => r[0] !== IX.envelopesCode).length === K26.localities, 'k26 locality count');
@@ -51,10 +51,13 @@ for (const K of [K26, ...IX.elections.map(e => J(`data/geo/k${e.k}.json`))]) {
     ok(r.every(x => Number.isInteger(x) && x >= 0), `K${K.k} ${r[0]} integers`);
   }
 }
-// spot checks (IIE localities file, 18:04 count)
+// spot checks (IIE localities file, 19:58 count)
 const row = c => K26.rows.find(r => r[0] === c);
 ok(row(5000).slice(1, 5).join() === '473868,309971,931,309040', 'k26 Tel Aviv');
 ok(row(3000).slice(1, 5).join() === '455862,300647,1232,299415', 'k26 Jerusalem');
+ok(row(8600).slice(1, 5).join() === '149635,106594,273,106321', 'k26 Ramat Gan (updated after 18:04)');
+ok(K26.envelopes.join() === '0,445438,2515,442923', 'k26 envelopes, all 881 boxes');
+ok(K26.basis.asOf === '2026-10-29T19:58+02:00' && /19:58/.test(K26.statusLabel) && /881/.test(K26.statusLabel) && !/18:04/.test(JSON.stringify(K26)), 'k26 basis 19:58');
 // localities that are new in 2026 have names
 const known = new Set(IX.localities.map(l => l[0]));
 K26.rows.forEach(r => { if (!known.has(r[0])) ok(K26.names[r[0]], `k26 new locality ${r[0]} has a name`); });

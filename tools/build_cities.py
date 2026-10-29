@@ -15,6 +15,9 @@ NAMES = {c: n for c, n, *_ in GI['localities']}
 SITE = {l['id']: l['name'] for l in EP['lists']}
 LET = {'מחל': 'likud', 'דרך': 'yashar', 'רק': 'beyachad', 'ודם': 'joint', 'אמת': 'dems', 'עם': 'raam', 'ל': 'yb', 'ב': 'otzma',
        'ג': 'utj', 'שס': 'shas', 'ט': 'rzz', 'די': 'miluim', 'ך': 'amcha'}
+# National count this file must reconcile with exactly (machria.com 19:58, 29.10.2026; same numbers as tools/build_outlook.py c1958)
+REF = {'asOf': '2026-10-29T19:58+02:00', 'valid': 5678352, 'invalid': 25789,
+       'votes': dict(likud=1164494, yashar=911796, beyachad=530253, joint=499878, dems=365733, raam=336275, yb=336838, otzma=325650, utj=312241, shas=298881, rzz=289181, miluim=154585, amcha=95288)}
 P = L['parties']; rows_in = L['rows']
 valid_nat = sum(r[5] for r in rows_in)
 assert sum(p['votes'] for p in P) == valid_nat
@@ -34,11 +37,13 @@ for r in rows_in:
     rows.append(row)
 rows.sort(key=lambda x: x[0])
 nat = [sum(x[i] for x in rows) for i in (1, 2, 3, 4)]
+assert nat[3] == REF['valid'] and nat[2] == REF['invalid'], (nat, REF['valid'], REF['invalid'])
+for x in lists: assert x['v'] == REF['votes'][x['id']], (x['id'], x['v'], REF['votes'][x['id']])
 out = {'k': 26, 'id': '2026', 'date': EP['date'], 'label': 'אוקטובר 2026',
        'status': 'partial',
-       'statusLabel': 'ספירה חלקית, לא סופית ולא רשמית: כל הקלפיות הרגילות ו-826 מתוך 881 קלפיות המעטפות הכפולות (ספירת 18:04, 29.10.2026). קולות המעטפות הכפולות אינם משויכים ליישוב.',
-       'basis': {'asOf': '2026-10-29T18:04+02:00', 'valid': nat[3],
-                 'reconciles': 'סכום כל היישובים ושורת המעטפות הכפולות שווה בדיוק לספירה הארצית של 18:04 שפורסמה ב-machria.com (5,653,178 קולות כשרים, ולכל אחת מ-13 הרשימות).'},
+       'statusLabel': 'ספירה חלקית, לא סופית ולא רשמית: ועדת הבחירות השלימה את ספירת כל 12,018 הקלפיות הרגילות וכל 881 קלפיות המעטפות הכפולות (ספירת 19:58, 29.10.2026), אבל התוצאות הרשמיות צפויות רק ב-4.11.2026 והמספרים עוד עשויים להשתנות. קולות המעטפות הכפולות אינם משויכים ליישוב.',
+      'basis': {'asOf': REF['asOf'], 'valid': nat[3],
+                'reconciles': 'סכום כל היישובים ושורת המעטפות הכפולות שווה בדיוק לספירה הארצית של 19:58 שפורסמה ב-machria.com (5,678,352 קולות כשרים, 25,789 פסולים, ולכל אחת מ-13 הרשימות).'},
        'src': {'url': 'https://israelielections.com/2026/results/localities.json', 'publisher': 'israelielections.com, עותק של נתוני ועדת הבחירות לפי יישוב',
                'sourceUpdatedAt': L['updated_at'], 'retrieved': retrieved, 'sha256': hashlib.sha256(raw).hexdigest(), 'bytes': len(raw),
                'note': 'אתר ועדת הבחירות (votes26 / media26) לא נגיש מהשרת שבו נבנה האתר, ולכן הקובץ לא הושווה ישירות למקור. הסכומים הושוו לספירה הארצית.'},
