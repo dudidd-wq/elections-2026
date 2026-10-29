@@ -32,6 +32,11 @@ COUNT26 = {
             'valid': 5653178, 'invalid': 25633, 'envBoxes': 826,
             'votes': dict(likud=1159791, yashar=907566, beyachad=527064, joint=498763, dems=364053, raam=335391, yb=335185, otzma=323800, utj=311473, shas=297889, rzz=286934, miluim=153674, amcha=94655),
             'sources': [{'url': 'https://machria.com/elections-2026', 'note': 'עדכון 18:04'}, {'url': 'https://www.ynet.co.il/news/article/s1bla0xame', 'note': 'ועדת הבחירות, 16:50: ספירת המעטפות הכפולות הסתיימה'}]},
+  # 19:58: CEC said the whole count was finished (ynet/Globes/i24); NOT final/certified – official results expected 4.11.2026
+  'c1958': {'asOf': '2026-10-29T19:58+02:00', 'label': 'כל 12,018 הקלפיות הרגילות + 881 קלפיות מעטפות כפולות (הספירה הושלמה לפי ועדת הבחירות; לא סופי ולא רשמי)',
+            'valid': 5678352, 'invalid': 25789, 'envBoxes': 881,
+            'votes': dict(likud=1164494, yashar=911796, beyachad=530253, joint=499878, dems=365733, raam=336275, yb=336838, otzma=325650, utj=312241, shas=298881, rzz=289181, miluim=154585, amcha=95288),
+            'sources': [{'url': 'https://machria.com/elections-2026', 'note': 'עדכון 19:58, נבדק 29.10 21:30'}, {'url': 'https://www.ynet.co.il/news/blogs/article/sj60fvepze', 'note': 'ynet: ועדת הבחירות השלימה את ספירת כל הקולות'}, {'url': 'https://en.globes.co.il/en/article-count-complete-likud-has-27-knesset-seats-shas-drops-to-6-1001561412', 'note': 'גלובס: התוצאות אינן סופיות, הרשמיות ביום רביעי'}]},
 }
 VOTERS_2200 = 5695682   # CEC figure at 22:00 (77.7% of 7,331,981)
 ELIGIBLE = 7331981
@@ -294,7 +299,7 @@ snaps = []
 for h in y['countHistory'] + [y['count']]:
     V = h['validVotes']; v = {k: h['pct'][k] / 100 * V for k in IDS}; v['other'] = V - sum(v.values())
     snaps.append({'asOf': h['asOf'], 'label': h['label'], 'valid': V, 'seats': bader_ofer(v, AGREEMENTS), 'approxFromPct': True})
-for key in ('c1116',):
+for key in ('c1116', 'c1958'):
     c = COUNT26[key]; snaps.append({'asOf': c['asOf'], 'label': c['label'], 'valid': c['valid'], 'seats': bader_ofer(c['votes'], AGREEMENTS), 'approxFromPct': False})
 snaps.sort(key=lambda s: s['asOf'])
 # validation of the seat function against published unofficial calcs
@@ -302,6 +307,31 @@ COUNT26['c1244']['votes'].setdefault('other', COUNT26['c1244']['valid'] - sum(CO
 check_machria_1244 = bader_ofer(COUNT26['c1244']['votes'], AGREEMENTS)
 check_machria_1804 = bader_ofer(c2['votes'], AGREEMENTS)
 check_iie_1132_noagr = bader_ofer(c1['votes'])
+# ---- retrospective: published estimates (data/outlook_published.json, frozen) vs the completed (not certified) count
+FIN = COUNT26['c1958']; FIN['votes'].setdefault('other', FIN['valid'] - sum(FIN['votes'].values()))
+fin_seats = bader_ofer(FIN['votes'], AGREEMENTS); fin_seats_na = bader_ofer(FIN['votes'])
+check_machria_1958 = fin_seats
+fin_pct = {k: 100 * FIN['votes'][k] / FIN['valid'] for k in IDS}
+PUB = json.load(open(os.path.join(ROOT, 'data/outlook_published.json'), encoding='utf-8'))
+retro = {'actual': {'asOf': FIN['asOf'], 'label': FIN['label'], 'valid': FIN['valid'], 'invalid': FIN['invalid'], 'sources': FIN['sources'],
+                    'pct': {k: r(fin_pct[k], 3) for k in IDS}, 'votes': {k: FIN['votes'][k] for k in IDS}, 'seats': fin_seats, 'seatsNoAgreements': fin_seats_na,
+                    'status': 'הספירה הושלמה לפי ועדת הבחירות, אבל התוצאות אינן סופיות ואינן רשמיות. הוועדה תפרסם תוצאות רשמיות אחרי בדיקת טוהר בחירות (לפי הדיווחים 4.11.2026). המושבים כאן הם חישוב של האתר, לא חלוקה רשמית.'},
+         'estimates': []}
+for e in PUB['published']:
+    rows = []
+    for k in IDS:
+        L = e['lists'][k]; err = L['pct']['p50'] - fin_pct[k]
+        rows.append({'id': k, 'p10': L['pct']['p10'], 'p50': L['pct']['p50'], 'p90': L['pct']['p90'], 'actual': r(fin_pct[k]), 'err': r(err, 3),
+                     'inside': L['pct']['p10'] - 0.005 <= fin_pct[k] <= L['pct']['p90'] + 0.005,
+                     'seatP50': L['seats']['p50'], 'seatP10': L['seats']['p10'], 'seatP90': L['seats']['p90'], 'modal': e['modal'][k], 'seatActual': fin_seats[k],
+                     'seatErr': e['modal'][k] - fin_seats[k]})
+    remaining_actual = FIN['valid'] - e['basisValid']
+    retro['estimates'].append({'commit': e['commit'], 'publishedAt': e['publishedAt'], 'label': e['label'], 'basisAsOf': e['basisAsOf'], 'basisValid': e['basisValid'],
+        'remainingValidRange': e['remainingValidRange'], 'remainingActual': remaining_actual,
+        'remainingInside': e['remainingValidRange'][0] <= remaining_actual <= e['remainingValidRange'][1],
+        'mae': r(st.mean(abs(x['err']) for x in rows), 3), 'maxAbsErr': r(max(abs(x['err']) for x in rows), 3),
+        'maxErrList': max(rows, key=lambda x: abs(x['err']))['id'], 'nInside': sum(1 for x in rows if x['inside']), 'n': len(rows),
+        'modalMisallocated': sum(abs(x['seatErr']) for x in rows) // 2, 'modalShare': e['modalShare'], 'rows': rows})
 
 # ---- history summary + "unusual"
 h25 = hist[-1]
@@ -348,7 +378,8 @@ out = {
               'polls': polls_cmp, 'counts': snaps},
   'methodB': {'ratio': ratio26, 'envPred': liveCheckB, 'mae': liveCheckB_mae},
   'pseudoBacktestA': pseudoA,
-  'checks': {'machria1244': check_machria_1244, 'machria1804': check_machria_1804, 'iie1132NoAgreements': check_iie_1132_noagr},
+  'retro': retro,
+  'checks': {'machria1244': check_machria_1244, 'machria1804': check_machria_1804, 'machria1958': check_machria_1958, 'iie1132NoAgreements': check_iie_1132_noagr},
   'history': [{k: v for k, v in h.items() if not k.startswith('_')} for h in hist],
   'y26': y26, 'backtest': backtest,
   'backtestSummary': {'mae': r(st.mean(b['mae'] for b in backtest), 3), 'maxErr': max(b['maxErr'] for b in backtest),
@@ -360,5 +391,7 @@ print('ok', {p['id']: (p['pct']['p50'], p['seats']['p10'], p['seats']['p50'], p[
 print('blocs', [(b['id'], b['p10'], b['p50'], b['p90']) for b in blocs])
 print('backtest', backtest); print('pseudoA', pseudoA, 'methodB mae', liveCheckB_mae)
 print('checks', check_machria_1244, check_iie_1132_noagr)
+print('final seats', fin_seats, 'noagr', fin_seats_na)
+for e in retro['estimates']: print('retro', e['label'], e['mae'], e['maxAbsErr'], e['maxErrList'], e['nInside'], e['modalMisallocated'], e['remainingActual'], e['remainingValidRange'])
 print('env', env_ballots_now, env_total_lo, env_total_hi, round(rem_lo), round(rem_hi), 'modal share', out['modalShare'], 'sum medians', sum(med.values()))
 print('margins', margins)

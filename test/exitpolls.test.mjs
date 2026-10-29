@@ -89,7 +89,8 @@ if (y.count) {
   const c = y.count, sum = Object.values(c.pct).reduce((a, b) => a + b, 0);
   ok(c.sources.length >= 2 && c.sources.every(s => isUrl(s.url)), '2026 count sources');
   ok(Object.keys(c.pct).every(k => y.lists.some(l => l.id === k)) && sum <= 100 && sum > 50, `2026 count shares (sum ${sum.toFixed(2)})`);
-  ok(/חלקית/.test(c.label), '2026 count labelled partial');
+  ok(/חלקית/.test(c.label) || (/לא סופית/.test(c.label) && /לא רשמית/.test(c.label)), '2026 count labelled partial / not final');
+  ok(!y.results || !/לא רשמי/.test(c.label), 'no set-results while not certified');
   if (c.voters && c.eligible) ok(Math.abs(c.voters / c.eligible * 100 - c.turnout) < 0.05, '2026 turnout = voters / eligible');
 }
 // ep26Cmp (poll average + each pollster vs a seat result), recomputed independently on a synthetic result

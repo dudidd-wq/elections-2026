@@ -76,5 +76,29 @@ ok(!/COLOR\[|class="dot"|--c:|style="/.test(block), 'no party colours / inline s
 ok(!/ממליץ|מומלץ|כדאי להצביע|ירכיב את הממשלה|תרכיב את הממשלה|הקואליציה הבאה תהיה/.test(text), 'no recommendation / government prediction');
 ok(/index\.html/.test('index.html') && fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8').includes('href="#/outlook" data-nav="outlook"'), 'nav link');
 ok(fs.readFileSync(path.join(ROOT, 'sw.js'), 'utf8').includes("'data/outlook.json'"), 'sw caches outlook.json');
+// 6. retrospective vs completed (not certified) count
+const R = O.retro, PUB = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/outlook_published.json'), 'utf8'));
+const c1958 = Object.assign({}, c1244, { likud: 27, shas: 6 });
+ok(eq(O.checks.machria1958, c1958) && eq(R.actual.seats, c1958), 'python BO = machria 19:58 (27/21/12/11/8/8/7/7/7/6/6)');
+const v1958 = Object.assign({}, R.actual.votes); v1958.other = R.actual.valid - sum(v1958);
+ok(eq(f.olBO(v1958, AG), c1958), 'JS BO = machria 19:58');
+ok(sum(R.actual.votes) + v1958.other === 5678352 && v1958.other === 57259, 'valid/other 19:58');
+ok(eq(EP.y2026.count.pct ? Object.fromEntries(Object.keys(R.actual.votes).map(k => [k, Math.round(R.actual.votes[k] / R.actual.valid * 10000) / 100])) : {}, EP.y2026.count.pct), 'exitpolls count pct = votes/valid');
+ok(PUB.published.length === R.estimates.length, 'one retro per published estimate');
+for (const e of R.estimates) {
+  const P = PUB.published.find(x => x.commit === e.commit);
+  for (const x of e.rows) {
+    ok(x.p50 === P.lists[x.id].pct.p50 && x.modal === P.modal[x.id], `${e.commit} ${x.id} = as published`);
+    ok(Math.abs(x.err - (x.p50 - 100 * R.actual.votes[x.id] / R.actual.valid)) < 0.0006, `${e.commit} ${x.id} err`);
+    ok(x.inside === (x.p10 - 0.005 <= 100 * R.actual.votes[x.id] / R.actual.valid && 100 * R.actual.votes[x.id] / R.actual.valid <= x.p90 + 0.005), `${e.commit} ${x.id} inside flag`);
+  }
+  ok(Math.abs(e.mae - e.rows.reduce((a, x) => a + Math.abs(x.err), 0) / e.rows.length) < 0.0006, `${e.commit} mae`);
+  ok(e.remainingActual === R.actual.valid - e.basisValid, `${e.commit} remaining`);
+  ok(html.includes('<b data-retro-mae>' + e.mae.toFixed(3) + '</b>'), `${e.commit} mae on page`);
+}
+for (const k of Object.keys(c1958)) if (c1958[k]) ok(html.includes('<span data-retro-final="' + k + '">' + c1958[k] + '</span>'), `final seats ${k} on page`);
+const retroTxt = (html.split('<section aria-labelledby="ol-r">')[1] || '').split('</section>')[0].replace(/<[^>]+>/g, ' ');
+ok(retroTxt.length > 500 && !/סופי|רשמי/.test(retroTxt.replace(/אינן סופיות ואינן רשמיות|לא סופיות ולא רשמיות|לא סופי ולא רשמי|אינן סופיות, הרשמיות|תוצאות רשמיות אחרי|חלוקה רשמית|את התוצאות הרשמיות/g, '')), 'retro: no final/official claim');
+ok(text.includes('לא סופיות ולא רשמיות'), 'not-final label shown');
 console.log(`${checks - fails}/${checks} checks passed`);
 process.exit(fails ? 1 : 0);

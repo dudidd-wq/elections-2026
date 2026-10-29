@@ -224,7 +224,7 @@
       card('#/polls', 'סקרים', 'ממוצע, טווח, סכומי גושים וקו 61, מגמה וטבלת כל הסקרים.', 'polls') +
       card('#/coalition', 'בנה קואליציה', 'בחירת רשימות, הערכת מנדטים מול קו 61 והשוואה מתמטית של העמדות המוצהרות בכל סוגיה. לא תחזית ולא המלצה.', 'coalition') +
       card('#/exit-polls', 'מדגמים: דיוק בעבר', 'עד כמה דייקו מדגמי הטלוויזיה בערב הבחירות ב-2019–2022, מול התוצאות הרשמיות. בלי תחזית.', 'polls') +
-      card('#/outlook', 'תחזית והקשר היסטורי', 'הערכה סטטיסטית של התוצאה הסופית אחרי ספירת המעטפות הכפולות, טווחי מושבים, והשוואה ל-2019–2022. לא תוצאה רשמית.', 'polls') +
+      card('#/outlook', 'תחזית בדיעבד', 'ההערכות שפורסמו בזמן ספירת המעטפות הכפולות מול הספירה שהושלמה (לא סופית ולא רשמית), והשוואה ל-2019–2022.', 'polls') +
       card('#/geo', 'תוצאות לפי יישוב וקלפי', 'אחוז ההצבעה ולמי הצביעו בכל יישוב ובכל קלפי, בחמש המערכות של 2019–2022. התוצאות הרשמיות של ועדת הבחירות.', 'analysis') +
       card('#/podcasts', 'פודקאסטים וראיונות', 'מה אמרו ראשי הרשימות בפודקאסטים ובראיונות ארוכים בחודש שלפני הבחירות, עם קישורים וציטוטים מאומתים.', 'podcasts') +
       '</div>' +
@@ -1151,7 +1151,7 @@
   function ep26Count(y, lists) { // partial CEC count: vote shares only (no seat allocation published yet)
     var c = y.count; if (!c) return '';
     var C = D.computed, ini = y.polls.filter(function (p) { return p.kind === 'initial'; });
-    var h = '<h3 id="ep-2026-count">' + esc(c.label) + '</h3><p class="note warn"><b>ספירה חלקית, לא תוצאה.</b> נכון ל-' + esc(fmtStamp(c.asOf)) + '. ' + esc(c.note) + '</p>' +
+    var h = '<h3 id="ep-2026-count">' + esc(c.label) + '</h3><p class="note warn"><b>' + (/הושלמה/.test(c.label) ? 'הספירה הושלמה, אבל התוצאות אינן סופיות ואינן רשמיות.' : 'ספירה חלקית, לא תוצאה.') + '</b> נכון ל-' + esc(fmtStamp(c.asOf)) + '. ' + esc(c.note) + '</p>' +
       '<div class="kpis">' + (c.turnout ? '<div class="kpi"><b>' + c.turnout + '%</b><span>שיעור ההצבעה' + (c.voters ? ' (' + c.voters.toLocaleString('he-IL') + ' מתוך ' + c.eligible.toLocaleString('he-IL') + ')' : '') + '</span></div>' : '') +
       (c.ballots ? '<div class="kpi"><b>' + c.ballots.toLocaleString('he-IL') + '</b><span>קלפיות שנספרו עד כה</span></div>' : '') +
       (c.validVotes ? '<div class="kpi"><b>' + c.validVotes.toLocaleString('he-IL') + '</b><span>קולות כשרים שנספרו עד כה</span></div>' : '') + '</div>' +
@@ -1164,7 +1164,7 @@
   function ep26Compare(y) { // last pre-election poll average + each pollster vs a seat result (only once CEC seats exist)
     var C = D.computed, res = y.results;
     var h = '<h3 id="ep-2026-cmp">ממוצע הסקרים האחרון מול התוצאה</h3>';
-    if (!res) return h + '<p class="note">ועדת הבחירות המרכזית עדיין לא פרסמה חלוקת מושבים, ולכן עוד אין השוואה במושבים בין ממוצע הסקרים האחרון (' + esc(fmtDate(C.asOf)) + ', ' + C.n + ' סקרים) או כל מכון סקרים לבין התוצאה. ההשוואה תופיע כאן אוטומטית, באותן נוסחאות, כשהחלוקה תפורסם, ותסומן כחלקית עד לתוצאות הסופיות.</p>';
+    if (!res) return h + '<p class="note">ועדת הבחירות המרכזית עדיין לא פרסמה חלוקת מושבים, ולכן עוד אין השוואה במושבים בין ממוצע הסקרים האחרון (' + esc(fmtDate(C.asOf)) + ', ' + C.n + ' סקרים) או כל מכון סקרים לבין התוצאה. ההשוואה תופיע כאן אוטומטית, באותן נוסחאות, כשהחלוקה תפורסם, ותסומן כחלקית עד לתוצאות הסופיות. חלוקת מושבים לא רשמית שהאתר חישב על הספירה (באדר-עופר עם הסכמי העודפים) מופיעה ב<a href="#/outlook">תחזית בדיעבד</a>.</p>';
     var X = ep26Cmp(y, D, res), partial = !/סופי/.test(res.label);
     var mark = partial ? ' <span class="badge">חלקי</span>' : '';
     var bl = X.blocs;
@@ -1293,12 +1293,29 @@
       '<p>סכומי הגושים, לפי העמדות שהרשימות עצמן הצהירו לפני הבחירות: ' + OL.blocs.filter(function (b) { return b.p90 > 0; }).map(function (b) { return esc(b.name) + ': ' + b.p50 + (b.p10 !== b.p90 ? ' (' + b.p10 + '–' + b.p90 + ')' : ''); }).join('; ') + '. ' + esc(OL.blocNote) + '</p>' +
       '<p>מה עלול להיות שונה: אני לא יודע בדיוק כמה מעטפות נשארו (טווח ' + olK(E.totalRange[0]) + '–' + olK(E.totalRange[1]) + ' אלף בסך הכול), והרכב המעטפות השתנה מאוד בין המנות שנספרו. גם תיקונים של ועדת הבחירות אחרי הספירה יכולים להזיז מושב. זו הערכה סטטיסטית, לא תוצאה רשמית. התוצאה המחייבת היא של ועדת הבחירות המרכזית.</p>';
   }
+  // Retrospective: the estimates as published (data/outlook_published.json) vs the completed, NOT certified count.
+  function olRetro() {
+    var R = OL.retro; if (!R) return '';
+    var A = R.actual, ps = olSorted(), sg = function (v, d) { return (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v).toFixed(d); };
+    var est = R.estimates.map(function (e) {
+      var rows = {}; e.rows.forEach(function (x) { rows[x.id] = x; });
+      return '<h3>' + esc(e.label) + ', פורסמה ' + fmtStamp(e.publishedAt) + '</h3>' +
+        '<p>טעות ממוצעת באחוז הקולות: <b data-retro-mae>' + e.mae.toFixed(3) + '</b> נקודות אחוז; הטעות הגדולה ביותר ' + e.maxAbsErr.toFixed(3) + ' (' + esc(olName(e.maxErrList)) + '). התוצאה נפלה בתוך טווח 10%–90% אצל ' + e.nInside + ' מתוך ' + e.n + ' רשימות. ' +
+        'מושבים שהוקצו אחרת בתרחיש השכיח: <b data-retro-seat>' + e.modalMisallocated + '</b>. קולות כשרים שנוספו אחרי נקודת המוצא: ' + olN(e.remainingActual) + ' (ההערכה הייתה ' + olN(e.remainingValidRange[0]) + '–' + olN(e.remainingValidRange[1]) + (e.remainingInside ? ', בתוך הטווח' : ', מחוץ לטווח') + ').</p>' +
+        '<div class="tbl-wrap ol-w" tabindex="0" role="region" aria-label="' + esc(e.label) + ' מול הספירה"><table class="tbl ol-t"><caption class="sr">' + esc(e.label) + ' מול הספירה שהושלמה</caption><thead><tr><th scope="col">רשימה</th><th scope="col" class="n">הערכה (חציון)</th><th scope="col" class="n">טווח 10%–90%</th><th scope="col" class="n">בספירה</th><th scope="col" class="n">טעות (נק׳ אחוז)</th><th scope="col" class="n">בתוך הטווח</th><th scope="col" class="n">מושבים: הערכה</th><th scope="col" class="n">מושבים: חישוב על הספירה</th></tr></thead><tbody>' +
+        ps.map(function (p) { var x = rows[p.id]; return '<tr data-retro="' + p.id + '"><th scope="row">' + esc(p.name) + '</th><td class="n">' + olP(x.p50) + '</td><td class="n">' + x.p10.toFixed(2) + '–' + x.p90.toFixed(2) + '</td><td class="n" data-retro-act>' + olP(x.actual) + '</td><td class="n">' + sg(x.err, 3) + '</td><td class="n">' + (x.inside ? 'כן' : 'לא') + '</td><td class="n">' + x.modal + (x.seatP10 !== x.seatP90 ? ' <span class="meta">(' + x.seatP10 + '–' + x.seatP90 + ')</span>' : '') + '</td><td class="n">' + x.seatActual + '</td></tr>'; }).join('') + '</tbody></table></div>';
+    }).join('');
+    return '<section aria-labelledby="ol-r"><h2 id="ol-r">בדיעבד: ההערכות מול הספירה שהושלמה</h2>' +
+      '<p>' + esc(A.status) + ' הספירה שמשמשת להשוואה: ' + fmtStamp(A.asOf) + ', ' + esc(A.label) + ', ' + olN(A.valid) + ' קולות כשרים ו-' + olN(A.invalid) + ' פסולים. ' + 'מקורות: ' + A.sources.map(function (s) { return srcLink(s.url, s.note || 'מקור'); }).join(' · ') + '.</p>' +
+      '<p>חלוקת המושבים בחישוב האתר (באדר-עופר, 3.25%, עם הסכמי העודפים) על הספירה הזו: ' + ps.filter(function (p) { return A.seats[p.id] > 0; }).map(function (p) { return esc(p.name) + ' <span data-retro-final="' + p.id + '">' + A.seats[p.id] + '</span>'; }).join(', ') + '. מתחת לאחוז החסימה: ' + ps.filter(function (p) { return !A.seats[p.id]; }).map(function (p) { return esc(p.name) + ' (' + A.pct[p.id].toFixed(2) + '%)'; }).join(', ') + '. בלי הסכמי העודפים החלוקה הייתה שונה ב' + ps.filter(function (p) { return A.seats[p.id] !== A.seatsNoAgreements[p.id]; }).map(function (p) { return esc(p.name) + ' ' + A.seatsNoAgreements[p.id]; }).join(', ') + '.</p>' +
+      est + '<p class="meta">ההערכות נשמרות בדיוק כפי שפורסמו (data/outlook_published.json, לפי הקומיטים ' + R.estimates.map(function (e) { return esc(e.commit); }).join(', ') + '). ההשוואה תחושב מחדש כשוועדת הבחירות תפרסם את התוצאות הרשמיות.</p></section>';
+  }
   function pageOutlook() {
-    var hd = head('תחזית', 'תחזית והקשר היסטורי', 'מה עוד לא נספר, איך זה עשוי להשפיע על המושבים, ואיך 2026 נראית מול חמש מערכות הבחירות הקודמות. <a href="#ol-method">איך זה מחושב</a>');
+    var hd = head('תחזית', 'תחזית בדיעבד והקשר היסטורי', 'ההערכות שפורסמו כאן בזמן הספירה, מול הספירה שהושלמה (לא סופית ולא רשמית), ואיך 2026 נראית מול חמש מערכות הבחירות הקודמות. <a href="#ol-method">איך זה חושב</a>');
     if (!OL) return hd + (OLerr ? '<div class="empty" role="alert"><b>שגיאה בטעינת נתוני התחזית</b><p>' + esc(OLerr) + '. נסו לרענן את הדף.</p></div>' : '<div class="skel" aria-hidden="true"><i></i><i></i><i></i></div><p class="sr" role="status">טוען…</p>');
     var E = OL.envelopes, C = OL.count, ps = olSorted(), BT = OL.backtestSummary, cmp = OL.compare, hist = OL.history, Y = OL.y26;
     var src = function (ss) { return ss.map(function (s) { return srcLink(s.url, s.note ? s.note : 'מקור'); }).join(' · '); };
-    var banner = '<div class="note warn ol-banner" role="note"><b>' + esc(OL.disclaimer) + '.</b> הנתונים חלקיים. הספירה האחרונה שנכללה: ' + fmtStamp(C.asOf) + ', ' + esc(C.label) + ' (' + olN(C.valid) + ' קולות כשרים). ' + src(C.sources) + '. אין עדיין חלוקת מושבים רשמית.</div>';
+    var banner = '<div class="note warn ol-banner" role="note"><b>' + esc(OL.disclaimer) + '.</b> ' + (OL.retro ? 'ועדת הבחירות השלימה את הספירה (' + fmtStamp(OL.retro.actual.asOf) + '), אבל התוצאות עוד לא סופיות ולא רשמיות, ואין חלוקת מושבים רשמית. החלקים א׳–ד׳ שלמטה הם ההערכה כפי שפורסמה על ספירת ' + fmtStamp(C.asOf) + ', ונשמרים כמו שהם.' : 'הנתונים חלקיים. הספירה האחרונה שנכללה: ' + fmtStamp(C.asOf) + ', ' + esc(C.label) + ' (' + olN(C.valid) + ' קולות כשרים). ' + src(C.sources) + '. אין עדיין חלוקת מושבים רשמית.') + '</div>';
     var kpis = '<div class="kpis"><div class="kpi big"><b>' + olK(E.countedNow) + ' אלף</b><span>מעטפות כפולות נספרו (מתוך ' + olK(E.totalRange[0]) + '–' + olK(E.totalRange[1]) + ' אלף, הערכה)</span></div>' +
       '<div class="kpi"><b>' + olK(E.remainingValidRange[0]) + '–' + olK(E.remainingValidRange[1]) + ' אלף</b><span>קולות כשרים שעוד לא נספרו (הערכה)</span></div>' +
       '<div class="kpi"><b>' + Y.turnoutFinalEst.toFixed(1) + '%</b><span>שיעור הצבעה משוער (' + Y.turnoutFinalRange[0].toFixed(1) + '–' + Y.turnoutFinalRange[1].toFixed(1) + '%)</span></div>' +
@@ -1349,15 +1366,15 @@
       '<li><b>למה ההערכה הסופית לא משתמשת בשיטה ב׳:</b> ב-2026 הרכב המעטפות שכבר נספרו ידוע, והוא רחוק ממה ששיטה ב׳ צופה (טעות ממוצעת ' + OL.methodB.mae.toFixed(2) + ' נקודות ברכב המעטפות), בעיקר כי שבע רשימות חדשות בהרכבן. לכן ההערכה מבוססת על המעטפות שנספרו. בדיקה פנימית: מצב 11:16 + הרכב המנה הקודמת חזה את ספירת 18:04 בטעות ממוצעת של ' + OL.pseudoBacktestA.mae.toFixed(3) + ' נקודות ובלי טעות במושבים.</li>' +
       '<li><b>מה חסר:</b> נתוני ועדת הבחירות עצמה לא זמינים מכאן (חסימה גאוגרפית), ולכן המספרים מצוטטים דרך machria, israelielections.com, ynet וכלי תקשורת נוספים. הרכב המנות 1–3 מחושב מאחוזים מעוגלים. אין מידע על הפיזור הגאוגרפי של המעטפות שנותרו (למשל חיילים, דיפלומטים, אסירים ובתי חולים).</li></ol>' +
       '<h3>בדיקה לאחור, 2019–2022</h3>' + bt + '<p class="meta">נתוני העבר: ועדת הבחירות המרכזית דרך data.gov.il (שורת המעטפות הכפולות בכל מערכת). מקורות המעטפות ב-2026: ' + src(E.sources) + '. הקוד: tools/build_outlook.py.</p></section>';
-    return hd + banner + kpis +
+    return hd + banner + olRetro() + '<h2 class="ol-arch">ההערכה כפי שפורסמה על ספירת ' + fmtStamp(C.asOf) + '</h2>' + kpis +
       '<h2 id="ol-a">א. מה עוד לא נספר</h2><p>נשארו רק מעטפות כפולות: קולות של חיילים, אנשי כוחות הביטחון, דיפלומטים, אסירים, מאושפזים ועוד. הן מצביעות אחרת מהקלפיות הרגילות, ולכן ההערכה לוקחת בחשבון את הרכב המעטפות שכבר נספרו.</p>' + tA + tBatch +
       '<h2 id="ol-b">ב. מושבים</h2>' + tB + modal + '<h3>המושבים הקרובים ביותר</h3>' + closeL + '<h3>הסכמי העודפים</h3>' + agr +
       '<h3>מול המדגמים, הסקרים והספירות</h3>' + tC + tP + tS +
       '<h2 id="ol-c">ג. מול ההיסטוריה (2019–2022)</h2>' + tH + swings + envHist + '<h3>מה חריג הפעם</h3>' + unusual +
-      '<h2 id="ol-d">ד. מה אני חושב</h2><div class="ol-think">' + olThink() + '</div>' +
+      '<h2 id="ol-d">ד. מה חשבתי (נכתב לפני סוף הספירה)</h2><div class="ol-think">' + olThink() + '</div>' +
       methods + '<p class="meta">' + esc(orderNote()) + '</p>';
   }
-  var TITLES = { home: 'ראשי', matrix: 'מטריצה', issue: 'לפי סוגיה', list: 'לפי רשימה', compare: 'השוואה', analysis: 'ניתוח רוחבי', polls: 'סקרים', podcasts: 'פודקאסטים וראיונות', coalition: 'בנה קואליציה', 'exit-polls': 'מדגמים: דיוק בעבר', geo: 'תוצאות לפי יישוב וקלפי', outlook: 'תחזית והקשר היסטורי', about: 'שיטה ומקורות' };
+  var TITLES = { home: 'ראשי', matrix: 'מטריצה', issue: 'לפי סוגיה', list: 'לפי רשימה', compare: 'השוואה', analysis: 'ניתוח רוחבי', polls: 'סקרים', podcasts: 'פודקאסטים וראיונות', coalition: 'בנה קואליציה', 'exit-polls': 'מדגמים: דיוק בעבר', geo: 'תוצאות לפי יישוב וקלפי', outlook: 'תחזית בדיעבד', about: 'שיטה ומקורות' };
   var lastPage = null;
   function render(keepScroll) {
     var r = parseHash(), html, sub = '';
