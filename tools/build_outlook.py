@@ -279,7 +279,8 @@ seat_mid = bader_ofer(vmid, AGREEMENTS)
 y = EP['y2026']
 med = {p['id']: p['seats']['p50'] for p in proj}
 def misalloc(seats): return sum(abs(seats.get(k, 0) - med[k]) for k in IDS) / 2
-polls_cmp = [{'id': p['id'], 'channel': p['channel'], 'pollster': p.get('pollster', ''), 'time': p['time'], 'kind': p['kind'],
+CHN = dict(EP['meta']['channels']); CHN.update(EP['y2026'].get('channels', {}))
+polls_cmp = [{'id': p['id'], 'channel': CHN.get(p['channel'], p['channel']), 'pollster': p.get('pollster', ''), 'time': p['time'], 'kind': p['kind'],
               'seats': {k: p['seats'].get(k, 0) for k in IDS}, 'misallocated': misalloc(p['seats'])} for p in y['polls']]
 init = [p for p in y['polls'] if p['kind'] == 'initial']
 avg_init = {k: r(st.mean(p['seats'].get(k, 0) for p in init), 2) for k in IDS}

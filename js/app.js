@@ -224,6 +224,7 @@
       card('#/polls', 'סקרים', 'ממוצע, טווח, סכומי גושים וקו 61, מגמה וטבלת כל הסקרים.', 'polls') +
       card('#/coalition', 'בנה קואליציה', 'בחירת רשימות, הערכת מנדטים מול קו 61 והשוואה מתמטית של העמדות המוצהרות בכל סוגיה. לא תחזית ולא המלצה.', 'coalition') +
       card('#/exit-polls', 'מדגמים: דיוק בעבר', 'עד כמה דייקו מדגמי הטלוויזיה בערב הבחירות ב-2019–2022, מול התוצאות הרשמיות. בלי תחזית.', 'polls') +
+      card('#/outlook', 'תחזית והקשר היסטורי', 'הערכה סטטיסטית של התוצאה הסופית אחרי ספירת המעטפות הכפולות, טווחי מושבים, והשוואה ל-2019–2022. לא תוצאה רשמית.', 'polls') +
       card('#/geo', 'תוצאות לפי יישוב וקלפי', 'אחוז ההצבעה ולמי הצביעו בכל יישוב ובכל קלפי, בחמש המערכות של 2019–2022. התוצאות הרשמיות של ועדת הבחירות.', 'analysis') +
       card('#/podcasts', 'פודקאסטים וראיונות', 'מה אמרו ראשי הרשימות בפודקאסטים ובראיונות ארוכים בחודש שלפני הבחירות, עם קישורים וציטוטים מאומתים.', 'podcasts') +
       '</div>' +
@@ -1246,7 +1247,117 @@
     var parts = h.split('/').filter(Boolean);
     return { page: parts[0] || 'home', arg: parts[1] ? decodeURIComponent(parts[1]) : '', q: qs };
   }
-  var TITLES = { home: 'ראשי', matrix: 'מטריצה', issue: 'לפי סוגיה', list: 'לפי רשימה', compare: 'השוואה', analysis: 'ניתוח רוחבי', polls: 'סקרים', podcasts: 'פודקאסטים וראיונות', coalition: 'בנה קואליציה', 'exit-polls': 'מדגמים: דיוק בעבר', geo: 'תוצאות לפי יישוב וקלפי', about: 'שיטה ומקורות' };
+  // ---- #/outlook: statistical estimate from data/outlook.json (built by tools/build_outlook.py). Not an official result.
+  var OL = null, OLerr = '';
+  function loadOutlook() { return getJSON('data/outlook.json').then(function (d) { OL = d; }).catch(function (e) { OLerr = e.message || 'שגיאה'; }); }
+  // Bader–Ofer (3.25% threshold, surplus agreements). Same algorithm as tools/build_outlook.py; checked by test/outlook.test.mjs
+  function olBO(votes, agreements, seats, thr) {
+    seats = seats || 120; thr = thr == null ? 0.0325 : thr;
+    var valid = 0, k; for (k in votes) valid += votes[k];
+    var pass = {}, tot = 0; for (k in votes) if (k !== 'other' && votes[k] >= thr * valid) { pass[k] = votes[k]; tot += votes[k]; }
+    var q = tot / seats, s = {}, used = {}, units = [];
+    for (k in pass) s[k] = Math.floor(pass[k] / q);
+    (agreements || []).forEach(function (a) { if (pass[a[0]] != null && pass[a[1]] != null) { units.push(a); used[a[0]] = used[a[1]] = 1; } });
+    for (k in pass) if (!used[k]) units.push([k]);
+    var us = units.map(function (u) { return u.reduce(function (t, x) { return t + s[x]; }, 0); }), uv = units.map(function (u) { return u.reduce(function (t, x) { return t + pass[x]; }, 0); });
+    var left = seats - units.reduce(function (t, u, i) { return t + us[i]; }, 0);
+    for (var n = 0; n < left; n++) { var bi = 0; for (var i = 1; i < units.length; i++) { var a = uv[i] / (us[i] + 1), b = uv[bi] / (us[bi] + 1); if (a > b || (a === b && uv[i] > uv[bi])) bi = i; } us[bi]++; }
+    var out = {}; for (k in votes) if (k !== 'other') out[k] = 0;
+    units.forEach(function (u, i) {
+      if (u.length === 1) { out[u[0]] = us[i]; return; }
+      var qq = uv[i] / us[i], ss = {}, got = 0; u.forEach(function (x) { ss[x] = Math.floor(pass[x] / qq); got += ss[x]; });
+      for (var m = got; m < us[i]; m++) { var best = u[0]; u.forEach(function (x) { var a = pass[x] / (ss[x] + 1), b = pass[best] / (ss[best] + 1); if (a > b || (a === b && pass[x] > pass[best])) best = x; }); ss[best]++; }
+      u.forEach(function (x) { out[x] = ss[x]; });
+    });
+    return out;
+  }
+  function olN(x) { return Math.round(x).toLocaleString('he-IL'); }
+  function olP(x) { return x.toFixed(2) + '%'; }
+  function olK(x) { return Math.round(x / 1000).toLocaleString('he-IL'); }
+  function olRng(s) { return s.p10 === s.p90 ? String(s.p50) : s.p10 + '–' + s.p90; }
+  function olSorted() { return OL.projection.slice().sort(function (a, b) { return COLL.compare(a.name, b.name); }); }
+  function olName(id) { return OL.projection.filter(function (p) { return p.id === id; })[0].name; }
+  function olShort(lbl) { return lbl.split(' (')[0]; }
+  function olClose() { // lists whose seat count is genuinely uncertain (second outcome ≥ 5% of simulations)
+    return OL.projection.filter(function (p) { var v = Object.keys(p.pSeats).map(function (k) { return p.pSeats[k]; }).sort(function (a, b) { return b - a; }); return v.length > 1 && v[1] >= 5; })
+      .sort(function (a, b) { var m = function (p) { var g = OL.midScenario.margins[p.id] || {}; return Math.min(g.gain == null ? 1e9 : g.gain, g.lose == null ? 1e9 : g.lose); }; return m(a) - m(b) || COLL.compare(a.name, b.name); });
+  }
+  function olThink() {
+    var E = OL.envelopes, ls = olSorted().filter(function (p) { return p.seats.p90 > 0; }), out = olSorted().filter(function (p) { return p.seats.p90 === 0; });
+    var close = olClose(), M = OL.midScenario.margins;
+    var dist = function (p) { return Object.keys(p.pSeats).filter(function (k) { return p.pSeats[k] >= 1; }).map(function (k) { return k + ' (' + Math.round(p.pSeats[k]) + '%)'; }).join(' או '); };
+    return '<p>הספירה כמעט הסתיימה. כל הקלפיות הרגילות נספרו, ונשארו כ-' + olK(E.remainingValidRange[0]) + '–' + olK(E.remainingValidRange[1]) + ' אלף קולות כשרים במעטפות כפולות, כ-' + Math.round(100 * (E.remainingValidRange[0] + E.remainingValidRange[1]) / 2 / (OL.count.valid + (E.remainingValidRange[0] + E.remainingValidRange[1]) / 2)) + '% מכל הקולות. לכן התמונה הכללית כבר יציבה, ומה שנשאר פתוח הוא מושבים בודדים.</p>' +
+      '<p>לפי ההערכה שלי (חציון, ובסוגריים הטווח שבו נמצאות 80% מההדמיות): ' + ls.map(function (p) { return esc(p.name) + ' ' + p.seats.p50 + (p.seats.p10 !== p.seats.p90 ? ' (' + olRng(p.seats) + ')' : ''); }).join(', ') + '. ' +
+      (out.length ? out.map(function (p) { return esc(p.name) + ' (כ-' + p.pct.p50.toFixed(1) + '%)'; }).join(' ו') + ' לא עוברות את אחוז החסימה בשום הדמיה. ' : '') + '</p>' +
+      (close.length ? '<p>המושבים הפתוחים ביותר: ' + close.map(function (p) { var g = M[p.id] || {}; return esc(p.name) + ': ' + dist(p) + (g.gain != null && g.gain < (g.lose || 1e9) ? ', בתרחיש המרכזי חסרים לה כ-' + olN(g.gain) + ' קולות למושב נוסף' : g.lose != null ? ', בתרחיש המרכזי היא מעל המושב האחרון בכ-' + olN(g.lose) + ' קולות' : ''); }).join('; ') + '. חלק מההכרעות האלה הן בתוך זוג רשימות עם הסכם עודפים, כך שמושב עובר בין שתי הרשימות בזוג ולא משנה את סכום הזוג.</p>' : '') +
+      '<p>סכומי הגושים, לפי העמדות שהרשימות עצמן הצהירו לפני הבחירות: ' + OL.blocs.filter(function (b) { return b.p90 > 0; }).map(function (b) { return esc(b.name) + ': ' + b.p50 + (b.p10 !== b.p90 ? ' (' + b.p10 + '–' + b.p90 + ')' : ''); }).join('; ') + '. ' + esc(OL.blocNote) + '</p>' +
+      '<p>מה עלול להיות שונה: אני לא יודע בדיוק כמה מעטפות נשארו (טווח ' + olK(E.totalRange[0]) + '–' + olK(E.totalRange[1]) + ' אלף בסך הכול), והרכב המעטפות השתנה מאוד בין המנות שנספרו. גם תיקונים של ועדת הבחירות אחרי הספירה יכולים להזיז מושב. זו הערכה סטטיסטית, לא תוצאה רשמית. התוצאה המחייבת היא של ועדת הבחירות המרכזית.</p>';
+  }
+  function pageOutlook() {
+    var hd = head('תחזית', 'תחזית והקשר היסטורי', 'מה עוד לא נספר, איך זה עשוי להשפיע על המושבים, ואיך 2026 נראית מול חמש מערכות הבחירות הקודמות. <a href="#ol-method">איך זה מחושב</a>');
+    if (!OL) return hd + (OLerr ? '<div class="empty" role="alert"><b>שגיאה בטעינת נתוני התחזית</b><p>' + esc(OLerr) + '. נסו לרענן את הדף.</p></div>' : '<div class="skel" aria-hidden="true"><i></i><i></i><i></i></div><p class="sr" role="status">טוען…</p>');
+    var E = OL.envelopes, C = OL.count, ps = olSorted(), BT = OL.backtestSummary, cmp = OL.compare, hist = OL.history, Y = OL.y26;
+    var src = function (ss) { return ss.map(function (s) { return srcLink(s.url, s.note ? s.note : 'מקור'); }).join(' · '); };
+    var banner = '<div class="note warn ol-banner" role="note"><b>' + esc(OL.disclaimer) + '.</b> הנתונים חלקיים. הספירה האחרונה שנכללה: ' + fmtStamp(C.asOf) + ', ' + esc(C.label) + ' (' + olN(C.valid) + ' קולות כשרים). ' + src(C.sources) + '. אין עדיין חלוקת מושבים רשמית.</div>';
+    var kpis = '<div class="kpis"><div class="kpi big"><b>' + olK(E.countedNow) + ' אלף</b><span>מעטפות כפולות נספרו (מתוך ' + olK(E.totalRange[0]) + '–' + olK(E.totalRange[1]) + ' אלף, הערכה)</span></div>' +
+      '<div class="kpi"><b>' + olK(E.remainingValidRange[0]) + '–' + olK(E.remainingValidRange[1]) + ' אלף</b><span>קולות כשרים שעוד לא נספרו (הערכה)</span></div>' +
+      '<div class="kpi"><b>' + Y.turnoutFinalEst.toFixed(1) + '%</b><span>שיעור הצבעה משוער (' + Y.turnoutFinalRange[0].toFixed(1) + '–' + Y.turnoutFinalRange[1].toFixed(1) + '%)</span></div>' +
+      '<div class="kpi"><b>' + BT.mae.toFixed(2) + '</b><span>נקודות אחוז: טעות ממוצעת בבדיקה לאחור על 2019–2022</span></div></div>';
+    // (א) envelopes
+    var tA = '<div class="tbl-wrap ol-w" tabindex="0" role="region" aria-label="אחוזים: נספר, מעטפות ותחזית"><table class="tbl ol-t"><caption class="sr">אחוז הקולות לפי רשימה: נספר עד כה, במעטפות הכפולות, וההערכה לתוצאה הסופית</caption><thead><tr><th scope="col">רשימה</th><th scope="col" class="n">נספר עד ' + C.asOf.slice(11, 16) + '</th><th scope="col" class="n">בקלפיות הרגילות בלבד</th><th scope="col" class="n">במעטפות שנספרו</th><th scope="col" class="n">הנחה למעטפות שנותרו</th><th scope="col" class="n">הערכה סופית (טווח 10%–90%)</th></tr></thead><tbody>' +
+      ps.map(function (p) { return '<tr data-ol="' + p.id + '"><th scope="row">' + esc(p.name) + '</th><td class="n">' + olP(p.counted) + '</td><td class="n">' + olP(p.regOnly) + '</td><td class="n">' + olP(p.envSoFar) + '</td><td class="n">' + p.envRemainingMu.toFixed(1) + '% ± ' + p.envRemainingSd.toFixed(1) + '</td><td class="n"><b data-ol-pct>' + olP(p.pct.p50) + '</b> <span class="meta">(' + p.pct.p10.toFixed(2) + '–' + p.pct.p90.toFixed(2) + ')</span></td></tr>'; }).join('') + '</tbody></table></div>';
+    var tBatch = '<details><summary>הרכב המעטפות לפי מנות ספירה (' + E.batches.length + ')</summary><div class="tbl-wrap ol-w" tabindex="0" role="region" aria-label="מנות מעטפות"><table class="tbl ol-t"><thead><tr><th scope="col">רשימה</th>' + E.batches.map(function (b, i) { return '<th scope="col" class="n">מנה ' + (i + 1) + '<br><span class="meta">' + olN(b.n) + '</span></th>'; }).join('') + '</tr></thead><tbody>' +
+      ps.map(function (p) { return '<tr><th scope="row">' + esc(p.name) + '</th>' + E.batches.map(function (b) { return '<td class="n">' + b.pct[p.id].toFixed(1) + '%</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div><p class="meta">מנות 1–3: אחוזים מצטברים שפורסמו (הוחסרו זה מזה); מנה 4: ההפרש בין ספירת 11:16 לספירת 12:44. מקורות: ' + E.batches.map(function (b, i) { return /^https?:/.test(b.src) ? srcLink(b.src, 'מנה ' + (i + 1)) : 'מנה ' + (i + 1) + ': ' + esc(b.src); }).join(' · ') + '</p></details>';
+    // (ב) seats
+    var tB = '<div class="tbl-wrap ol-w" tabindex="0" role="region" aria-label="הערכת מושבים"><table class="tbl ol-t"><caption class="sr">הערכת מושבים לפי רשימה</caption><thead><tr><th scope="col">רשימה</th><th scope="col" class="n">חציון</th><th scope="col" class="n">טווח 10%–90%</th><th scope="col">הסתברות לכל תוצאה</th><th scope="col" class="n">בלי הסכמי עודפים (ממוצע)</th><th scope="col" class="n">השפעת ההסכמים</th></tr></thead><tbody>' +
+      ps.map(function (p) { return '<tr data-ol="' + p.id + '"><th scope="row">' + esc(p.name) + '</th><td class="n"><b data-ol-seat>' + p.seats.p50 + '</b></td><td class="n" data-ol-rng>' + olRng(p.seats) + '</td><td>' + Object.keys(p.pSeats).filter(function (k) { return p.pSeats[k] >= 0.5; }).map(function (k) { return k + ': ' + Math.round(p.pSeats[k]) + '%'; }).join(' · ') + '</td><td class="n">' + p.seatsNoAgr.mean.toFixed(2) + '</td><td class="n">' + (p.agreementEffect > 0 ? '+' : '') + p.agreementEffect.toFixed(2) + '</td></tr>'; }).join('') + '</tbody></table></div>';
+    var modalSum = ps.reduce(function (t, p) { return t + OL.modal[p.id]; }, 0), medSum = ps.reduce(function (t, p) { return t + p.seats.p50; }, 0);
+    var modal = '<p>התרחיש השכיח ביותר בהדמיות (' + OL.modalShare.toFixed(0) + '% מהן), חלוקה מלאה של ' + modalSum + ' מושבים: ' + ps.filter(function (p) { return OL.modal[p.id] > 0; }).map(function (p) { return esc(p.name) + ' ' + OL.modal[p.id]; }).join(', ') + '.' + (medSum !== 120 ? ' סכום החציונים בטבלה הוא ' + medSum + ' ולא 120, כי החציון מחושב לכל רשימה בנפרד.' : '') + '</p>';
+    var close = olClose(), M = OL.midScenario.margins;
+    var closeL = close.length ? '<ul>' + close.map(function (p) { var g = M[p.id] || {}; return '<li><b>' + esc(p.name) + ':</b> ' + Object.keys(p.pSeats).filter(function (k) { return p.pSeats[k] >= 1; }).map(function (k) { return k + ' מושבים ב-' + Math.round(p.pSeats[k]) + '% מההדמיות'; }).join(', ') + '. בתרחיש המרכזי: ' + (g.gain != null ? 'עוד ' + olN(g.gain) + ' קולות למושב נוסף' : '') + (g.gain != null && g.lose != null ? '; ' : '') + (g.lose != null ? 'אובדן ' + olN(g.lose) + ' קולות להפסד מושב' : '') + '.</li>'; }).join('') + '</ul>' : '<p>אין רשימה שמספר המושבים שלה פתוח ביותר מ-5% מההדמיות.</p>';
+    var agr = '<p>הסכמי העודפים הרשמיים: ' + OL.agreements.map(function (a) { return esc(olName(a[0])) + ' עם ' + esc(olName(a[1])); }).sort(COLL.compare).join(' · ') + '. ' + src(OL.agreementSources) + '. הטבלה מראה בכמה מושבים בממוצע ההסכמים משנים את התוצאה לכל רשימה.</p>';
+    var cmpRows = ps.map(function (p) {
+      var c = cmp.counts[cmp.counts.length - 1].seats[p.id];
+      var d = function (x) { var v = Math.round((x - p.seats.p50) * 100) / 100; return (v > 0 ? '+' : '') + (Number.isInteger(v) ? v : v.toFixed(1)); };
+      return '<tr><th scope="row">' + esc(p.name) + '</th><td class="n"><b>' + p.seats.p50 + '</b></td><td class="n">' + fmtN(cmp.initialAvg[p.id]) + ' <span class="meta">(' + d(cmp.initialAvg[p.id]) + ')</span></td><td class="n">' + fmtN(cmp.allAvg[p.id]) + ' <span class="meta">(' + d(cmp.allAvg[p.id]) + ')</span></td><td class="n">' + fmtN(cmp.pollAverage[p.id]) + ' <span class="meta">(' + d(cmp.pollAverage[p.id]) + ')</span></td><td class="n">' + c + ' <span class="meta">(' + d(c) + ')</span></td></tr>';
+    }).join('');
+    var tC = '<div class="tbl-wrap ol-w" tabindex="0" role="region" aria-label="השוואה למדגמים ולסקרים"><table class="tbl ol-t"><caption class="sr">ההערכה מול המדגמים, הסקרים והספירה</caption><thead><tr><th scope="col">רשימה</th><th scope="col" class="n">הערכה (חציון)</th><th scope="col" class="n">ממוצע 6 המדגמים הראשוניים</th><th scope="col" class="n">ממוצע כל ' + cmp.polls.length + ' המדגמים</th><th scope="col" class="n">ממוצע ' + cmp.pollAverageN + ' הסקרים האחרונים</th><th scope="col" class="n">חלוקה לפי ספירת ' + cmp.counts[cmp.counts.length - 1].asOf.slice(11, 16) + '</th></tr></thead><tbody>' + cmpRows + '</tbody></table></div>' +
+      '<p class="meta">בסוגריים: ההפרש מהחציון. פלוס = המדגם או הסקר נתנו יותר מההערכה. הממוצעים אינם מעוגלים ל-120.</p>';
+    var pl = cmp.polls.slice().sort(function (a, b) { return a.misallocated - b.misallocated || COLL.compare(a.id, b.id); });
+    var tP = '<details><summary>כל מדגם לעומת ההערכה (מושבים שהוקצו אחרת)</summary><ul>' + pl.map(function (p) { return '<li>' + esc(p.channel) + (p.pollster ? ' (' + esc(p.pollster) + ')' : '') + ', ' + (p.kind === 'initial' ? 'מדגם ראשוני' : 'עדכון') + ' ' + esc(p.time) + ': ' + fmtN(p.misallocated) + '</li>'; }).join('') + '</ul><p class="meta">מסודר מהקרוב לרחוק. ההשוואה היא להערכה, לא לתוצאה הרשמית, ולכן היא זמנית. <a href="#/exit-polls">לדף המדגמים</a></p></details>';
+    var tS = '<details><summary>איך המושבים זזו בין הספירות (' + cmp.counts.length + ')</summary><div class="tbl-wrap ol-w" tabindex="0" role="region" aria-label="מושבים לפי ספירה"><table class="tbl ol-t"><thead><tr><th scope="col">רשימה</th>' + cmp.counts.map(function (s) { return '<th scope="col" class="n">' + fmtShort(s.asOf) + ' ' + s.asOf.slice(11, 16) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+      ps.map(function (p) { return '<tr><th scope="row">' + esc(p.name) + '</th>' + cmp.counts.map(function (s) { return '<td class="n">' + s.seats[p.id] + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div><p class="meta">חלוקה לפי באדר-עופר עם הסכמי העודפים על כל ספירה חלקית. ספירות שבהן רק האחוזים זמינים חושבו מהאחוזים המעוגלים. ספירת 28.10 07:57 כללה כ-57% מהקולות בלבד.</p></details>';
+    // (ג) history
+    var hRows = hist.map(function (h) { return '<tr><th scope="row">' + esc(olShort(h.label)) + '</th><td class="n">' + h.turnout.toFixed(1) + '%</td><td class="n">' + h.envShare.toFixed(1) + '%</td><td class="n">' + h.enpVotes.toFixed(1) + '</td><td class="n">' + h.enpSeats.toFixed(1) + '</td><td class="n">' + h.wastedPct.toFixed(1) + '%</td><td class="n">' + (h.pedersen != null ? h.pedersen.toFixed(1) : '–') + '</td><td class="n">' + h.maxDrift.toFixed(2) + '</td><td class="n">' + h.seatsMovedByEnvelopes + '</td><td class="n">' + h.blocSeats + '</td></tr>'; }).join('') +
+      '<tr class="ol-26"><th scope="row">2026 (הערכה)</th><td class="n">' + Y.turnoutFinalEst.toFixed(1) + '%</td><td class="n">' + Y.envShareEst[0].toFixed(1) + '–' + Y.envShareEst[1].toFixed(1) + '%</td><td class="n">' + Y.enpVotes.toFixed(1) + '</td><td class="n">' + Y.enpSeats.toFixed(1) + '</td><td class="n">' + Y.wastedPct.toFixed(1) + '%</td><td class="n">–</td><td class="n">–</td><td class="n">–</td><td class="n">' + OL.blocs[0].p50 + '*</td></tr>';
+    var tH = '<div class="tbl-wrap ol-w" tabindex="0" role="region" aria-label="השוואה היסטורית"><table class="tbl ol-t"><caption class="sr">מדדים היסטוריים 2019–2026</caption><thead><tr><th scope="col">מערכת</th><th scope="col" class="n">שיעור הצבעה</th><th scope="col" class="n">מעטפות כפולות (מהמצביעים)</th><th scope="col" class="n">מספר מפלגות אפקטיבי (קולות)</th><th scope="col" class="n">מספר מפלגות אפקטיבי (מושבים)</th><th scope="col" class="n">קולות מתחת לחסימה</th><th scope="col" class="n">תנודתיות (פדרסן)</th><th scope="col" class="n">תזוזה מרבית בגלל המעטפות (נק׳ אחוז)</th><th scope="col" class="n">מושבים שזזו בגלל המעטפות</th><th scope="col" class="n">גוש התומכים בנתניהו</th></tr></thead><tbody>' + hRows + '</tbody></table></div>' +
+      '<p class="meta">גוש התומכים בנתניהו בעבר: הרשימות שהמליצו עליו לנשיא אחרי הבחירות (' + hist.map(function (h) { return srcLink(h.blocSource, olShort(h.label)); }).join(' · ') + '). *ב-2026 אין עדיין המלצות, ולכן מוצג גוש הקואליציה היוצאת לפי ההצהרות לפני הבחירות. זו הגדרה אחרת, וההשוואה מקורבת. מספר המפלגות האפקטיבי על הקולות כולל רק רשימות שקיבלו 1% ומעלה. התנודתיות לפי אות הפתק, ולכן מקורבת כשאותה אות עברה בין הרכבים. "מושבים שזזו בגלל המעטפות": החלוקה בלי הסכמי עודפים לפי הקלפיות הרגילות בלבד מול התוצאה הסופית. תוצאות רשמיות: ' + hist.map(function (h) { return srcLink(h.source, olShort(h.label)); }).join(' · ') + '.</p>';
+    var swings = '<details><summary>התנודות הגדולות בין מערכות</summary><ul>' + hist.filter(function (h) { return h.topSwings; }).map(function (h) { return '<li><b>' + esc(olShort(h.label)) + ':</b> ' + h.topSwings.map(function (s) { return esc(s.n) + ' ' + s.from.toFixed(1) + '% ← ' + s.to.toFixed(1) + '% (' + (s.pp > 0 ? '+' : '') + s.pp.toFixed(1) + ')'; }).join('; ') + '. שיעור ההצבעה ' + (h.turnoutChange > 0 ? '+' : '') + h.turnoutChange.toFixed(1) + ' נקודות; הגוש ' + (h.blocChange > 0 ? '+' : '') + h.blocChange + ' מושבים.</li>'; }).join('') + '</ul></details>';
+    var envHist = '<details><summary>מה המעטפות הכפולות הזיזו בעבר</summary><ul>' + hist.map(function (h) { var d = Object.keys(h.seatsMovedDetail).sort(COLL.compare); return '<li><b>' + esc(olShort(h.label)) + ':</b> ' + olN(h.envVoters) + ' מעטפות (' + h.envShare.toFixed(1) + '%), תזוזה מרבית ' + h.maxDrift.toFixed(2) + ' נקודות. ' + (d.length ? d.map(function (n) { var v = h.seatsMovedDetail[n]; return esc(n) + ' ' + (v > 0 ? '+' : '') + v; }).join(', ') : 'אף מושב לא זז') + '.</li>'; }).join('') + '</ul></details>';
+    var unusual = '<ul class="ol-unusual">' + OL.unusual.map(function (u) { return '<li>' + esc(u.text) + '</li>'; }).join('') + '</ul>';
+    // methods + backtest
+    var bt = '<div class="tbl-wrap ol-w" tabindex="0" role="region" aria-label="בדיקה לאחור"><table class="tbl ol-t"><caption class="sr">בדיקה לאחור: קלפיות רגילות + יחס המעטפות ממערכות קודמות מול התוצאה הסופית</caption><thead><tr><th scope="col">מערכת</th><th scope="col" class="n">טעות ממוצעת (נק׳ אחוז)</th><th scope="col" class="n">טעות מרבית</th><th scope="col" class="n">בלי תיקון: טעות ממוצעת</th><th scope="col" class="n">מושבים שהוקצו אחרת</th><th scope="col" class="n">בלי תיקון: מושבים</th><th scope="col" class="n">רשימות עם היסטוריה</th></tr></thead><tbody>' +
+      OL.backtest.map(function (b) { return '<tr><th scope="row">' + esc(olShort(b.label)) + '</th><td class="n">' + b.mae.toFixed(3) + '</td><td class="n">' + b.maxErr.toFixed(2) + ' <span class="meta">(' + esc(b.maxErrList) + ')</span></td><td class="n">' + b.naiveMae.toFixed(3) + '</td><td class="n">' + b.seatErr + '</td><td class="n">' + b.naiveSeatErr + '</td><td class="n">' + b.matched + '/' + b.nLists + '</td></tr>'; }).join('') + '</tbody></table></div>';
+    var methods = '<section class="note" id="ol-method"><h2>איך זה מחושב (כל ההנחות)</h2><ol>' +
+      '<li><b>נקודת המוצא:</b> ספירת ' + fmtStamp(C.asOf) + ' (' + olN(C.valid) + ' קולות כשרים). כל 12,018 הקלפיות הרגילות כבר נספרו, ולכן מה שחסר הוא מעטפות כפולות בלבד.</li>' +
+      '<li><b>כמה מעטפות נשארו:</b> מספר הקלפיות הרגילות (' + olN(E.regularBallots) + ' פתקים) חושב מספירת 11:16 פחות ' + olN(E.batches[0].n + E.batches[1].n + E.batches[2].n) + ' מעטפות שדווחו כנספרות באותה שעה. סך המעטפות: לפחות ' + olN(E.totalRange[0]) + ' (דיווח "יותר מ-400 אלף") ולכל היותר ' + olN(E.totalRange[1]) + ' (אם נתון ההצבעה של 22:00, ' + olN(E.voters2200) + ', הוא הסופי). בהדמיה הכמות נבחרת באופן אחיד בטווח, ו-' + (100 * 4093 / 462807).toFixed(2) + '% פסולים כמו במעטפות של 2022.</li>' +
+      '<li><b>הרכב המעטפות שנותרו:</b> ממוצע משוקלל של שתי המנות האחרונות (' + olN(E.batches[2].n) + ' ו-' + olN(E.batches[3].n) + ' קולות), עם סטיית תקן לכל רשימה: הגדולה מבין 0.3 נקודות, 15% מהערך, ההפרש מהממוצע המצטבר והפיזור בין המנות. ' + OL.nSim.toLocaleString('he-IL') + ' הדמיות (זרע ' + OL.seed + ').</li>' +
+      '<li><b>חלוקת המושבים:</b> שיטת באדר-עופר, אחוז חסימה ' + OL.threshold + '% מכל הקולות הכשרים, עם הסכמי העודפים הרשמיים. הפונקציה משחזרת את החלוקה הלא רשמית שפורסמה ב-machria לספירת 12:44 ואת החלוקה של israelielections.com לספירת 11:32 (בלי הסכמים).</li>' +
+      '<li><b>טווחים:</b> אחוזון 10 ואחוזון 90 של ההדמיות. "חציון" לכל רשימה בנפרד.</li>' +
+      '<li><b>גושים:</b> לפי העמדות שהרשימות הצהירו לפני הבחירות (כמו בדף הסקרים). אינם תחזית של קואליציה.</li>' +
+      '<li><b>בדיקה לאחור (שיטה ב׳, היסטורית בלבד):</b> לכל מערכת 2019–2022 לקחתי את התוצאות בקלפיות הרגילות בלבד, הוספתי את מספר המעטפות האמיתי, וחילקתי אותן לפי יחס "מעטפות לעומת קלפיות רגילות" של אותה רשימה (לפי אות הפתק) בשתי המערכות הקודמות. רשימה בלי היסטוריה קיבלה יחס 1. השוואה מול התוצאה הסופית, ומול "בלי תיקון" (המעטפות כמו הקלפיות הרגילות). המושבים בבדיקה מחושבים בלי הסכמי עודפים. טעות ממוצעת בכל המערכות: ' + BT.mae.toFixed(3) + ' נקודות (בלי תיקון: ' + BT.naiveMae.toFixed(3) + '); הכי הרבה מושבים שהוקצו אחרת: ' + BT.seatErrMax + ' (בלי תיקון: ' + BT.naiveSeatErrMax + ').</li>' +
+      '<li><b>למה ההערכה הסופית לא משתמשת בשיטה ב׳:</b> ב-2026 הרכב המעטפות שכבר נספרו ידוע, והוא רחוק ממה ששיטה ב׳ צופה (טעות ממוצעת ' + OL.methodB.mae.toFixed(2) + ' נקודות ברכב המעטפות), בעיקר כי שבע רשימות חדשות בהרכבן. לכן ההערכה מבוססת על המעטפות שנספרו. בדיקה פנימית: מצב 11:16 + הרכב המנה הקודמת חזה את ספירת 12:44 בטעות ממוצעת של ' + OL.pseudoBacktestA.mae.toFixed(3) + ' נקודות ובלי טעות במושבים.</li>' +
+      '<li><b>מה חסר:</b> נתוני ועדת הבחירות עצמה לא זמינים מכאן (חסימה גאוגרפית), ולכן המספרים מצוטטים דרך machria, israelielections.com, ynet וכלי תקשורת נוספים. הרכב המנות 1–3 מחושב מאחוזים מעוגלים. אין מידע על הפיזור הגאוגרפי של המעטפות שנותרו (למשל חיילים, דיפלומטים, אסירים ובתי חולים).</li></ol>' +
+      '<h3>בדיקה לאחור, 2019–2022</h3>' + bt + '<p class="meta">נתוני העבר: ועדת הבחירות המרכזית דרך data.gov.il (שורת המעטפות הכפולות בכל מערכת). מקורות המעטפות ב-2026: ' + src(E.sources) + '. הקוד: tools/build_outlook.py.</p></section>';
+    return hd + banner + kpis +
+      '<h2 id="ol-a">א. מה עוד לא נספר</h2><p>נשארו רק מעטפות כפולות: קולות של חיילים, אנשי כוחות הביטחון, דיפלומטים, אסירים, מאושפזים ועוד. הן מצביעות אחרת מהקלפיות הרגילות, ולכן ההערכה לוקחת בחשבון את הרכב המעטפות שכבר נספרו.</p>' + tA + tBatch +
+      '<h2 id="ol-b">ב. מושבים</h2>' + tB + modal + '<h3>המושבים הקרובים ביותר</h3>' + closeL + '<h3>הסכמי העודפים</h3>' + agr +
+      '<h3>מול המדגמים, הסקרים והספירות</h3>' + tC + tP + tS +
+      '<h2 id="ol-c">ג. מול ההיסטוריה (2019–2022)</h2>' + tH + swings + envHist + '<h3>מה חריג הפעם</h3>' + unusual +
+      '<h2 id="ol-d">ד. מה אני חושב</h2><div class="ol-think">' + olThink() + '</div>' +
+      methods + '<p class="meta">' + esc(orderNote()) + '</p>';
+  }
+  var TITLES = { home: 'ראשי', matrix: 'מטריצה', issue: 'לפי סוגיה', list: 'לפי רשימה', compare: 'השוואה', analysis: 'ניתוח רוחבי', polls: 'סקרים', podcasts: 'פודקאסטים וראיונות', coalition: 'בנה קואליציה', 'exit-polls': 'מדגמים: דיוק בעבר', geo: 'תוצאות לפי יישוב וקלפי', outlook: 'תחזית והקשר היסטורי', about: 'שיטה ומקורות' };
   var lastPage = null;
   function render(keepScroll) {
     var r = parseHash(), html, sub = '';
@@ -1259,6 +1370,7 @@
       case 'analysis': html = pageAnalysis(r.arg, r.q); break;
       case 'polls': html = pagePolls(r.q); break;
       case 'about': html = pageAbout(); break;
+      case 'outlook': html = pageOutlook(); if (!OL && !OLerr) loadOutlook().then(function () { if (parseHash().page === 'outlook') render(true); }); break;
       case 'coalition': html = pageCoalition(r.q); if (!CO && !COerr) loadCoalition().then(function () { if (parseHash().page === 'coalition') render(true); }); break;
       case 'exit-polls': html = pageExitPolls(); if (!EP && !EPerr) loadExitPolls().then(function () { if (parseHash().page === 'exit-polls') render(true); }); break;
       case 'geo': if (window.EL26GEO) { html = window.EL26GEO.page(r); sub = window.EL26GEO.title(r); } else { html = '<div class="skel" aria-hidden="true"><i></i><i></i><i></i></div><p class="sr" role="status">טוען…</p>'; loadGeo(); } break;
