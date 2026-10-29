@@ -225,6 +225,7 @@
       card('#/coalition', 'בנה קואליציה', 'בחירת רשימות, הערכת מנדטים מול קו 61 והשוואה מתמטית של העמדות המוצהרות בכל סוגיה. לא תחזית ולא המלצה.', 'coalition') +
       card('#/exit-polls', 'מדגמים: דיוק בעבר', 'עד כמה דייקו מדגמי הטלוויזיה בערב הבחירות ב-2019–2022, מול התוצאות הרשמיות. בלי תחזית.', 'polls') +
       card('#/outlook', 'תחזית בדיעבד', 'ההערכות שפורסמו בזמן ספירת המעטפות הכפולות מול הספירה שהושלמה (לא סופית ולא רשמית), והשוואה ל-2019–2022.', 'polls') +
+      card('#/cities', 'ניתוח לפי יישוב', 'כל יישוב לאורך 2019–2026: אחוז ההצבעה, אחוז הקולות לכל רשימה, שינוי מול מערכות קודמות, החזקות והחלשות של כל רשימה, והשוואה בין יישובים. נתוני 2026 חלקיים.', 'polls') +
       card('#/geo', 'תוצאות לפי יישוב וקלפי', 'אחוז ההצבעה ולמי הצביעו בכל יישוב ובכל קלפי, בחמש המערכות של 2019–2022. התוצאות הרשמיות של ועדת הבחירות.', 'analysis') +
       card('#/podcasts', 'פודקאסטים וראיונות', 'מה אמרו ראשי הרשימות בפודקאסטים ובראיונות ארוכים בחודש שלפני הבחירות, עם קישורים וציטוטים מאומתים.', 'podcasts') +
       '</div>' +
@@ -1374,7 +1375,7 @@
       '<h2 id="ol-d">ד. מה חשבתי (נכתב לפני סוף הספירה)</h2><div class="ol-think">' + olThink() + '</div>' +
       methods + '<p class="meta">' + esc(orderNote()) + '</p>';
   }
-  var TITLES = { home: 'ראשי', matrix: 'מטריצה', issue: 'לפי סוגיה', list: 'לפי רשימה', compare: 'השוואה', analysis: 'ניתוח רוחבי', polls: 'סקרים', podcasts: 'פודקאסטים וראיונות', coalition: 'בנה קואליציה', 'exit-polls': 'מדגמים: דיוק בעבר', geo: 'תוצאות לפי יישוב וקלפי', outlook: 'תחזית בדיעבד', about: 'שיטה ומקורות' };
+  var TITLES = { home: 'ראשי', matrix: 'מטריצה', issue: 'לפי סוגיה', list: 'לפי רשימה', compare: 'השוואה', analysis: 'ניתוח רוחבי', polls: 'סקרים', podcasts: 'פודקאסטים וראיונות', coalition: 'בנה קואליציה', 'exit-polls': 'מדגמים: דיוק בעבר', geo: 'תוצאות לפי יישוב וקלפי', outlook: 'תחזית בדיעבד', cities: 'ניתוח לפי יישוב', about: 'שיטה ומקורות' };
   var lastPage = null;
   function render(keepScroll) {
     var r = parseHash(), html, sub = '';
@@ -1390,6 +1391,7 @@
       case 'outlook': html = pageOutlook(); if (!OL && !OLerr) loadOutlook().then(function () { if (parseHash().page === 'outlook') render(true); }); break;
       case 'coalition': html = pageCoalition(r.q); if (!CO && !COerr) loadCoalition().then(function () { if (parseHash().page === 'coalition') render(true); }); break;
       case 'exit-polls': html = pageExitPolls(); if (!EP && !EPerr) loadExitPolls().then(function () { if (parseHash().page === 'exit-polls') render(true); }); break;
+      case 'cities': if (window.EL26CITIES) { html = window.EL26CITIES.page(r); sub = window.EL26CITIES.title(r); } else { html = '<div class="skel" aria-hidden="true"><i></i><i></i><i></i></div><p class="sr" role="status">טוען…</p>'; loadCities(); } break;
       case 'geo': if (window.EL26GEO) { html = window.EL26GEO.page(r); sub = window.EL26GEO.title(r); } else { html = '<div class="skel" aria-hidden="true"><i></i><i></i><i></i></div><p class="sr" role="status">טוען…</p>'; loadGeo(); } break;
       case 'podcasts': html = pagePodcasts(r.arg, r.q); if (!PD && !PDerr) loadPodcasts().then(function () { if (parseHash().page === 'podcasts') { render(true); podScroll(); } }); break;
       default: r.page = 'home'; html = pageHome();
@@ -1406,17 +1408,27 @@
     lastPage = key;
     if (r.page === 'podcasts' && PD) podScroll();
     if (r.page === 'geo' && window.EL26GEO) window.EL26GEO.after();
+    if (r.page === 'cities' && window.EL26CITIES) window.EL26CITIES.after();
   }
   var geoLoading = false;
   function loadGeo() {
     if (geoLoading) return; geoLoading = true;
-    window.EL26 = { esc: esc, COLL: COLL, head: head, srcLink: srcLink, fmtDate: fmtDate, parseHash: parseHash, setHash: setHash, render: render, getJSON: getJSON, main: $main };
+    shareU();
     var s = document.createElement('script'); s.src = 'js/geo.js?v=' + GEO_V; s.async = true;
     s.onload = function () { if (parseHash().page === 'geo') render(true); };
     s.onerror = function () { geoLoading = false; if (parseHash().page === 'geo') $main.innerHTML = '<div class="empty" role="alert"><b>שגיאה בטעינת העמוד</b><p>נסו לרענן.</p></div>'; };
     document.head.appendChild(s);
   }
-  var GEO_V = '1';
+  var GEO_V = '2';
+  function shareU() { window.EL26 = { esc: esc, COLL: COLL, head: head, srcLink: srcLink, fmtDate: fmtDate, fmtStamp: fmtStamp, parseHash: parseHash, setHash: setHash, render: render, getJSON: getJSON, main: $main }; }
+  var citiesLoading = false, CITIES_V = '1';
+  function loadCities() { // #/cities: js/cities.js is loaded only when the page is opened
+    if (citiesLoading) return; citiesLoading = true; shareU();
+    var s = document.createElement('script'); s.src = 'js/cities.js?v=' + CITIES_V; s.async = true;
+    s.onload = function () { if (parseHash().page === 'cities') render(true); };
+    s.onerror = function () { citiesLoading = false; if (parseHash().page === 'cities') $main.innerHTML = '<div class="empty" role="alert"><b>שגיאה בטעינת העמוד</b><p>נסו לרענן.</p></div>'; };
+    document.head.appendChild(s);
+  }
   function podScroll() { var r = parseHash(); if (r.page !== 'podcasts' || !r.arg) return; var el = document.getElementById('pl-' + r.arg); if (el) el.scrollIntoView({ block: 'start' }); }
   function setHash(h) { if (location.hash === h) render(true); else { history.replaceState(null, '', h); render(true); } }
   function curQ() { return parseHash(); }

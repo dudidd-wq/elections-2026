@@ -299,8 +299,9 @@ snaps = []
 for h in y['countHistory'] + [y['count']]:
     V = h['validVotes']; v = {k: h['pct'][k] / 100 * V for k in IDS}; v['other'] = V - sum(v.values())
     snaps.append({'asOf': h['asOf'], 'label': h['label'], 'valid': V, 'seats': bader_ofer(v, AGREEMENTS), 'approxFromPct': True})
-for key in ('c1116', 'c1958'):
-    c = COUNT26[key]; snaps.append({'asOf': c['asOf'], 'label': c['label'], 'valid': c['valid'], 'seats': bader_ofer(c['votes'], AGREEMENTS), 'approxFromPct': False})
+for key in ('c1116', 'c1804', 'c1958'):  # exact vote counts replace the pct-derived snapshot of the same count
+    c = COUNT26[key]; snaps = [s for s in snaps if s['valid'] != c['valid']]
+    snaps.append({'asOf': c['asOf'], 'label': c['label'], 'valid': c['valid'], 'seats': bader_ofer(c['votes'], AGREEMENTS), 'approxFromPct': False})
 snaps.sort(key=lambda s: s['asOf'])
 # validation of the seat function against published unofficial calcs
 COUNT26['c1244']['votes'].setdefault('other', COUNT26['c1244']['valid'] - sum(COUNT26['c1244']['votes'].values()))
