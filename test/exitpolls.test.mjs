@@ -89,7 +89,7 @@ if (y.count) {
   const c = y.count, sum = Object.values(c.pct).reduce((a, b) => a + b, 0);
   ok(c.sources.length >= 2 && c.sources.every(s => isUrl(s.url)), '2026 count sources');
   ok(Object.keys(c.pct).every(k => y.lists.some(l => l.id === k)) && sum <= 100 && sum > 50, `2026 count shares (sum ${sum.toFixed(2)})`);
-  ok(/חלקית/.test(c.label) || (/לא סופית/.test(c.label) && /לא רשמית/.test(c.label)), '2026 count labelled partial / not final');
+  ok(/חלקית/.test(c.label) || (/לא סופית/.test(c.label) && (y.results || /לא רשמית/.test(c.label))), '2026 count labelled partial / not final');
   ok(!y.results || !/לא רשמי/.test(c.label), 'no set-results while not certified');
   if (c.voters && c.eligible) ok(Math.abs(c.voters / c.eligible * 100 - c.turnout) < 0.05, '2026 turnout = voters / eligible');
 }
@@ -108,6 +108,7 @@ if (ep26Cmp && y.polls.length) {
   ok(!X.blocs.some(b => b.id === 'other'), 'ep26Cmp site blocs only');
 }
 if (y.results) ok(Object.values(y.results.seats).reduce((a, b) => a + b, 0) === 120 && isUrl(y.results.source.url), '2026 results');
+if (y.results && y.status !== 'frozen') ok(!/סופי|רשמי/.test(y.results.label) && (y.results.sources || []).length >= 2 && y.results.sources.every(s => isUrl(s.url) && isDate(s.retrieved)) && !(y.results.blocLists || []).length, '2026 results before certification: no final/official label, >=2 sources, no bloc');
 // hygiene
 const blob = JSON.stringify(D);
 ok(!/api[_-]?key|token=|secret/i.test(blob), 'no keys in data');

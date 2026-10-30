@@ -6,7 +6,7 @@ List ids/names come from data/polls.json (parties), so the 2026 table uses the s
 
   add-poll   --channel c12 --pollster "..." --time 22:00 --kind initial|update \
              --seats likud=30,yashar=12,... --source URL [--source URL2] [--note "..."]
-  set-results --seats likud=..,... --source URL --label "תוצאות רשמיות (סופיות)" \
+  set-results --seats likud=..,... --source URL [--source URL2 ...] --label "תוצאות רשמיות (סופיות)" \
              [--short "תוצאה"] [--bloc likud,shas,...] [--bloc-source URL] [--note "..."]
              (may be called again until freeze, e.g. partial -> final count; the old one is kept in resultsHistory)
   set-count  --label "..." --as-of "2026-10-28 07:57" --pct likud=20.68,yashar=16.71,... --source URL [--source URL2]
@@ -49,6 +49,38 @@ def metrics(lists, actual, seats, bloc):
     return {'misallocated': sa / 2, 'within1': sum(abs(v) <= 1 for v in diff.values()), 'n': len(lists),
             'bloc': sum(seats.get(i, 0) for i in bloc), 'blocActual': sum(actual.get(i, 0) for i in bloc)}
 
+def show_cmp(y, r):
+    """Same comparison as ep26Cmp in js/app.js: last pre-election poll average + every poll in it + 22:00 exit polls
+    vs the seat result; misallocated = sum|pred - result| / 2; site blocs from data/polls.json (not the 2019–2022 rule)."""
+    with open(os.path.join(ROOT, 'data', 'polls.json'), encoding='utf-8') as f: PD = json.load(f)
+    ids = [l['id'] for l in y['lists']]; res = {i: r['seats'].get(i, 0) for i in ids}
+    blocs = [(b['id'], [m for m in b['members'] if m in ids]) for b in PD['blocs'] if b['id'] != 'other']
+    bres = {b: sum(res[m] for m in ms) for b, ms in blocs}
+    avg = PD['computed']['average']
+    print('\n== %s' % r['label'])
+    print('per list (avg %s, n=%d): result / avg / avg-result' % (PD['computed']['asOf'], PD['computed']['n']))
+    ds = []
+    for i in ids:
+        d = round((avg.get(i, 0) or 0) - res[i], 1); ds.append(abs((avg.get(i, 0) or 0) - res[i]))
+        print('  %-9s %3d  %5.1f  %+.1f' % (i, res[i], avg.get(i, 0) or 0, d))
+    print('  MAE per list (mean |avg-result|, %d lists): %.3f seats' % (len(ids), sum(ds) / len(ds)))
+    print('site blocs (result):', ', '.join('%s=%d' % (b, bres[b]) for b in bres))
+    def row(label, seats):
+        mis = round(sum(abs((seats.get(i, 0) or 0) - res[i]) for i in ids) / 2, 2)
+        be = ' '.join('%s %s (%+.1f)' % (b, ('%.1f' % sum((seats.get(m, 0) or 0) for m in ms)).rstrip('0').rstrip('.'), round(sum((seats.get(m, 0) or 0) for m in ms) - bres[b], 1)) for b, ms in blocs)
+        mae = sum(abs((seats.get(i, 0) or 0) - res[i]) for i in ids) / len(ids)
+        print('  %-44s misallocated %5.2f  MAE %.3f  | %s' % (label, mis, mae, be))
+    print('rows:')
+    row('poll average (%d)' % PD['computed']['n'], avg)
+    pols = [p for p in PD['polls'] if p['id'] in PD['computed']['included']]
+    for p in sorted(pols, key=lambda p: '%s (%s), %s' % (p['outlet'], p['pollster'], p['date'])):
+        row('%s (%s), %s' % (p['outlet'], p['pollster'], p['date']), p['seats'])
+    for p in y['polls']:
+        if p['kind'] == 'initial': row('exit 22:00 %s (%s)' % (p['channel'], p['pollster']), p['seats'])
+    print('updates (not in main metrics):')
+    for p in y['polls']:
+        if p['kind'] == 'update': row('update %s %s' % (p['channel'], p['time']), p['seats'])
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('cmd', choices=['add-poll', 'set-results', 'set-count', 'freeze', 'show'])
@@ -61,6 +93,7 @@ def main():
         r = y.get('results')
         for p in y['polls']:
             print(p['id'], p['channel'], p['time'], (metrics(y['lists'], r['seats'], p['seats'], r.get('blocLists') or []) if r else ''))
+        if r: show_cmp(y, r)
         return
     if y.get('status') == 'frozen': sys.exit('y2026 is frozen; nothing may be added or changed')
     if not y['lists']:
@@ -80,7 +113,8 @@ def main():
         print('added', pid)
     elif a.cmd == 'set-results':
         if not a.label: sys.exit('--label required (e.g. "תוצאות רשמיות סופיות" or "ספירה חלקית, 99% מהקלפיות")')
-        r = {'label': a.label, 'short': a.short or 'תוצאה', 'seats': parse_seats(a.seats, ids), 'source': srcs(a.source)[0],
+        ss = srcs(a.source)
+        r = {'label': a.label, 'short': a.short or 'תוצאה', 'seats': parse_seats(a.seats, ids), 'source': ss[0], 'sources': ss,
              'blocLists': [b.strip() for b in (a.bloc or '').split(',') if b.strip()], 'note': a.note or ''}
         if a.bloc_source: r['blocSource'] = srcs([a.bloc_source])[0]
         for b in r['blocLists']:

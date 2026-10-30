@@ -16,7 +16,7 @@ ok(s0 > 0 && s1 > s0, 'outlook block found');
 const block = app.slice(s0, s1);
 const COLL = new Intl.Collator('he');
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const stub = { esc, COLL, getJSON: () => Promise.resolve(O), fmtStamp: s => s, fmtShort: s => s.slice(5, 10), fmtN: x => (Math.round(x * 10) / 10).toFixed(1), orderNote: () => 'סדר אלפביתי', srcLink: (u, l) => '<a href="' + esc(u) + '">' + esc(l || 'מקור') + '</a>', head: (e, t, l) => '<h1>' + t + '</h1><p>' + l + '</p>' };
+const stub = { EP, esc, COLL, getJSON: () => Promise.resolve(O), fmtStamp: s => s, fmtShort: s => s.slice(5, 10), fmtN: x => (Math.round(x * 10) / 10).toFixed(1), orderNote: () => 'סדר אלפביתי', srcLink: (u, l) => '<a href="' + esc(u) + '">' + esc(l || 'מקור') + '</a>', head: (e, t, l) => '<h1>' + t + '</h1><p>' + l + '</p>' };
 const f = new Function(...Object.keys(stub), block + '; return { olBO, pageOutlook, olThink, setOL: function (d) { OL = d; } };')(...Object.values(stub));
 f.setOL(O);
 const html = f.pageOutlook();
@@ -83,7 +83,13 @@ ok(eq(O.checks.machria1958, c1958) && eq(R.actual.seats, c1958), 'python BO = ma
 const v1958 = Object.assign({}, R.actual.votes); v1958.other = R.actual.valid - sum(v1958);
 ok(eq(f.olBO(v1958, AG), c1958), 'JS BO = machria 19:58');
 ok(sum(R.actual.votes) + v1958.other === 5678352 && v1958.other === 57259, 'valid/other 19:58');
-ok(eq(EP.y2026.count.pct ? Object.fromEntries(Object.keys(R.actual.votes).map(k => [k, Math.round(R.actual.votes[k] / R.actual.valid * 10000) / 100])) : {}, EP.y2026.count.pct), 'exitpolls count pct = votes/valid');
+// the 19:58 count may since have moved to countHistory (30.10: CEC results file 00:58 is the current count)
+const EPc = [EP.y2026.count, ...(EP.y2026.countHistory || [])].find(c => c && c.asOf === R.actual.asOf);
+ok(EPc && eq(Object.fromEntries(Object.keys(R.actual.votes).map(k => [k, Math.round(R.actual.votes[k] / R.actual.valid * 10000) / 100])), EPc.pct), 'exitpolls count pct = votes/valid (same snapshot as retro)');
+// 30.10: CEC seat allocation (y2026.results) vs the published modal allocations, shown in the retro section
+if (EP.y2026.results) for (const e of R.estimates) { const P = PUB.published.find(x => x.commit === e.commit), cs = EP.y2026.results.seats;
+  const m = Object.keys(cs).reduce((t, k) => t + Math.abs((P.modal[k] || 0) - cs[k]), 0) / 2;
+  ok(html.includes('<b data-retro-cec-mis="' + e.commit + '">' + m + '</b>'), `${e.commit} modal vs CEC seats on page`); }
 ok(PUB.published.length === R.estimates.length, 'one retro per published estimate');
 for (const e of R.estimates) {
   const P = PUB.published.find(x => x.commit === e.commit);
