@@ -23,7 +23,7 @@ for (const e of IX.elections) {
 ok(K26.k === 26 && K26.status === 'partial', 'k26 status partial');
 ok(/חלקית/.test(K26.statusLabel) && /לא סופית/.test(K26.statusLabel) && /לא רשמית/.test(K26.statusLabel), 'k26 label partial / not final / not official');
 const claims = JSON.stringify(K26).replace(/(לא|ואינם|ואינן|אינם|אינן|ולא)\s+(סופי|רשמי)\S*/g, '');
-ok(!/(סופי|רשמי)/.test(claims.replace(/תוצאות האמת|הקבצים הרשמיים|התוצאות הרשמיות צפויות/g, '')), 'k26: no final/official claim except negations');
+ok(!/(סופי|רשמי)/.test(claims.replace(/תוצאות האמת|הקבצים הרשמיים|התוצאות הרשמיות צפויות|התוצאות הארציות הסופיות אושרו והוגשו לנשיא|קובצי היישובים והקלפיות הרשמיים/g, '')), 'k26: no final/official claim except negations');
 ok(/^https:\/\//.test(K26.src.url) && K26.src.retrieved && K26.src.sourceUpdatedAt && /^[0-9a-f]{64}$/.test(K26.src.sha256), 'k26 source recorded');
 const MACHRIA_1958 = { valid: 5678352, invalid: 25789, votes: { likud: 1164494, yashar: 911796, beyachad: 530253, joint: 499878, dems: 365733, raam: 336275, yb: 336838, otzma: 325650, utj: 312241, shas: 298881, rzz: 289181, miluim: 154585, amcha: 95288 } };
 const t26 = new Array(K26.cols.length).fill(0);

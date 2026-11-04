@@ -104,7 +104,7 @@ for (const e of R.estimates) {
 }
 for (const k of Object.keys(c1958)) if (c1958[k]) ok(html.includes('<span data-retro-final="' + k + '">' + c1958[k] + '</span>'), `final seats ${k} on page`);
 const retroTxt = (html.split('<section aria-labelledby="ol-r">')[1] || '').split('</section>')[0].replace(/<[^>]+>/g, ' ');
-ok(retroTxt.length > 500 && !/סופי|רשמי/.test(retroTxt.replace(/אינן סופיות ואינן רשמיות|לא סופיות ולא רשמיות|לא סופי ולא רשמי|אינן סופיות, הרשמיות|תוצאות רשמיות אחרי|חלוקה רשמית|את התוצאות הרשמיות/g, '')), 'retro: no final/official claim');
-ok(text.includes('לא סופיות ולא רשמיות'), 'not-final label shown');
+ok(retroTxt.length > 500 && !/סופי|רשמי/.test(retroTxt.replace(/אינן סופיות ואינן רשמיות|לא סופיות ולא רשמיות|לא סופי ולא רשמי|אינן סופיות, הרשמיות|תוצאות רשמיות אחרי|חלוקה רשמית|את התוצאות הרשמיות|אישרה את התוצאות הסופיות והגישה אותן לנשיא|תוצאות רשמיות סופיות – אושרו במליאת ועדת הבחירות והוגשו לנשיא|תוצאות סופיות הוגשו לנשיא/g, '')), 'retro: no final/official claim');
+ok(text.includes('לא סופיות ולא רשמיות') || (/סופי/.test((EP.y2026.results || {}).label || '') && text.includes('אישרה את התוצאות הסופיות והגישה אותן לנשיא')), 'not-final label shown, or final-certified label after 4.11');
 console.log(`${checks - fails}/${checks} checks passed`);
 process.exit(fails ? 1 : 0);

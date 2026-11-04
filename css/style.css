@@ -785,3 +785,5 @@ html.ux-lock{overflow:hidden}
 .ct-vs-all th.ct-rep{font-size:0}
 .ct-vs-all tbody th{white-space:normal;min-width:6.5rem;max-width:10rem}
 .ct-vs-all tr[data-ct-s="a"] th,.ct-vs-all tr[data-ct-s="a"] td{border-top:1px solid var(--line2)}
+
+.frozen-wrap .frozen-bar{margin:var(--s3) 0 0}
