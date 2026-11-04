@@ -35,7 +35,7 @@
   function nat(k) { return elOf(k).national; } // [eligible, voters, invalid, valid]
   function curK(q) { var k = +q.k; return KS.indexOf(k) >= 0 ? k : 26; }
   function prevK(k) { var i = KS.indexOf(k); return i > 0 ? KS[i - 1] : null; }
-  function elName(k) { var e = elOf(k); return e.label + ' (הכנסת ה-' + k + ')' + (k === 26 ? ', חלקי' : ''); }
+  function elName(k) { var e = elOf(k); return e.label + ' (הכנסת ה-' + k + ')' + (k === 26 ? ', קובץ 4.11' : ''); }
   function hashFor(arg, q) {
     var s = Object.keys(q || {}).filter(function (k) { return q[k] !== '' && q[k] != null; }).map(function (k) { return k + '=' + encodeURIComponent(q[k]); }).join('&');
     return '#/cities' + (arg ? '/' + arg : '') + (s ? '?' + s : '');
@@ -103,7 +103,10 @@
   function partialNote(k) {
     if (k !== 26) return '';
     var d = EL[26];
-    return '<p class="note warn" data-ct-partial><b>נתוני 2026:</b> ' + esc(d.statusLabel) + ' ' + esc(d.basis.reconciles) + ' מקור: ' + U.srcLink(d.src.url, d.src.publisher) + ' <span class="meta">(עדכון המקור ' + U.fmtStamp(d.src.sourceUpdatedAt) + ', נשלף ' + U.fmtStamp(d.src.retrieved) + ')</span>. ' + esc(d.src.note) + '</p>';
+    var b = d.basis, gap = b.gapValid == null ? '' : '<ul class="note" data-ct-gap aria-label="פער מול התוצאה הארצית"><li>סכום הקובץ לפי יישוב (כולל מעטפות חיצוניות): <b>' + n(b.valid) + '</b> כשרים, ' + n(b.invalid) + ' פסולים.</li>' +
+      '<li>התוצאה הארצית שהוגשה לנשיא (4.11.2026): <b>' + n(b.certValid) + '</b> כשרים, ' + n(b.certInvalid) + ' פסולים.</li>' +
+      '<li>פער (הקובץ פחות התוצאה הארצית): <b>+' + n(b.gapValid) + '</b> כשרים, +' + n(b.gapInvalid) + ' פסולים.</li></ul>';
+    return '<p class="note warn" data-ct-partial><b>נתוני 2026:</b> ' + esc(d.statusLabel) + ' ' + esc(b.reconciles) + ' מקור: ' + U.srcLink(d.src.url, d.src.publisher) + ' <span class="meta">(הורד ' + esc(d.src.retrieved.split('-').reverse().map(Number).join('.')) + ', SHA-256 ' + esc(d.src.sha256.slice(0, 12)) + '…)</span>. ' + esc(d.src.note) + '</p>' + gap;
   }
   function tabs(cur) {
     var t = [['', 'יישוב'], ['list', 'לפי רשימה'], ['vs', 'השוואה']];
@@ -130,7 +133,7 @@
   function pageLanding() {
     var d = EL[26], N = d.national;
     return searchBox() + partialNote(26) +
-      '<div class="kpis"><div class="kpi"><b>' + n(d.localities) + '</b><span>יישובים בנתוני 2026 (חלקי)</span></div><div class="kpi"><b>' + n(N[3] - d.envelopes[3]) + '</b><span>קולות כשרים שמשויכים ליישוב (2026, חלקי)</span></div><div class="kpi"><b>' + n(d.envelopes[3]) + '</b><span>קולות כשרים במעטפות כפולות, בלי שיוך ליישוב</span></div></div>' +
+      '<div class="kpis"><div class="kpi"><b>' + n(d.localities) + '</b><span>יישובים בנתוני 2026</span></div><div class="kpi"><b>' + n(N[3] - d.envelopes[3]) + '</b><span>קולות כשרים שמשויכים ליישוב (2026, חלקי)</span></div><div class="kpi"><b>' + n(d.envelopes[3]) + '</b><span>קולות כשרים במעטפות כפולות, בלי שיוך ליישוב</span></div></div>' +
       '<h2>מה יש כאן</h2><ul><li><b>יישוב:</b> אחוז ההצבעה ואחוז הקולות של כל רשימה בכל מערכת מ-2019 עד 2026, שינוי בנקודות אחוז מול המערכת הקודמת כשיש רשימה מקבילה, והשוואה לתוצאה הארצית.</li>' +
       '<li><b><a href="' + hashFor('list', {}) + '">לפי רשימה</a>:</b> היישובים שבהם רשימה קיבלה את האחוז הגבוה והנמוך ביותר, הכי הרבה קולות, והשינוי הגדול ביותר, עם סינון לפי גודל יישוב.</li>' +
       '<li><b><a href="' + hashFor('vs', {}) + '">השוואה</a>:</b> שני יישובים זה לצד זה, או יישוב מול התוצאה הארצית.</li></ul>' +
@@ -232,7 +235,7 @@
       var A = rowOf(x, a), B = rowOf(x, b), ta = A && A[0] ? A[1] / A[0] : null, tb = B && B[0] ? B[1] / B[0] : null;
       return '<tr data-ct-k="' + x + '"' + (x === 26 ? ' data-ct-k26' : '') + '><th scope="row">' + esc(elName(x)) + '</th><td class="n">' + (ta == null ? '–' : p1(ta)) + '</td><td class="n">' + (tb == null ? '–' : p1(tb)) + '</td><td class="n">' + (ta == null || tb == null ? '–' : pp(ta - tb)) + '</td><td class="n">' + (A ? n(A[3]) : '–') + '</td><td class="n">' + (B ? n(B[3]) : '–') + '</td></tr>';
     }).join('');
-    var tt = tbl('אחוז הצבעה וקולות כשרים: ' + na + ' מול ' + nb, 'אחוז הצבעה וקולות כשרים בכל מערכת, 2019–2026 (2026 חלקי). "–": אין נתונים ליישוב במערכת הזו.' + (b === 'nat' ? ' הארצי כולל מעטפות כפולות; היישוב לא.' : ''),
+    var tt = tbl('אחוז הצבעה וקולות כשרים: ' + na + ' מול ' + nb, 'אחוז הצבעה וקולות כשרים בכל מערכת, 2019–2026 (2026: קובץ 4.11). "–": אין נתונים ליישוב במערכת הזו.' + (b === 'nat' ? ' הארצי כולל מעטפות כפולות; היישוב לא.' : ''),
       th('מערכת') + th('אחוז הצבעה, ' + esc(na), 1) + th('אחוז הצבעה, ' + esc(nb), 1) + th('הפרש (נק׳ אחוז)', 1) + th('קולות כשרים, ' + esc(na), 1) + th('קולות כשרים, ' + esc(nb), 1), tr, 'ct-vs-t');
     // 2. lists of the selected election, with change vs the previous election on both sides
     var nc = [], sel;
@@ -265,8 +268,8 @@
         '<tr data-ct-s="d" class="ct-dr"><th scope="row" class="ct-rep">' + esc(it.n) + '</th><td>הפרש (נק׳ אחוז)</td>' + dv.map(function (v) { return '<td class="n">' + (v == null ? '–' : pp(v)) + '</td>'; }).join('') + '</tr>';
       if (Object.keys(it.m).length > 1) charts.push(spark(it.n, KS.map(function (x, i) { return { k: x, v: va[i] }; }), KS.map(function (x, i) { return { k: x, v: vb[i] }; }), p1, nb));
     });
-    var at = tbl('כל הרשימות לאורך המערכות: ' + na + ' מול ' + nb, 'אחוז מהקולות הכשרים בכל מערכת, 2019–2026 (2026 חלקי). שורה לכל רשימה עם רצף מוגדר (ראו "שיטה") ולכל רשימה של 2026. "–": הרשימה לא רצה באותה מערכת באותו הרכב, או שאין נתונים ליישוב.',
-      th('רשימה') + th('יישוב') + KS.map(function (x) { return th(esc(elOf(x).label) + ' (' + x + (x === 26 ? ', חלקי' : '') + ')', 1); }).join(''), ht, 'ct-vs-all').replace('<table ', '<table data-nosort ');
+    var at = tbl('כל הרשימות לאורך המערכות: ' + na + ' מול ' + nb, 'אחוז מהקולות הכשרים בכל מערכת, 2019–2026 (2026: קובץ 4.11). שורה לכל רשימה עם רצף מוגדר (ראו "שיטה") ולכל רשימה של 2026. "–": הרשימה לא רצה באותה מערכת באותו הרכב, או שאין נתונים ליישוב.',
+      th('רשימה') + th('יישוב') + KS.map(function (x) { return th(esc(elOf(x).label) + ' (' + x + (x === 26 ? ', קובץ 4.11' : '') + ')', 1); }).join(''), ht, 'ct-vs-all').replace('<table ', '<table data-nosort ');
     return form + partialNote(26) + '<h2 class="h3">אחוז הצבעה וקולות כשרים, 2019–2026</h2>' + tt +
       '<h2 class="h3">רשימות: ' + esc(elName(k)) + '</h2><p class="meta">בחרו מערכת בתפריט "מערכת בחירות" למעלה כדי לראות את הרשימות של מערכת אחרת.</p>' + sel +
       '<h2 class="h3">כל הרשימות לאורך המערכות, 2019–2026</h2>' + at +
@@ -279,7 +282,7 @@
     var d = EL[26];
     return '<section class="note ct-method" id="ct-method" aria-labelledby="ct-mh"><h2 id="ct-mh">שיטה, מקורות ומגבלות</h2><ul>' +
       '<li><b>2019–2022 (הכנסת ה-21 עד ה-25):</b> תוצאות האמת של ועדת הבחירות המרכזית לפי יישוב, מהמאגר הפתוח ב-data.gov.il (ראו <a href="#/geo">תוצאות לפי יישוב וקלפי</a>). סכום היישובים ושורת המעטפות הכפולות שווה לתוצאה הארצית בכל מערכת.</li>' +
-      '<li><b>2026 (הכנסת ה-26): חלקי, לא סופי ולא רשמי.</b> ' + esc(d.statusLabel) + ' ' + esc(d.basis.reconciles) + ' המקור: ' + U.srcLink(d.src.url, d.src.publisher) + ' (SHA-256 ' + esc(d.src.sha256.slice(0, 12)) + '…). ' + esc(d.src.note) + ' האתר הוקפא ב-4.11.2026, ולכן הנתונים האלה לא יוחלפו בקבצים הרשמיים.</li>' +
+      '<li><b>2026 (הכנסת ה-26): קובץ ועדת הבחירות לפי יישוב, הורד ב-4.11.2026.</b> ' + esc(d.statusLabel) + ' ' + esc(d.basis.reconciles) + ' המקור: ' + U.srcLink(d.src.url, d.src.publisher) + ' (SHA-256 ' + esc(d.src.sha256.slice(0, 12)) + '…). ' + esc(d.src.note) + ' התוצאה הארצית בשאר האתר נשארה כפי שהוגשה לנשיא; הקובץ לפי יישוב משמש רק לעמוד הזה.</li>' +
       '<li><b>מה לא נכלל:</b> קולות המעטפות הכפולות (חיילים, נציגויות, בתי חולים, בתי סוהר ועוד) לא משויכים ליישוב, ולכן אחוז ההצבעה ביישוב נמוך מהאמיתי, ובמקומות עם הרבה מצביעים במעטפות התמונה חלקית. אין כאן הערכה או השלמה של נתונים חסרים.</li>' +
       '<li><b>רשימות:</b> רשימות שקיבלו פחות מ-1% מהקולות ארצית מקופלות ל"רשימות אחרות". ' + esc(LIN.note) + '</li>' +
       '<li><b>רצף רשימות:</b> ' + alpha(LIN.series).map(function (s) { return esc(s.n) + ' (' + Object.keys(s.m).map(function (k) { return k; }).join(', ') + ')' + (s.note ? ': ' + esc(s.note) : ''); }).join('; ') + '.</li>' +
@@ -289,7 +292,7 @@
 
   function page(r) {
     var q = r.q || {}, sub = r.arg === 'list' ? 'list' : r.arg === 'vs' ? 'vs' : r.arg ? 'city' : '';
-    var hd = U.head('ניתוח לפי יישוב', 'ניתוח לפי יישוב', 'אחוז ההצבעה ולמי הצביעו בכל יישוב, 2019–2026, עם השוואה למערכות קודמות ולתוצאה הארצית. נתוני 2026 חלקיים ואינם סופיים. <a href="#ct-method">שיטה ומגבלות</a>');
+    var hd = U.head('ניתוח לפי יישוב', 'ניתוח לפי יישוב', 'אחוז ההצבעה ולמי הצביעו בכל יישוב, 2019–2026, עם השוואה למערכות קודמות ולתוצאה הארצית. נתוני 2026 לפי יישוב: קובץ ועדת הבחירות מ-4.11.2026, עם פער קטן מול התוצאה הארצית. <a href="#ct-method">שיטה ומגבלות</a>');
     if (ERR && ERRH !== location.hash) ERR = ''; // an error belongs to the page where it happened
     if (ERR) return hd + error();
     if (!needBase()) return hd + loading();

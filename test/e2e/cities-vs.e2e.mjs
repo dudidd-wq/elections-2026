@@ -34,8 +34,8 @@ for (const w of [390, 1280]) {
     });
     ok(JSON.stringify(r.ks) === JSON.stringify(KS), `${T} ${h} turnout/valid table elections ${r.ks}`);
     ok(/הצבעה/.test(r.head) && /כשרים/.test(r.head), `${T} ${h} turnout+valid columns missing: ${r.head}`);
-    ok(/חלקי/.test(r.k26), `${T} ${h} 2026 row lacks partial label: ${r.k26}`);
-    ok(/חלקית/.test(r.body) && /לא סופית/.test(r.body) && /לא רשמית/.test(r.body), `${T} ${h} partial/not final/not official label missing`);
+    ok(/קובץ 4\.11/.test(r.k26), `${T} ${h} 2026 row lacks file label: ${r.k26}`);
+    ok(/4\.11\.2026/.test(r.body) && /648/.test(r.body), `${T} ${h} 2026 file label / gap missing`);
     ok(/אין רשימה מקבילה/.test(r.body), `${T} ${h} "אין רשימה מקבילה" missing`);
     ok(r.allHead.length === 2 + KS.length && /2026/.test(r.allHead[r.allHead.length - 1]) && KS.every(k => r.allHead.some(x => x.includes('(' + k))), `${T} ${h} all-lists header: ${r.allHead}`);
     ok(r.allRows >= 3 * 13, `${T} ${h} all-lists rows ${r.allRows}`);

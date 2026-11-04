@@ -19,16 +19,16 @@ for (const e of IX.elections) {
   ok(tot.slice(5).reduce((a, b) => a + b, 0) === e.national[3], `K${e.k} list columns sum to valid`);
 }
 
-// 2. K26 (partial): status wording, source, and reconciliation with machria 19:58 (exact national count; all 12,018 regular + 881 envelope boxes)
-ok(K26.k === 26 && K26.status === 'partial', 'k26 status partial');
-ok(/חלקית/.test(K26.statusLabel) && /לא סופית/.test(K26.statusLabel) && /לא רשמית/.test(K26.statusLabel), 'k26 label partial / not final / not official');
-const claims = JSON.stringify(K26).replace(/(לא|ואינם|ואינן|אינם|אינן|ולא)\s+(סופי|רשמי)\S*/g, '');
-ok(!/(סופי|רשמי)/.test(claims.replace(/תוצאות האמת|הקבצים הרשמיים|התוצאות הרשמיות צפויות|התוצאות הארציות הסופיות אושרו והוגשו לנשיא|קובצי היישובים והקלפיות הרשמיים/g, '')), 'k26: no final/official claim except negations');
-ok(/^https:\/\//.test(K26.src.url) && K26.src.retrieved && K26.src.sourceUpdatedAt && /^[0-9a-f]{64}$/.test(K26.src.sha256), 'k26 source recorded');
-const MACHRIA_1958 = { valid: 5678352, invalid: 25789, votes: { likud: 1164494, yashar: 911796, beyachad: 530253, joint: 499878, dems: 365733, raam: 336275, yb: 336838, otzma: 325650, utj: 312241, shas: 298881, rzz: 289181, miluim: 154585, amcha: 95288 } };
+// 2. K26 (CEC per-locality CSV, downloaded 4.11.2026): wording, source, and reconciliation with the CSV totals; gap vs the certified national result
+ok(K26.k === 26 && K26.status === 'cec-file', 'k26 status cec-file');
+ok(/4\.11\.2026/.test(K26.statusLabel) && /648/.test(K26.statusLabel) && /5,691,426/.test(K26.statusLabel) && /5,690,778/.test(K26.statusLabel) && /מעטפות/.test(K26.statusLabel), 'k26 label: file date, totals, gap, envelopes');
+ok(!/(סופי|רשמי|מאושר)/.test(K26.statusLabel + K26.basis.reconciles + K26.src.note), 'k26: no final/official/certified wording for the locality data');
+ok(/^https:\/\//.test(K26.src.url) && K26.src.retrieved && K26.src.sourceUpdatedAt && K26.src.sha256 === 'bf7db01f96e1afceb4f22039d16e5f616dc001e4901a9ef2194ba92645837e8a', 'k26 source recorded');
+const MACHRIA_1958 = { valid: 5691426, invalid: 25971, votes: { likud: 1167591, yashar: 913629, beyachad: 532018, joint: 500755, dems: 366278, raam: 337720, yb: 337450, otzma: 326793, utj: 312632, shas: 299533, rzz: 290549, miluim: 155199, amcha: 95764 } }; // CSV totals (name kept)
+ok(K26.basis.certValid === 5690778 && K26.basis.certInvalid === 25887 && K26.basis.gapValid === 648 && K26.basis.gapInvalid === 84, 'k26 gap vs certified');
 const t26 = new Array(K26.cols.length).fill(0);
 for (const r of K26.rows) r.forEach((x, i) => { if (i) t26[i] += x; });
-ok(K26.national[3] === MACHRIA_1958.valid && K26.national[2] === MACHRIA_1958.invalid, 'k26 national = machria 19:58');
+ok(K26.national[3] === MACHRIA_1958.valid && K26.national[2] === MACHRIA_1958.invalid, 'k26 national = CSV totals');
 [1, 2, 3, 4].forEach(i => ok(t26[i] === K26.national[i - 1], `k26 rows sum col ${K26.cols[i]}`));
 K26.lists.forEach(L => {
   const j = K26.cols.indexOf(L.l);
@@ -51,13 +51,10 @@ for (const K of [K26, ...IX.elections.map(e => J(`data/geo/k${e.k}.json`))]) {
     ok(r.every(x => Number.isInteger(x) && x >= 0), `K${K.k} ${r[0]} integers`);
   }
 }
-// spot checks (IIE localities file, 19:58 count)
+// spot checks (CEC CSV 4.11.2026)
 const row = c => K26.rows.find(r => r[0] === c);
-ok(row(5000).slice(1, 5).join() === '473868,309971,931,309040', 'k26 Tel Aviv');
-ok(row(3000).slice(1, 5).join() === '455862,300647,1232,299415', 'k26 Jerusalem');
-ok(row(8600).slice(1, 5).join() === '149635,106594,273,106321', 'k26 Ramat Gan (updated after 18:04)');
-ok(K26.envelopes.join() === '0,445438,2515,442923', 'k26 envelopes, all 881 boxes');
-ok(K26.basis.asOf === '2026-10-29T19:58+02:00' && /19:58/.test(K26.statusLabel) && /881/.test(K26.statusLabel) && !/18:04/.test(JSON.stringify(K26)), 'k26 basis 19:58');
+ok(K26.envelopes.join() === '0,452687,2613,450074', 'k26 envelopes row');
+ok(K26.national.join() === '7331981,5717397,25971,5691426' && K26.localities === 1224, 'k26 national + locality count');
 // localities that are new in 2026 have names
 const known = new Set(IX.localities.map(l => l[0]));
 K26.rows.forEach(r => { if (!known.has(r[0])) ok(K26.names[r[0]], `k26 new locality ${r[0]} has a name`); });
