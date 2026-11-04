@@ -39,7 +39,7 @@ for (const c of CODES) {
   ok(g.turnout === pct(r[2], r[1]), `${c}: turnout ${g.turnout} vs ${pct(r[2], r[1])}`);
   K.lists.forEach((l, i) => { const x = g.lists.find(y => y[0].startsWith(l.n)); ok(x && +x[1] === r[5 + i], `${c} ${l.l}: ${x && x[1]} vs ${r[5 + i]}`); });
   // same locality on #/cities
-  await page.goto(BASE + `#/cities/${c}`, { waitUntil: 'networkidle' }); await page.waitForSelector('#ct-method', { state: 'attached', timeout: 15000 });
+  await page.goto(BASE + `#/cities/${c}`, { waitUntil: 'networkidle' }); await page.waitForSelector('tr[data-ct-k26] [data-ct-turnout]', { state: 'attached', timeout: 15000 });
   const ct = await page.evaluate(() => (document.querySelector('tr[data-ct-k26] [data-ct-turnout]') || {}).textContent);
   ok(ct === g.turnout, `${c}: #/cities turnout ${ct} = #/geo ${g.turnout}`);
 }
