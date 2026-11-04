@@ -67,8 +67,19 @@ for (const e of IX.elections) {
   const env = K.rows.find(r => r[0] === IX.envelopesCode);
   ok(env && env[1] === 0 && JSON.stringify(env.slice(1, 5)) === JSON.stringify(e.envelopes), `${t} envelopes row`);
 }
+// K26 (#/geo, locality level only): reuses data/cities/k26.json; columns must match the geo row format js/geo.js expects
+{
+  const K = J('data/cities/k26.json'), g = fs.readFileSync(path.join(ROOT, 'js/geo.js'), 'utf8');
+  ok(K.k === 26 && JSON.stringify(K.cols) === JSON.stringify(['code', 'eligible', 'voters', 'invalid', 'valid', ...K.lists.map(l => l.l), 'other']), 'K26 cols in geo format');
+  ok(K.rows.every(r => r[2] === r[3] + r[4] && r.slice(5).reduce((a, b) => a + b, 0) === r[4]), 'K26 rows consistent');
+  ok(K.national.length === 4 && K.envelopes.length === 4 && typeof K.statusLabel === 'string' && /648/.test(K.statusLabel), 'K26 national/envelopes/statusLabel');
+  ok(K.rows.every(r => codes.has(r[0]) || (K.names && K.names[r[0]])), 'K26 every code named (geo index or k26.names)');
+  ok(!fs.existsSync(path.join(ROOT, 'data/geo/k26.json')), 'K26 not duplicated under data/geo');
+  ok(/data\/cities\/k26\.json/.test(g) && /ברמת יישוב בלבד, אין קלפיות ל-2026/.test(g) && /statusLabel/.test(g), 'geo.js loads k26 + locality-only label + statusLabel');
+  ok(!/hook2026/.test(g), 'old hook2026 note removed');
+}
 // shards only reference known elections and their own code
-for (const [c, S] of Object.entries(shards)) ok(String(S.c) === c && Object.keys(S.e).every(k => IX.elections.some(e => String(e.k) === k)), `shard ${c}`);
+for (const [c, S] of Object.entries(shards)) ok(String(S.c) === c && Object.keys(S.e).every(k => k !== '26' && IX.elections.some(e => String(e.k) === k)), `shard ${c}`);
 // initial-load budget: geo adds nothing to the first page load
 const idx = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), sw = fs.readFileSync(path.join(ROOT, 'sw.js'), 'utf8');
 ok(!/geo\.js|data\/geo/.test(idx), 'index.html does not load geo');

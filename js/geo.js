@@ -1,11 +1,12 @@
 /* #/geo – turnout and votes per locality and per ballot box, K21–K25 (official CEC data via data.gov.il).
+   K26: LOCALITY LEVEL ONLY, reused from data/cities/k26.json (CEC per-locality file, 4.11.2026; labelled with its statusLabel). No 2026 ballot boxes.
    Loaded on demand by app.js; data/geo/* is fetched lazily (index, one election file, one locality shard at a time). */
 (function () {
   'use strict';
   var U = window.EL26; if (!U) return;
   var esc = U.esc, COLL = U.COLL;
   var MIN = 2000, TOP = 15, PAGE = 50;
-  var IX = null, ERR = '', EL = {}, SH = {}, PEND = {}, NAME = {}, PREV = {};
+  var IX = null, ERR = '', EL = {}, SH = {}, PEND = {}, NAME = {}, PREV = {}, GE = null, K26 = null, R26 = {};
   var NF = (window.Intl && Intl.NumberFormat) ? new Intl.NumberFormat('he-IL') : { format: String };
   function n(x) { return NF.format(x); }
   function pc(a, b, d) { return b ? (100 * a / b).toFixed(d == null ? 1 : d) + '%' : '–'; }
@@ -15,20 +16,36 @@
     if (PEND[key]) return; PEND[key] = 1;
     U.getJSON(url).then(function (d) { done(d); rerender(); }).catch(function (e) { ERR = (e && e.message) || 'שגיאה'; rerender(); });
   }
+  // K26 from data/cities/k26.json: same columns as data/geo/k{k}.json; appended as a locality-only election (no ballot boxes)
+  function addK26() {
+    if (!IX || !K26 || GE) return;
+    var d = K26; GE = IX.elections.slice();
+    IX.elections = GE.concat([{ k: 26, id: d.id, date: d.date, label: d.label, lists: d.lists, otherLists: d.otherLists, otherVotes: d.otherVotes, national: d.national, envelopes: d.envelopes, localities: d.localities, src26: d.src, statusLabel: d.statusLabel, k26: true }]);
+    EL[26] = { k: 26, cols: d.cols, rows: d.rows };
+    d.rows.forEach(function (r) { R26[r[0]] = r; });
+    Object.keys(d.names || {}).forEach(function (c) { if (!NAME[+c]) { NAME[+c] = d.names[c]; IX.localities.push([+c, d.names[c]]); } });
+    PREV[26] = GE[GE.length - 1].k; SIDX = null;
+  }
+  function is26(e) { return !!(e && e.k26); }
+  function status26(e) { return '<p class="note warn" data-geo-k26-status><b>2026 (הכנסת ה-26): ברמת יישוב בלבד, אין קלפיות ל-2026.</b> ' + esc(e.statusLabel) + ' אין לראות בנתונים אלה תוצאות סופיות לפי יישוב.</p>'; }
   function needIndex() {
-    if (IX) return true;
+    if (IX && GE) return true;
+    get('k26', 'data/cities/k26.json', function (d) { K26 = d; addK26(); });
     get('ix', 'data/geo/index.json', function (d) {
-      IX = d; d.localities.forEach(function (l) { NAME[l[0]] = l[1]; });
-      d.elections.forEach(function (e, i) { PREV[e.k] = i ? d.elections[i - 1].k : null; });
+      IX = d; GE = null; d.localities.forEach(function (l) { NAME[l[0]] = l[1]; });
+      d.elections.forEach(function (e, i) { PREV[e.k] = i ? d.elections[i - 1].k : null; }); addK26();
     });
     return false;
   }
   function needEl(k) { if (EL[k]) return true; get('k' + k, 'data/geo/k' + k + '.json', function (d) { EL[k] = d; }); return false; }
-  function needSh(c) { if (SH[c]) return true; get('c' + c, 'data/geo/loc/' + c + '.json', function (d) { SH[c] = d; }); return false; }
+  function needSh(c) {
+    if (SH[c]) { if (!SH[c].e[26] && R26[c]) SH[c].e[26] = { t: R26[c].slice(1), b: null }; return true; }
+    if (R26[c] && K26.names && K26.names[c]) { SH[c] = { c: c, n: NAME[c], e: { 26: { t: R26[c].slice(1), b: null } } }; return true; } // new in 2026: no 2019–2022 shard
+    get('c' + c, 'data/geo/loc/' + c + '.json', function (d) { SH[c] = d; }); return false; }
   function elOf(k) { return IX.elections.filter(function (e) { return e.k === k; })[0]; }
   function curK(q) { var k = +q.k, ks = IX.elections.map(function (e) { return e.k; }); return ks.indexOf(k) >= 0 ? k : ks[ks.length - 1]; }
   function isEnv(c) { return c === IX.envelopesCode; }
-  function lbl(e) { return e.label; }
+  function lbl(e) { return e.label + (is26(e) ? ' · קובץ יישובים' : ''); }
   function hashFor(arg, q) {
     var s = Object.keys(q).filter(function (k) { return q[k] !== '' && q[k] != null; }).map(function (k) { return k + '=' + encodeURIComponent(q[k]); }).join('&');
     return '#/geo' + (arg ? '/' + arg : '') + (s ? '?' + s : '');
@@ -91,6 +108,7 @@
   function loading() { return '<div class="skel" aria-hidden="true"><i></i><i></i><i></i></div><p class="sr" role="status">טוען…</p>'; }
   function error() { return '<div class="empty" role="alert"><b>שגיאה בטעינת הנתונים</b><p>' + esc(ERR) + '. נסו לרענן את הדף.</p></div>'; }
   function srcLine(e) {
+    if (is26(e)) return 'מקור: ' + U.srcLink(e.src26.url, 'ועדת הבחירות המרכזית, קובץ תוצאות לפי יישוב') + ' <span class="meta">(הורד ב-' + U.fmtDate(e.src26.retrieved) + '; נשמר באתר כ-<a href="data/cities/k26.json">data/cities/k26.json</a>, אותו קובץ שמשמש את <a href="#/cities">ניתוח לפי יישוב</a>)</span>';
     return 'מקור: ' + U.srcLink(e.src.ballots.url, 'ועדת הבחירות המרכזית, תוצאות לפי קלפיות') + ' · ' + U.srcLink(e.src.localities.url, 'לפי יישובים') + ' <span class="meta">(data.gov.il, נשלף ' + U.fmtDate(e.src.ballots.retrieved) + ')</span>';
   }
   function bar(share) { return '<span class="geo-bar" aria-hidden="true"><i style="width:' + Math.max(0, Math.min(100, share * 100)).toFixed(1) + '%"></i></span>'; }
@@ -109,9 +127,9 @@
     var hT = th('#', 1) + th('יישוב') + th('אחוז הצבעה', 1) + th('בעלי זכות בחירה', 1);
     var nat = e.national, env = e.envelopes, Lsum = all.reduce(function (s, r) { return [s[0] + r[iE], s[1] + r[iV]]; }, [0, 0]);
     var tr = all.map(t).filter(function (x, j) { return all[j][iE] >= MIN; });
-    var h = '<div class="kpis"><div class="kpi big"><b>' + pc(nat[1], nat[0], 2) + '</b><span>אחוז הצבעה ארצי, ' + esc(lbl(e)) + ' (כולל מעטפות כפולות)</span></div>' +
+    var h = (is26(e) ? status26(e) : '') + '<div class="kpis"><div class="kpi big"><b>' + pc(nat[1], nat[0], 2) + '</b><span>אחוז הצבעה ארצי, ' + esc(lbl(e)) + ' (כולל מעטפות כפולות' + (is26(e) ? ', לפי סכום הקובץ' : '') + ')</span></div>' +
       '<div class="kpi"><b>' + pc(Lsum[1], Lsum[0]) + '</b><span>אחוז הצבעה בקלפיות היישובים בלבד (בלי ' + n(env[1]) + ' מצביעי המעטפות הכפולות)</span></div>' +
-      '<div class="kpi"><b>' + n(e.ballots) + '</b><span>שורות קלפי בקובץ הרשמי, ב-' + n(e.localities - (env[1] ? 1 : 0)) + ' יישובים</span></div>' +
+      (is26(e) ? '<div class="kpi"><b>' + n(e.localities) + '</b><span>יישובים בקובץ (ברמת יישוב בלבד, אין קלפיות ל-2026)</span></div>' : '<div class="kpi"><b>' + n(e.ballots) + '</b><span>שורות קלפי בקובץ הרשמי, ב-' + n(e.localities - (env[1] ? 1 : 0)) + ' יישובים</span></div>') +
       '<div class="kpi"><b>' + pc(Math.min.apply(null, tr), 1) + ' עד ' + pc(Math.max.apply(null, tr), 1) + '</b><span>טווח אחוז ההצבעה ביישובים עם ' + n(MIN) + ' בעלי זכות בחירה ומעלה (' + n(big.length) + ' יישובים)</span></div></div>';
     h += '<p class="meta">' + srcLine(e) + '</p>';
     h += '<h2 id="geo-turnout">אחוז הצבעה: הגבוה והנמוך ביותר</h2><p>' + esc(lbl(e)) + '. רק יישובים עם ' + n(MIN) + ' בעלי זכות בחירה ומעלה. אחוז ההצבעה ביישוב = מצביעים בקלפיות היישוב ÷ בעלי זכות הבחירה בו (ראו <a href="#geo-method">שיטה</a>).</p>' +
@@ -157,14 +175,15 @@
     if (!needSh(c)) return loading();
     var S = SH[c], ks = IX.elections.map(function (e) { return e.k; }).filter(function (k) { return S.e[k]; });
     var k = ks.indexOf(+q.k) >= 0 ? +q.k : ks[ks.length - 1], e = elOf(k), X = S.e[k], env = isEnv(c);
-    var h = '<p><a href="' + hashFor('', { k: k }) + '">→ כל היישובים</a>' + (env ? '' : ' · <a href="#/cities/' + c + '" data-geo-k26>' + esc(S.n) + ' כולל 2026 (חלקי, לא סופי ולא רשמי)</a> · <a href="#/cities/vs?a=' + c + '&amp;b=nat">השוואה לתוצאה הארצית, 2019–2026</a>') + '</p>';
+    var h = '<p><a href="' + hashFor('', { k: k }) + '">→ כל היישובים</a>' + (env ? '' : ' · <a href="#/cities/' + c + '" data-geo-k26>' + esc(S.n) + ' בניתוח לפי יישוב, 2019–2026</a> · <a href="#/cities/vs?a=' + c + '&amp;b=nat">השוואה לתוצאה הארצית, 2019–2026</a>') + '</p>';
     if (env) h += '<p class="note"><b>זה לא יישוב.</b> "מעטפות חיצוניות" היא השורה שבה ועדת הבחירות מרכזת את הקולות במעטפות כפולות: חיילים, סגל דיפלומטי, אסירים, מאושפזים, אנשי צוות הקלפיות, ובוחרים בקלפיות נגישות או מיוחדות. אין לה בעלי זכות בחירה משלה, ולכן אין לה אחוז הצבעה. באפריל 2019 היא פורסמה בסמל 99999, ובשאר המערכות בסמל 9999.</p>';
+    if (S.e[26]) h += status26(elOf(26));
     if (ks.length < IX.elections.length) h += '<p class="note">היישוב מופיע בנתונים רק ב-' + ks.length + ' מתוך ' + IX.elections.length + ' מערכות: ' + ks.map(function (kk) { return esc(lbl(elOf(kk))); }).join(', ') + '. יישוב יכול להיעדר כשהוא חדש, כשהוא אוחד עם יישוב אחר, או כשהקלפיות שלו נרשמו תחת יישוב אחר.</p>';
     // turnout over time
     var T = ks.map(function (kk) { var t = S.e[kk].t, E = elOf(kk); return { k: kk, e: E, el: t[0], v: t[1], i: t[2], val: t[3], nat: (E.national[1] - E.envelopes[1]) / E.national[0] }; });
     if (!env) {
       var last = T[T.length - 1];
-      h += '<div class="kpis"><div class="kpi big"><b>' + pc(last.v, last.el) + '</b><span>אחוז הצבעה, ' + esc(lbl(last.e)) + '</span></div><div class="kpi"><b>' + n(last.el) + '</b><span>בעלי זכות בחירה, ' + esc(lbl(last.e)) + '</span></div><div class="kpi"><b>' + n(S.e[last.k].b.length) + '</b><span>קלפיות, ' + esc(lbl(last.e)) + '</span></div></div>';
+      h += '<div class="kpis"><div class="kpi big"><b>' + pc(last.v, last.el) + '</b><span>אחוז הצבעה, ' + esc(lbl(last.e)) + '</span></div><div class="kpi"><b>' + n(last.el) + '</b><span>בעלי זכות בחירה, ' + esc(lbl(last.e)) + '</span></div>' + (S.e[last.k].b ? '<div class="kpi"><b>' + n(S.e[last.k].b.length) + '</b><span>קלפיות, ' + esc(lbl(last.e)) + '</span></div>' : '<div class="kpi"><b>–</b><span>קלפיות, ' + esc(lbl(last.e)) + ': ברמת יישוב בלבד, אין קלפיות ל-2026</span></div>') + '</div>';
       h += '<h2 id="geo-t">אחוז ההצבעה לאורך המערכות</h2>' + turnoutChart(T) +
         tbl('אחוז ההצבעה לפי מערכת', 'אחוז ההצבעה ב' + esc(S.n) + ' לפי מערכת. להשוואה: אחוז ההצבעה בקלפיות כל היישובים יחד, בלי המעטפות הכפולות.', th('מערכת') + th('בעלי זכות בחירה', 1) + th('מצביעים', 1) + th('אחוז הצבעה', 1) + th('שינוי (נקודות)', 1) + th('פסולים', 1) + th('כל היישובים', 1),
           T.map(function (x, i) { var pr = i ? T[i - 1] : null; return '<tr><th scope="row">' + esc(lbl(x.e)) + '</th><td class="n">' + n(x.el) + '</td><td class="n">' + n(x.v) + '</td><td class="n"><b>' + pc(x.v, x.el) + '</b></td><td class="n">' + (pr && pr.k === PREV[x.k] ? pp(100 * (x.v / x.el - pr.v / pr.el)) : '–') + '</td><td class="n">' + pc(x.i, x.v) + '</td><td class="n">' + pc(x.nat, 1) + '</td></tr>'; }).join(''));
@@ -183,12 +202,13 @@
         '<tr class="ep-sum"><th scope="row">רשימות אחרות</th>' + ks.map(function (kk) { return '<td class="n">' + pc(other[kk], 1) + '</td>'; }).join('') + (pk && S.e[pk] ? '<td class="n"></td>' : '') + '</tr>');
     // selected election: lists detail + ballots
     var ls = lists(k), t = X.t;
-    h += '<h2 id="geo-kd">פירוט לפי מערכת</h2><p>' + elSelect(k, 'geo-k') + '</p><p class="meta">' + srcLine(e) + '</p>' +
+    h += '<h2 id="geo-kd">פירוט לפי מערכת</h2><p>' + elSelect(k, 'geo-k') + '</p><p class="meta">' + srcLine(e) + '</p>' + (is26(e) ? status26(e) : '') +
       tbl('קולות לפי רשימה, ' + lbl(e), 'קולות ב' + esc(S.n) + ', ' + esc(lbl(e)) + ' (לפי סדר האלף-בית). להשוואה: השיעור בכל הארץ.', th('רשימה') + th('קולות', 1) + th('אחוז מהכשרים', 1) + th('<span class="sr">המחשה</span>') + th('בכל הארץ', 1),
         alpha(ls).map(function (l) { var i = ls.indexOf(l), v = t[4 + i], s = t[3] ? v / t[3] : 0; return '<tr><th scope="row">' + esc(l.n) + ' <span class="meta">(' + esc(l.l) + ')</span></th><td class="n">' + n(v) + '</td><td class="n">' + pc(s, 1) + '</td><td>' + bar(s) + '</td><td class="n">' + pc(l.v, e.national[3]) + '</td></tr>'; }).join('') +
         '<tr class="ep-sum"><th scope="row">רשימות אחרות (' + e.otherLists + ')</th><td class="n">' + n(t[t.length - 1]) + '</td><td class="n">' + pc(t[t.length - 1], t[3]) + '</td><td></td><td class="n">' + pc(e.otherVotes, e.national[3]) + '</td></tr>' +
         '<tr class="ep-sum"><th scope="row">סה"כ כשרים</th><td class="n">' + n(t[3]) + '</td><td class="n">100%</td><td></td><td class="n">100%</td></tr>');
-    h += ballots(c, k, q);
+    var kb = ks.filter(function (kk) { return S.e[kk].b; }).pop();
+    h += is26(e) ? '<h2 id="geo-b">קלפיות</h2><p>ברמת יישוב בלבד, אין קלפיות ל-2026.' + (kb ? ' <a href="' + hashFor(String(c), { k: kb }) + '">הקלפיות ב' + esc(S.n) + ', ' + esc(lbl(elOf(kb))) + '</a>' : '') + '</p>' : ballots(c, k, q);
     return h;
   }
   function turnoutChart(T) {
@@ -228,7 +248,7 @@
 
   // ---------- method / limits
   function method() {
-    var E = IX.elections, k22 = E.filter(function (e) { return e.k === 22; })[0];
+    var E = GE || IX.elections, k22 = E.filter(function (e) { return e.k === 22; })[0];
     return '<h2 id="geo-method">שיטה</h2><ul>' +
       '<li><b>מקור:</b> קובצי "תוצאות האמת" של ועדת הבחירות המרכזית לכנסת, לפי קלפיות ולפי יישובים, במאגר ' + U.srcLink(IX.source.dataset, 'votes-knesset ב-data.gov.il') + '. הנתונים נשלפו דרך ממשק ה-API הציבורי של המאגר. לכל מערכת נשמר טביעת אצבע (sha256) של הקובץ שנשלף, בקובץ <a href="data/geo/index.json">index.json</a>.</li>' +
       '<li><b>שום מספר לא הוערך.</b> כל מספר בעמוד הוא סכום של שורות קלפי מהקובץ הרשמי. הבנייה בודקת שסכום הקלפיות בכל יישוב זהה לקובץ היישובים הרשמי, ושבכל קלפי מצביעים = פסולים + כשרים.</li>' +
@@ -237,10 +257,11 @@
       '<li><b>קולות פסולים</b> נספרים במצביעים ולא בכשרים. שיעור הקולות של רשימה מחושב מתוך הכשרים.</li>' +
       '<li><b>רשימות:</b> לכל מערכת מוצגות בנפרד הרשימות שקיבלו לפחות ' + IX.minNationalShare + '% מהקולות הכשרים בארץ (כולל כל מי שעבר את אחוז החסימה). שאר הרשימות מסוכמות ב"רשימות אחרות". השמות הקצרים מבוססים על שמות הרשימות בקובץ רשימות המועמדים של ועדת הבחירות; האותיות הן אותיות הפתק.</li>' +
       '<li><b>סף מינימום:</b> בטבלאות הארציות נכללים רק יישובים עם ' + n(MIN) + ' בעלי זכות בחירה ומעלה, כדי שיישובים קטנים מאוד לא ימלאו את הקצוות. כל היישובים מופיעים בטבלה המלאה ובחיפוש.</li>' +
-      '<li><b>יישובים לאורך זמן:</b> יישוב מזוהה לפי סמל היישוב של הלמ"ס. ' + n(IX.localities.length) + ' סמלים מופיעים בנתונים, ורובם בכל חמש המערכות. כשיישוב אוחד, פוצל או נוסד בין מערכות, הוא מופיע רק במערכות שבהן הופיע בקובץ.</li>' +
+      '<li><b>יישובים לאורך זמן:</b> יישוב מזוהה לפי סמל היישוב של הלמ"ס. ' + n(IX.localities.length) + ' סמלים מופיעים בנתונים, ורובם בכל חמש המערכות של 2019–2022. כשיישוב אוחד, פוצל או נוסד בין מערכות, הוא מופיע רק במערכות שבהן הופיע בקובץ.</li>' +
       '<li><b>קלפיות:</b> מזהה קלפי = סמל יישוב + מספר קלפי. מספרי הקלפיות ושיוך הבוחרים משתנים בין מערכות, ולכן אין כאן השוואה של קלפי בודדת לאורך זמן.</li>' +
+      '<li><b>2026 (הכנסת ה-26), ברמת יישוב בלבד:</b> הנתונים של 2026 נלקחים מאותו קובץ שמשמש את <a href="#/cities">ניתוח לפי יישוב</a> (<a href="data/cities/k26.json">data/cities/k26.json</a>), קובץ התוצאות לפי יישוב של ועדת הבחירות. ' + (K26 ? esc(K26.statusLabel) : '') + ' ועדת הבחירות עוד לא פרסמה ל-2026 קובץ לפי קלפיות במאגר data.gov.il, ולכן אין כאן קלפיות ל-2026, והבדיקות של סכום הקלפיות מול היישוב לא חלות על 2026. האחוז הארצי של 2026 בעמוד זה הוא לפי סכום הקובץ, לא התוצאה שהוגשה לנשיא.</li>' +
       '<li><b>בלי חלוקה למגזרים:</b> אין כאן סיכומים לפי מגזר או לפי אופי היישוב, כי לא השתמשנו בסיווג רשמי מתועד של יישובים.</li></ul>' +
-      '<h2>בדיקה מול התוצאות הרשמיות</h2><p>בכל חמש המערכות, סכום כל הקלפיות זהה למספרי המצביעים, הקולות הפסולים והקולות הכשרים הרשמיים בארץ, וגם לסך הקולות של כל רשימה שמוצגת. בדיקה אוטומטית (test/geo.test.mjs) מחשבת את הסכומים מחדש.</p>' +
+      '<h2>בדיקה מול התוצאות הרשמיות</h2><p>בכל חמש המערכות של 2019–2022, סכום כל הקלפיות זהה למספרי המצביעים, הקולות הפסולים והקולות הכשרים הרשמיים בארץ, וגם לסך הקולות של כל רשימה שמוצגת. בדיקה אוטומטית (test/geo.test.mjs) מחשבת את הסכומים מחדש.</p>' +
       '<h2>מגבלות ומה לא אומת</h2><ul>' +
       '<li>ספטמבר 2019: מספר בעלי זכות הבחירה בקובץ הוא ' + n(k22.national[0]) + ', ובפרסום התוצאות הרשמי מופיע 6,394,030 (הפרש של 2,812). לכן אחוז ההצבעה הארצי כאן ' + pc(k22.national[1], k22.national[0], 2) + ' ובפרסום הרשמי 69.83%. מספרי המצביעים והקולות זהים.</li>' +
       '<li>האתרים של ועדת הבחירות (votesNN.bechirot.gov.il) לא היו נגישים מהשרת שבנה את הנתונים, ולכן ההשוואה לסיכומים הארציים נעשתה מול טבלאות התוצאות בוויקיפדיה, שמצטטות את הוועדה. קובצי הנתונים עצמם הם של הוועדה.</li>' +
@@ -248,19 +269,19 @@
       '<li>אחוז ההצבעה ביישוב מחושב מול פנקס הבוחרים, שכולל גם בעלי זכות בחירה שגרים בחו"ל. ביישובים שיש בהם הרבה כאלה אחוז ההצבעה נמוך יותר מסיבה זו.</li>' +
       '<li>אין כאן מפה: לא מצאנו קובץ גבולות רשמי חופשי שאפשר להטמיע בלי ספריות חיצוניות.</li></ul>';
   }
-  // ---------- 2026 hook
-  function hook2026() {
-    var has = IX.elections.some(function (e) { return e.k === 26; });
-    return has ? '' : '<p class="note" id="geo-2026">הבחירות לכנסת ה-26 (27.10.2026) יתווספו כאן כשוועדת הבחירות תפרסם את קובצי תוצאות האמת לפי קלפיות במאגר data.gov.il, באותה שיטה ובאותן בדיקות. עד אז אין כאן נתונים של 2026 לפי קלפי. נתונים חלקיים של 2026 לפי יישוב, שאינם סופיים ואינם רשמיים, מופיעים ב<a href="#/cities">ניתוח לפי יישוב</a>.</p>';
+  // ---------- 2026 note (national page)
+  function note2026() {
+    var e = elOf(26); if (!e) return '';
+    return '<p class="note" id="geo-2026">הבחירות לכנסת ה-26 (27.10.2026) מוצגות כאן <b>ברמת יישוב בלבד, אין קלפיות ל-2026</b>: ועדת הבחירות עוד לא פרסמה קובץ תוצאות לפי קלפיות במאגר data.gov.il. הנתונים של 2026: ' + esc(e.statusLabel) + ' <a href="' + hashFor('', { k: 26 }) + '">2026 לפי יישוב</a> · <a href="#/cities">ניתוח לפי יישוב</a>.</p>';
   }
 
   function page(r) {
     var q = r.q || {};
     var hd = U.head('תוצאות לפי יישוב וקלפי', r.arg && NAME[+r.arg] ? esc(NAME[+r.arg]) + ': אחוז הצבעה ולמי הצביעו' : 'אחוז הצבעה ולמי הצביעו, לפי יישוב וקלפי',
-      'התוצאות הרשמיות של ועדת הבחירות המרכזית בחמש מערכות הבחירות האחרונות (2019–2022), לכל יישוב ולכל קלפי. בלי תחזית ובלי שיפוט: רק מה שנספר. <a href="#geo-method">שיטה ומגבלות</a>');
+      '2019–2022: התוצאות הרשמיות של ועדת הבחירות המרכזית בחמש מערכות, לכל יישוב ולכל קלפי. 2026 (הכנסת ה-26): ברמת יישוב בלבד, מקובץ ועדת הבחירות לפי יישוב, עם הסימון שליד הנתונים. בלי תחזית ובלי שיפוט: רק מה שנספר. <a href="#geo-method">שיטה ומגבלות</a>');
     if (ERR) return hd + error();
     if (!needIndex()) return hd + loading();
-    var body = r.arg ? pageLocality(+r.arg, q) : pageNational(q) + hook2026();
+    var body = r.arg ? pageLocality(+r.arg, q) : pageNational(q) + note2026();
     var top = r.arg ? searchBox('') : '<p>' + elSelect(curK(q), 'geo-k') + '</p>' + searchBox('');
     return hd + top + body + method();
   }

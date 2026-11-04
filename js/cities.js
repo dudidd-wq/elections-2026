@@ -1,5 +1,5 @@
 /* #/cities – per-locality analysis K21–K26: city page, per-list view, compare. Neutral: alphabetical lists, no party colours.
-   K21–K25: official CEC results (data/geo, data.gov.il). K26: PARTIAL count (data/cities/k26.json), labelled as such.
+   K21–K25: official CEC results (data/geo, data.gov.il). K26: CEC per-locality file 4.11.2026 (data/cities/k26.json), labelled with its statusLabel; also reused by js/geo.js.
    Loaded on demand by app.js; data are fetched lazily per view. */
 (function () {
   'use strict';
@@ -133,7 +133,7 @@
   function pageLanding() {
     var d = EL[26], N = d.national;
     return searchBox() + partialNote(26) +
-      '<div class="kpis"><div class="kpi"><b>' + n(d.localities) + '</b><span>יישובים בנתוני 2026</span></div><div class="kpi"><b>' + n(N[3] - d.envelopes[3]) + '</b><span>קולות כשרים שמשויכים ליישוב (2026, חלקי)</span></div><div class="kpi"><b>' + n(d.envelopes[3]) + '</b><span>קולות כשרים במעטפות כפולות, בלי שיוך ליישוב</span></div></div>' +
+      '<div class="kpis"><div class="kpi"><b>' + n(d.localities) + '</b><span>יישובים בנתוני 2026</span></div><div class="kpi"><b>' + n(N[3] - d.envelopes[3]) + '</b><span>קולות כשרים שמשויכים ליישוב (2026, קובץ 4.11)</span></div><div class="kpi"><b>' + n(d.envelopes[3]) + '</b><span>קולות כשרים במעטפות כפולות, בלי שיוך ליישוב</span></div></div>' +
       '<h2>מה יש כאן</h2><ul><li><b>יישוב:</b> אחוז ההצבעה ואחוז הקולות של כל רשימה בכל מערכת מ-2019 עד 2026, שינוי בנקודות אחוז מול המערכת הקודמת כשיש רשימה מקבילה, והשוואה לתוצאה הארצית.</li>' +
       '<li><b><a href="' + hashFor('list', {}) + '">לפי רשימה</a>:</b> היישובים שבהם רשימה קיבלה את האחוז הגבוה והנמוך ביותר, הכי הרבה קולות, והשינוי הגדול ביותר, עם סינון לפי גודל יישוב.</li>' +
       '<li><b><a href="' + hashFor('vs', {}) + '">השוואה</a>:</b> שני יישובים זה לצד זה, או יישוב מול התוצאה הארצית.</li></ul>' +
@@ -146,7 +146,7 @@
     if (!needSh(c)) return loading();
     var k = curK(q), row = cityRow(k, c), pk = prevK(k);
     var hdr = '<h2 class="ct-h">' + esc(nm(c)) + ' <span class="meta">(סמל יישוב ' + c + ')</span></h2>' +
-      '<p><a href="' + hashFor('vs', { a: c, b: 'nat' }) + '">השוואה לתוצאה הארצית</a> · <a href="' + hashFor('vs', { a: c }) + '">השוואה ליישוב אחר</a> · <a href="#/geo/' + c + '">פירוט לפי קלפי (2019–2022)</a></p>';
+      '<p><a href="' + hashFor('vs', { a: c, b: 'nat' }) + '">השוואה לתוצאה הארצית</a> · <a href="' + hashFor('vs', { a: c }) + '">השוואה ליישוב אחר</a> · <a href="#/geo/' + c + '">פירוט לפי קלפי (2019–2022) ו-2026 ברמת יישוב</a></p>';
     // turnout over time
     var trow = KS.map(function (x) { var r = cityRow(x, c); return '<tr' + (x === 26 ? ' data-ct-k26' : '') + '><th scope="row">' + esc(elName(x)) + '</th>' + (r ? '<td class="n">' + n(r[0]) + '</td><td class="n">' + n(r[1]) + '</td><td class="n" data-ct-turnout>' + (r[0] ? p1(r[1] / r[0]) : '–') + '</td><td class="n" data-ct-valid>' + n(r[3]) + '</td><td class="n">' + n(r[2]) + '</td>' : '<td colspan="5">אין נתונים ליישוב במערכת הזו</td>') + '</tr>'; }).join('');
     var tt = tbl('השתתפות ב' + nm(c), 'בעלי זכות בחירה, מצביעים וקולות לפי מערכת. בלי מעטפות כפולות (חיילים, נציגויות, בתי חולים ובתי סוהר), שלא משויכות ליישוב.',
@@ -167,7 +167,7 @@
       charts.push(spark(s.n, pts, KS.map(function (x) { return { k: x, v: s.m[x] ? natShare(x, s.m[x]) : null }; }), p1));
     });
     return hdr + '<p>' + elSelect(k, 'ct-k') + '</p>' + partialNote(k) + rt + tt +
-      '<h3>מגמות לאורך המערכות</h3><p class="meta">קו מלא: היישוב. קו מקווקו: התוצאה הארצית (באחוז ההצבעה אין קו ארצי, כי הארצי כולל מעטפות כפולות). ציר אופקי: מספר הכנסת (21 = אפריל 2019, 26 = 2026, חלקי). רק רשימות עם רצף מוגדר (ראו "שיטה"). נקודה חסרה: אין רשימה מקבילה באותה מערכת. 2026 חלקי.</p><div class="ct-grid">' + charts.join('') + '</div>';
+      '<h3>מגמות לאורך המערכות</h3><p class="meta">קו מלא: היישוב. קו מקווקו: התוצאה הארצית (באחוז ההצבעה אין קו ארצי, כי הארצי כולל מעטפות כפולות). ציר אופקי: מספר הכנסת (21 = אפריל 2019, 26 = 2026, קובץ 4.11). רק רשימות עם רצף מוגדר (ראו "שיטה"). נקודה חסרה: אין רשימה מקבילה באותה מערכת. 2026: קובץ ועדת הבחירות לפי יישוב (ראו שיטה).</p><div class="ct-grid">' + charts.join('') + '</div>';
   }
 
   // ---------- per-list view
@@ -273,7 +273,7 @@
     return form + partialNote(26) + '<h2 class="h3">אחוז הצבעה וקולות כשרים, 2019–2026</h2>' + tt +
       '<h2 class="h3">רשימות: ' + esc(elName(k)) + '</h2><p class="meta">בחרו מערכת בתפריט "מערכת בחירות" למעלה כדי לראות את הרשימות של מערכת אחרת.</p>' + sel +
       '<h2 class="h3">כל הרשימות לאורך המערכות, 2019–2026</h2>' + at +
-      '<h3>מגמות</h3><p class="meta">קו מלא: ' + esc(na) + '. קו מקווקו: ' + esc(nb) + (b === 'nat' ? ' (באחוז ההצבעה אין קו ארצי, כי הארצי כולל מעטפות כפולות)' : '') + '. ציר אופקי: מספר הכנסת (21 = אפריל 2019, 26 = 2026, חלקי). נקודה חסרה: אין רשימה מקבילה באותה מערכת.</p><div class="ct-grid">' + charts.join('') + '</div>' +
+      '<h3>מגמות</h3><p class="meta">קו מלא: ' + esc(na) + '. קו מקווקו: ' + esc(nb) + (b === 'nat' ? ' (באחוז ההצבעה אין קו ארצי, כי הארצי כולל מעטפות כפולות)' : '') + '. ציר אופקי: מספר הכנסת (21 = אפריל 2019, 26 = 2026, קובץ 4.11). נקודה חסרה: אין רשימה מקבילה באותה מערכת.</p><div class="ct-grid">' + charts.join('') + '</div>' +
       '<p><a href="' + hashFor(String(a), { k: k }) + '">לעמוד של ' + esc(na) + '</a>' + (b !== 'nat' ? ' · <a href="' + hashFor(String(b), { k: k }) + '">לעמוד של ' + esc(nb) + '</a>' : '') + '</p>';
   }
 

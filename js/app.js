@@ -221,8 +221,8 @@
       '<h2>לאן ממשיכים</h2><div class="cards">' +
       card('#/exit-polls', 'מדגמים: דיוק בעבר', 'עד כמה דייקו מדגמי הטלוויזיה בערב הבחירות ב-2019–2022, מול התוצאות הרשמיות. בלי תחזית.', 'polls') +
       card('#/outlook', 'תחזית בדיעבד', 'ההערכות שפורסמו בזמן ספירת המעטפות הכפולות מול הספירה שהושלמה (לא סופית ולא רשמית), והשוואה ל-2019–2022.', 'polls') +
-      card('#/cities', 'ניתוח לפי יישוב', 'כל יישוב לאורך 2019–2026: אחוז ההצבעה, אחוז הקולות לכל רשימה, שינוי מול מערכות קודמות, החזקות והחלשות של כל רשימה, והשוואה בין יישובים. נתוני 2026 חלקיים.', 'polls') +
-      card('#/geo', 'תוצאות לפי יישוב וקלפי', 'אחוז ההצבעה ולמי הצביעו בכל יישוב ובכל קלפי, בחמש המערכות של 2019–2022. התוצאות הרשמיות של ועדת הבחירות.', 'analysis') +
+      card('#/cities', 'ניתוח לפי יישוב', 'כל יישוב לאורך 2019–2026: אחוז ההצבעה, אחוז הקולות לכל רשימה, שינוי מול מערכות קודמות, החזקות והחלשות של כל רשימה, והשוואה בין יישובים. 2026 מקובץ ועדת הבחירות לפי יישוב (4.11.2026), שהסכום הארצי בו גבוה ב-648 קולות כשרים מהתוצאה שהוגשה לנשיא.', 'polls') +
+      card('#/geo', 'תוצאות לפי יישוב וקלפי', 'אחוז ההצבעה ולמי הצביעו בכל יישוב ובכל קלפי בחמש המערכות של 2019–2022 (תוצאות האמת של ועדת הבחירות), ו-2026 ברמת יישוב בלבד, מקובץ ועדת הבחירות לפי יישוב, בלי קלפיות.', 'analysis') +
       card('#/matrix', 'מטריצה', nLists() + ' רשימות × 10 סוגיות במפת חום לפי סוג המקור. לחיצה על תא מציגה את העמדה המלאה ואת המקור.', 'matrix') +
       card('#/issue', 'לפי סוגיה', 'כל הרשימות בסוגיה אחת, בניסוח מלא, ולצדן המחנות בסוגיה.', 'issue') +
       card('#/list', 'לפי רשימה', 'פרופיל של כל רשימה: הרכב, מעמד המצע, גוש מוצהר, סקרים ועמדות.', 'list') +
@@ -567,7 +567,7 @@
       '<p class="note"><b>בדיקת הרשימה המשותפת.</b> ' + esc(joint.verify.text) + ' ' + joint.verify.sources.map(function (u, k) { return srcLink(u, 'מקור ' + (k + 1)); }).join(' · ') + '</p>' +
       '<h2>בונה הקואליציה</h2><p>בעמוד <a href="#/coalition">בנה קואליציה</a> יש מדד קרבה שמשווה את העמדות המוצהרות של רשימות זו לזו, לפי הקידוד של הניתוח הרוחבי. הוא לא מדרג עמדות, לא תחזית ולא המלצה, ואינו מתחשב בהצהרות על שותפויות. השיטה, הקידוד המלא והמגבלות מפורטים בעמוד עצמו.</p>' +
       '<h2>דיוק המדגמים בעבר</h2><p>בעמוד <a href="#/exit-polls">מדגמים: דיוק בעבר</a> מושווים מדגמי הטלוויזיה של ערב הבחירות ב-2019–2022 לתוצאות הרשמיות של ועדת הבחירות המרכזית, עם מקור לכל מדגם, הנוסחאות והמגבלות. העמוד לא מנבא את תוצאות 2026.</p>' +
-      '<h2>תוצאות לפי יישוב וקלפי</h2><p>בעמוד <a href="#/geo">תוצאות לפי יישוב וקלפי</a> מוצגים אחוז ההצבעה ושיעור הקולות של כל רשימה בכל יישוב ובכל קלפי, בחמש מערכות הבחירות של 2019–2022. הנתונים הם קובצי תוצאות האמת של ועדת הבחירות המרכזית (data.gov.il), והסכומים נבדקו מול התוצאות הארציות הרשמיות.</p>' +
+      '<h2>תוצאות לפי יישוב וקלפי</h2><p>בעמוד <a href="#/geo">תוצאות לפי יישוב וקלפי</a> מוצגים אחוז ההצבעה ושיעור הקולות של כל רשימה בכל יישוב ובכל קלפי, בחמש מערכות הבחירות של 2019–2022. הנתונים הם קובצי תוצאות האמת של ועדת הבחירות המרכזית (data.gov.il), והסכומים נבדקו מול התוצאות הארציות הרשמיות. בחירות 2026 (הכנסת ה-26) מוצגות שם ברמת יישוב בלבד, אין קלפיות ל-2026: הנתונים נלקחים מקובץ התוצאות לפי יישוב של ועדת הבחירות (הורד ב-4.11.2026), אותו קובץ שמשמש את <a href="#/cities">ניתוח לפי יישוב</a>. הסכום הארצי בקובץ גבוה ב-648 קולות כשרים וב-84 פסולים מהתוצאה שהוגשה לנשיא, בקובץ אין סימון גרסה ולכן לא ידוע אם הוא תואם לגרסה שהוגשה, וקולות המעטפות הכפולות אינם משויכים ליישוב.</p>' +
       '<h2>פערים ואי-ודאויות</h2><ul>' + P.gaps.map(function (g) { return '<li>' + esc(g) + '</li>'; }).join('') + '</ul>' +
       '<h2>מקורות כלליים</h2><ul class="srcs">' + P.generalSources.map(function (s) { return '<li>' + (s.url ? srcLink(s.url, s.label) : esc(s.label)) + '</li>'; }).join('') + '</ul>' +
       '<p>המקורות של כל רשימה מופיעים בעמוד הפרופיל שלה, ומקור לכל עמדה מופיע לצדה.</p>' +
@@ -634,7 +634,7 @@
   function foot() {
     document.getElementById('foot').innerHTML =
       '<p><b>אתר מידע ניטרלי.</b> אין בו המלצה להצבעה. העמדות נכונות ל-' + fmtDate(P.meta.documentAsOf) + '; הסקרים עודכנו ב-' + fmtStamp(D.meta.updatedAt) + ' (סקר אחרון: ' + fmtDate(D.meta.latestPollDate) + ', ' + D.polls.length + ' סקרים).</p>' +
-      '<p><a href="#/about">שיטה ומקורות</a> · <a href="data/platforms.json">platforms.json</a> · <a href="data/analysis.json">analysis.json</a> · <a href="data/polls.json">polls.json</a> · <a href="data/podcasts.json">podcasts.json</a> · <a href="data/coalition.json">coalition.json</a> · <a href="data/exitpolls.json">exitpolls.json</a> · <a href="data/geo/index.json">geo/index.json</a> · <a href="' + REPO + '" target="_blank" rel="noopener noreferrer">קוד המקור<span class="sr"> (נפתח בחלון חדש)</span></a></p>';
+      '<p><a href="#/about">שיטה ומקורות</a> · <a href="data/platforms.json">platforms.json</a> · <a href="data/analysis.json">analysis.json</a> · <a href="data/polls.json">polls.json</a> · <a href="data/podcasts.json">podcasts.json</a> · <a href="data/coalition.json">coalition.json</a> · <a href="data/exitpolls.json">exitpolls.json</a> · <a href="data/geo/index.json">geo/index.json</a> · <a href="data/cities/k26.json">cities/k26.json</a> · <a href="' + REPO + '" target="_blank" rel="noopener noreferrer">קוד המקור<span class="sr"> (נפתח בחלון חדש)</span></a></p>';
   }
 
   // ---------- coalition builder (#/coalition; data/coalition.json, loaded on demand)
@@ -1459,9 +1459,9 @@
     s.onerror = function () { geoLoading = false; if (parseHash().page === 'geo') $main.innerHTML = '<div class="empty" role="alert"><b>שגיאה בטעינת העמוד</b><p>נסו לרענן.</p></div>'; };
     document.head.appendChild(s);
   }
-  var GEO_V = '3';
+  var GEO_V = '4';
   function shareU() { window.EL26 = { esc: esc, COLL: COLL, head: head, srcLink: srcLink, fmtDate: fmtDate, fmtStamp: fmtStamp, parseHash: parseHash, setHash: setHash, render: render, getJSON: getJSON, main: $main }; }
-  var citiesLoading = false, CITIES_V = '5';
+  var citiesLoading = false, CITIES_V = '6';
   function loadCities() { // #/cities: js/cities.js is loaded only when the page is opened
     if (citiesLoading) return; citiesLoading = true; shareU();
     var s = document.createElement('script'); s.src = 'js/cities.js?v=' + CITIES_V; s.async = true;
@@ -1600,7 +1600,7 @@
       case 'cities': var cm = window.EL26CITIES && window.EL26CITIES.meta && window.EL26CITIES.meta();
         if (cm) m.chips.push({ k: '2026', v: cm.status, w: 1 }, { k: 'נכון ל', v: fmtStamp(cm.asOf) }, { k: '2019–2022', v: 'ועדת הבחירות המרכזית' });
         m.json.push('data/cities/k26.json', 'data/cities/lineage.json', 'data/geo/index.json'); break;
-      case 'geo': m.chips.push({ k: 'מערכות', v: '2019–2022 (כנסות 21–25)' }, { k: 'מקור', v: 'ועדת הבחירות המרכזית (data.gov.il)' }); m.json.push('data/geo/index.json'); break;
+      case 'geo': m.chips.push({ k: 'מערכות', v: '2019–2022 לפי קלפי; 2026 ברמת יישוב בלבד' }, { k: 'מקור', v: 'ועדת הבחירות המרכזית (data.gov.il; 2026: קובץ לפי יישוב, 4.11.2026)' }); m.json.push('data/geo/index.json', 'data/cities/k26.json'); break;
     }
     return m;
   }
